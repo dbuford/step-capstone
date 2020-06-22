@@ -5,14 +5,100 @@
     <title>Add Scholarships</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+<style>
+    body{
+        background-color:white;
+        }
+
+    .info1{
+        float:left;
+        width:30%;
+          }
+    .info2{
+        float:left;
+        width:40%;
+          }
+    .button{
+        float:none;
+           }
+    textarea{
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      float:left;
+      width:100%;
+            }
+    .inner-text{
+        padding-left:10px;
+        padding-right:15px;
+        padding-bottom:25px;
+        text-align:right;
+               }
+    button{
+        border-radius:10px;
+        background-color:Thistle;
+        color:white;
+        width:100%;
+        text-align:center;
+        margin-left:0%;
+        margin-top:5%;
+          }
+    h1{
+        text-align:center;
+        padding-top:10%;
+      }
+    .topdiv{
+        background-image:url(/images/pencilfront.jpg);
+        background-size:cover;
+        height:90vh;
+        width:80vw;
+        position:absolute;
+        margin-left:10%;
+        top:7%;
+        border-radius:10px;
+        border: double Thistle;
+            }
+    .innerdiv{
+        background-color:white;
+        width:60%;
+        height:80%;
+        top:7%;
+        position:absolute;
+        left:20%;
+        border-radius:10px;
+        border-style:solid;
+        border-color:Thistle;
+        border-width:30px;
+             }
+
+    </style>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
+        <div class="topdiv">
+            <div class="innerdiv">
+                <h1> Add Scholarships </h1>
+                <p style="text-align:center;"> Know of an amazing scholarship that was not on the list? No problem!<br>
+                Fill out this form to add it to add it to the list!</p>
+                <div class="info1">
+                    <p class="inner-text"><b>Title</b></p>
+                    <p class="inner-text"><b>Description</b></p>
+                    <p class="inner-text"><b>Deadline</b></p>
+                    <p class="inner-text"><b>Link </b></p><br>
+                </div>
+
+                <div class="info2">
+                    <textarea name="scholarship-title" rows="1" ></textarea><br><br>
+                    <textarea name="scholarship-description" rows="1"></textarea> <br><br>
+                    <textarea name="scholarship-deadline" rows="1"></textarea><br><br>
+                    <textarea name="scholarship-link" rows="1"></textarea><br>
+                    <button> Submit</button>
+                </div>
+            </div>
+        </div>
+    
+    
   </body>
 </html>
