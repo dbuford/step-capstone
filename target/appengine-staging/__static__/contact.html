@@ -1,0 +1,203 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Brakia Jackson</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <script src="script.js"></script>
+
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: #ffcc99;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+
+/* styling section */
+
+</style>
+</head>
+
+</style>
+</head>
+<body class="w3-black" onload="loadPage()" >
+
+
+<div class="header">
+  <h1>Brakia Malaun Jackson</h1>
+  <p>Computer Science Major | Google STEP Intern</p>
+</div>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="indexgallery.html">Gallery</a>
+  <a href="http://www.linkedin.com/in/brakia-jackson-872687188" target="_blank" class="fa fa-linkedin">    LinkedIn</a>
+  <a href="contact.html" class="right">Contact</a>
+  <a href="Suggestions.html" class="right">Explore</a>
+</div>
+
+
+<div class="row">
+  <div class="side">
+ 
+    <h2><i>Contact Me</i></h2> 
+    <p> Email: </p> 
+    
+    <p> <i class="fa fa-google" style="font-size:36px"></i> </p>
+
+    <a href="mailto:brakiajackson55@gmail.com" target="_blank"> Send Email to brakiajackson55@gmail.com </p>
+    <a href="mailto:brakiajackson55@gmail.com" target="_blank"></a> 
+    <a href="mailto:brakiajackson@yahoo.com" target="_blank"> Send Email to brakiajackson@yahoo.com </a>
+    
+
+
+    <h3>LINKEDIN</h3> <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+    
+    <a href="http://www.linkedin.com/in/brakia-jackson-872687188" target="_blank" > http://www.linkedin.com/in/brakia-jackson-872687188 </a>
+    <h3>GITHUB</h3> <i class="fa fa-github" style="font-size:36px;color:blue"></i>
+    <a href="https://github.com/brakiajackson/Portfolio.git" target="_blank" > https://www.github.com/brakiajackson </a>
+
+    <!-- Comments sections -->
+
+
+  </div>
+
+
+  <div class="main">
+    <h1>Comments</h1> 
+    <p id="loginel"> </p>
+      <br/>
+      <div class="divider"></div>
+      <h6 id="error"></h6>
+
+
+      <form id="addcomm" action="/data" method="POST">
+        
+        <textarea name="title" placeholder="Comment"></textarea>
+        <br/><br/>
+        
+        <textarea name="name" placeholder="Name" style="height:25px; width:20%"></textarea>
+
+        <p>
+          <label>
+            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
+            <span>Display email next to comment</span>
+          </label>
+        </p>
+        
+        <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
+        <label for="displayemail"> Display email next to comment </label> -->
+        
+        <input class="button button_blue hoverable z-depth-1" style="margin-left:10px" type="submit"/>
+
+      </form>
+      <br/>
+      <div class="row">
+        <div class="input-field col s3 select-wrapper" style="width:20%">
+          <!-- <form action="/data" method="POST">  -->
+          <form>
+          <label>Max # of comments:</label>
+            <select onchange="getMessages()" id="maxcomments" name="maxcomments" required style="width:15%">
+              <option value="" disabled selected>Choose</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </form>
+        </div>
+        <div class="input-field col s3 select-wrapper" style="width:25%">
+          <form>
+          <label>Sort:</label>
+            <select onchange="sortComments()" id="sort" name="sort" required style="width:15%">
+              <option value="" disabled selected>Choose</option>
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </form>
+        </div>
+      </div>
+      <br/>
+
+      <ul class="collection" id="entry-list"></ul>
+      <br>
+
+</div>
+</html>
