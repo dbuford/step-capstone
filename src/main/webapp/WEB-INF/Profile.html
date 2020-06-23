@@ -1,21 +1,11 @@
+<!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="UTF-8">
-    <title>Mainpage</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <script src="script.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase.js"></script>
-    <script>
-  var config = {
-    apiKey: "AIzaSyBdplCWYnACcIGTz8jdviiU0LAaY6-2M5k",
-    authDomain: "brakiajackson-step-2020.firebaseapp.com",
-  };
-  firebase.initializeApp(config);
-</script>
-    <style>
+<style>
 * {
   box-sizing: border-box;
 }
@@ -95,16 +85,7 @@ body {
         width: 40%;
     }
 
-
-/* styling section */
-
 </style>
-</head>
-
-</style>
-</head>
-<body class="w3-black" onload="loadPage()" >
-
 
 <div class="header">
   <h1>Title</h1>
@@ -123,38 +104,34 @@ body {
 
   </div>
 
-  <div class=box>
-    <center><h1>Login/Signup</h1> </center>
-    <center><p id="loginel"> </p>
+<body onload="loadInfo()">
+    <div class="row">
+        <div class="input-field col s3 select-wrapper" style="width:20%">
+          <!-- <form action="/data" method="POST">  -->
+          <form>
+          <label>Max # of comments:</label>
+            <select onchange="getMessages()" id="maxcomments" name="maxcomments" required style="width:15%">
+              <option value="" disabled selected>Choose</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+          </form>
+        </div>
+        <div class="input-field col s3 select-wrapper" style="width:25%">
+          <form>
+          <label>Sort:</label>
+            <select onchange="sortComments()" id="sort" name="sort" required style="width:15%">
+              <option value="" disabled selected>Choose</option>
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </form>
+        </div>
+      </div>
       <br/>
-      <div class="divider"></div>
-      <h6 id="error"></h6>
 
-
-      <form id="addcomm" action="/data" method="POST">
-        
-        <textarea name="name" placeholder="Name"></textarea>
-        <br/><br/>
-        
-        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
-
-        <textarea name="major" placeholder="major" style="height:25px; width:20%"></textarea>
-
-        <p>
-          <label>
-            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
-            <span>Display email next to name</span>
-          </label>
-        </p>
-        
-        <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
-        <label for="displayemail"> Display email next to comment </label> -->
-        
-        <input class="button button_blue hoverable z-depth-1" style="margin-left:10px" type="submit"/>
-
-      </form>
-      <br/>
-      </center>
-
-</div>
+      <br>
+    <ul class="collection" id="entry-list"></ul>
+</body>
 </html>
