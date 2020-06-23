@@ -37,7 +37,9 @@ function loadEntries() {
       entryListElement.appendChild(createEntryElement(entry));
     })
   });
-  fetch('/logins').then(response => response.text()).then((txt) => {
+}
+function add_info() {
+	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
     if (txt.includes("Please")) {
       form.style.display = "none";
@@ -82,7 +84,7 @@ function sortComments() {
 }
 
 function updateCount() {
-  location.replace("contact.html")
+  location.replace("Profile.html")
 }
 
 function createEntryElement(entry) {
@@ -149,5 +151,10 @@ function deleteEntry(entry) {
 
 
 function loadPage() {
-  loadEntries();
+	add_info();
+}
+
+
+function loadInfo() {
+	loadEntries();
 }

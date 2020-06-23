@@ -38,22 +38,25 @@ import java.util.*;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  /** Data holder for each individual comment */
-  public class Entry {
+  /** Data holder for each individual email */
+  public class Info {
     public long id;
     public String title;
     public long timestamp;
     public String name;
     public String email;
-    public String displayemail;
+    public String age;
+    public String major;
 
-    public Entry(long id, String title, long timestamp, String name, String email, String displayemail) {
+
+    public Info(long id, String title, long timestamp, String name, String email, String age, String major) {
       this.id = id;
       this.title = title;
       this.timestamp = timestamp;
       this.name = name;
       this.email = email;
-      this.displayemail = displayemail;
+      this.age = age;
+      this.major =  major;
     }
 
     public long getId() {
@@ -75,11 +78,20 @@ public class DataServlet extends HttpServlet {
     public String getEmail() {
       return email;
     }
+	
+    public String getAge() {
+        return age;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
 
   }
-  public int maxcount = 3;
 
-  // all options: "newest (descending), oldest (ascending), alphabetical, reverse-alphabetical"
+
+  // all options: "newest (descending), oldest (ascending)
   public String sort = "newest";
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   
@@ -92,43 +104,38 @@ public class DataServlet extends HttpServlet {
     }
     Query query;
     if (sort.equals("newest")) {
-      query = new Query("Entry").addSort("timestamp", SortDirection.DESCENDING);
+      query = new Query("Info").addSort("timestamp", SortDirection.DESCENDING);
     } else if (sort.equals("oldest")) {
-      query = new Query("Entry").addSort("timestamp", SortDirection.ASCENDING);
-    } else if (sort.equals("alphabetical")) {
-      query = new Query("Entry").addSort("name", SortDirection.ASCENDING);
+      query = new Query("Info").addSort("timestamp", SortDirection.ASCENDING);
     } else {
-      query = new Query("Entry").addSort("name", SortDirection.DESCENDING);
+      query = new Query("Info").addSort("name", SortDirection.DESCENDING);
     }
     PreparedQuery results = datastore.prepare(query);
     int count = 0;
 
-    if (!(request.getParameter("maxcomments") == null)) {
-      maxcount = Integer.parseInt(request.getParameter("maxcomments"));
-    }
+   // if (!(request.getParameter("maxcomments") == null)) {
+ //     maxcount = Integer.parseInt(request.getParameter("maxcomments"));
+    ///}
 
     
 
-    List<Entry> comments = new ArrayList<>();
+    List<Info> information = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String title = (String) entity.getProperty("title");
       long timestamp = (long) entity.getProperty("timestamp");
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
-      String displayemail = (String) entity.getProperty("displayemail");
-      Entry entry = new Entry(id, title, timestamp, name, email, displayemail);
-      comments.add(entry);
+      String age = (String) entity.getProperty("age");
+      String major = (String) entity.getProperty("major");
+      Info entry = new Info(id, title, timestamp, name, email, age, major);
+      information.add(entry);
 
-      count++;
-      if (count >= maxcount) {
-        break;
-      }
     }
 
     response.setContentType("application/json;");
     Gson gson = new Gson();
-    String json = gson.toJson(comments);
+    String json = gson.toJson(information);
     response.getWriter().println(json);
   }
 
@@ -143,35 +150,33 @@ public class DataServlet extends HttpServlet {
     
     UserService userService = UserServiceFactory.getUserService();
     
-    // Must be logged in to post comments
+    // Must be logged in to add info
     String title = request.getParameter("title");
     String name = request.getParameter("name");
+    String age = request.getParameter("age");
+	String major = request.getParameter("major");
     long timestamp = System.currentTimeMillis();
     String email = userService.getCurrentUser().getEmail();
-    String displayemail;
     
-    if (request.getParameter("displayemail") == null) {
-      displayemail = "off";
-    } else {
-      displayemail = "on";
-    }
+    
 
-    Entity entryEntity = new Entity("Entry");
+    Entity entryEntity = new Entity("Info");
     entryEntity.setProperty("title", title);
     entryEntity.setProperty("name", name);
     entryEntity.setProperty("timestamp", timestamp);
     entryEntity.setProperty("email", email);
-    entryEntity.setProperty("displayemail", displayemail);
+    entryEntity.setProperty("age", age);
+    entryEntity.setProperty("major", major);
     datastore.put(entryEntity);
 
-    response.sendRedirect("/response.html");
+    response.sendRedirect("/response.html"); // could possibly add a redirect page ?
     
   }
 
-  public void updateCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    if (!(request.getParameter("maxcomments") == null)) {
-      maxcount = Integer.parseInt(request.getParameter("maxcomments"));
-    }
+  //public void updateCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+   // if (!(request.getParameter("maxcomments") == null)) {
+    //  maxcount = Integer.parseInt(request.getParameter("maxcomments"));
+  //  }
   
-  }
+  //}
 }
