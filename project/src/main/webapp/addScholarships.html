@@ -5,15 +5,26 @@
     <title>Add Scholarships</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+
+
 <style>
     body{
         background-color:white;
         }
-
+    
+    /*style the Scholarship details title div*/
     .info1{
         float:left;
         width:30%;
           }
+    /*style text for info1 div*/
+    .inner-text{
+        padding-left:10px;
+        padding-right:15px;
+        padding-bottom:25px;
+        text-align:right;
+               }
+    /*style the Scholarshp details textarea div*/
     .info2{
         float:left;
         width:40%;
@@ -21,64 +32,135 @@
     .button{
         float:none;
            }
-    textarea,input{
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      float:left;
-      width:100%;
-                  }
-    .inner-text{
-        padding-left:10px;
-        padding-right:15px;
-        padding-bottom:25px;
-        text-align:right;
-               }
+    /*style the input and textareas for infodiv*/
+    .infodiv textarea, .infodiv input{
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        float:left;
+        width:100%;
+                                     }
+    /*style submit button*/
     button{
         border-radius:10px;
         background-color:Thistle;
         color:white;
-        width:100%;
+        width:50%;
         text-align:center;
-        margin-left:0%;
+        margin-left:25%;
         margin-top:5%;
           }
-    h1{
+    h2{
         text-align:center;
-        padding-top:10%;
+        
       }
+    /*format header div at top of page*/
+    .header {
+        width:100%;
+        height:15vh;
+        padding-bottom:3%;
+        margin-top:1%;
+            }
+    /*format left half of header div with title of page*/
+    .headerdiv1{
+        float:left;
+        border-right:solid black;
+        width:50%;
+        height:100%;
+        padding-top:0px;
+        
+               }
+    /*style title of page*/
+    .headerdiv1 h1{
+        font-size:50px;
+        text-align:right;
+        padding-right:2%;
+        padding-top:0%;
+                  }
+      /*format right half of header div with description of page*/
+    .headerdiv2{
+        float:right;
+        width:49%;
+        height:100%;
+    }
+    /*style description of page*/
+    .headerdiv2 p{
+        text-align:left;
+        padding-top:3%;
+        font-size:20px;
+    }
+    /*style most outer div with background as pencils*/
     .topdiv{
         background-image:url(/images/pencilfront.jpg);
         background-size:cover;
         height:90vh;
-        width:80vw;
-        position:absolute;
-        margin-left:10%;
-        top:8%;
+        width:90vw;
+        
+        margin-left:5%;
+        top:15%;
         border-radius:10px;
         border: double Thistle;
             }
-    .innerdiv{
+    /*style the inner div containing the form*/
+    .innerdiv1{
         background-color:white;
-        width:60%;
+        width:70%;
         height:80%;
-        top:7%;
-        position:absolute;
-        left:20%;
+        margin-top:4%;
+        margin-left:13%;
         border-radius:10px;
         border-style:solid;
-        border-color:Thistle;
+        border-color:black;
         border-width:30px;
              }
+    /*style the right side of the form div*/
+    .innerdiv2{
+        background-color:white;
+        width:40%;
+        height:80%;
+        top:7%;
+        float:right;
+        overflow:scroll;
+        margin-right:5%;
+              }
+    /*style the left side of the form div*/
+    .infodiv{
+        float:left;
+        width:50%;
+        height:80%;
+            }
+    
+    /*format div for each eligibility section on left side*/
+    .eligibility{
+        width:100%;
+        height:10%;
+        margin-bottom:5%;
+        
+                }
+    /*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:60%;
+        height:100%;
+        overflow:scroll;
+        border: dotted black;
+        float:right;
+        margin-right:5%;
+        margin-top:2%;
+              }
+    /*style the titles on the left side of eligibility div*/
+    .title{
+        float:left;
+        width:30%;
+        height:100%;
+          }
      /* Style the top navigation bar */
     .navbar {
         overflow: hidden;
         background-color: #ffcc99;
             }
-
     /* Style the navigation bar links */
     .navbar a {
         float: left;
@@ -88,7 +170,6 @@
         padding: 14px 20px;
         text-decoration: none;
               }
-
     /* Right-aligned link */
     .navbar a.right {
         float: right;
@@ -99,25 +180,35 @@
         background-color: #ddd;
         color: black;
                     }
-
-
     </style>
   </head>
   
-      <nav class="navbar">
-  <a href="index.html">Home</a>
-  <a href="Profile.html">Profile</a>
-  <a href="displayScholarships.html">Scholarships</a>
-  <a href="ToDoList.html" class="right">To-Do</a>
-  <a href="addScholarships.html" class="right">Add-Scholarship</a>
-</div>
+<nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="Profile.html">Profile</a>
+    <a href="displayScholarships.html">Scholarships</a>
+    <a href="ToDoList.html" class="right">To-Do</a>
+    <a href="addScholarships.html" class="right">Add-Scholarship</a>
+</nav>
 <br>
 <body>
-        <div class="topdiv">
-            <div class="innerdiv">
-                <h1> Add Scholarships </h1>
-                <p style="text-align:center;"> Know of an amazing scholarship that was not on the list? No problem!<br>
-                Fill out this form to add it to add it to the list!</p>
+    <div class="header">
+        <div class="headerdiv1">
+            <h1> Add Scholarships </h1>
+        </div>
+        <div class="headerdiv2">
+    <p> <em>Know of an amazing scholarship that was not on the list? No problem!<br>
+        Fill out this form to add it to add it to the list!</em></p>
+        </div>
+    </div>
+
+    <div class="topdiv">
+        <div class="innerdiv1">
+            <div class="infodiv">
+                <h2> Scholarships Details </h2>
+                <div style='color:white;'>div</div>
+                <div style='color:white;'>div</div>
+                <div style='color:white;'>div</div>
                 <form action="/info" method="POST">
                 <div class="info1">
                     <p class="inner-text"><b>Title</b></p>
@@ -131,11 +222,77 @@
                     <input type="text"name="scholarship-description" rows="1" required></input> <br><br>
                     <input type="text" name="scholarship-deadline" rows="1"></input><br><br>
                     <input type="url" name="scholarship-link" rows="1"></input><br>
-                    <button> Submit</button>
-                </form>
+                        
                 </div>
             </div>
+            <div class="innerdiv2">
+                <h2> Eligibility Requirements</h2>
+                <p style="text-align:center;"> If the scholarship has any eligibility requirements,
+                    <br> check all that apply or check none</p>
+                
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Race/Ethnicity:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="hispanic/latinx" name="hispanic/latinx">Hispanic or Latinx</input><br>
+                        <input type="checkbox" value="African-American/Black" name="African-American/Black">African American or Black</input><br>
+                        <input type="checkbox" value="Asian" name="Asian">Asian </input><br>
+                        <input type="checkbox" value="Hawaiian" name="Hawaiian">Native Hawaiaan or Other Pacific Islander</input><br>
+                        <input type="checkbox" value="White" name="White"> White</input><br>
+                        <input type="checkbox" value="none" name="none"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Gender Identity:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="male" name="man"> Male/Man</input><br>
+                        <input type ="checkbox" value="female" name="female"> Female/Woman</input><br>
+                        <input type="checkbox" value="transman" name="transman"> Transmale/Transman</input><br>
+                        <input type="checkbox" value="transwoman" name="transwoman">Transfemale/Transwoman</input><br>
+                        <input type="checkbox" value="nonconforming" name="nonconforming"> Genderqueer/Gender nonconforming</input><br>
+                        <input type="checkbox" value="none" name="none"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4>Income Level:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="low-income" name="low-income"> Low Income</input><br>
+                        <input type ="checkbox" value="middle-income" name="middle-income"> Middle Income</input><br>
+                        <input type="checkbox" value="high-income" name="highincome"> High Income </input><br>
+                        <input type="checkbox" value="none" name="none"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Major Interests:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="arts" name="arts"> Arts</input><br>
+                        <input type ="checkbox" value="business" name="business"> Business</input><br>
+                        <input type ="checkbox" value="chemistry" name="chemistry"> Chemistry</input><br>
+                        <input type="checkbox" value="compsci" name="compsci">Computer Science </input><br>
+                        <input type ="checkbox" value="eco" name="eco"> Economics</input><br>
+                        <input type ="checkbox" value="edu" name="edu"> Education</input><br>
+                        <input type ="checkbox" value="engineering" name="engineering"> Engineering</input><br>
+                        <input type="checkbox" value="none" name="none"> None</input>
+                    </div>
+                                 
+                </div>
         </div>
+        <button> Submit</button> 
+          
+        </form>   
+  
+    </div>
+    </div>
     
     
   </body>
