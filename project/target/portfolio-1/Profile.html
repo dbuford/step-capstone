@@ -1,11 +1,27 @@
-<!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
-<style>
+	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase.js"></script>
+    <script>
+  var config = {
+    apiKey: "AIzaSyBdplCWYnACcIGTz8jdviiU0LAaY6-2M5k",
+    authDomain: "brakiajackson-step-2020.firebaseapp.com",
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<!------ Include the above in your HEAD tag ---------->
+    <style>
 * {
   box-sizing: border-box;
 }
@@ -85,7 +101,18 @@ body {
         width: 40%;
     }
 
+
+/* styling section */
+
 </style>
+</head>
+
+</style>
+</head>
+<body class="w3-black" >
+
+
+
 
 <div class="header">
   <h1>Title</h1>
@@ -104,13 +131,47 @@ body {
 
   </div>
 
-<div class=box>
-<body onload="loadInfo()">
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="images/person.jpg" alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        Name
+                                    </h5>
+                                    <h6>
+                                        User
+                                    </h6>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <body onload="loadInfo()">
     <div class="row">
         <div class="input-field col s3 select-wrapper" style="width:20%">
           <!-- <form action="/data" method="POST">  -->
           <form>
-          <label>Max # of comments:</label>
+          <label>Max Recent Info</label>
             <select onchange="getMessages()" id="maxcomments" name="maxcomments" required style="width:15%">
               <option value="" disabled selected>Choose</option>
               <option value="5">5</option>
@@ -134,6 +195,9 @@ body {
 
       <br>
     <ul class="collection" id="entry-list"></ul>
-</body>
-</div>
-</html>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
