@@ -21,7 +21,7 @@
     .button{
         float:none;
            }
-    textarea{
+    textarea,input{
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
@@ -30,7 +30,7 @@
       box-sizing: border-box;
       float:left;
       width:100%;
-            }
+                  }
     .inner-text{
         padding-left:10px;
         padding-right:15px;
@@ -82,6 +82,7 @@
                 <h1> Add Scholarships </h1>
                 <p style="text-align:center;"> Know of an amazing scholarship that was not on the list? No problem!<br>
                 Fill out this form to add it to add it to the list!</p>
+                <form action="/info" method="POST">
                 <div class="info1">
                     <p class="inner-text"><b>Title</b></p>
                     <p class="inner-text"><b>Description</b></p>
@@ -90,11 +91,12 @@
                 </div>
 
                 <div class="info2">
-                    <textarea name="scholarship-title" rows="1" ></textarea><br><br>
-                    <textarea name="scholarship-description" rows="1"></textarea> <br><br>
-                    <textarea name="scholarship-deadline" rows="1"></textarea><br><br>
-                    <textarea name="scholarship-link" rows="1"></textarea><br>
+                    <input type="text" name="scholarship-title" rows="1" required></input><br><br>
+                    <input type="text"name="scholarship-description" rows="1" required></input> <br><br>
+                    <input type="text" name="scholarship-deadline" rows="1"></input><br><br>
+                    <input type="url" name="scholarship-link" rows="1"></input><br>
                     <button> Submit</button>
+                </form>
                 </div>
             </div>
         </div>
