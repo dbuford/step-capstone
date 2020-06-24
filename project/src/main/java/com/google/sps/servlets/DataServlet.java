@@ -41,7 +41,6 @@ public class DataServlet extends HttpServlet {
   /** Data holder for each individual email */
   public class Info {
     public long id;
-    public String title;
     public long timestamp;
     public String name;
     public String email;
@@ -49,9 +48,8 @@ public class DataServlet extends HttpServlet {
     public String major;
 
 
-    public Info(long id, String title, long timestamp, String name, String email, String age, String major) {
+    public Info(long id, long timestamp, String name, String email, String age, String major) {
       this.id = id;
-      this.title = title;
       this.timestamp = timestamp;
       this.name = name;
       this.email = email;
@@ -61,10 +59,6 @@ public class DataServlet extends HttpServlet {
 
     public long getId() {
       return id;
-    }
-    
-    public String getTitle() {
-      return title;
     }
 
     public long getTimestamp() {
@@ -90,45 +84,28 @@ public class DataServlet extends HttpServlet {
 
   }
 
-
-  // all options: "newest (descending), oldest (ascending)
-  public String sort = "newest";
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   
 
   /** Responds with a JSON array containing comments data. */
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    if (!(request.getParameter("sort") == null)) {
-      sort = request.getParameter("sort");
-    }
-    Query query;
-    if (sort.equals("newest")) {
-      query = new Query("Info").addSort("timestamp", SortDirection.DESCENDING);
-    } else if (sort.equals("oldest")) {
-      query = new Query("Info").addSort("timestamp", SortDirection.ASCENDING);
-    } else {
-      query = new Query("Info").addSort("name", SortDirection.DESCENDING);
-    }
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { 
+
+    Query query = new Query ("Info");
+
     PreparedQuery results = datastore.prepare(query);
-    int count = 0;
-
-   // if (!(request.getParameter("maxcomments") == null)) {
- //     maxcount = Integer.parseInt(request.getParameter("maxcomments"));
-    ///}
-
-    
 
     List<Info> information = new ArrayList<>();
+
+
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String title = (String) entity.getProperty("title");
       long timestamp = (long) entity.getProperty("timestamp");
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
       String age = (String) entity.getProperty("age");
       String major = (String) entity.getProperty("major");
-      Info entry = new Info(id, title, timestamp, name, email, age, major);
+      Info entry = new Info(id, timestamp, name, email, age, major);
       information.add(entry);
 
     }

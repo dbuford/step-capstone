@@ -110,9 +110,6 @@ function createEntryElement(entry) {
   const entryElement = document.createElement('li');
   entryElement.className = 'entry collection-item';
 
-  const titleElement = document.createElement('span');
-  titleElement.innerText = entry.title;
-
   const nameElement = document.createElement('span');
   if (entry.name === undefined || entry.name === "") {
     nameElement.innerHTML = "-- Anonymous".italics().bold();
@@ -122,12 +119,15 @@ function createEntryElement(entry) {
   nameElement.style.marginLeft = "15px"
 
   const emailElement = document.createElement('span');
-  if (entry.displayemail === "on") {
-    emailElement.innerHTML = "(" + entry.email + ")";
-  } else {
-    emailElement.innerHTML = "(Hidden email)"
-  }
-  emailElement.style.margin = "2px";
+  emailElement.innerHTML = "(" + entry.email + ")";
+  
+
+  const ageElement = document.createElement('span');
+  ageElement.innerText = entry.age;
+
+
+  const majorElement = document.createElement('span');
+  majorElement.innerText = entry.major;
 
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
@@ -146,9 +146,10 @@ function createEntryElement(entry) {
   });
 
 
-  entryElement.appendChild(titleElement);
   entryElement.appendChild(nameElement);
   entryElement.appendChild(emailElement);
+  entryElement.appendChild(ageElement);
+  entryElement.appendChild(majorElement);
   entryElement.appendChild(deleteButtonElement);
   entryElement.appendChild(timeElement);
   return entryElement;
