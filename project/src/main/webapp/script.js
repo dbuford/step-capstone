@@ -47,8 +47,6 @@ async function getData() {
 }
 
 function loadEntries() {
-  const commentCount = document.getElementById('maxcomments');
-  console.log(commentCount.value)
   fetch('/data').then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
     entries.forEach((entry) => {
@@ -77,8 +75,6 @@ function login() {
 }
 
 function getMessages() {
-  const commentCount = document.getElementById('maxcomments');
-  console.log(commentCount.name)
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?maxcomments=' + commentCount.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -90,8 +86,6 @@ function getMessages() {
 }
 
 function sortComments() {
-  const sort = document.getElementById('sort');
-  console.log(sort.value)
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?sort=' + sort.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
