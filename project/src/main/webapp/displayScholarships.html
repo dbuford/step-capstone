@@ -5,7 +5,61 @@
     <title>Display Scholarships</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+
 <style>
+    .container{
+        position:relative;
+        margin-left: 10%;
+  height:17vh;
+  margin-top:3%;
+  width:70vw;
+  border: 3px solid Thistle;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius:10px;
+  overflow:visible;
+    }
+.regular{
+position:absolute;
+width:100%;
+overflow:scroll;
+  
+   }
+a{
+    margin-left:40%;
+    text-align:center;
+    font-size:30px;
+    padding:0px;
+    text-decoration:none;
+    color:black;
+
+  }
+a:hover{
+    color:pink;
+}
+
+a:active{
+    color:black;
+}
+p,h4{
+    padding-left:5px;
+    }
+.circle {
+  float:left;
+  position:absolute;
+  margin-top:-35px;
+  margin-left:-25px;
+  overflow:visible;
+  
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 50px;
+  border-width:thick;
+  border-color:Thistle;
+  border-style:solid;
+  background: #4da6ff;
+}
 </style>
 
 <body onload="getScholarships()">
