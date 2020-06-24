@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/addScholarshipServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/LoginServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/DataServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/ListScholarshipsServlet.java
+=======
+/home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/LoginServlet.java
+/home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/addScholarshipServlet.java
+/home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/DataServlet.java
+/home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/ListScholarshipsServlet.java
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
