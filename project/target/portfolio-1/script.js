@@ -37,7 +37,6 @@
 
 
 
-
 async function getData() {
   console.log('Getting Data');
   const response = await fetch('/data');
@@ -174,7 +173,6 @@ function loadInfo() {
 }
 
 // scholarships functions
-
 
 function getScholarships() {
    fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
