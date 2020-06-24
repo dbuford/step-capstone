@@ -42,6 +42,7 @@ public class addScholarshipServlet extends HttpServlet {
     String description=getParameter(request,"scholarship-description","");
     String deadline= getParameter(request,"scholarship-deadline","");
     String url=getParameter(request,"scholarship-link","");
+    long timestamp = System.currentTimeMillis();
 
     //check if title is empty
 
@@ -74,6 +75,7 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("description",description);
     scholarshipEntity.setProperty("deadline",deadline);
     scholarshipEntity.setProperty("url",url);
+    scholarshipEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);

@@ -173,12 +173,8 @@ function loadInfo() {
 	loadEntries();
 }
 
-<<<<<<< HEAD
+
 // scholarships functions
-=======
->>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
-
-
 function getScholarships() {
    fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
        if(scholarships.length==0){

@@ -28,13 +28,6 @@
       <artifactId>appengine-api-1.0-sdk</artifactId>
       <version>1.9.59</version>
     </dependency>
-<<<<<<< HEAD
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.6</version>
-    </dependency>
-=======
 
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -42,7 +35,7 @@
       <version>2.8.6</version>
     </dependency>
     
->>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
+
   </dependencies>
 
   <build>
