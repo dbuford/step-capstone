@@ -36,6 +36,11 @@
 
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
 async function getData() {
   console.log('Getting Data');
   const response = await fetch('/data');
@@ -45,8 +50,11 @@ async function getData() {
 }
 
 function loadEntries() {
+<<<<<<< HEAD
+=======
   const commentCount = document.getElementById('maxcomments');
   console.log(commentCount.value)
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
   fetch('/data').then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
     entries.forEach((entry) => {
@@ -75,8 +83,11 @@ function login() {
 }
 
 function getMessages() {
+<<<<<<< HEAD
+=======
   const commentCount = document.getElementById('maxcomments');
   console.log(commentCount.name)
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?maxcomments=' + commentCount.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -88,8 +99,11 @@ function getMessages() {
 }
 
 function sortComments() {
+<<<<<<< HEAD
+=======
   const sort = document.getElementById('sort');
   console.log(sort.value)
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?sort=' + sort.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -108,9 +122,12 @@ function createEntryElement(entry) {
   const entryElement = document.createElement('li');
   entryElement.className = 'entry collection-item';
 
+<<<<<<< HEAD
+=======
   const titleElement = document.createElement('span');
   titleElement.innerText = entry.title;
 
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
   const nameElement = document.createElement('span');
   if (entry.name === undefined || entry.name === "") {
     nameElement.innerHTML = "-- Anonymous".italics().bold();
@@ -120,12 +137,24 @@ function createEntryElement(entry) {
   nameElement.style.marginLeft = "15px"
 
   const emailElement = document.createElement('span');
+<<<<<<< HEAD
+  emailElement.innerHTML = "(" + entry.email + ")";
+  
+
+  const ageElement = document.createElement('span');
+  ageElement.innerText = entry.age;
+
+
+  const majorElement = document.createElement('span');
+  majorElement.innerText = entry.major;
+=======
   if (entry.displayemail === "on") {
     emailElement.innerHTML = "(" + entry.email + ")";
   } else {
     emailElement.innerHTML = "(Hidden email)"
   }
   emailElement.style.margin = "2px";
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
 
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
@@ -144,9 +173,16 @@ function createEntryElement(entry) {
   });
 
 
+<<<<<<< HEAD
+  entryElement.appendChild(nameElement);
+  entryElement.appendChild(emailElement);
+  entryElement.appendChild(ageElement);
+  entryElement.appendChild(majorElement);
+=======
   entryElement.appendChild(titleElement);
   entryElement.appendChild(nameElement);
   entryElement.appendChild(emailElement);
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
   entryElement.appendChild(deleteButtonElement);
   entryElement.appendChild(timeElement);
   return entryElement;
@@ -176,6 +212,10 @@ function loadInfo() {
 	loadEntries();
 }
 
+<<<<<<< HEAD
+// scholarships functions
+=======
+>>>>>>> 62e2e392b02b0a02e4a8ce326159391c1b27dd27
 
 
 function getScholarships() {

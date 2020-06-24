@@ -36,6 +36,8 @@
 
 
 
+
+
 async function getData() {
   console.log('Getting Data');
   const response = await fetch('/data');
@@ -45,8 +47,6 @@ async function getData() {
 }
 
 function loadEntries() {
-  const commentCount = document.getElementById('maxcomments');
-  console.log(commentCount.value)
   fetch('/data').then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
     entries.forEach((entry) => {
@@ -75,8 +75,6 @@ function login() {
 }
 
 function getMessages() {
-  const commentCount = document.getElementById('maxcomments');
-  console.log(commentCount.name)
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?maxcomments=' + commentCount.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -88,8 +86,6 @@ function getMessages() {
 }
 
 function sortComments() {
-  const sort = document.getElementById('sort');
-  console.log(sort.value)
   document.getElementById('entry-list').innerHTML = "";
   fetch('/data?sort=' + sort.value).then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -108,9 +104,6 @@ function createEntryElement(entry) {
   const entryElement = document.createElement('li');
   entryElement.className = 'entry collection-item';
 
-  const titleElement = document.createElement('span');
-  titleElement.innerText = entry.title;
-
   const nameElement = document.createElement('span');
   if (entry.name === undefined || entry.name === "") {
     nameElement.innerHTML = "-- Anonymous".italics().bold();
@@ -120,12 +113,15 @@ function createEntryElement(entry) {
   nameElement.style.marginLeft = "15px"
 
   const emailElement = document.createElement('span');
-  if (entry.displayemail === "on") {
-    emailElement.innerHTML = "(" + entry.email + ")";
-  } else {
-    emailElement.innerHTML = "(Hidden email)"
-  }
-  emailElement.style.margin = "2px";
+  emailElement.innerHTML = "(" + entry.email + ")";
+  
+
+  const ageElement = document.createElement('span');
+  ageElement.innerText = entry.age;
+
+
+  const majorElement = document.createElement('span');
+  majorElement.innerText = entry.major;
 
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
@@ -144,9 +140,10 @@ function createEntryElement(entry) {
   });
 
 
-  entryElement.appendChild(titleElement);
   entryElement.appendChild(nameElement);
   entryElement.appendChild(emailElement);
+  entryElement.appendChild(ageElement);
+  entryElement.appendChild(majorElement);
   entryElement.appendChild(deleteButtonElement);
   entryElement.appendChild(timeElement);
   return entryElement;
@@ -177,7 +174,7 @@ function loadInfo() {
 }
 
 
-
+// scholarships functions
 function getScholarships() {
    fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
        if(scholarships.length==0){
