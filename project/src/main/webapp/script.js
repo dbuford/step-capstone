@@ -35,6 +35,7 @@
 
 
 
+
 async function getData() {
   console.log('Getting Data');
   const response = await fetch('/data');
@@ -234,6 +235,62 @@ function getScholarships() {
         function createScholarshipElement(scholarship) {
             const divElement = document.createElement('div');
 
+=======
+function getScholarships() {
+   fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
+       if(scholarships.length==0){
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="No Scholarships Currently Available";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+            }
+            else{
+                const pageList=document.getElementById('page-number');
+                var pagenum=1;
+                if(scholarships.length%5==0){
+                    for(let k=0; k<Math.floor(scholarships.length/5);k++){
+                    const pageButton=document.createElement("button");
+                    pageButton.innerText=pagenum.toString();
+                    pageList.appendChild(pageButton);
+                    pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                    if(pagenum===1){
+                       pageButton.click();
+                     }
+                    pagenum++;
+                }
+                }
+                else{
+                    for(let k=0; k<Math.floor(scholarships.length/5)+1;k++){
+                        const pageButton=document.createElement("button");
+                        pageButton.innerText=pagenum.toString();
+                        pageList.appendChild(pageButton);
+                        pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                        if(pagenum===1){
+                            pageButton.click();
+                        }
+                        pagenum++;
+                    }
+                    }    
+           }
+        });
+        }
+        function createScholarships(scholarships,pagenum){
+            return function(){
+                 const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.innerHTML="";
+                for(let i=pagenum*5-5;i<5*pagenum;i++){
+                scholarshipList.appendChild(createScholarshipElement(scholarships[i]));
+                }
+            }
+        }
+
+        /** Creates a list element to display the comment */
+        function createScholarshipElement(scholarship) {
+            const divElement = document.createElement('div');
+
+
             const titleElement=document.createElement("h2");
             titleElement.innerText=scholarship[0];
             divElement.appendChild(titleElement);
@@ -257,4 +314,7 @@ function getScholarships() {
 
 
             return divElement;
+
         }
+
+
