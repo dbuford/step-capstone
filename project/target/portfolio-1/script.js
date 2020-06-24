@@ -15,14 +15,89 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function getScholarships() {
+   fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
+       if(scholarships.length==0){
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="No Scholarships Currently Available";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+            }
+            else{
+                const pageList=document.getElementById('page-number');
+                var pagenum=1;
+                if(scholarships.length%5==0){
+                    for(let k=0; k<Math.floor(scholarships.length/5);k++){
+                    const pageButton=document.createElement("button");
+                    pageButton.innerText=pagenum.toString();
+                    pageList.appendChild(pageButton);
+                    pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                    if(pagenum===1){
+                       pageButton.click();
+                     }
+                    pagenum++;
+                }
+                }
+                else{
+                    for(let k=0; k<Math.floor(scholarships.length/5)+1;k++){
+                        const pageButton=document.createElement("button");
+                        pageButton.innerText=pagenum.toString();
+                        pageList.appendChild(pageButton);
+                        pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                        if(pagenum===1){
+                            pageButton.click();
+                        }
+                        pagenum++;
+                    }
+                    }    
+           }
+        });
+        }
+        function createScholarships(scholarships,pagenum){
+            return function(){
+                 const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.innerHTML="";
+                for(let i=pagenum*5-5;i<5*pagenum;i++){
+                scholarshipList.appendChild(createScholarshipElement(scholarships[i]));
+                }
+            }
+        }
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+        /** Creates a list element to display the comment */
+        function createScholarshipElement(scholarship) {
+            const containerElement=document.createElement('div');
+            containerElement.setAttribute('class','container');
+            const divElement = document.createElement('div');
+            divElement.setAttribute('class','regular');
+            
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
+            const circleElement= document.createElement('div');
+            circleElement.setAttribute('class','circle');
+            containerElement.appendChild(circleElement);
+            console.log("working");
+           
+
+            var urlElement=document.createElement('a');
+            var linkText=document.createTextNode(scholarship[0]);
+            urlElement.appendChild(linkText);
+            
+            urlElement.title=scholarship[0];
+            urlElement.setAttribute('href', scholarship[3]);
+            urlElement.setAttribute('target', '_blank');
+            divElement.appendChild(urlElement);
+            
+
+            const descriptionElement=document.createElement("p");
+            descriptionElement.innerText=scholarship[1];
+            divElement.appendChild(descriptionElement);
+
+            const deadlineElement=document.createElement("h4");
+            deadlineElement.innerText="DEADLINE: "+ scholarship[2];
+            divElement.appendChild(deadlineElement);
+            
+
+            containerElement.appendChild(divElement); 
+            return containerElement;
+                    }

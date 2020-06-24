@@ -67,29 +67,37 @@ function getScholarships() {
 
         /** Creates a list element to display the comment */
         function createScholarshipElement(scholarship) {
+            const containerElement=document.createElement('div');
+            containerElement.setAttribute('class','container');
             const divElement = document.createElement('div');
+            divElement.setAttribute('class','regular');
+            
 
-            const titleElement=document.createElement("h2");
-            titleElement.innerText=scholarship[0];
-            divElement.appendChild(titleElement);
-
-            const descriptionElement=document.createElement("h5");
-            descriptionElement.innerText=scholarship[1];
-            divElement.appendChild(descriptionElement);
-
-            const deadlineElement=document.createElement("h5");
-            deadlineElement.innerText="deadline "+ scholarship[2];
-            divElement.appendChild(deadlineElement);
+            const circleElement= document.createElement('div');
+            circleElement.setAttribute('class','circle');
+            containerElement.appendChild(circleElement);
+            console.log("working");
+           
 
             var urlElement=document.createElement('a');
-            var linkText=document.createTextNode(scholarship[0]+ " link");
+            var linkText=document.createTextNode(scholarship[0]);
             urlElement.appendChild(linkText);
-            urlElement.title=scholarship[0]+" link";
+            
+            urlElement.title=scholarship[0];
             urlElement.setAttribute('href', scholarship[3]);
             urlElement.setAttribute('target', '_blank');
             divElement.appendChild(urlElement);
-            console.log(scholarship[3]);
+            
 
+            const descriptionElement=document.createElement("p");
+            descriptionElement.innerText=scholarship[1];
+            divElement.appendChild(descriptionElement);
 
-            return divElement;
-        }
+            const deadlineElement=document.createElement("h4");
+            deadlineElement.innerText="DEADLINE: "+ scholarship[2];
+            divElement.appendChild(deadlineElement);
+            
+
+            containerElement.appendChild(divElement); 
+            return containerElement;
+                    }
