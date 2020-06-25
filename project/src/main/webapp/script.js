@@ -174,6 +174,8 @@ function loadInfo() {
 
 // scholarships functions
 
+
+// scholarships functions
 function getScholarships() {
    fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
        if(scholarships.length==0){

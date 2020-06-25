@@ -40,7 +40,7 @@ public class ListScholarshipsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     
-    Query query = new Query("Scholarship");
+    Query query = new Query("Scholarship").addSort("timestamp", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
