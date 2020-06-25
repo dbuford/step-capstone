@@ -99,6 +99,8 @@ body {
     }
 
 
+
+
 /* styling section */
 
 </style>
@@ -118,7 +120,7 @@ body {
   <a href="index.html">Home</a>
   <a href="Profile.html">Profile</a>
   <a href="displayScholarships.html">Scholarships</a>
-  <a href="To-Do-List.html" class="right">To-Do</a>
+  <a href="toDoList.html" class="right">To-Do</a>
   <a href="addScholarships.html" class="right">Add-Scholarship</a>
 </div>
 
@@ -141,8 +143,6 @@ body {
         
         <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
 
-        <textarea name="major" placeholder="major" style="height:25px; width:20%"></textarea>
-
         <p>
           <label>
             <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
@@ -152,10 +152,72 @@ body {
         
         <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
         <label for="displayemail"> Display email next to info</label> -->
-        
-        <input class="button button_blue hoverable z-depth-1" style="margin-left:10px" type="submit"/>
+    
+      <div class="innerdiv2">
+                <h2> Eligibility Requirements</h2>
+                <p style="text-align:center;"> If the scholarship has any eligibility requirements,
+                    <br> check all that apply or check none</p>
+                
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Race/Ethnicity:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="hispanic/latinx" name="race">Hispanic or Latinx</input><br>
+                        <input type="checkbox" value="African-American/Black" name="race">African American or Black</input><br>
+                        <input type="checkbox" value="Asian" name="race">Asian </input><br>
+                        <input type="checkbox" value="Hawaiian" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
+                        <input type="checkbox" value="White" name="race"> White</input><br>
+                        <input type="checkbox" value="none" name="race"> None</input>
+                    </div>
+                </div>
 
-      </form>
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Gender Identity:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="male" name="gender"> Male/Man</input><br>
+                        <input type ="checkbox" value="female" name="gender"> Female/Woman</input><br>
+                        <input type="checkbox" value="transman" name="gender"> Transmale/Transman</input><br>
+                        <input type="checkbox" value="transwoman" name="gender">Transfemale/Transwoman</input><br>
+                        <input type="checkbox" value="nonconforming" name="gender"> Genderqueer/Gender nonconforming</input><br>
+                        <input type="checkbox" value="none" name="gender"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4>Income Level:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="low-income" name="income"> Low Income</input><br>
+                        <input type ="checkbox" value="middle-income" name="income"> Middle Income</input><br>
+                        <input type="checkbox" value="high-income" name="income"> High Income </input><br>
+                        <input type="checkbox" value="none" name="income"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> Major Interests:</h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="arts" name="major"> Arts</input><br>
+                        <input type ="checkbox" value="business" name="major"> Business</input><br>
+                        <input type ="checkbox" value="chemistry" name="major"> Chemistry</input><br>
+                        <input type="checkbox" value="compsci" name="major">Computer Science </input><br>
+                        <input type ="checkbox" value="eco" name="major"> Economics</input><br>
+                        <input type ="checkbox" value="edu" name="major"> Education</input><br>
+                        <input type ="checkbox" value="engineering" name="major"> Engineering</input><br>
+                        <input type="checkbox" value="none" name="major"> None</input>
+                    </div>
+                                 
+                </div>
+        </div>
+        <button> Submit</button> 
+          
+        </form>   
       <br/>
       </center>
 
