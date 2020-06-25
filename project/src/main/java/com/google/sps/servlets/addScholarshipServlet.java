@@ -31,6 +31,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import javax.script.*;
 import java.io.PrintWriter;
+import java.util.Collections;
 
 @WebServlet("/info")
 public class addScholarshipServlet extends HttpServlet {
@@ -42,31 +43,32 @@ public class addScholarshipServlet extends HttpServlet {
     String description=getParameter(request,"scholarship-description","");
     String deadline= getParameter(request,"scholarship-deadline","");
     String url=getParameter(request,"scholarship-link","");
+
+   String[] empty={"none"};
+    String[] race=request.getParameterValues("race");
+    List racelist= race!=null ? Arrays.asList(race): Arrays.asList(empty);
+   
+
+
+    String[] gender=request.getParameterValues("gender");
+    List genderlist= gender!=null ? Arrays.asList(gender): Arrays.asList(empty);
+    
+
+    String[] income=request.getParameterValues("income");
+    List incomelist= income!=null ? Arrays.asList(income): Arrays.asList(empty);
+
+
+    String[] major=request.getParameterValues("major");
+    List majorlist= major!=null ? Arrays.asList(major): Arrays.asList(empty);
+
+
     long timestamp = System.currentTimeMillis();
 
-    //check if title is empty
+    //check if any Scholarship details is empty
 
-    if(title.isEmpty()){
+    if(title.isEmpty()|| description.isEmpty()|| deadline.isEmpty()|| url.isEmpty()){
         response.setContentType("text/html");
-        response.getWriter().println("Please enter a valid Scholarship Title");
-        return;
-    }
-    //check if description is empty
-        if(description.isEmpty()){
-        response.setContentType("text/html");
-        response.getWriter().println("Please enter a valid Scholarship Description");
-        return;
-    }
-    //check if deadline is empty
-        if(deadline.isEmpty()){
-        response.setContentType("text/html");
-        response.getWriter().println("Please enter a valid Scholarship Deadline");
-        return;
-    }
-    //check if url is empty
-        if(url.isEmpty()){
-        response.setContentType("text/html");
-        response.getWriter().println("Please enter a valid Scholarship Link");
+        response.getWriter().println("Please fill out all Scholarship information");
         return;
     }
     
@@ -76,6 +78,10 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("deadline",deadline);
     scholarshipEntity.setProperty("url",url);
     scholarshipEntity.setProperty("timestamp", timestamp);
+    scholarshipEntity.setProperty("race",racelist);
+    scholarshipEntity.setProperty("gender", genderlist);
+    scholarshipEntity.setProperty("income", incomelist);
+    scholarshipEntity.setProperty("major", majorlist);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);
@@ -93,4 +99,5 @@ public class addScholarshipServlet extends HttpServlet {
     }
     return value;
   }
+
 }
