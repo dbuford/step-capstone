@@ -1,14 +1,163 @@
-<!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Mainpage</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
-  </head>
-  <body>
-      <p>Scholarships!</p>
-     
-    
-  </body>
+	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase.js"></script>
+    <script>
+  var config = {
+    apiKey: "AIzaSyBdplCWYnACcIGTz8jdviiU0LAaY6-2M5k",
+    authDomain: "brakiajackson-step-2020.firebaseapp.com",
+  };
+  firebase.initializeApp(config);
+</script>
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: #ffcc99;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.box {       
+        background-color:#ffcc99;
+        text-align: center;
+        color:white;
+        font-weight:bold;
+        margin:auto;     
+        width: 40%;
+    }
+
+
+/* styling section */
+
+</style>
+</head>
+
+</style>
+</head>
+<body class="w3-black" onload="loadPage()" >
+
+
+<div class="header">
+  <h1>Title</h1>
+  <p>quote</p>
+</div>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="Profile.html">Profile</a>
+  <a href="displayScholarships.html">Scholarships</a>
+  <a href="To-Do-List.html" class="right">To-Do</a>
+  <a href="addScholarships.html" class="right">Add-Scholarship</a>
+</div>
+
+
+
+  </div>
+
+  <div class=box>
+    <center><h1>Login/Signup</h1> </center>
+    <center><p id="loginel"> </p>
+      <br/>
+      <div class="divider"></div>
+      <h6 id="error"></h6>
+
+      <p> Complete form if you haven't already to best help us find the best scholarships for you </p> 
+      <form id="addcomm" action="/data" method="POST">
+        
+        <textarea name="name" placeholder="Name"></textarea>
+        <br/><br/>
+        
+        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
+
+        <textarea name="major" placeholder="major" style="height:25px; width:20%"></textarea>
+
+        <p>
+          <label>
+            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
+            <span>Display email next to name</span>
+          </label>
+        </p>
+        
+        <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
+        <label for="displayemail"> Display email next to info</label> -->
+        
+        <input class="button button_blue hoverable z-depth-1" style="margin-left:10px" type="submit"/>
+
+      </form>
+      <br/>
+      </center>
+
+</div>
 </html>
