@@ -47,15 +47,22 @@ public class DataServlet extends HttpServlet {
     public String email;
     public String age;
     public String major;
+    public String race;
+    public String gender;
+    public String income;
 
-
-    public Info(long id, long timestamp, String name, String email, String age, String major) {
+	
+    
+    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income) {
       this.id = id;
       this.timestamp = timestamp;
       this.name = name;
       this.email = email;
       this.age = age;
       this.major =  major;
+      this.race = race;
+      this.gender = gender;
+      this.income = income;
     }
 
     public long getId() {
@@ -80,6 +87,17 @@ public class DataServlet extends HttpServlet {
 
     public String getMajor() {
         return major;
+    }
+    public String getRace() {
+        return race;
+    }
+
+    public String getIncome() {
+        return income;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
 
@@ -106,8 +124,12 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty("email");
       String age = (String) entity.getProperty("age");
       String major = (String) entity.getProperty("major");
-      Info entry = new Info(id, timestamp, name, email, age, major);
+      String gender = (String) entity.getProperty("gender");
+      String race = (String) entity.getProperty("race");
+      String income = (String) entity.getProperty("income");
+      Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income);
       information.add(entry);
+      System.out.println("working");
 
     }
 
@@ -132,11 +154,25 @@ public class DataServlet extends HttpServlet {
     String title = request.getParameter("title");
     String name = request.getParameter("name");
     String age = request.getParameter("age");
-	String major = request.getParameter("major");
     long timestamp = System.currentTimeMillis();
     String email = userService.getCurrentUser().getEmail();
     
+    String[] empty={};
+    String[] racearray=request.getParameterValues("race");
+    String race= racearray!=null ? String.join(" ",racearray): Arrays.toString(empty);
+
+
+    String[] genderarray=request.getParameterValues("gender");
+    String gender= genderarray!=null ? String.join(" ",genderarray): Arrays.toString(empty);
     
+
+    String[] incomearray=request.getParameterValues("income");
+    String income= incomearray!=null ? String.join(" ",incomearray): Arrays.toString(empty);
+
+
+    String[] majorarray=request.getParameterValues("major");
+    String major= majorarray!=null ? String.join(" ",majorarray): Arrays.toString(empty);
+
 
     Entity entryEntity = new Entity("Info");
     entryEntity.setProperty("title", title);
@@ -144,6 +180,9 @@ public class DataServlet extends HttpServlet {
     entryEntity.setProperty("timestamp", timestamp);
     entryEntity.setProperty("email", email);
     entryEntity.setProperty("age", age);
+    entryEntity.setProperty("race",race);
+    entryEntity.setProperty("gender", gender);
+    entryEntity.setProperty("income", income);
     entryEntity.setProperty("major", major);
     datastore.put(entryEntity);
 

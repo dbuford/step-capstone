@@ -120,7 +120,16 @@ function createEntryElement(entry) {
 
 
   const majorElement = document.createElement('span');
-  majorElement.innerText = entry.major;
+  majorElement.innerText = entry.major.toString();
+
+  const genderElement = document.createElement('span');
+  genderElement.innerText = entry.gender.toString();
+
+  const incomeElement = document.createElement('span');
+  incomeElement.innerText = entry.income.toString();
+
+  const raceElement = document.createElement('span');
+  raceElement.innerText = entry.race.toString();
 
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
@@ -143,6 +152,9 @@ function createEntryElement(entry) {
   entryElement.appendChild(emailElement);
   entryElement.appendChild(ageElement);
   entryElement.appendChild(majorElement);
+  entryElement.appendChild(incomeElement);
+  entryElement.appendChild(raceElement);
+  entryElement.appendChild(genderElement);
   entryElement.appendChild(deleteButtonElement);
   entryElement.appendChild(timeElement);
   return entryElement;
