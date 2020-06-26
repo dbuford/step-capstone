@@ -45,21 +45,21 @@ public class addScholarshipServlet extends HttpServlet {
     String url=getParameter(request,"scholarship-link","");
 
    String[] empty={"none"};
-    String[] race=request.getParameterValues("race");
-    List racelist= race!=null ? Arrays.asList(race): Arrays.asList(empty);
+    String[] racearray=request.getParameterValues("race");
+    String race= racearray!=null ? String.join(" ",racearray): Arrays.toString(empty);
    
 
 
-    String[] gender=request.getParameterValues("gender");
-    List genderlist= gender!=null ? Arrays.asList(gender): Arrays.asList(empty);
+    String[] genderarray=request.getParameterValues("gender");
+    String gender= genderarray!=null ? String.join(" ",genderarray): Arrays.toString(empty);
     
 
-    String[] income=request.getParameterValues("income");
-    List incomelist= income!=null ? Arrays.asList(income): Arrays.asList(empty);
+    String[] incomearray=request.getParameterValues("income");
+    String income= incomearray!=null ? String.join(" ",incomearray): Arrays.toString(empty);
 
 
-    String[] major=request.getParameterValues("major");
-    List majorlist= major!=null ? Arrays.asList(major): Arrays.asList(empty);
+    String[] majorarray=request.getParameterValues("major");
+    String major= majorarray!=null ? String.join(" ", majorarray): Arrays.toString(empty);
 
 
     long timestamp = System.currentTimeMillis();
@@ -78,10 +78,10 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("deadline",deadline);
     scholarshipEntity.setProperty("url",url);
     scholarshipEntity.setProperty("timestamp", timestamp);
-    scholarshipEntity.setProperty("race",racelist);
-    scholarshipEntity.setProperty("gender", genderlist);
-    scholarshipEntity.setProperty("income", incomelist);
-    scholarshipEntity.setProperty("major", majorlist);
+    scholarshipEntity.setProperty("race",race);
+    scholarshipEntity.setProperty("gender", gender);
+    scholarshipEntity.setProperty("income", income);
+    scholarshipEntity.setProperty("major", major);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);

@@ -144,10 +144,20 @@ p,h4{
     border-bottom-style:ridge;
     margin-bottom:1%;
 }
+.scholarships{
+    height:100%;
+    width:90%;
+    float:right;
+}
+.dropdown{
+    height:100%;
+    width:5%;
+    float:left;
+}
 
 </style>
 
-<body onload="getScholarships()">
+<body id="body">
     <nav class="navbar">
   <a href="index.html">Home</a>
   <a href="Profile.html">Profile</a>
@@ -155,6 +165,7 @@ p,h4{
   <a href="toDoList.html" class="right">To-Do</a>
   <a href="addScholarships.html" class="right">Add-Scholarship</a>
 </nav>
+
 <div class="outer">
     <div class="header">
     <h1> Top Scholarships For You</h1>
@@ -163,6 +174,7 @@ p,h4{
      </div>
      <div class="image"> </div>
      <div style="clear:both;"></div>
+     
 </div>
 
     <div id="page-number" class="pagination">
@@ -171,6 +183,36 @@ p,h4{
     <div class="pagination">
         <a href="#">&raquo;</a>
     </div>
+    <div class="drop-down">
+        <form>
+            <label for="race">Race/Ethnicity:</label>
+            <select name="race" id="race" onchange="display()">
+            <option value="" disabled selected style="display:none;"> </option>
+            <option value="none">All</option>
+            <option value="hispanic/latinx">Hispanic/Latinx</option>
+            <option value="african american/black">African American/Black</option>
+            <option value="asian">Asian</option>
+            <option value="hawaiaan">Hawaiaan</option>
+            <option value="white"> White</option>
+        </select>
+        <br><br>
+        
+        </form>
+    </div>
+    <div class="scholarships"
         <ul id="scholarship-list"></ul>
+    </div>
+    <script>
+        function display(){
+            const listElement=document.getElementById("scholarship-list");
+            listElement.innerHTML="";
+            var raceElement=document.getElementById("race").value;
+            console.log(raceElement);
+            const pageElement=document.getElementById("page-number");
+            pageElement.innerHTML="";
+            getScholarships(raceElement);
+
+        }
+    </script>
 </body>
 </html>
