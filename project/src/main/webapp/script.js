@@ -188,7 +188,7 @@ function loadInfo() {
 
 
 // scholarships functions
-function getScholarships(race) {
+function getScholarships(race,gender) {
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        if(response.length==0){
@@ -202,11 +202,24 @@ function getScholarships(race) {
             else{   
             for(let i=0;i<response.length;i++){
                 if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
-                    scholarships.push(response[i]);
+                    if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
+                        scholarships.push(response[i]);
+                        console.log(response[i]);
+                    }
+                    
                 }
-                console.log("working");
                 
             }
+            if(scholarships.length==0){
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.style.textAlign="center";
+                titleElement.innerText="No Scholarships Currently Available";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+            }
+            else{
                 const pageList=document.getElementById('page-number');
                 var pagenum=1;
                 if(scholarships.length%5==0){
@@ -234,6 +247,7 @@ function getScholarships(race) {
                     }
                     }    
            }
+            }
         });
         }
         

@@ -8,37 +8,35 @@
 
 <style>
     .container{
-        position:relative;
-        margin-left: 10%;
-  height:17vh;
-  margin-top:3%;
-  width:70vw;
-  border: 3px solid #ffcc99;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius:10px;
-  overflow:visible;
-    }
-.regular{
-position:absolute;
-width:100%;
-overflow:scroll;
-  
-   }
- /* Style the top navigation bar */
+      position:relative;
+      margin-left: 10%;
+      height:17vh;
+      margin-top:3%;
+      width:70vw;
+      border: 3px solid #ffcc99;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius:10px;
+      overflow:visible;
+              }
+    .regular{
+      position:absolute;
+      width:100%;
+      overflow:scroll;
+            }
+    /* Style the top navigation bar */
     .navbar {
-        overflow: hidden;
-        background-color: #ffcc99;
-    }
-
-/* Style the navigation bar links */
-.navbar a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
+      overflow: hidden;
+      background-color: #ffcc99;
+            }
+    /* Style the navigation bar links */
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+              }
 
 /* Right-aligned link */
 .navbar a.right {
@@ -118,10 +116,7 @@ p,h4{
     width:60%;
     height:40vh;
     float:left;
-
-   
 }
-
 .header h3{
     font-weight:normal;
     padding-left:10%;
@@ -152,11 +147,9 @@ p,h4{
 }
 .dropdown{
     height:100%;
-    width:5%;
+    width:10%;
     float:left;
 }
-     
-
 </style>
 
 
@@ -187,11 +180,11 @@ p,h4{
         <a href="#">&raquo;</a>
     </div>
     <div class="drop-down">
+        <h4> Filters:</h4>
         <form>
             <label for="race">Race/Ethnicity:</label>
             <select name="race" id="race" onchange="display()">
-            <option value="" selected disabled style="display:none;"> </option>
-            <option value="none">All</option>
+            <option selected value="none">All</option>
             <option value="hispanic/latinx">Hispanic/Latinx</option>
             <option value="african american/black">African American/Black</option>
             <option value="asian">Asian</option>
@@ -199,11 +192,21 @@ p,h4{
             <option value="white"> White</option>
         </select>
         <br><br>
+        <label for="gender">Gender Identity:</label>
+            <select name="gender" id="gender" onchange="display()">
+            <option value="" disabled style="display:none;"> </option>
+            <option selected value="none">All</option>
+            <option value="male">Male/Man</option>
+            <option value="fem">Female/Woman</option>
+            <option value="transman">Trans male/man</option>
+            <option value="transwoman">Trans female/woman</option>
+            <option value="nonconforming">Gender Queer</option>
+        </select>
         
         </form>
     </div>
-    <div class="scholarships"
-    <nav id="page-number"></nav>
+    <div class="scholarships">
+    
         <ul id="scholarship-list"></ul>
     </div>
     <script>
@@ -211,10 +214,12 @@ p,h4{
             const listElement=document.getElementById("scholarship-list");
             listElement.innerHTML="";
             var raceElement=document.getElementById("race").value;
+            var genderElement=document.getElementById('gender').value;
             console.log(raceElement);
+            console.log(genderElement);
             const pageElement=document.getElementById("page-number");
             pageElement.innerHTML="";
-            getScholarships(raceElement);
+            getScholarships(raceElement,genderElement);
 
         }
         
@@ -229,11 +234,16 @@ p,h4{
 async function asyncCall() {
   const result = await resolveAfter1Second();
   document.getElementById("race").value="none";
-  document.getElementById('race').addEventListener('change', () =>
-console.log("Changed!"));
+  
+  
+
+
 const e = new Event("change");
-const element = document.getElementById('race');
-element.dispatchEvent(e);
+
+const element1 = document.getElementById('race');
+
+element1.dispatchEvent(e);
+
 }
 
  
