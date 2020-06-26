@@ -188,9 +188,10 @@ function loadInfo() {
 
 
 // scholarships functions
-function getScholarships() {
-   fetch('/list-scholarships').then(response => response.json()).then((scholarships) => {
-       if(scholarships.length==0){
+function getScholarships(race) {
+   fetch("/list-scholarships").then(response => response.json()).then((response) => {
+       var scholarships=[];
+       if(response.length==0){
                 const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="No Scholarships Currently Available";
@@ -198,7 +199,14 @@ function getScholarships() {
                 const scholarshipList = document.getElementById('scholarship-list');
                 scholarshipList.appendChild(divElement);
             }
-            else{
+            else{   
+            for(let i=0;i<response.length;i++){
+                if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
+                    scholarships.push(response[i]);
+                }
+                console.log("working");
+                
+            }
                 const pageList=document.getElementById('page-number');
                 var pagenum=1;
                 if(scholarships.length%5==0){
@@ -250,7 +258,7 @@ function getScholarships() {
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
-            console.log("working");
+            
            
 
             var urlElement=document.createElement('a');
@@ -273,5 +281,9 @@ function getScholarships() {
             
 
             containerElement.appendChild(divElement); 
+            
             return containerElement;
-                    }
+            }
+
+
+   

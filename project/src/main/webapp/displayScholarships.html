@@ -60,10 +60,109 @@ p,h4{
   border-style:solid;
   background: #4da6ff;
 }
+<<<<<<< HEAD
+
+.header{
+    width:60%;
+    height:40vh;
+    float:left;
+
+   
+}
+
+.header h3{
+    font-weight:normal;
+    padding-left:10%;
+}
+.header h1{
+    font-size:60px;
+    padding-top:8%;
+    padding-left:10%;
+}
+.image{
+    background-image:url("/images/college7.jpg");
+    background-position:right 25% top 20%;
+    background-size:cover;
+    width:40%;
+    height:40vh;
+    float:right;
+}
+.outer{
+    padding:5px;
+    border-bottom-color:black;
+    border-bottom-style:ridge;
+    margin-bottom:1%;
+}
+.scholarships{
+    height:100%;
+    width:90%;
+    float:right;
+}
+.dropdown{
+    height:100%;
+    width:5%;
+    float:left;
+}
+
 </style>
 
-<body onload="getScholarships()">
+<body id="body">
+    <nav class="navbar">
+  <a href="index.html">Home</a>
+  <a href="Profile.html">Profile</a>
+  <a href="displayScholarships.html">Scholarships</a>
+  <a href="toDoList.html" class="right">To-Do</a>
+  <a href="addScholarships.html" class="right">Add-Scholarship</a>
+</nav>
+
+<div class="outer">
+    <div class="header">
+    <h1> Top Scholarships For You</h1>
+    <h3><em> Find some of the best scholarships for students in the U.S. today. <br>The education journey should
+     be affordable for all.We're here to help make that happen.</em></h3>
+     </div>
+     <div class="image"> </div>
+     <div style="clear:both;"></div>
+     
+</div>
+
+    <div id="page-number" class="pagination">
+        <a href="#">&laquo;</a>
+    </div>
+    <div class="pagination">
+        <a href="#">&raquo;</a>
+    </div>
+    <div class="drop-down">
+        <form>
+            <label for="race">Race/Ethnicity:</label>
+            <select name="race" id="race" onchange="display()">
+            <option value="" disabled selected style="display:none;"> </option>
+            <option value="none">All</option>
+            <option value="hispanic/latinx">Hispanic/Latinx</option>
+            <option value="african american/black">African American/Black</option>
+            <option value="asian">Asian</option>
+            <option value="hawaiaan">Hawaiaan</option>
+            <option value="white"> White</option>
+        </select>
+        <br><br>
+        
+        </form>
+    </div>
+    <div class="scholarships"
     <nav id="page-number"></nav>
         <ul id="scholarship-list"></ul>
+    </div>
+    <script>
+        function display(){
+            const listElement=document.getElementById("scholarship-list");
+            listElement.innerHTML="";
+            var raceElement=document.getElementById("race").value;
+            console.log(raceElement);
+            const pageElement=document.getElementById("page-number");
+            pageElement.innerHTML="";
+            getScholarships(raceElement);
+
+        }
+    </script>
 </body>
 </html>
