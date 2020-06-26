@@ -292,6 +292,10 @@ function getScholarships(race,gender) {
             const deadlineElement=document.createElement("h4");
             deadlineElement.innerText="DEADLINE: "+ scholarship[2];
             divElement.appendChild(deadlineElement);
+
+            const requirementElement=document.createElement("p");
+            requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7];
+            divElement.appendChild(requirementElement);
             
 
             containerElement.appendChild(divElement); 
