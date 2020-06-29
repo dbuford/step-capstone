@@ -45,15 +45,15 @@ async function getData() {
   document.getElementById('data-container').innerText = data;
 }
 
-function loadEntries() {
-  fetch('/data').then(response => response.json()).then((entries) => {
-    const entryListElement = document.getElementById('entry-list');
-    entries.forEach((entry) => {
-      console.log(entry.title)
-      entryListElement.appendChild(createEntryElement(entry));
-    })
-  });
-}
+//function loadEntries() {
+ // fetch('/data').then(response => response.json()).then((entries) => {
+  //  const entryListElement = document.getElementById('entry-list');
+  ///  entries.forEach((entry) => {
+  //    console.log(entry.title)
+   //   entryListElement.appendChild(createEntryElement(entry));
+  //  })
+ // });
+//}
 function add_info() {
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
@@ -166,7 +166,39 @@ function deleteEntry(entry) {
   fetch('/delete', {method: 'POST', body: params});
 }
 
+// create function for user info
 
+function getUserInfo(){
+    fetch("/current-user").then(response => response.json()).then((email) => {
+        if(email=="none"){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const entryListElement = document.getElementById('entry-list');
+                entryListElement.appendChild(divElement);
+        }
+        else{
+            fetch('/data').then(response => response.json()).then((entries) => {
+            entries.forEach((entry) => {
+                if(entry.email==email){
+                    const entryListElement = document.getElementById('entry-list');
+                    console.log(entry.title)
+                    entryListElement.appendChild(createEntryElement(entry));
+                    console.log(entry.email);
+                    console.log(email);
+            
+                    
+                }
+
+    })
+  });
+
+        }
+
+         });
+
+}
 
 
 function loadPage() {
@@ -175,13 +207,14 @@ function loadPage() {
 
 
 function loadInfo() {
-	loadEntries();
+    getUserInfo();
 }
 
 // scholarships functions
 
 
 // scholarships functions
+
 
 function getUserScholarships(){
     fetch("current-user").then(response => response.json()).then((email) => {
@@ -373,6 +406,3 @@ function getScholarships(race,gender,major,income) {
             
             return containerElement;
             }
-
-
-   

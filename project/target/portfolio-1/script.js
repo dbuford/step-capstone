@@ -45,6 +45,7 @@ async function getData() {
   document.getElementById('data-container').innerText = data;
 }
 
+<<<<<<< HEAD
 function loadEntries() {
   fetch('/data').then(response => response.json()).then((entries) => {
     const entryListElement = document.getElementById('entry-list');
@@ -54,6 +55,17 @@ function loadEntries() {
     })
   });
 }
+=======
+//function loadEntries() {
+ // fetch('/data').then(response => response.json()).then((entries) => {
+  //  const entryListElement = document.getElementById('entry-list');
+  ///  entries.forEach((entry) => {
+  //    console.log(entry.title)
+   //   entryListElement.appendChild(createEntryElement(entry));
+  //  })
+ // });
+//}
+>>>>>>> e3da0c95650500e145786cd8d3691e4f66965c3f
 function add_info() {
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
@@ -166,16 +178,51 @@ function deleteEntry(entry) {
   fetch('/delete', {method: 'POST', body: params});
 }
 
+// create function for user info
+
+function getUserInfo(){
+    fetch("/current-user").then(response => response.json()).then((email) => {
+        if(email=="none"){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const entryListElement = document.getElementById('entry-list');
+                entryListElement.appendChild(divElement);
+        }
+        else{
+            fetch('/data').then(response => response.json()).then((entries) => {
+            entries.forEach((entry) => {
+                if(entry.email==email){
+                    const entryListElement = document.getElementById('entry-list');
+                    console.log(entry.title)
+                    entryListElement.appendChild(createEntryElement(entry));
+                    console.log(entry.email);
+                    console.log(email);
+            
+                    
+                }
+
+    })
+  });
+
+<<<<<<< HEAD
+=======
+        }
+
+         });
+
+}
 
 
-
+>>>>>>> e3da0c95650500e145786cd8d3691e4f66965c3f
 function loadPage() {
 	add_info();
 }
 
 
 function loadInfo() {
-	loadEntries();
+    getUserInfo();
 }
 
 // scholarships functions
@@ -197,7 +244,17 @@ function getUserScholarships(){
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email==email){
+<<<<<<< HEAD
                     getScholarships(entry.race,entry.gender,entry.major,entry.income);  
+=======
+                    getScholarships(entry.race,entry.gender,entry.major,entry.income);
+                    console.log(entry.race);
+                    console.log(entry.gender);
+                    console.log(entry.major);
+                    console.log(entry.gender);
+                    console.log(email);
+;                    
+>>>>>>> e3da0c95650500e145786cd8d3691e4f66965c3f
                 }
                 else{
                 const divElement=document.createElement('div');
