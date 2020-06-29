@@ -190,6 +190,7 @@ public class DataServlet extends HttpServlet {
     
   }
 
+
   //public void updateCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
  //   if (!(request.getParameter("maxcomments") == null)) {
   //   maxcount = Integer.parseInt(request.getParameter("maxcomments"));

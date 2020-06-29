@@ -54,6 +54,9 @@ function loadEntries() {
     })
   });
 }
+
+
+
 function add_info() {
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
@@ -64,6 +67,17 @@ function add_info() {
       document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
     }});
 }
+
+
+
+// function add_users_info() {
+  //  fetch('/logins').then(response => response.text()).then((txt) => {
+ //    var form = document.getElementById("addcomm");
+ //   userService.getcurrentUser.getEmail()
+ //   if (userEmail == entry.email) {
+
+ //  }
+// }
 
 function login() {
   fetch('/logins').then((response) => {
@@ -94,6 +108,9 @@ function sortComments() {
     })
   });
 }
+
+
+
 
 function updateCount() {
   location.replace("Profile.html")
@@ -165,8 +182,6 @@ function deleteEntry(entry) {
   params.append('id', entry.id);
   fetch('/delete', {method: 'POST', body: params});
 }
-
-
 
 
 
