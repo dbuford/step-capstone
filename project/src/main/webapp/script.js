@@ -188,7 +188,15 @@ function loadInfo() {
 
 
 // scholarships functions
-function getScholarships(race,gender) {
+
+function getUserScholarships(){
+    fetch("current-user").then(response => response.json()).then((email) => {
+        console.log(email);
+
+         });
+
+}
+function getScholarships(race,gender,major,income) {
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        if(response.length==0){
@@ -203,8 +211,14 @@ function getScholarships(race,gender) {
             for(let i=0;i<response.length;i++){
                 if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
                     if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
-                        scholarships.push(response[i]);
-                        console.log(response[i]);
+                        if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
+                            if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
+                                scholarships.push(response[i]);
+                                console.log(response[i]);
+                            }
+                            
+                        }
+                        
                     }
                     
                 }

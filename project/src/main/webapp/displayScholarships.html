@@ -7,6 +7,11 @@
     <script src="script.js"></script>
 
 <style>
+    body{
+        width:100vw;
+        height:100vh;
+    }
+    
     .container{
       position:relative;
       margin-left: 10%;
@@ -144,12 +149,15 @@ p,h4{
     height:100%;
     width:90%;
     float:right;
+    padding-left:0px;
 }
 .dropdown{
     height:100%;
     width:10%;
     float:left;
+    
 }
+
 </style>
 
 
@@ -173,16 +181,24 @@ p,h4{
      
 </div>
 
-    <div id="page-number" class="pagination">
-        
-    </div>
+   
     
-    <div class="drop-down">
+    <div class="dropdown">
+         <div id="page-number" class="pagination"></div>
         <h4> Filters:</h4>
-        <form>
+        <form id="form1">
+            <label for="selection">Scholarships Displayed:</label>
+            <select name="selection" id="selection" onchange="changeSelection()">
+                <option value="foryou">For You</option>
+                <option value="all">All Scholarships</option>
+            </select>
+        </form>
+
+        <form id="form2">
             <label for="race">Race/Ethnicity:</label>
             <select name="race" id="race" onchange="display()">
-            <option selected value="none">All</option>
+            <option value="" disabled selected style="display:none;"> </option>
+            <option value="none">All</option>
             <option value="hispanic/latinx">Hispanic/Latinx</option>
             <option value="african american/black">African American/Black</option>
             <option value="asian">Asian</option>
@@ -190,15 +206,39 @@ p,h4{
             <option value="white"> White</option>
         </select>
         <br><br>
+
         <label for="gender">Gender Identity:</label>
             <select name="gender" id="gender" onchange="display()">
-            <option value="" disabled style="display:none;"> </option>
             <option selected value="none">All</option>
             <option value="male">Male/Man</option>
             <option value="fem">Female/Woman</option>
             <option value="transman">Trans male/man</option>
             <option value="transwoman">Trans female/woman</option>
             <option value="nonconforming">Gender Queer</option>
+        </select>
+        <br><br>
+         <label for="major">Major:</label>
+            <select name="major" id="major" onchange="display()">
+            <option value="" disabled style="display:none;"> </option>
+            <option selected value="none">All</option>
+            <option value="arts">Arts</option>
+            <option value="business">Business</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="compsci">Computer Science</option>
+            <option value="eco">Economics</option>
+            <option value="edu">Education</option>
+            <option value="engineering">Engineering</option>
+        </select>
+        <br><br>
+         <label for="income">Income:</label>
+            <select name="income" id="income" onchange="display()">
+            <option value="" disabled style="display:none;"> </option>
+            <option selected value="none">All</option>
+            <option value="lessthan25k">less than $25k</option>
+            <option value="25k-50k">$25k-$50k</option>
+            <option value="50k-75k">$50k-$75k</option>
+            <option value="75k-100k">$75k-$100k</option>
+            <option value="morethan100k">more than $100k</option>
         </select>
         
         </form>
@@ -211,13 +251,14 @@ p,h4{
         function display(){
             const listElement=document.getElementById("scholarship-list");
             listElement.innerHTML="";
-            var raceElement=document.getElementById("race").value;
-            var genderElement=document.getElementById('gender').value;
-            console.log(raceElement);
-            console.log(genderElement);
             const pageElement=document.getElementById("page-number");
             pageElement.innerHTML="";
-            getScholarships(raceElement,genderElement);
+            var raceElement=document.getElementById("race");
+            var genderElement=document.getElementById('gender');
+            var majorElement=document.getElementById('major');
+            var incomeElement=document.getElementById('income');
+
+            getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value);
 
         }
         
@@ -232,20 +273,27 @@ p,h4{
 async function asyncCall() {
   const result = await resolveAfter1Second();
   document.getElementById("race").value="none";
-  
-  
+  const e = new Event("change");
+  const element1 = document.getElementById('race');
+  element1.dispatchEvent(e);
+}
 
-
-const e = new Event("change");
-
-const element1 = document.getElementById('race');
-
-element1.dispatchEvent(e);
-
+function changeSelection(){
+    const changeSelectionElement=document.getElementById("selection");
+    const form2Element=document.getElementById("form2");
+    if(changeSelectionElement.value=="foryou"){
+        form2Element.style.display="none";
+        console.log("also working");
+        getUserScholarships();
+    }
+    else{
+        form2Element.style.display="block";
+        console.log("working");
+    }
 }
 
  
 
-    </script>
+</script>
 </body>
 </html>
