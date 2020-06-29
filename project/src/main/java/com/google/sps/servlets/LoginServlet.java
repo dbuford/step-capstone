@@ -32,4 +32,5 @@ public class LoginServlet extends HttpServlet {
       response.getWriter().println("<p>Please <a href=\"" + loginUrl + "\"><button style=\"padding:0px 3px 0px 3px\" class=\"button button_blue hoverable valign-container z-depth-1\"><p class=\"valign\"> <i>Login</i> </p></button></a> to Login.</p>");
     }
   }
+ 
 }
