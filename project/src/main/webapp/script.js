@@ -169,12 +169,6 @@ function deleteEntry(entry) {
 
 
 
-
-
-
-
-
-
 function loadPage() {
 	add_info();
 }
@@ -191,7 +185,38 @@ function loadInfo() {
 
 function getUserScholarships(){
     fetch("current-user").then(response => response.json()).then((email) => {
-        console.log(email);
+        if(email=="none"){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+        }
+        else{
+            fetch('/data').then(response => response.json()).then((entries) => {
+            entries.forEach((entry) => {
+                if(entry.email==email){
+                    getScholarships(entry.race,entry.gender,entry.major,entry.income);
+                    console.log(entry.race);
+                    console.log(entry.gender);
+                    console.log(entry.major);
+                    console.log(entry.gender);
+                    
+                }
+                else{
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+                }
+
+    })
+  });
+
+        }
 
          });
 
