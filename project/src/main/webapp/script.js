@@ -197,12 +197,7 @@ function getUserScholarships(){
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email==email){
-                    getScholarships(entry.race,entry.gender,entry.major,entry.income);
-                    console.log(entry.race);
-                    console.log(entry.gender);
-                    console.log(entry.major);
-                    console.log(entry.gender);
-                    
+                    getScholarships(entry.race,entry.gender,entry.major,entry.income);  
                 }
                 else{
                 const divElement=document.createElement('div');
@@ -266,7 +261,7 @@ function getScholarships(race,gender,major,income) {
                     const pageButton=document.createElement("button");
                     pageButton.innerText=pagenum.toString();
                     pageList.appendChild(pageButton);
-                    pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                    pageButton.onclick=createScholarships(scholarships,pagenum);
                     if(pagenum===1){
                        pageButton.click();
                      }
@@ -278,7 +273,8 @@ function getScholarships(race,gender,major,income) {
                         const pageButton=document.createElement("button");
                         pageButton.innerText=pagenum.toString();
                         pageList.appendChild(pageButton);
-                        pageButton.addEventListener("click",createScholarships(scholarships,pagenum));
+                        pageButton.onclick=createScholarships(scholarships,pagenum);
+
                         if(pagenum===1){
                             pageButton.click();
                         }
@@ -311,8 +307,44 @@ function getScholarships(race,gender,major,income) {
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
-            
+            circleElement.onclick = function() { // Note this is a function
+            console.log("blabla");
+            const formElement=document.createElement('div');
+            formElement.setAttribute('class','form-popup');
+            formElement.setAttribute('id','form-popup');
+            formElement.style.display="block";
+
+            const title=document.createElement('h3');
+            title.innerText="Add?";
+            formElement.appendChild(title);
+
+            const message=document.createElement('p');
+            message.innerText="Click to add Scholarship to To-Do List /Calendar";
+            formElement.appendChild(message);
+
+            const yesButton=document.createElement('button');
+            yesButton.innerText='Add Scholarship';
+            formElement.appendChild(yesButton);
+            yesButton.onclick=function(){
+                document.getElementById('form-popup').remove();
+                const checkMark=document.createElement('span');
+                checkMark.innerHTML='&#x2714;';
+                circleElement.appendChild(checkMark);
+
+            };
+
+            const closeButton=document.createElement('button');
+            closeButton.innerText='Close';
+            formElement.appendChild(closeButton);
+            closeButton.onclick=function(){
+                document.getElementById('form-popup').remove();
+                console.log("close button");
+            };
            
+
+            containerElement.appendChild(formElement);
+            };
+            
 
             var urlElement=document.createElement('a');
             var linkText=document.createTextNode(scholarship[0]);
