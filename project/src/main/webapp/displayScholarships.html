@@ -189,6 +189,7 @@ p,h4{
         <form id="form1">
             <label for="selection">Scholarships Displayed:</label>
             <select name="selection" id="selection" onchange="changeSelection()">
+                <option value="" disabled selected style="display:none;"> </option>
                 <option value="foryou">For You</option>
                 <option value="all">All Scholarships</option>
             </select>
@@ -197,8 +198,8 @@ p,h4{
         <form id="form2">
             <label for="race">Race/Ethnicity:</label>
             <select name="race" id="race" onchange="display()">
-            <option value="" disabled selected style="display:none;"> </option>
-            <option value="none">All</option>
+            
+            <option selected value="none">All</option>
             <option value="hispanic/latinx">Hispanic/Latinx</option>
             <option value="african american/black">African American/Black</option>
             <option value="asian">Asian</option>
@@ -272,13 +273,17 @@ p,h4{
 
 async function asyncCall() {
   const result = await resolveAfter1Second();
-  document.getElementById("race").value="none";
+  document.getElementById("selection").value="foryou";
   const e = new Event("change");
-  const element1 = document.getElementById('race');
+  const element1 = document.getElementById('selection');
   element1.dispatchEvent(e);
 }
 
 function changeSelection(){
+    const listElement=document.getElementById("scholarship-list");
+    listElement.innerHTML="";
+    const pageElement=document.getElementById("page-number");
+    pageElement.innerHTML="";
     const changeSelectionElement=document.getElementById("selection");
     const form2Element=document.getElementById("form2");
     if(changeSelectionElement.value=="foryou"){
@@ -289,6 +294,7 @@ function changeSelection(){
     else{
         form2Element.style.display="block";
         console.log("working");
+        getScholarships("none","none","none","none");
     }
 }
 

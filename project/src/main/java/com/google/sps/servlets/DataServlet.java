@@ -157,21 +157,21 @@ public class DataServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
     String email = userService.getCurrentUser().getEmail();
     
-    String[] empty={};
+    String[] empty={"none"};
     String[] racearray=request.getParameterValues("race");
-    String race= racearray!=null ? String.join(" ",racearray): Arrays.toString(empty);
+    String race= racearray!=null ? String.join(" ",racearray): String.join(" ", empty);
 
 
     String[] genderarray=request.getParameterValues("gender");
-    String gender= genderarray!=null ? String.join(" ",genderarray): Arrays.toString(empty);
+    String gender= genderarray!=null ? String.join(" ",genderarray): String.join(" ", empty);
     
 
     String[] incomearray=request.getParameterValues("income");
-    String income= incomearray!=null ? String.join(" ",incomearray): Arrays.toString(empty);
+    String income= incomearray!=null ? String.join(" ",incomearray): String.join(" ", empty);
 
 
     String[] majorarray=request.getParameterValues("major");
-    String major= majorarray!=null ? String.join(" ",majorarray): Arrays.toString(empty);
+    String major= majorarray!=null ? String.join(" ",majorarray): String.join(" ", empty);
 
 
     Entity entryEntity = new Entity("Info");
