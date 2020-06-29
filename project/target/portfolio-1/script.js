@@ -45,18 +45,15 @@ async function getData() {
   document.getElementById('data-container').innerText = data;
 }
 
-function loadEntries() {
-  fetch('/data').then(response => response.json()).then((entries) => {
-    const entryListElement = document.getElementById('entry-list');
-    entries.forEach((entry) => {
-      console.log(entry.title)
-      entryListElement.appendChild(createEntryElement(entry));
-    })
-  });
-}
-
-
-
+//function loadEntries() {
+ // fetch('/data').then(response => response.json()).then((entries) => {
+  //  const entryListElement = document.getElementById('entry-list');
+  ///  entries.forEach((entry) => {
+  //    console.log(entry.title)
+   //   entryListElement.appendChild(createEntryElement(entry));
+  //  })
+ // });
+//}
 function add_info() {
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
@@ -67,17 +64,6 @@ function add_info() {
       document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
     }});
 }
-
-
-
-// function add_users_info() {
-  //  fetch('/logins').then(response => response.text()).then((txt) => {
- //    var form = document.getElementById("addcomm");
- //   userService.getcurrentUser.getEmail()
- //   if (userEmail == entry.email) {
-
- //  }
-// }
 
 function login() {
   fetch('/logins').then((response) => {
@@ -108,9 +94,6 @@ function sortComments() {
     })
   });
 }
-
-
-
 
 function updateCount() {
   location.replace("Profile.html")
@@ -183,23 +166,48 @@ function deleteEntry(entry) {
   fetch('/delete', {method: 'POST', body: params});
 }
 
+// create function for user info
+
+function getUserInfo(){
+    fetch("/current-user").then(response => response.json()).then((email) => {
+        if(email=="none"){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const entryListElement = document.getElementById('entry-list');
+                entryListElement.appendChild(divElement);
+        }
+        else{
+            fetch('/data').then(response => response.json()).then((entries) => {
+            entries.forEach((entry) => {
+                if(entry.email==email){
+                    const entryListElement = document.getElementById('entry-list');
+                    console.log(entry.title)
+                    entryListElement.appendChild(createEntryElement(entry));
+                    console.log(entry.email);
+                    console.log(email);
+            
+                    
+                }
+
+    })
+  });
+
+        }
+
+         });
+
+}
 
 
-
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 0698cd561467ce2e793ce8816185d83753309a7f
 function loadPage() {
 	add_info();
 }
 
 
 function loadInfo() {
-	loadEntries();
+    getUserInfo();
 }
 
 // scholarships functions
@@ -226,7 +234,8 @@ function getUserScholarships(){
                     console.log(entry.gender);
                     console.log(entry.major);
                     console.log(entry.gender);
-                    
+                    console.log(email);
+;                    
                 }
                 else{
                 const divElement=document.createElement('div');
