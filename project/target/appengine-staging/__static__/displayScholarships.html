@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Display Scholarships</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+<style>
+    body{
+        width:100vw;
+        height:100vh;
+    }
+    
+    .container{
+      position:relative;
+      margin-left: 10%;
+      height:20vh;
+      margin-top:3%;
+      width:70vw;
+      border: 3px solid #ffcc99;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius:10px;
+      overflow:visible;
+              }
+    .regular{
+      position:absolute;
+      width:100%;
+      overflow:scroll;
+            }
+    /* Style the top navigation bar */
+    .navbar {
+      overflow: hidden;
+      background-color: #ffcc99;
+            }
+    /* Style the navigation bar links */
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+              }
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.regular a{
+    margin-left:40%;
+    text-align:center;
+    font-size:30px;
+    padding:0px;
+    text-decoration:none;
+    color:black;
+
+  }
+.regular a:hover{
+    color:pink;
+}
+
+.regular a:active{
+    color:black;
+}
+.pagination {
+  display: inline-block;
+}
+.pagination a{
+    text-decoration:none;
+    color:black;
+}
+
+.pagination button {
+  color: black;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  border-bottom:none;
+  background:none;
+}
+.pagination button:active{
+    border-bottom:solid black;
+    border-left:none;
+    border-right:none;
+    border-top:none;
+
+}
+p,h4{
+    padding-left:5px;
+    }
+.circle {
+  float:left;
+  position:absolute;
+  margin-top:-35px;
+  margin-left:-25px;
+  overflow:visible;
+  
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 50px;
+  border-width:thick;
+  border-color:#ffcc99;
+  border-style:solid;
+  background: darkgreen;
+}
+
+
+.header{
+    width:60%;
+    height:40vh;
+    float:left;
+}
+.header h3{
+    font-weight:normal;
+    padding-left:10%;
+}
+.header h1{
+    font-size:60px;
+    padding-top:8%;
+    padding-left:10%;
+}
+.image{
+    background-image:url("/images/college7.jpg");
+    background-position:right 25% top 20%;
+    background-size:cover;
+    width:40%;
+    height:40vh;
+    float:right;
+}
+.outer{
+    padding:5px;
+    border-bottom-color:black;
+    border-bottom-style:ridge;
+    margin-bottom:1%;
+}
+.scholarships{
+    height:100%;
+    width:90%;
+    float:right;
+    padding-left:0px;
+}
+.dropdown{
+    height:100%;
+    width:10%;
+    float:left;
+    
+}
+/* The popup form - hidden by default */
+.form-popup {
+position:absolute;
+  width:20%;
+  height:100%;
+  border: 3px solid white;
+  border-radius:10px;
+  background-color:white;
+}
+span {
+  font-size:50px;
+  position:absolute;
+}
+
+</style>
+
+
+ 
+<body id="body" onload="asyncCall()">
+<nav class="navbar">
+  <a href="index.html">Home</a>
+  <a href="Profile.html">Profile</a>
+  <a href="displayScholarships.html">Scholarships</a>
+  <a href="toDoList.html" class="right">To-Do</a>
+  <a href="addScholarships.html" class="right">Add-Scholarship</a>
+</nav>
+<div class="outer">
+    <div class="header">
+    <h1> Top Scholarships For You</h1>
+    <h3><em> Find some of the best scholarships for students in the U.S. today. <br>The education journey should
+     be affordable for all.We're here to help make that happen.</em></h3>
+     </div>
+     <div class="image"> </div>
+     <div style="clear:both;"></div>
+     
+</div>
+
+   
+    
+    <div class="dropdown">
+         <div id="page-number" class="pagination"></div>
+        <h4> Filters:</h4>
+        <form id="form1">
+            <label for="selection">Scholarships Displayed:</label>
+            <select name="selection" id="selection" onchange="changeSelection()">
+                <option value="" disabled selected style="display:none;"> </option>
+                <option value="foryou">For You</option>
+                <option value="all">All Scholarships</option>
+            </select>
+        </form><br><br>
+
+        <form id="form2">
+            <label for="race">Race/Ethnicity:</label>
+            <select name="race" id="race" onchange="display()">
+            
+            <option selected value="none">All</option>
+            <option value="hispanic/latinx">Hispanic/Latinx</option>
+            <option value="african american/black">African American/Black</option>
+            <option value="asian">Asian</option>
+            <option value="hawaiaan">Hawaiaan</option>
+            <option value="white"> White</option>
+        </select>
+        <br><br>
+
+        <label for="gender">Gender Identity:</label>
+            <select name="gender" id="gender" onchange="display()">
+            <option selected value="none">All</option>
+            <option value="male">Male/Man</option>
+            <option value="fem">Female/Woman</option>
+            <option value="transman">Trans male/man</option>
+            <option value="transwoman">Trans female/woman</option>
+            <option value="nonconforming">Gender Queer</option>
+        </select>
+        <br><br>
+         <label for="major">Major:</label>
+            <select name="major" id="major" onchange="display()">
+            <option value="" disabled style="display:none;"> </option>
+            <option selected value="none">All</option>
+            <option value="arts">Arts</option>
+            <option value="business">Business</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="compsci">Computer Science</option>
+            <option value="eco">Economics</option>
+            <option value="edu">Education</option>
+            <option value="engineering">Engineering</option>
+        </select>
+        <br><br>
+         <label for="income">Income:</label>
+            <select name="income" id="income" onchange="display()">
+            <option value="" disabled style="display:none;"> </option>
+            <option selected value="none">All</option>
+            <option value="lessthan25k">less than $25k</option>
+            <option value="25k-50k">$25k-$50k</option>
+            <option value="50k-75k">$50k-$75k</option>
+            <option value="75k-100k">$75k-$100k</option>
+            <option value="morethan100k">more than $100k</option>
+        </select>
+        
+        </form>
+    </div>
+    <div class="scholarships">
+    
+        <ul id="scholarship-list"></ul>
+    </div>
+    <script>
+        function display(){
+            const listElement=document.getElementById("scholarship-list");
+            listElement.innerHTML="";
+            const pageElement=document.getElementById("page-number");
+            pageElement.innerHTML="";
+            var raceElement=document.getElementById("race");
+            var genderElement=document.getElementById('gender');
+            var majorElement=document.getElementById('major');
+            var incomeElement=document.getElementById('income');
+
+            getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value);
+
+        }
+        
+        function resolveAfter1Second() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('1');
+    }, 10);
+  });
+}
+
+async function asyncCall() {
+  const result = await resolveAfter1Second();
+  document.getElementById("selection").value="foryou";
+  const e = new Event("change");
+  const element1 = document.getElementById('selection');
+  element1.dispatchEvent(e);
+}
+
+function changeSelection(){
+    const listElement=document.getElementById("scholarship-list");
+    listElement.innerHTML="";
+    const pageElement=document.getElementById("page-number");
+    pageElement.innerHTML="";
+    const changeSelectionElement=document.getElementById("selection");
+    const form2Element=document.getElementById("form2");
+    if(changeSelectionElement.value=="foryou"){
+        form2Element.style.display="none";
+        console.log("also working");
+        getUserScholarships();
+    }
+    else{
+        form2Element.style.display="block";
+        console.log("working");
+        getScholarships("none","none","none","none");
+    }
+}
+
+ 
+
+</script>
+</body>
+</html>

@@ -15,6 +15,7 @@ public class CurrentUserServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
       String userEmail;
 
       UserService userService = UserServiceFactory.getUserService();
