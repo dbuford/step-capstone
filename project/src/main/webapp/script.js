@@ -65,6 +65,40 @@ function add_info() {
     }});
 }
 
+
+function call_name(){
+    fetch("/current-user").then(response => response.json()).then((email) => {
+        if(email=="none"){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Name";
+                divElement.appendChild(titleElement);
+                const entryNamesElement = document.getElementById('userName');
+                entryNamesElement.appendChild(divElement);
+        }
+        else{
+            fetch('/data').then(response => response.json()).then((entries) => {
+            entries.forEach((entry) => {
+                if(entry.email==email){
+                    const entryNamesElement  = document.getElementById('userName');
+                    console.log(entry.name)
+                    entryNamesElement .appendChild(createEntryElement(entry.name));
+                    console.log(entry.email);
+                    console.log(email);
+                    console.log(name);
+            
+                    
+                }
+
+    })
+  });
+
+        }
+
+         });
+
+}
+
 function login() {
   fetch('/logins').then((response) => {
      const loginElement = document.getElementById('loginel');
@@ -107,29 +141,29 @@ function createEntryElement(entry) {
   if (entry.name === undefined || entry.name === "") {
     nameElement.innerHTML = "-- Anonymous".italics().bold();
   } else {
-    nameElement.innerHTML = ("--" + entry.name).italics().bold();
+    nameElement.innerHTML = ("Name: " + entry.name).italics().bold();
   }
   nameElement.style.marginLeft = "15px"
 
   const emailElement = document.createElement('span');
-  emailElement.innerHTML = "(" + entry.email + ")";
+  emailElement.innerHTML = ("Email: " + entry.email);
   
 
   const ageElement = document.createElement('span');
-  ageElement.innerText = entry.age;
+  ageElement.innerText = ("Age: " + entry.age);
 
 
   const majorElement = document.createElement('span');
-  majorElement.innerText = entry.major.toString();
+  majorElement.innerText = ("Major: " + entry.major.toString());
 
   const genderElement = document.createElement('span');
-  genderElement.innerText = entry.gender.toString();
+  genderElement.innerText = ("Gender: " + entry.gender.toString());
 
   const incomeElement = document.createElement('span');
-  incomeElement.innerText = entry.income.toString();
+  incomeElement.innerText = ("Income: " + entry.income.toString());
 
   const raceElement = document.createElement('span');
-  raceElement.innerText = entry.race.toString();
+  raceElement.innerText = ("Race: " + entry.race.toString());
 
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
@@ -183,7 +217,6 @@ function getUserInfo(){
             entries.forEach((entry) => {
                 if(entry.email==email){
                     const entryListElement = document.getElementById('entry-list');
-                    console.log(entry.title)
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
                     console.log(email);
@@ -207,6 +240,7 @@ function loadPage() {
 
 
 function loadInfo() {
+    call_name()
     getUserInfo();
 }
 
