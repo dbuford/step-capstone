@@ -226,6 +226,7 @@ function loadInfo() {
       var signoutButton = document.getElementById('signout_button');
 
       var date;
+      var calendarTitle;
 
 
 
@@ -359,6 +360,11 @@ function getScholarships(race,gender,major,income) {
             calendarElement.style.display="none";
             divElement.appendChild(calendarElement);
 
+            const titleElement =document.createElement("h4");
+            titleElement.innerText=scholarship[0];
+            titleElement.style.display="none";
+            divElement.appendChild(titleElement);
+
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
@@ -383,7 +389,9 @@ function getScholarships(race,gender,major,income) {
             yesButton.onclick=function(){
                 console.log(calendarElement.innerText);
                 date=calendarElement.innerText;
+                calendarTitle=titleElement.innerText;
                 console.log(date);
+                console.log(calendarTitle);
                 accessCalendar();
                 document.getElementById('form-popup').remove();
                 const checkMark=document.createElement('span');
@@ -505,29 +513,24 @@ function getScholarships(race,gender,major,income) {
        
       function listUpcomingEvents() {
           var event = {
-  'summary': 'Google I/O 2015',
-  'location': '800 Howard St., San Francisco, CA 94103',
-  'description': 'A chance to hear more about Google\'s developer products.',
+  'summary': calendarTitle+' Deadline',
+  'description': calendarTitle+ ' is due today! Make sure to submit it on time',
   'start': {
-    'dateTime': date+'T17:00:00-06:00',
-    'timeZone': 'America/Los_Angeles'
+    'dateTime': date+'T13:00:00-00:00',
+    'timeZone': 'America/Chicago'
   },
   'end': {
-    'dateTime': date+'T17:00:00-07:00',
-    'timeZone': 'America/Los_Angeles'
+    'dateTime': date+'T15:00:00-00:00',
+    'timeZone': 'America/Chicago'
   },
   'recurrence': [
-    'RRULE:FREQ=DAILY;COUNT=2'
-  ],
-  'attendees': [
-    {'email': 'lpage@example.com'},
-    {'email': 'sbrin@example.com'}
+    'RRULE:FREQ=DAILY;COUNT=1'
   ],
   'reminders': {
     'useDefault': false,
     'overrides': [
-      {'method': 'email', 'minutes': 24 * 60},
-      {'method': 'popup', 'minutes': 10}
+      {'method': 'email', 'minutes': 48 * 60},
+      {'method': 'popup', 'minutes': 30}
     ]
   }
 };
