@@ -1,0 +1,241 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Editing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase.js"></script>
+    <script>
+  var config = {
+    apiKey: "AIzaSyBdplCWYnACcIGTz8jdviiU0LAaY6-2M5k",
+    authDomain: "brakiajackson-step-2020.firebaseapp.com",
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<!------ Include the above in your HEAD tag ---------->
+    <style>
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: -webkit-linear-gradient(left, #D7DEDA, #D7DEDA);
+
+}
+
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+        background-image: url("images/scholar.jpg");
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: #ffcc99;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.box {       
+        background-color:#ffcc99;
+        text-align: center;
+        color:white;
+        font-weight:bold;
+        margin:auto;     
+        width: 40%;
+    }
+
+
+/* styling section */
+
+</style>
+</head>
+
+</style>
+</head>
+<body class="w3-black" onload="loadInfo()"> >
+
+
+
+
+<div class="header">
+  <h1>$cholar</h1>
+  <p><i>Your Way To Success</i></p>
+</div>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="Profile.html">Profile</a>
+  <a href="displayScholarships.html">Scholarships</a>
+  <a href="toDoList.html" class="right">To-Do</a>
+  <a href="addScholarships.html" class="right">Add-Scholarship</a>
+</div>
+
+
+
+  </div>
+
+<div class="container emp-profile">
+    <div class="col-md-2">
+                        <a href="Profile.html">Back to Profile</a>
+    </div>
+    <form id="addcomm" action="/data" method="POST">
+    <center>
+        <p> <b>Name: </b></p>
+        <textarea name="name" placeholder="Name"></textarea>
+        <br/><br/>
+        <p> <b>Age: </b> </p>
+        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
+
+         <p><b>Upload a profile image:</b></p>
+            <input type="file" name="image">
+            <br/><br/>
+        
+        <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
+        <label for="displayemail"> Display email next to info</label> -->
+    
+      <div class="innerdiv2">
+                
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> <b>Race/Ethnicity:</b></h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="hispanic/latinx" name="race">Hispanic or Latinx</input><br>
+                        <input type="checkbox" value="african american/black" name="race">African American or Black</input><br>
+                        <input type="checkbox" value="asian" name="race">Asian </input><br>
+                        <input type="checkbox" value="hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
+                        <input type="checkbox" value="white" name="race"> White</input><br>
+                        <input type="checkbox" value="none" name="race"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4><b> Gender Identity:</b></h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="male" name="gender"> Male/Man</input><br>
+                        <input type ="checkbox" value="fem" name="gender"> Female/Woman</input><br>
+                        <input type="checkbox" value="transman" name="gender"> Transmale/Transman</input><br>
+                        <input type="checkbox" value="transwoman" name="gender">Transfemale/Transwoman</input><br>
+                        <input type="checkbox" value="nonconforming" name="gender"> Genderqueer/Gender nonconforming</input><br>
+                        <input type="checkbox" value="none" name="gender"> None</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4><b>Income Level:</b></h4>
+                    </div>
+                    <div class="scrollbox">
+                         <input type="checkbox" value="lessthan25k" name="income">less than $25k</input><br>
+                        <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
+                        <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
+                        <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
+                        <input type="checkbox" value="morethan100k" name="income"> more than $100k</input>
+                    </div>
+                </div>
+
+                <div class="eligibility">
+                    <div class="title">
+                        <h4> <b>Major Interests:</b></h4>
+                    </div>
+                    <div class="scrollbox">
+                        <input type="checkbox" value="Arts" name="major"> Arts</input><br>
+                        <input type ="checkbox" value="Business" name="major"> Business</input><br>
+                        <input type ="checkbox" value="Chemistry" name="major"> Chemistry</input><br>
+                        <input type="checkbox" value="Computer Science" name="major">Computer Science </input><br>
+                        <input type ="checkbox" value="Economy" name="major"> Economics</input><br>
+                        <input type ="checkbox" value="Education" name="major"> Education</input><br>
+                        <input type ="checkbox" value="Engineering" name="major"> Engineering</input><br>
+                        <input type="checkbox" value="none" name="major"> None</input>
+                    </div>
+                                 
+                </div>
+        </div>
+        <button onclick="myFunction()">Submit</button>
+          
+        </form>   
+      <br/>
+      </center>
+
+</div>
+</div>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

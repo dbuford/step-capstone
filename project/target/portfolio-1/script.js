@@ -183,13 +183,14 @@ function createEntryElement(entry) {
 
 
   entryElement.appendChild(nameElement);
+  const breakElement=document.createElement("br");
+  entryElement.appendChild(breakElement);
   entryElement.appendChild(emailElement);
   entryElement.appendChild(ageElement);
   entryElement.appendChild(majorElement);
   entryElement.appendChild(incomeElement);
   entryElement.appendChild(raceElement);
   entryElement.appendChild(genderElement);
-  entryElement.appendChild(deleteButtonElement);
   entryElement.appendChild(timeElement);
   return entryElement;
 }
@@ -200,8 +201,15 @@ function deleteEntry(entry) {
   fetch('/delete', {method: 'POST', body: params});
 }
 
-// create function for user info
+// Modifying user info
+//function editing_info() {
+ //   
+//}
 
+
+
+
+// create function for user info
 function getUserInfo(){
     fetch("/current-user").then(response => response.json()).then((email) => {
         if(email=="none"){
