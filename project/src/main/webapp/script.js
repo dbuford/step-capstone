@@ -186,12 +186,21 @@ function createEntryElement(entry) {
   const breakElement=document.createElement("br");
   entryElement.appendChild(breakElement);
   entryElement.appendChild(emailElement);
+  const breakElement2=document.createElement("br");
+  const breakElement3=document.createElement("br");
+  const breakElement4=document.createElement("br");
+  const breakElement5=document.createElement("br");
+  const breakElement6=document.createElement("br");
+  entryElement.appendChild(breakElement2);
   entryElement.appendChild(ageElement);
+  entryElement.appendChild(breakElement3);
   entryElement.appendChild(majorElement);
+  entryElement.appendChild(breakElement6);
   entryElement.appendChild(incomeElement);
+  entryElement.appendChild(breakElement4);
   entryElement.appendChild(raceElement);
+  entryElement.appendChild(breakElement5);
   entryElement.appendChild(genderElement);
-  entryElement.appendChild(timeElement);
   return entryElement;
 }
 
