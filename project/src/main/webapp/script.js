@@ -246,9 +246,11 @@ function getUserScholarships(){
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email==email){
-                    getScholarships(entry.race,entry.gender,entry.major,entry.income);  
+                    getScholarships(entry.race,entry.gender,entry.major,entry.income,"none","none");  
                 }
                 else{
+                    console.log(entry.email);
+                    console.log(email);
                 const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Fill Out Form on Home Page";
@@ -265,7 +267,7 @@ function getUserScholarships(){
          });
 
 }
-function getScholarships(race,gender,major,income) {
+function getScholarships(race,gender,major,income,grade,state) {
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        if(response.length==0){
@@ -282,16 +284,17 @@ function getScholarships(race,gender,major,income) {
                     if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
                         if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
                             if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
-                                scholarships.push(response[i]);
-                                console.log(response[i]);
-                            }
-                            
+                                if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
+                                    if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
+
+                                    scholarships.push(response[i]);
+                                    console.log(response[i]);
+                                    }
+                                }   
+                            }  
                         }
-                        
-                    }
-                    
-                }
-                
+                    } 
+                } 
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -352,8 +355,6 @@ function getScholarships(race,gender,major,income) {
             const divElement = document.createElement('div');
             divElement.setAttribute('class','regular');
 
-            const deadlineElement=document.createElement("h4");
-            deadlineElement.innerText="DEADLINE: "+ scholarship[2];
             
             const calendarElement=document.createElement("h4");
             calendarElement.innerText=scholarship[2];
@@ -416,24 +417,77 @@ function getScholarships(race,gender,major,income) {
             var linkText=document.createTextNode(scholarship[0]);
             urlElement.appendChild(linkText);
             
+            var titleContainer=document.createElement("div");
+            titleContainer.setAttribute('class','scholarship-title');
             urlElement.title=scholarship[0];
             urlElement.setAttribute('href', scholarship[3]);
             urlElement.setAttribute('target', '_blank');
-            divElement.appendChild(urlElement);
+            titleContainer.appendChild(urlElement);
+            containerElement.appendChild(titleContainer);
             
 
-            const descriptionElement=document.createElement("p");
-            descriptionElement.innerText=scholarship[1];
-            divElement.appendChild(descriptionElement);
 
-            divElement.appendChild(deadlineElement);
+            const deadlineContainer=document.createElement("div");
+            deadlineContainer.setAttribute('class','deadline-container');
+            const deadlineTitle=document.createElement("h4");
+            deadlineTitle.innerText="DEADLINE: ";
+            const deadlineValue=document.createElement("h4");
+            deadlineValue.innerText=scholarship[2];
+            deadlineContainer.appendChild(deadlineTitle);
+            deadlineContainer.appendChild(deadlineValue);
+            containerElement.appendChild(deadlineContainer);
+
+            const amountContainer=document.createElement("div");
+            amountContainer.setAttribute('class','amount-container');
+            const amountTitle=document.createElement("h4");
+            amountTitle.innerText="AMOUNT: ";
+            const amountValue=document.createElement("h4");
+            amountValue.innerText=scholarship[9];
+            amountContainer.appendChild(amountTitle);
+            amountContainer.appendChild(amountValue);
+            containerElement.appendChild(amountContainer);
+
+            const moreDetails=document.createElement("div");
+            moreDetails.setAttribute('class','more-details');
+            moreDetails.innerHTML="Scholarship Details: ";
+            
+            const downArrow=document.createElement("i");
+            downArrow.setAttribute('class','arrow down');
+            moreDetails.appendChild(downArrow);
+
+            const detailsElement=document.createElement("div");
+            detailsElement.style.display="none";
+
+            const descriptionElement=document.createElement("p");
+            descriptionElement.innerText="Description: "+ scholarship[1];
+            detailsElement.appendChild(descriptionElement);
 
             const requirementElement=document.createElement("p");
             requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7];
-            divElement.appendChild(requirementElement);
+            detailsElement.appendChild(requirementElement);
+
+            
+
+            moreDetails.appendChild(detailsElement);
+            
+
+            moreDetails.onclick=function(){
+                if(detailsElement.style.display=="none"){
+                detailsElement.style.display="block";
+                downArrow.classList.remove("down");
+                downArrow.classList.add("up");
+                }
+                else{
+                    detailsElement.style.display="none";
+                    downArrow.classList.remove("up");
+                    downArrow.classList.add("down");
+                }
+                
+                }
             
 
             containerElement.appendChild(divElement); 
+            containerElement.appendChild(moreDetails);
             
             return containerElement;
             }
@@ -516,11 +570,11 @@ function getScholarships(race,gender,major,income) {
   'summary': calendarTitle+' Deadline',
   'description': calendarTitle+ ' is due today! Make sure to submit it on time',
   'start': {
-    'dateTime': date+'T13:00:00-00:00',
+    'date': date,
     'timeZone': 'America/Chicago'
   },
   'end': {
-    'dateTime': date+'T15:00:00-00:00',
+    'date':date,
     'timeZone': 'America/Chicago'
   },
   'recurrence': [

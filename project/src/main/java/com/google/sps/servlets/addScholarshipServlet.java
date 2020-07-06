@@ -43,6 +43,13 @@ public class addScholarshipServlet extends HttpServlet {
     String description=getParameter(request,"scholarship-description","");
     String deadline= getParameter(request,"scholarship-deadline","");
     String url=getParameter(request,"scholarship-link","");
+    String amount=getParameter(request,"scholarship-amount","");
+    if(amount.equals("")){
+        amount="not specified";
+    }
+    else{
+        amount="$" + amount;
+    }
 
    String[] empty={"none"};
     String[] racearray=request.getParameterValues("race");
@@ -61,6 +68,11 @@ public class addScholarshipServlet extends HttpServlet {
     String[] majorarray=request.getParameterValues("major");
     String major= majorarray!=null ? String.join(" ", majorarray): String.join(" ",empty);
 
+    String[] gradearray=request.getParameterValues("grade");
+    String grade= gradearray!=null ? String.join(" ", gradearray): String.join(" ",empty);
+
+    String[] statearray=request.getParameterValues("state");
+    String state= statearray!=null ? String.join(" ",statearray): String.join(" ",empty);
 
     long timestamp = System.currentTimeMillis();
 
@@ -77,11 +89,14 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("description",description);
     scholarshipEntity.setProperty("deadline",deadline);
     scholarshipEntity.setProperty("url",url);
+    scholarshipEntity.setProperty("amount",amount);
     scholarshipEntity.setProperty("timestamp", timestamp);
     scholarshipEntity.setProperty("race",race);
     scholarshipEntity.setProperty("gender", gender);
     scholarshipEntity.setProperty("income", income);
     scholarshipEntity.setProperty("major", major);
+    scholarshipEntity.setProperty("grade",grade);
+    scholarshipEntity.setProperty("state",state);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);
