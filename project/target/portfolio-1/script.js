@@ -215,7 +215,20 @@ function deleteEntry(entry) {
  //   
 //}
 
+//function show_form() {
+  //  if (email != emailElement) {
+//
+  //  }
+//}
 
+
+//function getUserInfoOnce(){
+ //   if (entryListElement.in.entry){
+     //   if (entryListElement.in.entry){
+     //       add_info();
+      //  }
+  //  }
+//}
 
 
 // create function for user info
