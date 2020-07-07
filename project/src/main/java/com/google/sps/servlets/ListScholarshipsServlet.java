@@ -59,6 +59,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         String major=(String) entity.getProperty("major");
         String grade=(String) entity.getProperty("grade");
         String state=(String) entity.getProperty("state");
+        String userEmail=(String) entity.getProperty("userEmail");
 
         ArrayList<String> info=new ArrayList<>();
         info.add(title);
@@ -72,6 +73,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         info.add(grade);
         info.add(amount);
         info.add(state);
+        info.add(userEmail);
         
 
         scholarships.add(info);

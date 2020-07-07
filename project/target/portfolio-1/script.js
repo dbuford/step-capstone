@@ -227,6 +227,7 @@ function loadInfo() {
 
       var date;
       var calendarTitle;
+      var userEmail;
 
 
 
@@ -268,6 +269,10 @@ function getUserScholarships(){
 
 }
 function getScholarships(race,gender,major,income,grade,state) {
+    fetch("current-user").then(response => response.json()).then((email) => {
+        userEmail=email;
+        console.log(userEmail);
+    });
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        if(response.length==0){
@@ -424,6 +429,42 @@ function getScholarships(race,gender,major,income,grade,state) {
             urlElement.setAttribute('target', '_blank');
             titleContainer.appendChild(urlElement);
             containerElement.appendChild(titleContainer);
+
+            if(userEmail==scholarship[11]){
+                var editButton=document.createElement("button");
+                editButton.innerText="Edit";
+                titleContainer.appendChild(editButton);
+                editButton.onclick=function(){
+                    urlElement.style.display="none";
+                    deadlineValue.style.display="none";
+                    amountValue.style.display="none";
+                    moreDetails.style.display="none";
+                
+
+                    var newTitleInput=document.createElement("input");
+                    newTitleInput.value=scholarship[0];
+                    titleContainer.appendChild(newTitleInput);
+
+                    var newUrlInput=document.createElement("input");
+                    newUrlInput.type="url";
+                    newUrlInput.value=scholarship[3];
+                    titleContainer.appendChild(newUrlInput);
+
+
+                    var newDeadlineInput=document.createElement("input");
+                    newDeadlineInput.type="date";
+                    newDeadlineInput.value=scholarship[2];
+                    deadlineContainer.appendChild(newDeadlineInput);
+
+                    var newAmountInput=document.createElement("input");
+                    newAmountInput.type="number";
+                    newAmountInput.value=scholarship[9];
+                    amountContainer.appendChild(newAmountInput);
+
+
+
+                }
+            }
             
 
 

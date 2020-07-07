@@ -207,10 +207,28 @@ function loadInfo() {
     getUserInfo();
 }
 
-// scholarships functions
 
 
-// scholarships functions
+
+/* scholarships functions*/
+// Client ID and API key from the Developer Console
+      var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
+
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+      var authorizeButton = document.getElementById('authorize_button');
+      var signoutButton = document.getElementById('signout_button');
+
+      var date;
+      var calendarTitle;
+      var userEmail;
+
 
 
 function getUserScholarships(){
@@ -229,9 +247,11 @@ function getUserScholarships(){
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email==email){
-                    getScholarships(entry.race,entry.gender,entry.major,entry.income);  
+                    getScholarships(entry.race,entry.gender,entry.major,entry.income,"none","none");  
                 }
                 else{
+                    console.log(entry.email);
+                    console.log(email);
                 const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Fill Out Form on Home Page";
@@ -248,7 +268,11 @@ function getUserScholarships(){
          });
 
 }
-function getScholarships(race,gender,major,income) {
+function getScholarships(race,gender,major,income,grade,state) {
+    fetch("current-user").then(response => response.json()).then((email) => {
+        userEmail=email;
+        console.log(userEmail);
+    });
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        if(response.length==0){
@@ -265,16 +289,17 @@ function getScholarships(race,gender,major,income) {
                     if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
                         if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
                             if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
-                                scholarships.push(response[i]);
-                                console.log(response[i]);
-                            }
-                            
+                                if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
+                                    if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
+
+                                    scholarships.push(response[i]);
+                                    console.log(response[i]);
+                                    }
+                                }   
+                            }  
                         }
-                        
-                    }
-                    
-                }
-                
+                    } 
+                } 
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -334,7 +359,17 @@ function getScholarships(race,gender,major,income) {
             containerElement.setAttribute('class','container');
             const divElement = document.createElement('div');
             divElement.setAttribute('class','regular');
+
             
+            const calendarElement=document.createElement("h4");
+            calendarElement.innerText=scholarship[2];
+            calendarElement.style.display="none";
+            divElement.appendChild(calendarElement);
+
+            const titleElement =document.createElement("h4");
+            titleElement.innerText=scholarship[0];
+            titleElement.style.display="none";
+            divElement.appendChild(titleElement);
 
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
@@ -358,11 +393,16 @@ function getScholarships(race,gender,major,income) {
             yesButton.innerText='Add Scholarship';
             formElement.appendChild(yesButton);
             yesButton.onclick=function(){
+                console.log(calendarElement.innerText);
+                date=calendarElement.innerText;
+                calendarTitle=titleElement.innerText;
+                console.log(date);
+                console.log(calendarTitle);
+                accessCalendar();
                 document.getElementById('form-popup').remove();
                 const checkMark=document.createElement('span');
                 checkMark.innerHTML='&#x2714;';
                 circleElement.appendChild(checkMark);
-
             };
 
             const closeButton=document.createElement('button');
@@ -382,26 +422,196 @@ function getScholarships(race,gender,major,income) {
             var linkText=document.createTextNode(scholarship[0]);
             urlElement.appendChild(linkText);
             
+            var titleContainer=document.createElement("div");
+            titleContainer.setAttribute('class','scholarship-title');
             urlElement.title=scholarship[0];
             urlElement.setAttribute('href', scholarship[3]);
             urlElement.setAttribute('target', '_blank');
-            divElement.appendChild(urlElement);
+            titleContainer.appendChild(urlElement);
+            containerElement.appendChild(titleContainer);
+
+            if(userEmail==scholarship[11]){
+                var editButton=document.createElement("button");
+                editButton.innerText="Edit";
+                titleContainer.appendChild(editButton);
+                editButton.onclick=function(){
+                    urlElement.setAttribute('contenteditable','true');
+                    const {Datastore} = require('@google-cloud/datastore');
+                    const datastore = new Datastore();
+
+                }
+            }
             
 
-            const descriptionElement=document.createElement("p");
-            descriptionElement.innerText=scholarship[1];
-            divElement.appendChild(descriptionElement);
 
-            const deadlineElement=document.createElement("h4");
-            deadlineElement.innerText="DEADLINE: "+ scholarship[2];
-            divElement.appendChild(deadlineElement);
+            const deadlineContainer=document.createElement("div");
+            deadlineContainer.setAttribute('class','deadline-container');
+            const deadlineTitle=document.createElement("h4");
+            deadlineTitle.innerText="DEADLINE: ";
+            const deadlineValue=document.createElement("h4");
+            deadlineValue.innerText=scholarship[2];
+            deadlineContainer.appendChild(deadlineTitle);
+            deadlineContainer.appendChild(deadlineValue);
+            containerElement.appendChild(deadlineContainer);
+
+            const amountContainer=document.createElement("div");
+            amountContainer.setAttribute('class','amount-container');
+            const amountTitle=document.createElement("h4");
+            amountTitle.innerText="AMOUNT: ";
+            const amountValue=document.createElement("h4");
+            amountValue.innerText=scholarship[9];
+            amountContainer.appendChild(amountTitle);
+            amountContainer.appendChild(amountValue);
+            containerElement.appendChild(amountContainer);
+
+            const moreDetails=document.createElement("div");
+            moreDetails.setAttribute('class','more-details');
+            moreDetails.innerHTML="Scholarship Details: ";
+            
+            const downArrow=document.createElement("i");
+            downArrow.setAttribute('class','arrow down');
+            moreDetails.appendChild(downArrow);
+
+            const detailsElement=document.createElement("div");
+            detailsElement.style.display="none";
+
+            const descriptionElement=document.createElement("p");
+            descriptionElement.innerText="Description: "+ scholarship[1];
+            detailsElement.appendChild(descriptionElement);
 
             const requirementElement=document.createElement("p");
             requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7];
-            divElement.appendChild(requirementElement);
+            detailsElement.appendChild(requirementElement);
+
+            
+
+            moreDetails.appendChild(detailsElement);
+            
+
+            moreDetails.onclick=function(){
+                if(detailsElement.style.display=="none"){
+                detailsElement.style.display="block";
+                downArrow.classList.remove("down");
+                downArrow.classList.add("up");
+                }
+                else{
+                    detailsElement.style.display="none";
+                    downArrow.classList.remove("up");
+                    downArrow.classList.add("down");
+                }
+                
+                }
             
 
             containerElement.appendChild(divElement); 
+            containerElement.appendChild(moreDetails);
             
             return containerElement;
             }
+        function accessCalendar(){
+            handleClientLoad();
+        }
+
+            /**
+       *  On load, called to load the auth2 library and API client library.*/
+       
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.*/
+       
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          handleAuthClick();
+        }, function(error) {
+          appendPre(JSON.stringify(error, null, 2));
+        });
+      }
+
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.*/
+       
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          listUpcomingEvents();
+        } 
+      }
+
+      /**
+       *  Sign in the user upon button click.*/
+       
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      /**
+       *  Sign out the user upon button click.*/
+       
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node. Used to display the results of the API call.
+       *
+       * @param {string} message Text to be placed in pre element.*/
+       
+      function appendPre(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+      /**
+       * Print the summary and start datetime/date of the next ten events in
+       * the authorized user's calendar. If no events are found an
+       * appropriate message is printed.*/
+       
+      function listUpcomingEvents() {
+          var event = {
+  'summary': calendarTitle+' Deadline',
+  'description': calendarTitle+ ' is due today! Make sure to submit it on time',
+  'start': {
+    'date': date,
+    'timeZone': 'America/Chicago'
+  },
+  'end': {
+    'date':date,
+    'timeZone': 'America/Chicago'
+  },
+  'recurrence': [
+    'RRULE:FREQ=DAILY;COUNT=1'
+  ],
+  'reminders': {
+    'useDefault': false,
+    'overrides': [
+      {'method': 'email', 'minutes': 48 * 60},
+      {'method': 'popup', 'minutes': 30}
+    ]
+  }
+};
+
+var request = gapi.client.calendar.events.insert({
+  'calendarId': 'primary',
+  'resource': event
+});
+
+request.execute(function(event) {
+  appendPre('Event created: ' + event.htmlLink);
+});
+      }
