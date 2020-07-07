@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 import javax.script.*;
 import java.io.PrintWriter;
 import java.util.Collections;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet("/info")
 public class addScholarshipServlet extends HttpServlet {
@@ -76,6 +78,16 @@ public class addScholarshipServlet extends HttpServlet {
 
     long timestamp = System.currentTimeMillis();
 
+    String userEmail;
+
+    UserService userService = UserServiceFactory.getUserService();
+    if (userService.isUserLoggedIn()) {
+      userEmail = userService.getCurrentUser().getEmail();
+    }
+    else{
+        userEmail="none";
+    }
+
     //check if any Scholarship details is empty
 
     if(title.isEmpty()|| description.isEmpty()|| deadline.isEmpty()|| url.isEmpty()){
@@ -97,6 +109,7 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("major", major);
     scholarshipEntity.setProperty("grade",grade);
     scholarshipEntity.setProperty("state",state);
+    scholarshipEntity.setProperty("userEmail",userEmail);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);
