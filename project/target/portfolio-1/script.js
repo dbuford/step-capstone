@@ -447,7 +447,15 @@ function getScholarships(race,gender,major,income,grade,state) {
                     amountContainer.style.display="none";
                     moreDetails.style.display="none";
                 
+                    formDiv1=document.createElement("div");
+                    formDiv1.setAttribute("class","edit-form1");
+
+                    formDiv2=document.createElement("div");
+                    formDiv2.setAttribute("class","edit-form2");
+
+
                     formElement2=document.createElement("form");
+                    formElement2.setAttribute("class","edit-form-parent");
                     formElement2.action="/edit-scholarship";
                     formElement2.method="POST";
                     formElement2.setAttribute('id','form-element-2'+scholarship[0]);
@@ -456,37 +464,37 @@ function getScholarships(race,gender,major,income,grade,state) {
 
                     var newTitle=document.createElement("h4");
                     newTitle.innerText='Title: ';
-                    formElement2.appendChild(newTitle);
+                    formDiv1.appendChild(newTitle);
 
                     var newTitleInput=document.createElement("input");
                     newTitleInput.value=scholarship[0];
                     newTitleInput.name="new-title";
-                    formElement2.appendChild(newTitleInput);
+                    formDiv1.appendChild(newTitleInput);
 
                     var newUrl=document.createElement("h4");
                     newUrl.innerText='Url: ';
-                    formElement2.appendChild(newUrl);
+                    formDiv1.appendChild(newUrl);
 
                     var newUrlInput=document.createElement("input");
                     newUrlInput.type="url";
                     console.log(scholarship[3]);
                     newUrlInput.value=new URL(scholarship[3]);
                     newUrlInput.name="new-url";
-                    formElement2.appendChild(newUrlInput);
+                    formDiv1.appendChild(newUrlInput);
 
                     var newDeadline=document.createElement("h4");
                     newDeadline.innerText='Deadline: ';
-                    formElement2.appendChild(newDeadline);
+                    formDiv1.appendChild(newDeadline);
 
                     var newDeadlineInput=document.createElement("input");
                     newDeadlineInput.type="date";
                     newDeadlineInput.value=scholarship[2];
                     newDeadlineInput.name="new-deadline"
-                    formElement2.appendChild(newDeadlineInput);
+                    formDiv1.appendChild(newDeadlineInput);
 
                     var newAmount=document.createElement("h4");
                     newAmount.innerText='Amount: ';
-                    formElement2.appendChild(newAmount);
+                    formDiv1.appendChild(newAmount);
 
                     var newAmountInput=document.createElement("input");
                     newAmountInput.type="number";
@@ -494,64 +502,237 @@ function getScholarships(race,gender,major,income,grade,state) {
                     newAmountInput.value=Number(scholarship[9]);
                     console.log(newAmountInput.value);
                     newAmountInput.name="new-amount";
-                    formElement2.appendChild(newAmountInput);
+                    formDiv1.appendChild(newAmountInput);
 
                     var scholarshipId=document.createElement("input");
                     scholarshipId.value=scholarship[12];
                     scholarshipId.style.display="none";
                     scholarshipId.name="new-id";
-                    formElement2.appendChild(scholarshipId);  
+                    formDiv1.appendChild(scholarshipId);  
 
                     var newDescription=document.createElement("h4");
                     newDescription.innerText='Description: ';
-                    formElement2.appendChild(newDescription);
+                    formDiv1.appendChild(newDescription);
 
                     var newDescriptionInput=document.createElement("input");
                     newDescriptionInput.value=scholarship[1];
                     newDescriptionInput.name="new-description";
-                    formElement2.appendChild(newDescriptionInput) ;
+                    formDiv1.appendChild(newDescriptionInput) ;
 
-                    var newRaceInput=document.createElement("input");
-                    newRaceInput.value=scholarship[4];
-                    newRaceInput.style.display="none";
-                    newRaceInput.name="new-race";
-                    formElement2.appendChild(newRaceInput) ;
+                /*create input boxes for race*/
 
-                    var newGenderInput=document.createElement("input");
-                    newGenderInput.value=scholarship[5];
-                    newGenderInput.name="new-gender";
-                    newGenderInput.style.display="none";
-                    formElement2.appendChild(newGenderInput) ;
+                    var newRace=document.createElement("h4");
+                    newRace.innerText='Race/Ethnicity: ';
+                    formDiv2.appendChild(newRace);
 
-                    var newIncomeInput=document.createElement("input");
-                    newIncomeInput.value=scholarship[6];
-                    newIncomeInput.name="new-income";
-                    newIncomeInput.style.display="none";
-                    formElement2.appendChild(newIncomeInput) ;
+                    var newRaceContainer=document.createElement("div");
+                    newRaceContainer.setAttribute("class","scrollbox");
 
-                    var newMajorInput=document.createElement("input");
-                    newMajorInput.value=scholarship[7];
-                    newMajorInput.name="new-major";
-                    newMajorInput.style.display="none";
-                    formElement2.appendChild(newMajorInput);
+                    /*input for black race*/
+                    var raceBlack=document.createElement("input");
+                    setAttributes(raceBlack,{"value":"african american/black","type":"checkbox","name":"new-race"},scholarship[4]);
+                    var raceBlackLabel=document.createTextNode("African American or Black");
+                    newRaceContainer.appendChild(raceBlack);
+                    newRaceContainer.appendChild(raceBlackLabel);
 
-                    var newGradeInput=document.createElement("input");
-                    newGradeInput.value=scholarship[8];
-                    newGradeInput.name="new-grade";
-                    newGradeInput.style.display="none";
-                    formElement2.appendChild(newGradeInput) ;
+                    /*input for latinx ethnicity*/
+                    var raceLatinx=document.createElement("input");
+                    setAttributes(raceLatinx,{"value":"hispanic/latinx","type":"checkbox","name":"new-race"},scholarship[4]);
+                    var raceLatinxLabel=document.createTextNode("Hispanic or Latinx");
+                    newRaceContainer.appendChild(document.createElement("br"));
+                    newRaceContainer.appendChild(raceLatinx);
+                    newRaceContainer.appendChild(raceLatinxLabel);
+
+                    /*input for asian race*/
+                    var raceAsian=document.createElement("input");
+                    setAttributes(raceAsian,{"value":"asian","type":"checkbox","name":"new-race"},scholarship[4]);
+                    var raceAsianLabel=document.createTextNode("Asian");
+                    newRaceContainer.appendChild(document.createElement("br"));
+                    newRaceContainer.appendChild(raceAsian);
+                    newRaceContainer.appendChild(raceAsianLabel);
+
+                    /*input for hawaiaan race*/
+                    var raceHawaiaan=document.createElement("input");
+                    setAttributes(raceHawaiaan,{"value":"hawaiaan","type":"checkbox","name":"new-race"},scholarship[4]);
+                    var raceHawaiaanLabel=document.createTextNode("Native Hawaiaan/Pacific Islander");
+                    newRaceContainer.appendChild(document.createElement("br"));
+                    newRaceContainer.appendChild(raceHawaiaan);
+                    newRaceContainer.appendChild(raceHawaiaanLabel);                   
+
+                    formDiv2.appendChild(newRaceContainer);
+
+               
+                /*create input for gender identity*/
+
+                    var newGender=document.createElement("h4");
+                    newGender.innerText='Gender Identity: ';
+                    formDiv2.appendChild(newGender);
+
+                    var newGenderContainer=document.createElement("div");
+                    newGenderContainer.setAttribute("class","scrollbox");
+
+                    /*input for female*/
+                    var genderFemale=document.createElement("input");
+                    setAttributes(genderFemale,{"value":"fem","type":"checkbox","name":"new-gender"},scholarship[5]);
+                    var genderFemaleLabel=document.createTextNode("Female/Woman");
+                    newGenderContainer.appendChild(genderFemale);
+                    newGenderContainer.appendChild(genderFemaleLabel);
+
+                    /*input for male*/
+                    var genderMale=document.createElement("input");
+                    setAttributes(genderMale,{"value":"male","type":"checkbox","name":"new-gender"},scholarship[5]);
+                    var genderMaleLabel=document.createTextNode("Male/Man");
+                    newGenderContainer.appendChild(document.createElement("br"));
+                    newGenderContainer.appendChild(genderMale);
+                    newGenderContainer.appendChild(genderMaleLabel);
+
+                    /*input for transmale*/
+                    var genderTransMale=document.createElement("input");
+                    setAttributes(genderTransMale,{"value":"transman","type":"checkbox","name":"new-gender"},scholarship[5]);
+                    var genderTransMaleLabel=document.createTextNode("Transmale/Transman");
+                    newGenderContainer.appendChild(document.createElement("br"));
+                    newGenderContainer.appendChild(genderTransMale);
+                    newGenderContainer.appendChild(genderTransMaleLabel);    
+
+                    /*input for transfemale*/
+                    var genderTransFemale=document.createElement("input");
+                    setAttributes(genderTransFemale,{"value":"transwoman","type":"checkbox","name":"new-gender"},scholarship[5]);
+                    var genderTransFemaleLabel=document.createTextNode("Transfemale/Transwoman");
+                    newGenderContainer.appendChild(document.createElement("br"));
+                    newGenderContainer.appendChild(genderTransFemale);
+                    newGenderContainer.appendChild(genderTransFemaleLabel); 
+
+                    /*input for gender-non conforming*/
+                    var genderNon=document.createElement("input");
+                    setAttributes(genderNon,{"value":"nonconforming","type":"checkbox","name":"new-gender"},scholarship[5]);
+                    var genderNonLabel=document.createTextNode("Genderqueer/nonconforming");
+                    newGenderContainer.appendChild(document.createElement("br"));
+                    newGenderContainer.appendChild(genderNon);
+                    newGenderContainer.appendChild(genderNonLabel);              
+
+
+                    formDiv2.appendChild(newGenderContainer);
+
+
+            /*create input for income level*/
+
+                    var newIncome=document.createElement("h4");
+                    newIncome.innerText='Income Level: ';
+                    formDiv2.appendChild(newIncome);
+
+                    var newIncomeContainer=document.createElement("div");
+                    newIncomeContainer.setAttribute("class","scrollbox");
+
+                    /*input for <25k*/
+                    var income25k=document.createElement("input");
+                    setAttributes(income25k,{"value":"lessthan25k","type":"checkbox","name":"new-income"},scholarship[6]);
+                    var income25kLabel=document.createTextNode("Less than 25k");
+                    newIncomeContainer.appendChild(income25k);
+                    newIncomeContainer.appendChild(income25kLabel);
+
+                    /*input for <50k*/
+                    var income50k=document.createElement("input");
+                    setAttributes(income50k,{"value":"25k-50k","type":"checkbox","name":"new-income"},scholarship[6]);
+                    var income50kLabel=document.createTextNode("$25k-$50k");
+                    newIncomeContainer.appendChild(document.createElement("br"));
+                    newIncomeContainer.appendChild(income50k);
+                    newIncomeContainer.appendChild(income50kLabel);
+
+                    /*input for <75k*/
+                    var income75k=document.createElement("input");
+                    setAttributes(income75k,{"value":"50k-75k","type":"checkbox","name":"new-income"},scholarship[6]);
+                    var income75kLabel=document.createTextNode("$50k-$75k");
+                    newIncomeContainer.appendChild(document.createElement("br"));
+                    newIncomeContainer.appendChild(income75k);
+                    newIncomeContainer.appendChild(income75kLabel);
+
+                    /*input for <100k*/
+                    var income100k=document.createElement("input");
+                    setAttributes(income100k,{"value":"75k-100k","type":"checkbox","name":"new-income"},scholarship[6]);
+                    var income100kLabel=document.createTextNode("$75k-$100k");
+                    newIncomeContainer.appendChild(document.createElement("br"));
+                    newIncomeContainer.appendChild(income100k);
+                    newIncomeContainer.appendChild(income100kLabel);
+
+                    /*input for >100k*/
+                    var incomeOver100k=document.createElement("input");
+                    setAttributes(incomeOver100k,{"value":"morethan100k","type":"checkbox","name":"new-income"},scholarship[6]);
+                    var incomeOver100kLabel=document.createTextNode("more than $100k");
+                    newIncomeContainer.appendChild(document.createElement("br"));
+                    newIncomeContainer.appendChild(incomeOver100k);
+                    newIncomeContainer.appendChild(incomeOver100kLabel);
+
+                    formDiv2.appendChild(newIncomeContainer);
+
+            /*create input for major*/
+                    var newMajor=document.createElement("h4");
+                    newMajor.innerText='Major: ';
+                    formDiv2.appendChild(newMajor);
+                
+                    
+
+            /*create input for gradelevel*/
+                    var newGrade=document.createElement("h4");
+                    newGrade.innerText='Grade Level: ';
+                    formDiv2.appendChild(newGrade);
+
+                    var newGradeContainer=document.createElement("div");
+                    newGradeContainer.setAttribute("class","scrollbox");
+
+                    /*input for freshman*/
+                    var gradeFreshman=document.createElement("input");
+                    setAttributes(gradeFreshman,{"value":"freshman","type":"checkbox","name":"new-major"},scholarship[7]);
+                    var gradeFreshmanLabel=document.createTextNode("Freshman");
+                    newGradeContainer.appendChild(gradeFreshman);
+                    newGradeContainer.appendChild(gradeFreshmanLabel);
+                
+                    /*input for sophomore*/
+                    var gradeSophomore=document.createElement("input");
+                    setAttributes(gradeSophomore,{"value":"sophomore","type":"checkbox","name":"new-major"},scholarship[7]);
+                    var gradeSophomoreLabel=document.createTextNode("Sophomore");
+                    newGradeContainer.appendChild(document.createElement("br"));
+                    newGradeContainer.appendChild(gradeSophomore);
+                    newGradeContainer.appendChild(gradeSophomoreLabel);
+
+                    /*input for junior*/
+                    var gradeJunior=document.createElement("input");
+                    setAttributes(gradeJunior,{"value":"junior","type":"checkbox","name":"new-major"},scholarship[7]);
+                    var gradeJuniorLabel=document.createTextNode("Junior");
+                    newGradeContainer.appendChild(document.createElement("br"));
+                    newGradeContainer.appendChild(gradeJunior);
+                    newGradeContainer.appendChild(gradeJuniorLabel);
+
+                    /*input for senior*/
+                    var gradeSenior=document.createElement("input");
+                    setAttributes(gradeSenior,{"value":"senior","type":"checkbox","name":"new-major"},scholarship[7]);
+                    var gradeSeniorLabel=document.createTextNode("Senior");
+                    newGradeContainer.appendChild(document.createElement("br"));
+                    newGradeContainer.appendChild(gradeSenior);
+                    newGradeContainer.appendChild(gradeSeniorLabel);
+
+
+
+                    formDiv2.appendChild(newGradeContainer);
+
+            /*input for state location*/
+                    var newState=document.createElement("h4");
+                    newState.innerText='State: ';
+                    formDiv2.appendChild(newState);
 
                     var newStateInput=document.createElement("input");
                     newStateInput.value=scholarship[10];
                     newStateInput.name="new-state";
-                    newStateInput.style.display="none";
-                    formElement2.appendChild(newStateInput) ;
+                    /*newStateInput.style.display="none";*/
+                    formDiv2.appendChild(newStateInput) ;
 
 
                     var submitButton=document.createElement("button");
                     submitButton.innerHTML="Submit";
+                    submitButton.style.float="left";
+                    formElement2.appendChild(formDiv2);
+                    formElement2.appendChild(formDiv1);
                     formElement2.appendChild(submitButton);
-
+                    
                     containerElement.appendChild(formElement2);
                     }
                     else{
@@ -640,6 +821,15 @@ function getScholarships(race,gender,major,income,grade,state) {
             
             return containerElement;
             }
+        function setAttributes(el, attrs,current) {
+            for(var key in attrs) {
+            el.setAttribute(key, attrs[key]);
+                }
+            if(current.includes(el.value)){
+                el.checked=true;
+            }
+
+        }
         function accessCalendar(){
             handleClientLoad();
         }
