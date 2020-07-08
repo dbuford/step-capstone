@@ -21,7 +21,6 @@
       position:relative;
       margin-left: 10%;
       height:auto;
-      /*min-height:20vh;*/
       margin-top:3%;
       width:70vw;
       border: 3px solid #ffcc99;
@@ -30,7 +29,6 @@
       overflow:visible;
               }
     .regular{
-      /*position:absolute;*/
       width:100%;
       height:100%;
       overflow:auto;
@@ -245,12 +243,40 @@ left:0;
   border-radius:10px;
   background-color:white;
 }
-.edit-form{
-    width:50%;
-    margin-left:20%;
-    height:50%;
-    top:0;
+.edit-form-parent{
+    position:relative;
+    display:block;
+    width:70%;
+    margin-left:10%;
+    height:100%;
+    overflow:auto;
 }
+.edit-form1{
+    width:40%;
+    margin-left:20%;
+    height:100%;
+    display:block;
+    line-height:60%;
+    
+    
+}
+.edit-form2{
+    margin-right:10%;
+    width:35%;
+    height:100%; 
+    display:block;
+    float:right;
+    overflow:auto;
+    line-height:0%;
+}
+/*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:95%;
+        height:25px;
+        overflow:scroll;
+        border: dotted black;
+        line-height:80%;
+              }
 span {
   font-size:50px;
   position:absolute;
@@ -302,7 +328,6 @@ span {
             <option value="african american/black">African American/Black</option>
             <option value="asian">Asian</option>
             <option value="hawaiaan">Hawaiaan</option>
-            <option value="white"> White</option>
         </select>
         <br><br>
 
