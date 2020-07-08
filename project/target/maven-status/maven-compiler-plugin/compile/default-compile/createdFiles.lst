@@ -1,4 +1,5 @@
 com/google/sps/servlets/LoginServlet.class
+com/google/sps/servlets/editScholarshipServlet.class
 com/google/sps/servlets/DataServlet$Info.class
 com/google/sps/servlets/addScholarshipServlet.class
 com/google/sps/servlets/CurrentUserServlet.class

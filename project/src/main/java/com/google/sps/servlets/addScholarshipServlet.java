@@ -50,7 +50,7 @@ public class addScholarshipServlet extends HttpServlet {
         amount="not specified";
     }
     else{
-        amount="$" + amount;
+        amount=amount;
     }
 
    String[] empty={"none"};
