@@ -378,7 +378,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             
             const formElement=document.createElement('div');
             formElement.setAttribute('class','form-popup');
-            formElement.setAttribute('id','form-popup');
+            formElement.setAttribute('id','form-popup'+scholarship[0]);
             formElement.style.display="block";
 
             const title=document.createElement('h3');
@@ -399,7 +399,7 @@ function getScholarships(race,gender,major,income,grade,state) {
                 console.log(date);
                 console.log(calendarTitle);
                 accessCalendar();
-                document.getElementById('form-popup').remove();
+                document.getElementById('form-popup'+scholarship[0]).remove();
                 const checkMark=document.createElement('span');
                 checkMark.innerHTML='&#x2714;';
                 circleElement.appendChild(checkMark);
@@ -409,7 +409,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             closeButton.innerText='Close';
             formElement.appendChild(closeButton);
             closeButton.onclick=function(){
-                document.getElementById('form-popup').remove();
+                document.getElementById('form-popup'+scholarship[0]).remove();
                 console.log("close button");
             };
            
@@ -431,39 +431,147 @@ function getScholarships(race,gender,major,income,grade,state) {
             containerElement.appendChild(titleContainer);
 
             if(userEmail==scholarship[11]){
+                //create form if user chooses to edit their scholarship entry
                 var editButton=document.createElement("button");
                 editButton.innerText="Edit";
                 titleContainer.appendChild(editButton);
+
+
                 editButton.onclick=function(){
+                    if(editButton.innerText=="Edit"){
+                        editButton.innerText="Close";
+
+                    
                     urlElement.style.display="none";
-                    deadlineValue.style.display="none";
-                    amountValue.style.display="none";
+                    deadlineContainer.style.display="none";
+                    amountContainer.style.display="none";
                     moreDetails.style.display="none";
                 
+                    formElement2=document.createElement("form");
+                    formElement2.action="/edit-scholarship";
+                    formElement2.method="POST";
+                    formElement2.setAttribute('id','form-element-2'+scholarship[0]);
+                    
+
+
+                    var newTitle=document.createElement("h4");
+                    newTitle.innerText='Title: ';
+                    formElement2.appendChild(newTitle);
 
                     var newTitleInput=document.createElement("input");
                     newTitleInput.value=scholarship[0];
-                    titleContainer.appendChild(newTitleInput);
+                    newTitleInput.name="new-title";
+                    formElement2.appendChild(newTitleInput);
+
+                    var newUrl=document.createElement("h4");
+                    newUrl.innerText='Url: ';
+                    formElement2.appendChild(newUrl);
 
                     var newUrlInput=document.createElement("input");
                     newUrlInput.type="url";
-                    newUrlInput.value=scholarship[3];
-                    titleContainer.appendChild(newUrlInput);
+                    console.log(scholarship[3]);
+                    newUrlInput.value=new URL(scholarship[3]);
+                    newUrlInput.name="new-url";
+                    formElement2.appendChild(newUrlInput);
 
+                    var newDeadline=document.createElement("h4");
+                    newDeadline.innerText='Deadline: ';
+                    formElement2.appendChild(newDeadline);
 
                     var newDeadlineInput=document.createElement("input");
                     newDeadlineInput.type="date";
                     newDeadlineInput.value=scholarship[2];
-                    deadlineContainer.appendChild(newDeadlineInput);
+                    newDeadlineInput.name="new-deadline"
+                    formElement2.appendChild(newDeadlineInput);
+
+                    var newAmount=document.createElement("h4");
+                    newAmount.innerText='Amount: ';
+                    formElement2.appendChild(newAmount);
 
                     var newAmountInput=document.createElement("input");
                     newAmountInput.type="number";
-                    newAmountInput.value=scholarship[9];
-                    amountContainer.appendChild(newAmountInput);
+                    console.log(scholarship[9]);
+                    newAmountInput.value=Number(scholarship[9]);
+                    console.log(newAmountInput.value);
+                    newAmountInput.name="new-amount";
+                    formElement2.appendChild(newAmountInput);
+
+                    var scholarshipId=document.createElement("input");
+                    scholarshipId.value=scholarship[12];
+                    scholarshipId.style.display="none";
+                    scholarshipId.name="new-id";
+                    formElement2.appendChild(scholarshipId);  
+
+                    var newDescription=document.createElement("h4");
+                    newDescription.innerText='Description: ';
+                    formElement2.appendChild(newDescription);
+
+                    var newDescriptionInput=document.createElement("input");
+                    newDescriptionInput.value=scholarship[1];
+                    newDescriptionInput.name="new-description";
+                    formElement2.appendChild(newDescriptionInput) ;
+
+                    var newRaceInput=document.createElement("input");
+                    newRaceInput.value=scholarship[4];
+                    newRaceInput.style.display="none";
+                    newRaceInput.name="new-race";
+                    formElement2.appendChild(newRaceInput) ;
+
+                    var newGenderInput=document.createElement("input");
+                    newGenderInput.value=scholarship[5];
+                    newGenderInput.name="new-gender";
+                    newGenderInput.style.display="none";
+                    formElement2.appendChild(newGenderInput) ;
+
+                    var newIncomeInput=document.createElement("input");
+                    newIncomeInput.value=scholarship[6];
+                    newIncomeInput.name="new-income";
+                    newIncomeInput.style.display="none";
+                    formElement2.appendChild(newIncomeInput) ;
+
+                    var newMajorInput=document.createElement("input");
+                    newMajorInput.value=scholarship[7];
+                    newMajorInput.name="new-major";
+                    newMajorInput.style.display="none";
+                    formElement2.appendChild(newMajorInput);
+
+                    var newGradeInput=document.createElement("input");
+                    newGradeInput.value=scholarship[8];
+                    newGradeInput.name="new-grade";
+                    newGradeInput.style.display="none";
+                    formElement2.appendChild(newGradeInput) ;
+
+                    var newStateInput=document.createElement("input");
+                    newStateInput.value=scholarship[10];
+                    newStateInput.name="new-state";
+                    newStateInput.style.display="none";
+                    formElement2.appendChild(newStateInput) ;
 
 
+                    var submitButton=document.createElement("button");
+                    submitButton.innerHTML="Submit";
+                    formElement2.appendChild(submitButton);
+
+                    containerElement.appendChild(formElement2);
+                    }
+                    else{
+                    editButton.innerText="Edit"
+                    
+                    document.getElementById('form-element-2'+scholarship[0]).remove();
+                    
+                    urlElement.style.display="inline";
+                    deadlineContainer.style.display="block";
+                    amountContainer.style.display="block";
+                    moreDetails.style.display="block";
+
+                    }
+
+
+                     
+                
 
                 }
+                
             }
             
 
@@ -483,7 +591,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             const amountTitle=document.createElement("h4");
             amountTitle.innerText="AMOUNT: ";
             const amountValue=document.createElement("h4");
-            amountValue.innerText=scholarship[9];
+            amountValue.innerText='$'+scholarship[9];
             amountContainer.appendChild(amountTitle);
             amountContainer.appendChild(amountValue);
             containerElement.appendChild(amountContainer);

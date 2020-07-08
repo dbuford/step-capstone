@@ -45,7 +45,7 @@ public class ListScholarshipsServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
 
-    ArrayList<ArrayList> scholarships = new ArrayList<>();
+    ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
 
     for (Entity entity : results.asIterable()){
         String title = (String) entity.getProperty("title");
@@ -60,8 +60,10 @@ public class ListScholarshipsServlet extends HttpServlet {
         String grade=(String) entity.getProperty("grade");
         String state=(String) entity.getProperty("state");
         String userEmail=(String) entity.getProperty("userEmail");
+        long myid = entity.getKey().getId();
+        Long id=new Long(myid);
 
-        ArrayList<String> info=new ArrayList<>();
+        ArrayList<Object> info=new ArrayList<>();
         info.add(title);
         info.add(description);
         info.add(deadline);
@@ -74,6 +76,8 @@ public class ListScholarshipsServlet extends HttpServlet {
         info.add(amount);
         info.add(state);
         info.add(userEmail);
+        info.add(id);
+        
         
 
         scholarships.add(info);
