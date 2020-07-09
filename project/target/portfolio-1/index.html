@@ -1,15 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<title>MainPage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Mainpage</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+
     <style>
 * {
   box-sizing: border-box;
@@ -83,34 +86,12 @@ body {
   padding: 20px;
 }
 
-.box {       
-        background-color:#ffcc99;
-        text-align: center;
-        color:white;
-        font-weight:bold;
-        margin:auto;     
-        width: 40%;
-    }
-
-
-
-
-/* styling section */
 
 </style>
-</head>
+<body>
 
-</style>
-</head>
-<body class="w3-black" onload="loadPage()" >
-
-
-<div class="header">
-  <h1>$cholar</h1>
-  <p><i>Your Way To Success</i></p>
-</div>
-
-<div class="navbar">
+<!-- Navbar -->
+  <div class="navbar">
   <a href="index.html">Home</a>
   <a href="Profile.html">Profile</a>
   <a href="displayScholarships.html">Scholarships</a>
@@ -118,103 +99,68 @@ body {
   <a href="addScholarships.html" class="right">Add-Scholarship</a>
 </div>
 
+<!-- Header -->
+<header class="w3-container w3-center" style="padding:128px 16px" style="background-color: #00000">
+  <h1 class="w3-margin w3-jumbo"><i>$cholar</i></h1>
+  <p class="w3-xlarge">We're Here To Help You Succeed</p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"><a style="text-decoration:none" href ="login.html">Login/SignUp</button>
+</header>
 
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container" style="background-color: #ffcc99" style="color:white">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1><center>What is $cholar?</center></h1>
+      <h5 class="w3-padding-32"> $cholar is to help students find scholarships and tackle due dates more effectively.</h5>
 
+      <p class="w3-text-grey">The problem we are trying to solve is the lack of 
+          access to financial aid information for students seeking higher education. This website 
+          provides links to financial aid information customized to the specific 
+          user and allows the user to maintain organization by including reminders for deadlines.</p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <i class="fa fa-graduation-cap w3-padding-64 w3-margin-right" style="font-size:125px;color:black"></i>
+    </div>
   </div>
-
-  <div class=box>
-    <center><h1>Login/Signup</h1> </center>
-    <center><p id="loginel"> </p>
-      <br/>
-      <div class="divider"></div>
-      <h6 id="error"></h6>
-
-      <p> Complete form if you haven't already to best help us find the best scholarships for you </p> 
-      <form id="addcomm" action="/data" method="POST">
-        
-        <textarea name="name" placeholder="Name"></textarea>
-        <br/><br/>
-        
-        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
-
-        <p>
-          <label>
-            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
-            <span>Display email next to name</span>
-          </label>
-        </p>
-        
-        <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
-        <label for="displayemail"> Display email next to info</label> -->
-    
-      <div class="innerdiv2">
-                <h2> Eligibility Requirements</h2>
-                <p style="text-align:center;"> If the scholarship has any eligibility requirements,
-                    <br> check all that apply or check none</p>
-                
-                <div class="eligibility">
-                    <div class="title">
-                        <h4> Race/Ethnicity:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Hispanic/latinx" name="race">Hispanic or Latinx</input><br>
-                        <input type="checkbox" value="African American/Black" name="race">African American or Black</input><br>
-                        <input type="checkbox" value="Asian" name="race">Asian </input><br>
-                        <input type="checkbox" value="Hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
-                        <input type="checkbox" value="White" name="race"> White</input><br>
-                        <input type="checkbox" value="none" name="race"> None</input>
-                    </div>
-                </div>
-
-                <div class="eligibility">
-                    <div class="title">
-                        <h4> Gender Identity:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Male" name="gender"> Male/Man</input><br>
-                        <input type ="checkbox" value="Female" name="gender"> Female/Woman</input><br>
-                        <input type="checkbox" value="Transman" name="gender"> Transmale/Transman</input><br>
-                        <input type="checkbox" value="Transwoman" name="gender">Transfemale/Transwoman</input><br>
-                        <input type="checkbox" value="nonconforming" name="gender"> Genderqueer/Gender nonconforming</input><br>
-                        <input type="checkbox" value="none" name="gender"> None</input>
-                    </div>
-                </div>
-
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Income Level:</h4>
-                    </div>
-                    <div class="scrollbox">
-                         <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
-                        <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
-                        <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
-                        <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
-                        <input type="checkbox" value="More than 100k" name="income"> more than $100k</input>
-                    </div>
-                </div>
-
-                <div class="eligibility">
-                    <div class="title">
-                        <h4> Major Interests:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Arts" name="major"> Arts</input><br>
-                        <input type ="checkbox" value="Business" name="major"> Business</input><br>
-                        <input type ="checkbox" value="Chemistry" name="major"> Chemistry</input><br>
-                        <input type="checkbox" value="Computer Science" name="major">Computer Science </input><br>
-                        <input type ="checkbox" value="Economics" name="major"> Economics</input><br>
-                        <input type ="checkbox" value="Education" name="major"> Education</input><br>
-                        <input type ="checkbox" value="Engineering" name="major"> Engineering</input><br>
-                        <input type="checkbox" value="none" name="major"> None</input>
-                    </div>
-                                 
-                </div>
-        </div>
-        <button> Submit</button> 
-          
-        </form>   
-      <br/>
-      </center>
-
 </div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <i class="fa fa-bullseye aria-hidden="true" w3-padding-64 w3-margin-right" style="font-size:130px;color:black"></i>
+    </div>
+
+    <div class="w3-twothird">
+      <h1>Targeted Goal</h1>
+      <h5 class="w3-padding-32">Our Goal Ts To Help You Find Scholarships Specified Just For You.</h5>
+
+      <p class="w3-text-grey">Just Simply Login Or SignUp. Next you will need to fill out the form to help us find the best Scholarships
+          for you. $cholar helps you organize better and with time management with due dates on scholarships.
+          Lastly, Apply and Learn about Scholarships just for you.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Quote: Strive to Be The Best</h1>
+</div>
+
+
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
 </html>
