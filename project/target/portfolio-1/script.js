@@ -162,6 +162,12 @@ function createEntryElement(entry) {
   const raceElement = document.createElement('span');
   raceElement.innerText = ("Race: " + entry.race.toString());
 
+  const gradeElement = document.createElement('span');
+  gradeElement.innerText = ("Grade Level: " + entry.grade.toString());
+
+  const locationElement = document.createElement('span');
+  locationElement.innerText = ("Location: " + entry.location.toString());
+
   const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
   timeElement.innerText = date.toString().slice(0,24);
@@ -188,6 +194,8 @@ function createEntryElement(entry) {
   const breakElement4=document.createElement("br");
   const breakElement5=document.createElement("br");
   const breakElement6=document.createElement("br");
+  const breakElement7=document.createElement("br");
+  const breakElement8=document.createElement("br");
   entryElement.appendChild(breakElement2);
   entryElement.appendChild(ageElement);
   entryElement.appendChild(breakElement3);
@@ -197,7 +205,11 @@ function createEntryElement(entry) {
   entryElement.appendChild(breakElement4);
   entryElement.appendChild(raceElement);
   entryElement.appendChild(breakElement5);
-  entryElement.appendChild(genderElement);
+  entryElement.appendChild(gradeElement);
+  entryElement.appendChild(breakElement7);
+  entryElement.appendChild(locationElement);
+  
+  
   return entryElement;
 }
 

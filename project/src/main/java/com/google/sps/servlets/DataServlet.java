@@ -50,10 +50,12 @@ public class DataServlet extends HttpServlet {
     public String race;
     public String gender;
     public String income;
+    public String grade;
+    public String location;
 
 	
     
-    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income) {
+    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income, String grade, String location) {
       this.id = id;
       this.timestamp = timestamp;
       this.name = name;
@@ -63,6 +65,8 @@ public class DataServlet extends HttpServlet {
       this.race = race;
       this.gender = gender;
       this.income = income;
+      this.grade = grade;
+      this.location = location;
     }
 
     public long getId() {
@@ -100,6 +104,13 @@ public class DataServlet extends HttpServlet {
         return gender;
     }
 
+    public String getGrade() {
+        return grade;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 
   }
 
@@ -127,7 +138,9 @@ public class DataServlet extends HttpServlet {
       String gender = (String) entity.getProperty("gender");
       String race = (String) entity.getProperty("race");
       String income = (String) entity.getProperty("income");
-      Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income);
+      String grade = (String) entity.getProperty("grade");
+      String location = (String) entity.getProperty("location");
+      Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income, grade, location);
       information.add(entry);
       System.out.println("working");
 
@@ -173,6 +186,13 @@ public class DataServlet extends HttpServlet {
     String[] majorarray=request.getParameterValues("major");
     String major= majorarray!=null ? String.join(" ",majorarray): String.join(" ", empty);
 
+    String[] gradearray=request.getParameterValues("grade");
+    String grade= gradearray!=null ? String.join(" ",gradearray): String.join(" ", empty);
+
+
+    String[] locationarray=request.getParameterValues("location");
+    String location= locationarray!=null ? String.join(" ",locationarray): String.join(" ", empty);
+
 
     Entity entryEntity = new Entity("Info");
     entryEntity.setProperty("title", title);
@@ -184,6 +204,8 @@ public class DataServlet extends HttpServlet {
     entryEntity.setProperty("gender", gender);
     entryEntity.setProperty("income", income);
     entryEntity.setProperty("major", major);
+    entryEntity.setProperty("grade", grade);
+    entryEntity.setProperty("location", location);
     datastore.put(entryEntity);
 
     response.sendRedirect("/response.html"); // could possibly add a redirect page ?
