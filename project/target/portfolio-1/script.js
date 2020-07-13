@@ -97,11 +97,9 @@ function call_name(){
 }
 
 function login() {
-  fetch('/logins').then((response) => {
      const loginElement = document.getElementById('loginel');
-     console.log(response)
-     loginElement.innerHTML = response;
-  });
+     loginElement.innerHTML = document.getElementById('login').value;
+     console.log(document.getElementById('login').value);
 }
 
 function getMessages() {
@@ -274,7 +272,7 @@ function getUserInfo(){
 
 
 function loadPage() {
-	add_info();
+	login();
 }
 
 

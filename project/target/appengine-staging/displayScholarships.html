@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="style.css">
   
     <script async defer src="https://apis.google.com/js/api.js"></script>
+   
+    <script src="bundle.js"></script>
     <script src="script.js"></script>
 
 
@@ -19,7 +21,6 @@
       position:relative;
       margin-left: 10%;
       height:auto;
-      /*min-height:20vh;*/
       margin-top:3%;
       width:70vw;
       border: 3px solid #ffcc99;
@@ -28,13 +29,13 @@
       overflow:visible;
               }
     .regular{
-      /*position:absolute;*/
-      width:100%;
-      height:100%;
+      width:97%;
+      height:90%;
       overflow:auto;
       text-align:left;
       line-height:50%;
       padding-top:10px;
+      border-top:1px solid #e6e6e6;
             }
     .deadline-container{
         width:49%;
@@ -42,16 +43,15 @@
         line-height:50%;
        text-align:right;
        padding-right:60px;
-        height:5%;
-        border-bottom:1px solid #e6e6e6;
+        height:3%;
     }
     .amount-container{
-        width:40%;
+        width:30%;
         float:left;
+        margin-right:10%;
         line-height:50%;
-        height:5%;
+        height:3%;
         text-align:left;
-        border-bottom:1px solid #e6e6e6;
     }
     .scholarship-title{
         width:95%;
@@ -63,17 +63,18 @@
     .scholarship-title a{
         margin-left:5%;
     }
-    .scholarship-title button{
+    .scholarship-title button, .regular button{
         float:right;
-        border-right: none;
-        border-left:none;
-        border-top:none;
-        color: black;
+        border:none;
+        color: #919191;
         text-align: center;
         text-decoration: none;
         font-size: 20px;
         cursor: pointer;
         background-color:white;
+    }
+    .scholarship-title button:hover, .regular button:hover{
+        color:green;
     }
     .more-details{
     color: #919191;
@@ -243,6 +244,40 @@ left:0;
   border-radius:10px;
   background-color:white;
 }
+.edit-form-parent{
+    position:relative;
+    display:block;
+    width:70%;
+    margin-left:10%;
+    height:100%;
+    overflow:auto;
+}
+.edit-form1{
+    width:40%;
+    margin-left:20%;
+    height:100%;
+    display:block;
+    line-height:60%;
+    
+    
+}
+.edit-form2{
+    margin-right:10%;
+    width:35%;
+    height:100%; 
+    display:block;
+    float:right;
+    overflow:auto;
+    line-height:0%;
+}
+/*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:95%;
+        height:25px;
+        overflow:scroll;
+        border: dotted black;
+        line-height:80%;
+              }
 span {
   font-size:50px;
   position:absolute;
@@ -294,7 +329,6 @@ span {
             <option value="african american/black">African American/Black</option>
             <option value="asian">Asian</option>
             <option value="hawaiaan">Hawaiaan</option>
-            <option value="white"> White</option>
         </select>
         <br><br>
 

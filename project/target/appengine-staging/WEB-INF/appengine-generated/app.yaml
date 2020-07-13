@@ -36,7 +36,15 @@ handlers:
   script: unused
   login: optional
   secure: optional
+- url: /edit-scholarship
+  script: unused
+  login: optional
+  secure: optional
 - url: /logins
+  script: unused
+  login: optional
+  secure: optional
+- url: /delete-scholarship
   script: unused
   login: optional
   secure: optional
