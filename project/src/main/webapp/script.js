@@ -28,14 +28,112 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
 
 
-/**
- * Adds a random greeting to the page.
- */
+/** */
+var userEmail= "none";
+var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
+
+    
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+      var authorizeButton = document.getElementById('authorize_button');
+      var signoutButton = document.getElementById('signout_button');
+
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+          console.log("working");
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+        }, function(error) {
+          appendPre(JSON.stringify(error, null, 2));
+        });
+      }
+
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        console.log("working");
+        if (isSignedIn) {
+          userEmail=gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
+          document.getElementById('login').value = userEmail;
+          loadPage();
+          console.log(document.getElementById('login').value);
+         // const params = new URLSearchParams();
+          //  params.append('email', email);
+          //  fetch('/logins', {method: 'POST', body: params})
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          listUpcomingEvents();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+        }
+      }
+
+
+
+
+      /**
+       *  Sign in the user upon button click.
+       */
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      /**
+       *  Sign out the user upon button click.
+       */
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node. Used to display the results of the API call.
+       *
+       * @param {string} message Text to be placed in pre element.
+       */
+      function appendPre(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+
+
+
+
+
+
 
 
 
@@ -63,38 +161,6 @@ function add_info() {
 }
 
 
-function call_name(){
-    fetch("/current-user").then(response => response.json()).then((email) => {
-        if(email=="none"){
-            const divElement=document.createElement('div');
-                const titleElement=document.createElement("h2");
-                titleElement.innerText="Name";
-                divElement.appendChild(titleElement);
-                const entryNamesElement = document.getElementById('userName');
-                entryNamesElement.appendChild(divElement);
-        }
-        else{
-            fetch('/data').then(response => response.json()).then((entries) => {
-            entries.forEach((entry) => {
-                if(entry.email==email){
-                    const entryNamesElement  = document.getElementById('userName');
-                    console.log(entry.name)
-                    entryNamesElement .appendChild(createEntryElement(entry.name));
-                    console.log(entry.email);
-                    console.log(email);
-                    console.log(name);
-            
-                    
-                }
-
-    })
-  });
-
-        }
-
-         });
-
-}
 
 function login() {
      const loginElement = document.getElementById('loginel');
@@ -131,6 +197,16 @@ function updateCount() {
 function createEntryElement(entry) {
   const entryElement = document.createElement('li');
   entryElement.className = 'entry collection-item';
+
+  const imageElement=document.createElement("img");
+        if(entry.image == null || entry.image == undefined) { 
+            imageElement.src="/images/person.jpg";
+        }
+        else{
+            imageElement.src = entry.image;
+        }
+    
+
 
   const nameElement = document.createElement('span');
   if (entry.name === undefined || entry.name === "") {
@@ -182,7 +258,9 @@ function createEntryElement(entry) {
     entryElement.remove();
   });
 
-
+  entryElement.appendChild(imageElement);
+  const breakElement9=document.createElement("br");
+  entryElement.appendChild(breakElement9);
   entryElement.appendChild(nameElement);
   const breakElement=document.createElement("br");
   entryElement.appendChild(breakElement);
@@ -240,8 +318,7 @@ function deleteEntry(entry) {
 
 // create function for user info
 function getUserInfo(){
-    fetch("/current-user").then(response => response.json()).then((email) => {
-        if(email=="none"){
+        if(userEmail=="none"){
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
@@ -252,11 +329,13 @@ function getUserInfo(){
         else{
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
-                if(entry.email==email){
+                if(entry.email==userEmail){
                     const entryListElement = document.getElementById('entry-list');
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
-                    console.log(email);
+                    console.log(userEmail);
+                    const messageForm = document.getElementById('my-form');
+                    messageForm.action = entries.uploadUrl;
             
                     
                 }
@@ -266,7 +345,6 @@ function getUserInfo(){
 
         }
 
-         });
 
 }
 
@@ -277,7 +355,6 @@ function loadPage() {
 
 
 function loadInfo() {
-    call_name()
     getUserInfo();
 }
 
@@ -869,13 +946,13 @@ function getScholarships(race,gender,major,income,grade,state) {
 
         }
         function accessCalendar(){
-            handleClientLoad();
+          /*  handleClientLoad();/** */
         }
 
             /**
        *  On load, called to load the auth2 library and API client library.*/
        
-      function handleClientLoad() {
+      /*function handleClientLoad() {
         gapi.load('client:auth2', initClient);
       }
 
@@ -883,7 +960,7 @@ function getScholarships(race,gender,major,income,grade,state) {
        *  Initializes the API client library and sets up sign-in state
        *  listeners.*/
        
-      function initClient() {
+     /* function initClient() {
         gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
@@ -905,7 +982,7 @@ function getScholarships(race,gender,major,income,grade,state) {
        *  Called when the signed in status changes, to update the UI
        *  appropriately. After a sign-in, the API is called.*/
        
-      function updateSigninStatus(isSignedIn) {
+      /*function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
           listUpcomingEvents();
         } 
@@ -914,14 +991,14 @@ function getScholarships(race,gender,major,income,grade,state) {
       /**
        *  Sign in the user upon button click.*/
        
-      function handleAuthClick(event) {
+     /* function handleAuthClick(event) {
         gapi.auth2.getAuthInstance().signIn();
       }
 
       /**
        *  Sign out the user upon button click.*/
        
-      function handleSignoutClick(event) {
+      /*function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
       }
 
@@ -931,7 +1008,7 @@ function getScholarships(race,gender,major,income,grade,state) {
        *
        * @param {string} message Text to be placed in pre element.*/
        
-      function appendPre(message) {
+      /*function appendPre(message) {
         var pre = document.getElementById('content');
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
@@ -942,7 +1019,7 @@ function getScholarships(race,gender,major,income,grade,state) {
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.*/
        
-      function listUpcomingEvents() {
+      /*function listUpcomingEvents() {
           var event = {
   'summary': calendarTitle+' Deadline',
   'description': calendarTitle+ ' is due today! Make sure to submit it on time',
@@ -974,4 +1051,4 @@ var request = gapi.client.calendar.events.insert({
 request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
-      }
+      }*/
