@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Display Scholarships</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
     <script async defer src="https://apis.google.com/js/api.js"></script>
    
@@ -38,11 +39,11 @@
       border-top:1px solid #e6e6e6;
             }
     .deadline-container{
-        width:49%;
+        width:29%;
         float:left;
         line-height:50%;
        text-align:right;
-       padding-right:60px;
+       margin-right:60px;
         height:3%;
     }
     .amount-container{
@@ -53,6 +54,24 @@
         height:3%;
         text-align:left;
     }
+    /*style the thumb up/down voting system*/
+    .voting-container{
+        width:20%;
+        float:left;
+        height:3%;
+        padding-left:10px;
+                     }
+    .fa {
+        font-size:15px;
+        cursor: pointer;
+        user-select: none;
+        color:black;
+            }
+
+    .fa:hover {
+        color: darkblue;
+                 }
+    
     .scholarship-title{
         width:95%;
         height:20%;
@@ -309,7 +328,7 @@ span {
    
     
     <div class="dropdown">
-         <div id="page-number" class="pagination"></div>
+         
         <h3> Filters:</h3>
         <form id="form1">
             <label for="selection">Show Results For:</label>
@@ -481,6 +500,7 @@ span {
         </form>
     </div>
     <div class="scholarships">
+        <div id="page-number" class="pagination"></div>
     
         <ul id="scholarship-list"></ul>
     </div>

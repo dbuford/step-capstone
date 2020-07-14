@@ -78,6 +78,9 @@ public class addScholarshipServlet extends HttpServlet {
 
     long timestamp = System.currentTimeMillis();
 
+    String thumbsup="0";
+    String thumbsdown="0";
+
     String userEmail;
 
     UserService userService = UserServiceFactory.getUserService();
@@ -110,6 +113,8 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("grade",grade);
     scholarshipEntity.setProperty("state",state);
     scholarshipEntity.setProperty("userEmail",userEmail);
+    scholarshipEntity.setProperty("thumbsup",thumbsup);
+    scholarshipEntity.setProperty("thumbsdown",thumbsdown);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);
