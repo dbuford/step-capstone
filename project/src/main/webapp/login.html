@@ -93,8 +93,14 @@ body {
         width: 40%;
     }
 
-
-
+/*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:60%;
+        overflow:scroll;
+        border: dotted black;
+        margin-right:5%;
+        margin-top:2%;
+              }
 
 /* styling section */
 
@@ -119,12 +125,14 @@ body {
   </div>
 
   <div class=box>
-    <button id="authorize_button" style="display: none;">Login</button>
+    <button id="authorize_button" style="display: block;">Login</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
+  
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
 
     <script type="text/javascript">
+  
+    /*
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
       var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
@@ -141,7 +149,7 @@ body {
 
       /**
        *  On load, called to load the auth2 library and API client library.
-       */
+       */ /*
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
       }
@@ -149,7 +157,7 @@ body {
       /**
        *  Initializes the API client library and sets up sign-in state
        *  listeners.
-       */
+       */ /*
       function initClient() {
         gapi.client.init({
           apiKey: API_KEY,
@@ -172,7 +180,7 @@ body {
       /**
        *  Called when the signed in status changes, to update the UI
        *  appropriately. After a sign-in, the API is called.
-       */
+       */ /*
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
           var email=gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
@@ -196,14 +204,14 @@ body {
 
       /**
        *  Sign in the user upon button click.
-       */
+       */ /*
       function handleAuthClick(event) {
         gapi.auth2.getAuthInstance().signIn();
       }
 
       /**
        *  Sign out the user upon button click.
-       */
+       *//*
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
       }
@@ -213,12 +221,12 @@ body {
        * as its text node. Used to display the results of the API call.
        *
        * @param {string} message Text to be placed in pre element.
-       */
+       *//*
       function appendPre(message) {
         var pre = document.getElementById('content');
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
-      }
+      }/*
 
       </script>
 
@@ -227,7 +235,7 @@ body {
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
 
-<p id = "login" ></p>
+
 
 
 
@@ -241,19 +249,14 @@ body {
       <h6 id="error"></h6>
 
       <p> Complete form if you haven't already to best help us find the best scholarships for you </p> 
-      <form id="addcomm" action="/data" method="POST">
+      <form  id="addcomm" action="/data" method="POST">
+        <input id = "login" name="userEmail" ></input>
         
         <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
         
         <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
 
-        <p>
-          <label>
-            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
-            <span>Display email next to name</span>
-          </label>
-        </p>
         
         <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
         <label for="displayemail"> Display email next to info</label> -->

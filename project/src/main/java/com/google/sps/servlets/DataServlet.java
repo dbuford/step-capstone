@@ -29,6 +29,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.blobstore.BlobInfo;
+import com.google.appengine.api.blobstore.BlobInfoFactory;
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
 // import com.google.sps.data.Task;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
@@ -52,10 +64,10 @@ public class DataServlet extends HttpServlet {
     public String income;
     public String grade;
     public String location;
-
+    public String uploadUrl;
 	
     
-    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income, String grade, String location) {
+    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income, String grade, String location, String uploadUrl) {
       this.id = id;
       this.timestamp = timestamp;
       this.name = name;
@@ -67,6 +79,7 @@ public class DataServlet extends HttpServlet {
       this.income = income;
       this.grade = grade;
       this.location = location;
+      this.uploadUrl = uploadUrl;
     }
 
     public long getId() {
@@ -121,6 +134,12 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { 
 
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+    
+    String uploadUrl = blobstoreService.createUploadUrl("/my-form-handler");
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
     Query query = new Query ("Info");
 
     PreparedQuery results = datastore.prepare(query);
@@ -140,7 +159,8 @@ public class DataServlet extends HttpServlet {
       String income = (String) entity.getProperty("income");
       String grade = (String) entity.getProperty("grade");
       String location = (String) entity.getProperty("location");
-      Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income, grade, location);
+      String url= (String) entity.getProperty("image");
+      Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income, grade, location, url);
       information.add(entry);
       System.out.println("working");
 
@@ -161,14 +181,17 @@ public class DataServlet extends HttpServlet {
   // A simple HTTP handler to extract text input from submitted web form and respond that context back to the user.
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    UserService userService = UserServiceFactory.getUserService();
+    String[] emailarray = request.getParameterValues("userEmail");
+
+    System.out.println(emailarray);
+  
     
     // Must be logged in to add info
     String title = request.getParameter("title");
     String name = request.getParameter("name");
     String age = request.getParameter("age");
     long timestamp = System.currentTimeMillis();
-    String email = userService.getCurrentUser().getEmail();
+    //String email = userService.getCurrentUser().getEmail();
     
     String[] empty={"none"};
     String[] racearray=request.getParameterValues("race");
@@ -177,6 +200,8 @@ public class DataServlet extends HttpServlet {
 
     String[] genderarray=request.getParameterValues("gender");
     String gender= genderarray!=null ? String.join(" ",genderarray): String.join(" ", empty);
+    
+    String email=emailarray!=null ? String.join(" ",emailarray): String.join(" ", empty);
     
 
     String[] incomearray=request.getParameterValues("income");
@@ -206,6 +231,7 @@ public class DataServlet extends HttpServlet {
     entryEntity.setProperty("major", major);
     entryEntity.setProperty("grade", grade);
     entryEntity.setProperty("location", location);
+    //entryEntity.setProperty("image", url);
     datastore.put(entryEntity);
 
     response.sendRedirect("/response.html"); // could possibly add a redirect page ?

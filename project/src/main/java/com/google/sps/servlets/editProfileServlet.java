@@ -98,6 +98,7 @@ public class editProfileServlet extends HttpServlet {
     entryEntity.setProperty("major", major);
     entryEntity.setProperty("grade", grade);
     entryEntity.setProperty("location", location);
+    //entryEntity.setProperty("image", url);
     datastore.put(entryEntity);
 
     response.setContentType("text/html");
