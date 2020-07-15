@@ -31,7 +31,8 @@
 
 
 /** */
-var userEmail= "none";
+
+
 var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
       var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
 
@@ -83,8 +84,10 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
       function updateSigninStatus(isSignedIn) {
         console.log("working");
         if (isSignedIn) {
-          userEmail=gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
-          document.getElementById('login').value = userEmail;
+          var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
+          localStorage.setItem("userEmail",JSON.stringify(userEmail2));
+          console.log(localStorage.getItem("userEmail"));          
+          document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
          // const params = new URLSearchParams();
@@ -96,6 +99,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
+          console.log("working");
         }
       }
 
@@ -168,27 +172,6 @@ function login() {
      console.log(document.getElementById('login').value);
 }
 
-function getMessages() {
-  document.getElementById('entry-list').innerHTML = "";
-  fetch('/data?maxcomments=' + commentCount.value).then(response => response.json()).then((entries) => {
-    const entryListElement = document.getElementById('entry-list');
-    entries.forEach((entry) => {
-      console.log(entry.title)
-      entryListElement.appendChild(createEntryElement(entry));
-    })
-  });
-}
-
-function sortComments() {
-  document.getElementById('entry-list').innerHTML = "";
-  fetch('/data?sort=' + sort.value).then(response => response.json()).then((entries) => {
-    const entryListElement = document.getElementById('entry-list');
-    entries.forEach((entry) => {
-      console.log(entry.title)
-      entryListElement.appendChild(createEntryElement(entry));
-    })
-  });
-}
 
 function updateCount() {
   location.replace("Profile.html")
@@ -318,7 +301,8 @@ function deleteEntry(entry) {
 
 // create function for user info
 function getUserInfo(){
-        if(userEmail=="none"){
+    console.log(localStorage.getItem("userEmail"));
+        if(localStorage.getItem("userEmail")=="none"){
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
@@ -329,11 +313,11 @@ function getUserInfo(){
         else{
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
-                if(entry.email==userEmail){
+                if(entry.email== localStorage.getItem("userEmail")){
                     const entryListElement = document.getElementById('entry-list');
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
-                    console.log(userEmail);
+                    console.log(localStorage.getItem("userEmail"));
                     const messageForm = document.getElementById('my-form');
                     messageForm.action = entries.uploadUrl;
             

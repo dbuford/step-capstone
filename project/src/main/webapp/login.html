@@ -125,7 +125,7 @@ body {
   </div>
 
   <div class=box>
-    <button id="authorize_button" style="display: none;">Login</button>
+    <button id="authorize_button" style="display: block;">Login</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
   
 
@@ -250,19 +250,13 @@ body {
 
       <p> Complete form if you haven't already to best help us find the best scholarships for you </p> 
       <form  id="addcomm" action="/data" method="POST">
-        <p id = "login" name="userEmail" ></p>
+        <input id = "login" name="userEmail" ></input>
         
         <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
         
         <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
 
-        <p>
-          <label>
-            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
-            <span>Display email next to name</span>
-          </label>
-        </p>
         
         <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
         <label for="displayemail"> Display email next to info</label> -->

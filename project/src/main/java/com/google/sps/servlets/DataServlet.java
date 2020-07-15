@@ -181,7 +181,10 @@ public class DataServlet extends HttpServlet {
   // A simple HTTP handler to extract text input from submitted web form and respond that context back to the user.
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    String[] email = request.getParameterValues("userEmail");
+    String[] emailarray = request.getParameterValues("userEmail");
+
+    System.out.println(emailarray);
+  
     
     // Must be logged in to add info
     String title = request.getParameter("title");
@@ -197,6 +200,8 @@ public class DataServlet extends HttpServlet {
 
     String[] genderarray=request.getParameterValues("gender");
     String gender= genderarray!=null ? String.join(" ",genderarray): String.join(" ", empty);
+    
+    String email=emailarray!=null ? String.join(" ",emailarray): String.join(" ", empty);
     
 
     String[] incomearray=request.getParameterValues("income");
