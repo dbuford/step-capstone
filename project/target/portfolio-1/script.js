@@ -69,9 +69,12 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           console.log("works");
-          document.getElementById("authorize_button").onclick = handleAuthClick;
+          if(document.getElementById("authorize_button")!=null){
+            document.getElementById("authorize_button").onclick = handleAuthClick;
+            document.getElementById("signout_button").onclick = handleSignoutClick;
+
+          }
           console.log("works");
-          document.getElementById("signout_button").onclick = handleSignoutClick;
           console.log("works");
         }, function(error) {
           appendPre(JSON.stringify(error, null, 2));
@@ -87,7 +90,9 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         if (isSignedIn) {
           var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
           localStorage.setItem("userEmail",JSON.stringify(userEmail2));
-          console.log(localStorage.getItem("userEmail"));          
+          console.log(localStorage.getItem("userEmail")); 
+          if (document.getElementById('login') !=null) {
+         
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
@@ -99,12 +104,23 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
           console.log("working");
-        } else {
-          document.getElementById("authorize_button").style.display = 'block';
-          document.getElementById("signout_button").style.display = 'none';
-          console.log("working");
-          localStorage.removeItem("userEmail");
         }
+        else{
+            listUpcomingEvents();
+        }
+        } else {
+            if(document.getElementById('login') !=null){
+                document.getElementById("authorize_button").style.display = 'block';
+                document.getElementById("signout_button").style.display = 'none';
+                console.log("working");
+                localStorage.removeItem("userEmail");
+            }
+            else{
+                handleAuthClick();
+            }
+
+        }
+      
       }
 
 
@@ -114,7 +130,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *  Sign in the user upon button click.
        */
       function handleAuthClick(event) {
+        console.log("line 133 not logged in");
+
         gapi.auth2.getAuthInstance().signIn();
+        console.log("line 136 not logged in");
+
       }
 
       /**
@@ -355,18 +375,6 @@ function loadInfo() {
 
 /* scholarships functions*/
 // Client ID and API key from the Developer Console
-      var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
-
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
-
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
 
       var date;
       var calendarTitle;
@@ -1018,87 +1026,21 @@ function getScholarships(race,gender,major,income,grade,state) {
 
         }
         function accessCalendar(){
-          /*  handleClientLoad();/** */
+           handleClientLoad();
         }
-
-            /**
-       *  On load, called to load the auth2 library and API client library.*/
-       
-      /*function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
-
-      /**
-       *  Initializes the API client library and sets up sign-in state
-       *  listeners.*/
-       
-     /* function initClient() {
-        gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
-        }).then(function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-          // Handle the initial sign-in state.
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          handleAuthClick();
-        }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
-        });
-      }
-
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.*/
-       
-      /*function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          listUpcomingEvents();
-        } 
-      }
-
-      /**
-       *  Sign in the user upon button click.*/
-       
-     /* function handleAuthClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-      }
-
-      /**
-       *  Sign out the user upon button click.*/
-       
-      /*function handleSignoutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
-      }
-
-      /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.*/
-       
-      /*function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-
       /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.*/
        
-      /*function listUpcomingEvents() {
+      function listUpcomingEvents() {
           var event = {
-  'summary': calendarTitle+' Deadline',
-  'description': calendarTitle+ ' is due today! Make sure to submit it on time',
-  'start': {
-    'date': date,
-    'timeZone': 'America/Chicago'
-  },
+            'summary': calendarTitle+' Deadline',
+            'description': calendarTitle+ ' is due today! Make sure to submit it on time',
+            'start': {
+            'date': date,
+            'timeZone': 'America/Chicago'
+                },
   'end': {
     'date':date,
     'timeZone': 'America/Chicago'
@@ -1123,4 +1065,4 @@ var request = gapi.client.calendar.events.insert({
 request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
-      }*/
+      }
