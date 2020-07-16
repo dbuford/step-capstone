@@ -81,15 +81,10 @@ public class addScholarshipServlet extends HttpServlet {
     String thumbsup="0";
     String thumbsdown="0";
 
-    String userEmail;
 
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      userEmail = userService.getCurrentUser().getEmail();
-    }
-    else{
-        userEmail="none";
-    }
+    String[] emailarray = request.getParameterValues("addScholarship-user-email");
+    String userEmail=emailarray!=null ? String.join(" ",emailarray): String.join(" ", empty);
+
 
     //check if any Scholarship details is empty
 

@@ -209,6 +209,7 @@
                 <p style='text-align:center'>*required field</p>
                 <div style='color:white;'>div</div>
                 <form action="/info" method="POST">
+                <input style="display:none"  name="addScholarship-user-email" id="addScholarship-user-email"></input>
                 <div class="info1">
                     <p class="inner-text"><b>Title*</b></p>
                     <p class="inner-text"><b>Description*</b></p>
@@ -405,7 +406,9 @@
   
     </div>
     </div>
-    
+<script>
+document.getElementById('addScholarship-user-email').value = localStorage.getItem("userEmail");
+</script>
     
   </body>
 </html>

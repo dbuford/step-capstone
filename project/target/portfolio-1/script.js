@@ -123,9 +123,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
       
       }
 
-
-
-
       /**
        *  Sign in the user upon button click.
        */
@@ -378,15 +375,15 @@ function loadInfo() {
 
       var date;
       var calendarTitle;
-      var userEmail;
+      var currentUserEmail;
 
 
 
 function getUserScholarships(){
-    fetch("current-user").then(response => response.json()).then((email) => {
-        console.log(email);
-        document.getElementById('')
-        if(email=="none"){
+    if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+    }
+        if(localStorage.getItem('userEmail')==null){
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
@@ -399,15 +396,14 @@ function getUserScholarships(){
                 var foundEmail=false;
                 var foundEntry;
             entries.forEach((entry) => {
-                if(entry.email==email){
+                if(entry.email==currentUserEmail){
                     foundEmail=true;
                     foundEntry=entry;
                     }
                 })
 
                 if(foundEmail==true){
-                    getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,"none","none"); 
-                    console.log(foundEntry.major); 
+                    getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location); 
                 }
                 else{
                 if(!document.body.contains(document.getElementById('please-fill'))){
@@ -428,14 +424,16 @@ function getUserScholarships(){
 
         }
 
-         });
-
 }
 function getScholarships(race,gender,major,income,grade,state) {
-    fetch("current-user").then(response => response.json()).then((email) => {
+    /*fetch("current-user").then(response => response.json()).then((email) => {
         userEmail=email;
         console.log(userEmail);
-    });
+    });*/
+    if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+
+    }
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        console.log(response);
@@ -601,7 +599,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             titleContainer.appendChild(urlElement);
             containerElement.appendChild(titleContainer);
 
-            if(userEmail==scholarship[11]){
+            if(currentUserEmail==scholarship[11]){
                 //create form if user chooses to edit their scholarship entry
                 var editButton=document.createElement("button");
                 editButton.innerText="edit";
