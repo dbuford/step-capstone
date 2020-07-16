@@ -824,13 +824,19 @@ function getScholarships(race,gender,major,income,grade,state) {
                     userDownClicked=false;
                     
                 }
-                const params = new URLSearchParams();
+            }
+            else{
+                scholarship[13]=scholarship[13]-1;
+                thumbsup.innerText=scholarship[13];
+                userUpClicked=false;
+                thumbsup.style.color='black';
+            }
+            const params = new URLSearchParams();
                 params.append('id', scholarship[12]);
                 console.log(scholarship[12]);
                 params.append('thumbsup',scholarship[13]);
                 params.append('thumbsdown',scholarship[14]);
                 fetch('/update-vote', {method: 'POST', body: params});
-            }
 
                 }
                 
@@ -850,13 +856,20 @@ function getScholarships(race,gender,major,income,grade,state) {
                     thumbsup.innerText=scholarship[13];
                     userUpClicked=false;
                 }
-                const params = new URLSearchParams();
+            }
+            else{
+                scholarship[14]=scholarship[14]-1;
+                thumbsdown.innerText=scholarship[14];
+                userDownClicked=false;
+                thumbsdown.style.color='black';
+
+            }
+            const params = new URLSearchParams();
                 params.append('id', scholarship[12]);
                 console.log(scholarship[12]);
                 params.append('thumbsup',scholarship[13]);
                 params.append('thumbsdown',scholarship[14]);
                 fetch('/update-vote', {method: 'POST', body: params});
-            }
 
                 }
                 
