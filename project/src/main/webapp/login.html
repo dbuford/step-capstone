@@ -125,8 +125,7 @@ body {
   </div>
 
   <div class=box>
-    <button id="authorize_button" style="display: block;">Login</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+    
   
 
 
@@ -243,14 +242,16 @@ body {
 
 
     <center><h1>Login/Signup</h1> </center>
-    <center><p id="loginel"> </p>
+    <center><p id="loginel"></p>
+      <button id="authorize_button" style="display: none;">Login</button>
+      <button id="signout_button" style="display: none;">Sign Out</button>
       <br/>
       <div class="divider"></div>
       <h6 id="error"></h6>
 
       <p> Complete form if you haven't already to best help us find the best scholarships for you </p> 
       <form  id="addcomm" action="/data" method="POST">
-        <input id = "login" name="userEmail" ></input>
+        <input id = "login" name="userEmail" style="display:none";></input>
         
         <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>

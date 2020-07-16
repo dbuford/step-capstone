@@ -43,8 +43,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
       // included, separated by spaces.
       var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
 
       /**
        *  On load, called to load the auth2 library and API client library.
@@ -70,8 +68,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-          signoutButton.onclick = handleSignoutClick;
+          console.log("works");
+          document.getElementById("authorize_button").onclick = handleAuthClick;
+          console.log("works");
+          document.getElementById("signout_button").onclick = handleSignoutClick;
+          console.log("works");
         }, function(error) {
           appendPre(JSON.stringify(error, null, 2));
         });
@@ -93,13 +94,16 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
          // const params = new URLSearchParams();
           //  params.append('email', email);
           //  fetch('/logins', {method: 'POST', body: params})
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          listUpcomingEvents();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
           console.log("working");
+          document.getElementById("authorize_button").style.display = 'none';
+          console.log("working also");
+          document.getElementById("signout_button").style.display = 'block';
+          console.log("working");
+        } else {
+          document.getElementById("authorize_button").style.display = 'block';
+          document.getElementById("signout_button").style.display = 'none';
+          console.log("working");
+          localStorage.removeItem("userEmail");
         }
       }
 
@@ -118,6 +122,10 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        const loginElement = document.getElementById('loginel');
+        loginElement.innerHTML = "Feel free to Login";
+        localStorage.removeItem("userEmail");
+
       }
 
       /**
@@ -168,7 +176,7 @@ function add_info() {
 
 function login() {
      const loginElement = document.getElementById('loginel');
-     loginElement.innerHTML = document.getElementById('login').value;
+     loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
      console.log(document.getElementById('login').value);
 }
 
@@ -302,7 +310,7 @@ function deleteEntry(entry) {
 // create function for user info
 function getUserInfo(){
     console.log(localStorage.getItem("userEmail"));
-        if(localStorage.getItem("userEmail")=="none"){
+        if(localStorage.getItem("userEmail") == null){
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
