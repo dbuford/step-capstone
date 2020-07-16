@@ -402,8 +402,6 @@ function getUserScholarships(){
                     console.log(foundEntry.major); 
                 }
                 else{
-                    console.log(entry.email);
-                    console.log(email);
                 if(!document.body.contains(document.getElementById('please-fill'))){
                     const divElement=document.createElement('div');
                     const titleElement=document.createElement("h2");
@@ -517,6 +515,13 @@ function getScholarships(race,gender,major,income,grade,state) {
             containerElement.setAttribute('class','container');
             const divElement = document.createElement('div');
             divElement.setAttribute('class','regular');
+
+            //check if scholarship deadline is expired
+            var currentDate=new Date();
+            var scholarshipDate=new Date(scholarship[2]);
+            if(scholarshipDate<currentDate){
+                containerElement.style.display="none";
+            }
 
             
             const calendarElement=document.createElement("h4");
@@ -862,6 +867,81 @@ function getScholarships(race,gender,major,income,grade,state) {
                 
             }
             
+            const votingContainer=document.createElement("div");
+            votingContainer.setAttribute('class','voting-container');
+            const thumbsup=document.createElement("i");
+            thumbsup.setAttribute('class','fa fa-thumbs-up');
+            thumbsup.innerText=scholarship[13];
+            const thumbsdown=document.createElement("i");
+            thumbsdown.setAttribute('class','fa fa-thumbs-down');
+            thumbsdown.innerText=scholarship[14];
+            var userUpClicked=false;
+            var userDownClicked=false;
+            thumbsup.onclick=function(){
+                if(userUpClicked==false){
+                    thumbsup.style.color="green";
+                scholarship[13]=scholarship[13]+1;
+                thumbsup.innerText=scholarship[13];
+                console.log(scholarship[13]);
+                userUpClicked=true;
+                if(userDownClicked==true && scholarship[14]!=0){
+                    thumbsdown.style.color='black';
+                    scholarship[14]=scholarship[14]-1;
+                    thumbsdown.innerText=scholarship[14];
+                    userDownClicked=false;
+                    
+                }
+            }
+            else{
+                scholarship[13]=scholarship[13]-1;
+                thumbsup.innerText=scholarship[13];
+                userUpClicked=false;
+                thumbsup.style.color='black';
+            }
+            const params = new URLSearchParams();
+                params.append('id', scholarship[12]);
+                console.log(scholarship[12]);
+                params.append('thumbsup',scholarship[13]);
+                params.append('thumbsdown',scholarship[14]);
+                fetch('/update-vote', {method: 'POST', body: params});
+
+                }
+                
+            votingContainer.appendChild(thumbsup);
+
+            thumbsdown.onclick=function(){
+                if(userDownClicked==false){
+                    thumbsdown.style.color="green";
+                scholarship[14]=scholarship[14]+1;
+                thumbsdown.innerText=scholarship[14];
+                console.log(scholarship[13]);
+                userDownClicked=true;
+
+                if(userUpClicked==true&& scholarship[13]!=0){
+                    thumbsup.style.color='black';
+                    scholarship[13]=scholarship[13]-1;
+                    thumbsup.innerText=scholarship[13];
+                    userUpClicked=false;
+                }
+            }
+            else{
+                scholarship[14]=scholarship[14]-1;
+                thumbsdown.innerText=scholarship[14];
+                userDownClicked=false;
+                thumbsdown.style.color='black';
+
+            }
+            const params = new URLSearchParams();
+                params.append('id', scholarship[12]);
+                console.log(scholarship[12]);
+                params.append('thumbsup',scholarship[13]);
+                params.append('thumbsdown',scholarship[14]);
+                fetch('/update-vote', {method: 'POST', body: params});
+
+                }
+                
+            votingContainer.appendChild(thumbsdown);
+            containerElement.appendChild(votingContainer);
 
 
             const deadlineContainer=document.createElement("div");
@@ -900,7 +980,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             detailsElement.appendChild(descriptionElement);
 
             const requirementElement=document.createElement("p");
-            requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7];
+            requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7]+ ", grade:"+scholarship[8]+", location:"+scholarship[10];
             detailsElement.appendChild(requirementElement);
 
             
