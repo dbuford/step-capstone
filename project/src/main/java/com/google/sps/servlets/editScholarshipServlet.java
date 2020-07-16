@@ -58,7 +58,7 @@ public class editScholarshipServlet extends HttpServlet {
         amount= amount;
     }
 
-    String userEmail;
+    /*String userEmail;
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
@@ -66,7 +66,7 @@ public class editScholarshipServlet extends HttpServlet {
     }
     else{
         userEmail="none";
-    }
+    }*/
 
      String[] empty={"none"};
     String[] racearray=request.getParameterValues("new-race");
@@ -112,7 +112,7 @@ public class editScholarshipServlet extends HttpServlet {
         scholarshipEntity.setProperty("major", major);
         scholarshipEntity.setProperty("grade",grade);
         scholarshipEntity.setProperty("state",state);
-        scholarshipEntity.setProperty("userEmail",userEmail);
+        /*scholarshipEntity.setProperty("userEmail",userEmail);*/
         datastore.put(scholarshipEntity);
 
         }catch (EntityNotFoundException e) {
