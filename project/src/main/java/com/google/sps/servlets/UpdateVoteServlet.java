@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,13 @@ public class UpdateVoteServlet extends HttpServlet {
     String thumbsup=request.getParameter("thumbsup");
     String thumbsdown=request.getParameter("thumbsdown");
     System.out.println(id);
+    String upVoteEmailsString=request.getParameter("thumbsUpList");
+    List upVoteEmails=Arrays.asList(upVoteEmailsString.split(","));
+    System.out.println(upVoteEmails);
+
+    String downVoteEmailsString=request.getParameter("thumbsDownList");
+    List downVoteEmails=Arrays.asList(downVoteEmailsString.split(","));
+
 
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -56,6 +64,8 @@ public class UpdateVoteServlet extends HttpServlet {
         Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
         scholarshipEntity.setProperty("thumbsup", thumbsup);
         scholarshipEntity.setProperty("thumbsdown",thumbsdown);
+        scholarshipEntity.setProperty("upVoteEmails",upVoteEmails);
+        scholarshipEntity.setProperty("downVoteEmails",downVoteEmails);
         datastore.put(scholarshipEntity);
 
         }catch (EntityNotFoundException e) {

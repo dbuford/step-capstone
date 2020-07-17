@@ -81,6 +81,11 @@ public class addScholarshipServlet extends HttpServlet {
     String thumbsup="0";
     String thumbsdown="0";
 
+List<String> upVoteEmails=new ArrayList<String>();
+List<String> downVoteEmails=new ArrayList<String>();
+upVoteEmails.add("filler");
+downVoteEmails.add("filler");
+
 
     String[] emailarray = request.getParameterValues("addScholarship-user-email");
     String userEmail=emailarray!=null ? String.join(" ",emailarray): String.join(" ", empty);
@@ -110,6 +115,8 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("userEmail",userEmail);
     scholarshipEntity.setProperty("thumbsup",thumbsup);
     scholarshipEntity.setProperty("thumbsdown",thumbsdown);
+    scholarshipEntity.setProperty("upVoteEmails",upVoteEmails);
+    scholarshipEntity.setProperty("downVoteEmails",downVoteEmails);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);
