@@ -1,9 +1,7 @@
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/addScholarshipServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/LoginServlet.java
-/home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/DeleteInfoServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/CurrentUserServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/editScholarshipServlet.java
-/home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/editProfileServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/DataServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/ListScholarshipsServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/DeleteScholarshipServlet.java
