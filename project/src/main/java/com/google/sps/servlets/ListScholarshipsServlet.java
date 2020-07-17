@@ -66,7 +66,9 @@ public class ListScholarshipsServlet extends HttpServlet {
         int thumbsdown=Integer.parseInt(entity.getProperty("thumbsdown").toString());
         long myid = entity.getKey().getId();
         Long id=new Long(myid);
-
+        List upVoteEmails=(ArrayList) entity.getProperty("upVoteEmails");
+        List downVoteEmails=(ArrayList) entity.getProperty("downVoteEmails");
+    
         ArrayList<Object> info=new ArrayList<>();
         info.add(title);
         info.add(description);
@@ -83,6 +85,8 @@ public class ListScholarshipsServlet extends HttpServlet {
         info.add(id);
         info.add(thumbsup);
         info.add(thumbsdown);
+        info.add(upVoteEmails);
+        info.add(downVoteEmails);
         
         
 

@@ -883,67 +883,122 @@ function getScholarships(race,gender,major,income,grade,state) {
             thumbsdown.innerText=scholarship[14];
             var userUpClicked=false;
             var userDownClicked=false;
+            if(scholarship[15].includes(localStorage.getItem("userEmail"))){
+                        console.log("INCLUDES");
+                        userUpClicked=true;
+                        thumbsup.style.color="green";
+                    }
+            if(scholarship[16].includes(localStorage.getItem("userEmail"))){
+                        console.log("INCLUDES");
+                        userDownClicked=true;
+                        thumbsdown.style.color="green";
+                    }
             thumbsup.onclick=function(){
-                if(userUpClicked==false){
-                    thumbsup.style.color="green";
-                scholarship[13]=scholarship[13]+1;
-                thumbsup.innerText=scholarship[13];
-                console.log(scholarship[13]);
-                userUpClicked=true;
-                if(userDownClicked==true && scholarship[14]!=0){
-                    thumbsdown.style.color='black';
-                    scholarship[14]=scholarship[14]-1;
-                    thumbsdown.innerText=scholarship[14];
-                    userDownClicked=false;
-                    
-                }
-            }
-            else{
-                scholarship[13]=scholarship[13]-1;
-                thumbsup.innerText=scholarship[13];
-                userUpClicked=false;
-                thumbsup.style.color='black';
-            }
-            const params = new URLSearchParams();
-                params.append('id', scholarship[12]);
-                console.log(scholarship[12]);
-                params.append('thumbsup',scholarship[13]);
-                params.append('thumbsdown',scholarship[14]);
-                fetch('/update-vote', {method: 'POST', body: params});
+            //check if user is signed in to allow them to vote
+            if(localStorage.getItem("userEmail")!=null){
 
+                    
+                    //allow upvote if user does not have upvote active
+                    if(userUpClicked==false&&!scholarship[15].includes(localStorage.getItem("userEmail"))){
+                        thumbsup.style.color="green";
+                        scholarship[13]=scholarship[13]+1;
+                        thumbsup.innerText=scholarship[13];
+                        console.log(scholarship[13]);
+                        userUpClicked=true;
+                       scholarship[15].push(localStorage.getItem("userEmail"));
+                       console.log(scholarship[15]);
+                    //change downvote to upvote if downvote is active
+                    if(userDownClicked==true && scholarship[14]!=0){
+                        thumbsdown.style.color='black';
+                        scholarship[14]=scholarship[14]-1;
+                        thumbsdown.innerText=scholarship[14];
+                        userDownClicked=false;
+                        //remove email from downVotelist
+                        const emailLocation=scholarship[16].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[16].splice(emailLocation, 1);
+                            }
+                    }
                 }
+                    //take away  upvote if button is clicked and upvote is active
+                    else{
+                        scholarship[13]=scholarship[13]-1;
+                        thumbsup.innerText=scholarship[13];
+                        userUpClicked=false;
+                        thumbsup.style.color='black';
+                        //remove email from upVoteList
+                        const emailLocation=scholarship[15].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[15].splice(emailLocation, 1);
+                            }
+                    }
                 
+                    
+                  const params = new URLSearchParams();
+                    params.append('id', scholarship[12]);
+                    console.log(scholarship[12]);
+                    params.append('thumbsup',scholarship[13]);
+                    params.append('thumbsdown',scholarship[14]);
+                    params.append('thumbsUpList',scholarship[15]);
+                    params.append('thumbsDownList',scholarship[16]);
+                    fetch('/update-vote', {method: 'POST', body: params});
+            }
+                
+                //alert user that they are not logged in and cannot vote
+                else{window.alert("Please log in to vote");}
+                }
             votingContainer.appendChild(thumbsup);
 
             thumbsdown.onclick=function(){
-                if(userDownClicked==false){
-                    thumbsdown.style.color="green";
-                scholarship[14]=scholarship[14]+1;
-                thumbsdown.innerText=scholarship[14];
-                console.log(scholarship[13]);
-                userDownClicked=true;
+            //check if user is signed in to allow them to vote
+            if(localStorage.getItem("userEmail")!=null){
 
+                //allow downvote if user does not have downvote active
+                if(userDownClicked==false&&!scholarship[16].includes(localStorage.getItem("userEmail"))){
+                    thumbsdown.style.color="green";
+                    scholarship[14]=scholarship[14]+1;
+                    thumbsdown.innerText=scholarship[14];
+                    console.log(scholarship[13]);
+                    userDownClicked=true;
+                    scholarship[16].push(localStorage.getItem("userEmail"));
+
+
+                //change upvote to downvote if upvote is active
                 if(userUpClicked==true&& scholarship[13]!=0){
                     thumbsup.style.color='black';
                     scholarship[13]=scholarship[13]-1;
                     thumbsup.innerText=scholarship[13];
                     userUpClicked=false;
+                    //remove email from upVotelist
+                    const emailLocation=scholarship[15].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[15].splice(emailLocation, 1);
+                            }
                 }
             }
+            //take away  downvote if button is clicked and downvote is active
             else{
                 scholarship[14]=scholarship[14]-1;
                 thumbsdown.innerText=scholarship[14];
                 userDownClicked=false;
                 thumbsdown.style.color='black';
-
+                //remove email from downVotelist
+                const emailLocation=scholarship[16].indexOf(localStorage.getItem("userEmail"));
+                if (emailLocation > -1) {
+                    scholarship[16].splice(emailLocation, 1);
+                    }
             }
             const params = new URLSearchParams();
                 params.append('id', scholarship[12]);
                 console.log(scholarship[12]);
                 params.append('thumbsup',scholarship[13]);
                 params.append('thumbsdown',scholarship[14]);
+                params.append('thumbsUpList',scholarship[15]);
+               params.append('thumbsDownList',scholarship[16]);
                 fetch('/update-vote', {method: 'POST', body: params});
-
+            }
+            //alert user that they are not logged in and cannot vote
+                else{window.alert("Please log in to vote");}
                 }
                 
             votingContainer.appendChild(thumbsdown);
