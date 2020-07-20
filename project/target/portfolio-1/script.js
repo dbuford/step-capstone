@@ -114,7 +114,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           document.getElementById("addcomm").style.display = 'none';
 
         }
-        else{
+        if(document.getElementById('login')==null){
             listUpcomingEvents();
         }
         } else {
@@ -127,6 +127,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
             else{
                 handleAuthClick();
             }
+
 
         }
       
@@ -141,7 +142,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         gapi.auth2.getAuthInstance().signIn();
 
         console.log("line 136 not logged in");
-
 
       }
 
