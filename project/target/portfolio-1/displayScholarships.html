@@ -301,6 +301,10 @@ span {
   font-size:50px;
   position:absolute;
 }
+.sort-options{
+    float:right;
+    padding-right:30px;
+}
 
 </style>
 
@@ -502,6 +506,16 @@ span {
     <div class="scholarships">
         <div id="page-number" class="pagination"></div>
     
+        <div id="sort-options" class="sort-options">
+            <label for="sort">Sort By:</label>
+            <select name="sort" id="sort" onchange="display()">
+            <option selected value="normal" >Our Sorting</option>
+            <option value="requirements"># of Requirements:High to Low</option>
+            <option value="amount">Amount:High to Low</option>
+            <option value="likes">Thumbs Up</option>
+            </select>
+        </div>
+
         <ul id="scholarship-list"></ul>
     </div>
     <script>
@@ -516,9 +530,11 @@ span {
             var incomeElement=document.getElementById('income');
             var gradeElement=document.getElementById('grade');
             var stateElement=document.getElementById('state');
+            var sortElement=document.getElementById('sort');
+            console.log(sortElement.value);
 
 
-            getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value,gradeElement.value,stateElement.value);
+            getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value,gradeElement.value,stateElement.value,sortElement.value);
 
         }
         
