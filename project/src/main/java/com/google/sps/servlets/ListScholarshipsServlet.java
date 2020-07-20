@@ -35,6 +35,7 @@ import java.util.Collections;
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-scholarships")
 public class ListScholarshipsServlet extends HttpServlet {
+    String sorting;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -96,6 +97,7 @@ public class ListScholarshipsServlet extends HttpServlet {
 scholarships.sort(new Comparator<ArrayList>() {
     @Override
     public int compare(ArrayList l1, ArrayList l2) {
+        
         int l1none=0;
         int l2none=0;
         int amount1=0;
@@ -105,7 +107,51 @@ scholarships.sort(new Comparator<ArrayList>() {
         int l2thumbsup=0;
         int l2thumbsdown=0;
 
-        for(int i=4; i<11; i++){
+        if(sorting.equals("requirements")){
+            for(int i=4; i<11; i++){
+                if(l1.get(i).equals("none")){
+                    l1none++;
+                }
+                if(l2.get(i).equals("none")){
+                    l2none++;
+                }
+            return l1none-l2none;
+            
+            }
+        }
+
+        if(sorting.equals("amount")){
+            if(!l1.get(9).equals("not specified")&&!l2.get(9).equals("not specified")){
+                amount1=Integer.parseInt(l1.get(9).toString())*-1;
+                amount2=Integer.parseInt(l2.get(9).toString())*-1;
+                return amount1-amount2;
+            }
+            if(!l1.get(9).equals("not specified")){
+                return -1;
+            }
+            if(!l2.get(9).equals("not specified")){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+
+        }
+        if(sorting.equals("likes")){
+                l1thumbsup=Integer.parseInt(l1.get(13).toString());
+                l1thumbsdown=-1*Integer.parseInt(l1.get(14).toString());
+
+                l2thumbsup=Integer.parseInt(l2.get(13).toString());
+                l2thumbsdown=-1*Integer.parseInt(l2.get(14).toString());
+
+                return(-(l1thumbsup+l2thumbsdown)+(l2thumbsup+l2thumbsdown));
+
+
+
+
+        }
+        else{
+                   for(int i=4; i<11; i++){
             if(l1.get(i).equals("none")){
             l1none++;
             }
@@ -124,7 +170,7 @@ scholarships.sort(new Comparator<ArrayList>() {
     l1thumbsdown=-2*Integer.parseInt(l1.get(14).toString());
 
     l2thumbsup=2*Integer.parseInt(l2.get(13).toString());
-    l2thumbsdown=2*Integer.parseInt(l2.get(14).toString());
+    l2thumbsdown=-2*Integer.parseInt(l2.get(14).toString());
 
     int l1total=l1none+amount1+l1thumbsup+l1thumbsdown;
     int l2total=l2none+amount2+l2thumbsup+l2thumbsdown;
@@ -132,6 +178,10 @@ scholarships.sort(new Comparator<ArrayList>() {
     
     System.out.println(l1total-l2total);
      return (l1total-l2total);
+
+        }
+
+ 
 }
      
 });
@@ -152,4 +202,12 @@ scholarships.sort(new Comparator<ArrayList>() {
     return json;
   }
 
+@Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+      sorting=request.getParameter("sort");
+      System.out.println(sorting);
+      doGet(request,response);
+
+}
 }

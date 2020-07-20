@@ -438,16 +438,15 @@ function getUserScholarships(){
         }
 
 }
-function getScholarships(race,gender,major,income,grade,state) {
-    /*fetch("current-user").then(response => response.json()).then((email) => {
-        userEmail=email;
-        console.log(userEmail);
-    });*/
+function getScholarships(race,gender,major,income,grade,state,sort) {
     if(localStorage.getItem('userEmail')!=null){
         currentUserEmail=localStorage.getItem('userEmail');
 
     }
-   fetch("/list-scholarships").then(response => response.json()).then((response) => {
+    const params = new URLSearchParams();
+    params.append('sort', sort);
+
+   fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
        var scholarships=[];
        console.log(response);
        if(response.length==0){
