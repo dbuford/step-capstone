@@ -104,6 +104,15 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
           console.log("working");
+
+          document.getElementById("addcomm").style.display = 'block';
+        } else {
+          document.getElementById("authorize_button").style.display = 'block';
+          document.getElementById("signout_button").style.display = 'none';
+          console.log("working");
+          localStorage.removeItem("userEmail");
+          document.getElementById("addcomm").style.display = 'none';
+
         }
         else{
             listUpcomingEvents();
@@ -119,6 +128,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
                 handleAuthClick();
             }
 
+
         }
       
       }
@@ -130,6 +140,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         console.log("line 133 not logged in");
 
         gapi.auth2.getAuthInstance().signIn();
+
         console.log("line 136 not logged in");
 
       }
@@ -141,6 +152,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         gapi.auth2.getAuthInstance().signOut();
         const loginElement = document.getElementById('loginel');
         loginElement.innerHTML = "Feel free to Login";
+
         localStorage.removeItem("userEmail");
 
       }
@@ -195,6 +207,7 @@ function login() {
      const loginElement = document.getElementById('loginel');
      loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
      console.log(document.getElementById('login').value);
+     console.log("works");
 }
 
 
