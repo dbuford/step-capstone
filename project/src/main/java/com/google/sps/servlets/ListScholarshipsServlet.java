@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URL; 
+import java.util.Comparator;
+import java.util.Collections;
 
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-scholarships")
@@ -60,9 +62,13 @@ public class ListScholarshipsServlet extends HttpServlet {
         String grade=(String) entity.getProperty("grade");
         String state=(String) entity.getProperty("state");
         String userEmail=(String) entity.getProperty("userEmail");
+        int thumbsup= Integer.parseInt(entity.getProperty("thumbsup").toString());
+        int thumbsdown=Integer.parseInt(entity.getProperty("thumbsdown").toString());
         long myid = entity.getKey().getId();
         Long id=new Long(myid);
-
+        List upVoteEmails=(ArrayList) entity.getProperty("upVoteEmails");
+        List downVoteEmails=(ArrayList) entity.getProperty("downVoteEmails");
+    
         ArrayList<Object> info=new ArrayList<>();
         info.add(title);
         info.add(description);
@@ -77,11 +83,60 @@ public class ListScholarshipsServlet extends HttpServlet {
         info.add(state);
         info.add(userEmail);
         info.add(id);
+        info.add(thumbsup);
+        info.add(thumbsdown);
+        info.add(upVoteEmails);
+        info.add(downVoteEmails);
         
         
 
         scholarships.add(info);
     }
+
+scholarships.sort(new Comparator<ArrayList>() {
+    @Override
+    public int compare(ArrayList l1, ArrayList l2) {
+        int l1none=0;
+        int l2none=0;
+        int amount1=0;
+        int amount2=0;
+        int l1thumbsup=0;
+        int l1thumbsdown=0;
+        int l2thumbsup=0;
+        int l2thumbsdown=0;
+
+        for(int i=4; i<11; i++){
+            if(l1.get(i).equals("none")){
+            l1none++;
+            }
+            if(l2.get(i).equals("none")){
+            l2none++;
+            }
+    l1none=5*l1none;
+    l2none=5*l2none;
+
+    }
+    if(!l1.get(9).equals("not specified")&&!l2.get(9).equals("not specified")){
+        amount1=Integer.parseInt(l1.get(9).toString())*-1;
+        amount2=Integer.parseInt(l2.get(9).toString())*-1;
+    }
+    l1thumbsup=2*Integer.parseInt(l1.get(13).toString());
+    l1thumbsdown=-2*Integer.parseInt(l1.get(14).toString());
+
+    l2thumbsup=2*Integer.parseInt(l2.get(13).toString());
+    l2thumbsdown=2*Integer.parseInt(l2.get(14).toString());
+
+    int l1total=l1none+amount1+l1thumbsup+l1thumbsdown;
+    int l2total=l2none+amount2+l2thumbsup+l2thumbsdown;
+    
+    
+    System.out.println(l1total-l2total);
+     return (l1total-l2total);
+}
+     
+});
+
+
     String json=convertToJsonUsingGson(scholarships);
 
     // Send the JSON as the response
@@ -96,4 +151,5 @@ public class ListScholarshipsServlet extends HttpServlet {
     String json = gson.toJson(scholarships);
     return json;
   }
+
 }

@@ -69,9 +69,12 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           console.log("works");
-          document.getElementById("authorize_button").onclick = handleAuthClick;
+          if(document.getElementById("authorize_button")!=null){
+            document.getElementById("authorize_button").onclick = handleAuthClick;
+            document.getElementById("signout_button").onclick = handleSignoutClick;
+
+          }
           console.log("works");
-          document.getElementById("signout_button").onclick = handleSignoutClick;
           console.log("works");
         }, function(error) {
           appendPre(JSON.stringify(error, null, 2));
@@ -87,7 +90,9 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         if (isSignedIn) {
           var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
           localStorage.setItem("userEmail",JSON.stringify(userEmail2));
-          console.log(localStorage.getItem("userEmail"));          
+          console.log(localStorage.getItem("userEmail")); 
+          if (document.getElementById('login') !=null) {
+         
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
@@ -99,6 +104,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
           console.log("working");
+
           document.getElementById("addcomm").style.display = 'block';
         } else {
           document.getElementById("authorize_button").style.display = 'block';
@@ -106,18 +112,37 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("working");
           localStorage.removeItem("userEmail");
           document.getElementById("addcomm").style.display = 'none';
+
         }
+        else{
+            listUpcomingEvents();
+        }
+        } else {
+            if(document.getElementById('login') !=null){
+                document.getElementById("authorize_button").style.display = 'block';
+                document.getElementById("signout_button").style.display = 'none';
+                console.log("working");
+                localStorage.removeItem("userEmail");
+            }
+            else{
+                handleAuthClick();
+            }
+
+        }
+      
       }
-
-
-
 
       /**
        *  Sign in the user upon button click.
        */
       function handleAuthClick(event) {
+        console.log("line 133 not logged in");
+
         gapi.auth2.getAuthInstance().signIn();
-        
+
+        console.log("line 136 not logged in");
+
+
       }
 
       /**
@@ -360,30 +385,18 @@ function loadInfo() {
 
 /* scholarships functions*/
 // Client ID and API key from the Developer Console
-      var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
-
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
-
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
 
       var date;
       var calendarTitle;
-      var userEmail;
+      var currentUserEmail;
 
 
 
 function getUserScholarships(){
-    fetch("current-user").then(response => response.json()).then((email) => {
-        console.log(email);
-        document.getElementById('')
-        if(email=="none"){
+    if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+    }
+        if(localStorage.getItem('userEmail')==null){
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
@@ -396,19 +409,16 @@ function getUserScholarships(){
                 var foundEmail=false;
                 var foundEntry;
             entries.forEach((entry) => {
-                if(entry.email==email){
+                if(entry.email==currentUserEmail){
                     foundEmail=true;
                     foundEntry=entry;
                     }
                 })
 
                 if(foundEmail==true){
-                    getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,"none","none"); 
-                    console.log(foundEntry.major); 
+                    getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location); 
                 }
                 else{
-                    console.log(entry.email);
-                    console.log(email);
                 if(!document.body.contains(document.getElementById('please-fill'))){
                     const divElement=document.createElement('div');
                     const titleElement=document.createElement("h2");
@@ -427,14 +437,16 @@ function getUserScholarships(){
 
         }
 
-         });
-
 }
 function getScholarships(race,gender,major,income,grade,state) {
-    fetch("current-user").then(response => response.json()).then((email) => {
+    /*fetch("current-user").then(response => response.json()).then((email) => {
         userEmail=email;
         console.log(userEmail);
-    });
+    });*/
+    if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+
+    }
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
        var scholarships=[];
        console.log(response);
@@ -523,6 +535,13 @@ function getScholarships(race,gender,major,income,grade,state) {
             const divElement = document.createElement('div');
             divElement.setAttribute('class','regular');
 
+            //check if scholarship deadline is expired
+            var currentDate=new Date();
+            var scholarshipDate=new Date(scholarship[2]);
+            if(scholarshipDate<currentDate){
+                containerElement.style.display="none";
+            }
+
             
             const calendarElement=document.createElement("h4");
             calendarElement.innerText=scholarship[2];
@@ -593,7 +612,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             titleContainer.appendChild(urlElement);
             containerElement.appendChild(titleContainer);
 
-            if(userEmail==scholarship[11]){
+            if(currentUserEmail==scholarship[11]){
                 //create form if user chooses to edit their scholarship entry
                 var editButton=document.createElement("button");
                 editButton.innerText="edit";
@@ -867,6 +886,136 @@ function getScholarships(race,gender,major,income,grade,state) {
                 
             }
             
+            const votingContainer=document.createElement("div");
+            votingContainer.setAttribute('class','voting-container');
+            const thumbsup=document.createElement("i");
+            thumbsup.setAttribute('class','fa fa-thumbs-up');
+            thumbsup.innerText=scholarship[13];
+            const thumbsdown=document.createElement("i");
+            thumbsdown.setAttribute('class','fa fa-thumbs-down');
+            thumbsdown.innerText=scholarship[14];
+            var userUpClicked=false;
+            var userDownClicked=false;
+            if(scholarship[15].includes(localStorage.getItem("userEmail"))){
+                        console.log("INCLUDES");
+                        userUpClicked=true;
+                        thumbsup.style.color="green";
+                    }
+            if(scholarship[16].includes(localStorage.getItem("userEmail"))){
+                        console.log("INCLUDES");
+                        userDownClicked=true;
+                        thumbsdown.style.color="green";
+                    }
+            thumbsup.onclick=function(){
+            //check if user is signed in to allow them to vote
+            if(localStorage.getItem("userEmail")!=null){
+
+                    
+                    //allow upvote if user does not have upvote active
+                    if(userUpClicked==false&&!scholarship[15].includes(localStorage.getItem("userEmail"))){
+                        thumbsup.style.color="green";
+                        scholarship[13]=scholarship[13]+1;
+                        thumbsup.innerText=scholarship[13];
+                        console.log(scholarship[13]);
+                        userUpClicked=true;
+                       scholarship[15].push(localStorage.getItem("userEmail"));
+                       console.log(scholarship[15]);
+                    //change downvote to upvote if downvote is active
+                    if(userDownClicked==true && scholarship[14]!=0){
+                        thumbsdown.style.color='black';
+                        scholarship[14]=scholarship[14]-1;
+                        thumbsdown.innerText=scholarship[14];
+                        userDownClicked=false;
+                        //remove email from downVotelist
+                        const emailLocation=scholarship[16].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[16].splice(emailLocation, 1);
+                            }
+                    }
+                }
+                    //take away  upvote if button is clicked and upvote is active
+                    else{
+                        scholarship[13]=scholarship[13]-1;
+                        thumbsup.innerText=scholarship[13];
+                        userUpClicked=false;
+                        thumbsup.style.color='black';
+                        //remove email from upVoteList
+                        const emailLocation=scholarship[15].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[15].splice(emailLocation, 1);
+                            }
+                    }
+                
+                    
+                  const params = new URLSearchParams();
+                    params.append('id', scholarship[12]);
+                    console.log(scholarship[12]);
+                    params.append('thumbsup',scholarship[13]);
+                    params.append('thumbsdown',scholarship[14]);
+                    params.append('thumbsUpList',scholarship[15]);
+                    params.append('thumbsDownList',scholarship[16]);
+                    fetch('/update-vote', {method: 'POST', body: params});
+            }
+                
+                //alert user that they are not logged in and cannot vote
+                else{window.alert("Please log in to vote");}
+                }
+            votingContainer.appendChild(thumbsup);
+
+            thumbsdown.onclick=function(){
+            //check if user is signed in to allow them to vote
+            if(localStorage.getItem("userEmail")!=null){
+
+                //allow downvote if user does not have downvote active
+                if(userDownClicked==false&&!scholarship[16].includes(localStorage.getItem("userEmail"))){
+                    thumbsdown.style.color="green";
+                    scholarship[14]=scholarship[14]+1;
+                    thumbsdown.innerText=scholarship[14];
+                    console.log(scholarship[13]);
+                    userDownClicked=true;
+                    scholarship[16].push(localStorage.getItem("userEmail"));
+
+
+                //change upvote to downvote if upvote is active
+                if(userUpClicked==true&& scholarship[13]!=0){
+                    thumbsup.style.color='black';
+                    scholarship[13]=scholarship[13]-1;
+                    thumbsup.innerText=scholarship[13];
+                    userUpClicked=false;
+                    //remove email from upVotelist
+                    const emailLocation=scholarship[15].indexOf(localStorage.getItem("userEmail"));
+                        if (emailLocation > -1) {
+                             scholarship[15].splice(emailLocation, 1);
+                            }
+                }
+            }
+            //take away  downvote if button is clicked and downvote is active
+            else{
+                scholarship[14]=scholarship[14]-1;
+                thumbsdown.innerText=scholarship[14];
+                userDownClicked=false;
+                thumbsdown.style.color='black';
+                //remove email from downVotelist
+                const emailLocation=scholarship[16].indexOf(localStorage.getItem("userEmail"));
+                if (emailLocation > -1) {
+                    scholarship[16].splice(emailLocation, 1);
+                    }
+            }
+            const params = new URLSearchParams();
+                params.append('id', scholarship[12]);
+                console.log(scholarship[12]);
+                params.append('thumbsup',scholarship[13]);
+                params.append('thumbsdown',scholarship[14]);
+                params.append('thumbsUpList',scholarship[15]);
+               params.append('thumbsDownList',scholarship[16]);
+                fetch('/update-vote', {method: 'POST', body: params});
+            }
+            //alert user that they are not logged in and cannot vote
+                else{window.alert("Please log in to vote");}
+                }
+                
+            votingContainer.appendChild(thumbsdown);
+            containerElement.appendChild(votingContainer);
 
 
             const deadlineContainer=document.createElement("div");
@@ -905,7 +1054,7 @@ function getScholarships(race,gender,major,income,grade,state) {
             detailsElement.appendChild(descriptionElement);
 
             const requirementElement=document.createElement("p");
-            requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7];
+            requirementElement.innerText="Requirements: race/ethnicity:"+ scholarship[4]+", gender identity:"+scholarship[5]+", income:"+ scholarship[6]+", major:"+ scholarship[7]+ ", grade:"+scholarship[8]+", location:"+scholarship[10];
             detailsElement.appendChild(requirementElement);
 
             
@@ -943,87 +1092,21 @@ function getScholarships(race,gender,major,income,grade,state) {
 
         }
         function accessCalendar(){
-          /*  handleClientLoad();/** */
+           handleClientLoad();
         }
-
-            /**
-       *  On load, called to load the auth2 library and API client library.*/
-       
-      /*function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
-
-      /**
-       *  Initializes the API client library and sets up sign-in state
-       *  listeners.*/
-       
-     /* function initClient() {
-        gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
-        }).then(function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-          // Handle the initial sign-in state.
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          handleAuthClick();
-        }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
-        });
-      }
-
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.*/
-       
-      /*function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          listUpcomingEvents();
-        } 
-      }
-
-      /**
-       *  Sign in the user upon button click.*/
-       
-     /* function handleAuthClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-      }
-
-      /**
-       *  Sign out the user upon button click.*/
-       
-      /*function handleSignoutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
-      }
-
-      /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.*/
-       
-      /*function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-
       /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
        * appropriate message is printed.*/
        
-      /*function listUpcomingEvents() {
+      function listUpcomingEvents() {
           var event = {
-  'summary': calendarTitle+' Deadline',
-  'description': calendarTitle+ ' is due today! Make sure to submit it on time',
-  'start': {
-    'date': date,
-    'timeZone': 'America/Chicago'
-  },
+            'summary': calendarTitle+' Deadline',
+            'description': calendarTitle+ ' is due today! Make sure to submit it on time',
+            'start': {
+            'date': date,
+            'timeZone': 'America/Chicago'
+                },
   'end': {
     'date':date,
     'timeZone': 'America/Chicago'
@@ -1048,4 +1131,4 @@ var request = gapi.client.calendar.events.insert({
 request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
-      }*/
+      }

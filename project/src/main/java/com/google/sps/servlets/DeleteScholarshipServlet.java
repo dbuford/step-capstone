@@ -49,6 +49,8 @@ public class DeleteScholarshipServlet extends HttpServlet {
 
     Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+    
     datastore.delete(scholarshipEntityKey);
   }
 }

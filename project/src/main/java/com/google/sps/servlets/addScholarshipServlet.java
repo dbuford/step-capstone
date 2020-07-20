@@ -78,15 +78,18 @@ public class addScholarshipServlet extends HttpServlet {
 
     long timestamp = System.currentTimeMillis();
 
-    String userEmail;
+    String thumbsup="0";
+    String thumbsdown="0";
 
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      userEmail = userService.getCurrentUser().getEmail();
-    }
-    else{
-        userEmail="none";
-    }
+List<String> upVoteEmails=new ArrayList<String>();
+List<String> downVoteEmails=new ArrayList<String>();
+upVoteEmails.add("filler");
+downVoteEmails.add("filler");
+
+
+    String[] emailarray = request.getParameterValues("addScholarship-user-email");
+    String userEmail=emailarray!=null ? String.join(" ",emailarray): String.join(" ", empty);
+
 
     //check if any Scholarship details is empty
 
@@ -110,6 +113,10 @@ public class addScholarshipServlet extends HttpServlet {
     scholarshipEntity.setProperty("grade",grade);
     scholarshipEntity.setProperty("state",state);
     scholarshipEntity.setProperty("userEmail",userEmail);
+    scholarshipEntity.setProperty("thumbsup",thumbsup);
+    scholarshipEntity.setProperty("thumbsdown",thumbsdown);
+    scholarshipEntity.setProperty("upVoteEmails",upVoteEmails);
+    scholarshipEntity.setProperty("downVoteEmails",downVoteEmails);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(scholarshipEntity);

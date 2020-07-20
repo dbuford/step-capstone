@@ -36,6 +36,8 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+
 
 @WebServlet("/edit-scholarship")
 public class editScholarshipServlet extends HttpServlet {
@@ -56,16 +58,7 @@ public class editScholarshipServlet extends HttpServlet {
         amount= amount;
     }
 
-    long id=Long.parseLong(request.getParameter("new-id"));
-
-
-    Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.delete(scholarshipEntityKey);
-
-    System.out.println(id);
-
-    String userEmail;
+    /*String userEmail;
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
@@ -73,7 +66,7 @@ public class editScholarshipServlet extends HttpServlet {
     }
     else{
         userEmail="none";
-    }
+    }*/
 
      String[] empty={"none"};
     String[] racearray=request.getParameterValues("new-race");
@@ -98,23 +91,33 @@ public class editScholarshipServlet extends HttpServlet {
     String[] statearray=request.getParameterValues("new-state");
     String state= statearray!=null ? String.join(" ",statearray): String.join(" ",empty);
 
-    Entity scholarshipEntity=new Entity("Scholarship");
-    scholarshipEntity.setProperty("title",title);
-    scholarshipEntity.setProperty("description",description);
-    scholarshipEntity.setProperty("deadline",deadline);
-    scholarshipEntity.setProperty("url",url);
-    scholarshipEntity.setProperty("amount",amount);
-    scholarshipEntity.setProperty("timestamp", timestamp);
-    
-    scholarshipEntity.setProperty("race",race);
-    scholarshipEntity.setProperty("gender", gender);
-    scholarshipEntity.setProperty("income", income);
-    scholarshipEntity.setProperty("major", major);
-    scholarshipEntity.setProperty("grade",grade);
-    scholarshipEntity.setProperty("state",state);
-    scholarshipEntity.setProperty("userEmail",userEmail);
+    long id=Long.parseLong(request.getParameter("new-id"));
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    datastore.put(scholarshipEntity);
+
+     try {
+        Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
+        System.out.println(scholarshipEntityKey);
+        Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
+        scholarshipEntity.setProperty("title",title);
+        scholarshipEntity.setProperty("description",description);
+        scholarshipEntity.setProperty("deadline",deadline);
+        scholarshipEntity.setProperty("url",url);
+        scholarshipEntity.setProperty("amount",amount);
+        scholarshipEntity.setProperty("timestamp", timestamp);
+    
+        scholarshipEntity.setProperty("race",race);
+        scholarshipEntity.setProperty("gender", gender);
+        scholarshipEntity.setProperty("income", income);
+        scholarshipEntity.setProperty("major", major);
+        scholarshipEntity.setProperty("grade",grade);
+        scholarshipEntity.setProperty("state",state);
+        /*scholarshipEntity.setProperty("userEmail",userEmail);*/
+        datastore.put(scholarshipEntity);
+
+        }catch (EntityNotFoundException e) {
+		throw new RuntimeException("scholarship not found.");
+        }
 
     response.setContentType("text/html");
     
