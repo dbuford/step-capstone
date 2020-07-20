@@ -114,7 +114,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           document.getElementById("addcomm").style.display = 'none';
 
         }
-        else{
+        if(document.getElementById('login')==null){
             listUpcomingEvents();
         }
         } else {
