@@ -27,9 +27,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-
-
 /** */
 
 
@@ -92,7 +89,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           localStorage.setItem("userEmail",JSON.stringify(userEmail2));
           console.log(localStorage.getItem("userEmail")); 
           if (document.getElementById('login') !=null) {
-         
+              
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
@@ -104,7 +101,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
           console.log("working");
-
           document.getElementById("addcomm").style.display = 'block';
         } else {
           document.getElementById("authorize_button").style.display = 'block';
@@ -123,6 +119,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
                 document.getElementById("signout_button").style.display = 'none';
                 console.log("working");
                 localStorage.removeItem("userEmail");
+                document.getElementById("addcomm").style.display = 'none';
             }
             else{
                 handleAuthClick();
