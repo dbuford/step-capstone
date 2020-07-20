@@ -104,8 +104,24 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           localStorage.removeItem("userEmail");
           document.getElementById("addcomm").style.display = 'none';
         }
+<<<<<<< HEAD
       }
 
+=======
+        if(document.getElementById('login')==null){
+            listUpcomingEvents();
+        }
+        } else {
+            if(document.getElementById('login') !=null){
+                document.getElementById("authorize_button").style.display = 'block';
+                document.getElementById("signout_button").style.display = 'none';
+                console.log("working");
+                localStorage.removeItem("userEmail");
+            }
+            else{
+                handleAuthClick();
+            }
+>>>>>>> 118380bd16d38400e306e6b09f566d146d20291b
 
 
 
@@ -427,12 +443,24 @@ function getUserScholarships(){
          });
 
 }
+
 function getScholarships(race,gender,major,income,grade,state) {
     fetch("current-user").then(response => response.json()).then((email) => {
         userEmail=email;
         console.log(userEmail);
     });
    fetch("/list-scholarships").then(response => response.json()).then((response) => {
+
+function getScholarships(race,gender,major,income,grade,state,sort) {
+    if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+
+    }
+    const params = new URLSearchParams();
+    params.append('sort', sort);
+
+   fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+
        var scholarships=[];
        console.log(response);
        if(response.length==0){
