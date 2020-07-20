@@ -1029,7 +1029,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const amountTitle=document.createElement("h4");
             amountTitle.innerText="AMOUNT: ";
             const amountValue=document.createElement("h4");
-            amountValue.innerText='$'+scholarship[9];
+            amountValue.innerText='$'+thousands_separators(scholarship[9]);
             amountContainer.appendChild(amountTitle);
             amountContainer.appendChild(amountValue);
             containerElement.appendChild(amountContainer);
@@ -1086,6 +1086,11 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 el.checked=true;
             }
 
+        }
+        function thousands_separators(num){
+            var num_parts = num.toString().split(".");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num_parts.join(".");
         }
         function accessCalendar(){
            handleClientLoad();

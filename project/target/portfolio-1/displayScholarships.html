@@ -24,10 +24,11 @@
       height:auto;
       margin-top:3%;
       width:70vw;
-      border: 3px solid #ffcc99;
+      border: 3px solid grey;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       border-radius:10px;
       overflow:visible;
+      background-color:ghostwhite;
               }
     .regular{
       width:97%;
@@ -37,6 +38,8 @@
       line-height:50%;
       padding-top:10px;
       border-top:1px solid #e6e6e6;
+    background-color:ghostwhite;
+
             }
     .deadline-container{
         width:29%;
@@ -90,7 +93,7 @@
         text-decoration: none;
         font-size: 20px;
         cursor: pointer;
-        background-color:white;
+        background-color:ghostwhite;
     }
     .scholarship-title button:hover, .regular button:hover{
         color:green;
@@ -124,7 +127,7 @@
     /* Style the top navigation bar */
     .navbar {
       overflow: hidden;
-      background-color: #ffcc99;
+      background-color: black;
             }
     /* Style the navigation bar links */
     .navbar a {
@@ -152,11 +155,11 @@
     font-size:35px;
     padding:0px;
     text-decoration:none;
-    color:darkgreen;
+    color:black;
 
   }
 .container a:hover{
-    color:pink;
+    color:darkgreen;
 }
 
 .container a:active{
@@ -199,14 +202,15 @@ p,h4{
   margin-top:-35px;
   margin-left:-25px;
   overflow:visible;
+  content:"Add";
   
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 50px;
   border-width:thick;
-  border-color:#ffcc99;
+  border-color:ghostwhite;
   border-style:solid;
   background: darkgreen;
 }
@@ -236,8 +240,8 @@ p,h4{
 }
 .outer{
     padding:5px;
-    border-bottom-color:black;
-    border-bottom-style:ridge;
+    /*border-bottom-color:black;
+    border-bottom-style:ridge;*/
     margin-bottom:1%;
 }
 .scholarships{
@@ -510,8 +514,8 @@ span {
             <label for="sort">Sort By:</label>
             <select name="sort" id="sort" onchange="display()">
             <option selected value="normal" >Our Sorting</option>
-            <option value="requirements"># of Requirements:High to Low</option>
-            <option value="amount">Amount:High to Low</option>
+            <option value="requirements">Number of Requirements</option>
+            <option value="amount">Amount</option>
             <option value="likes">Votes</option>
             </select>
         </div>
