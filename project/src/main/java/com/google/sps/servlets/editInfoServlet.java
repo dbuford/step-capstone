@@ -44,6 +44,31 @@ public class editInfoServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+
+      String[] empty={"none"};
+
+      String [] emailarray = request.getParameterValues("userEmail");
+      System.out.println("line55");
+      String userEmail = emailarray != null ? String.join ("", emailarray) : String.join("", empty);
+      System.out.println("line 57");
+      System.out.println(userEmail.toString());
+      Query query = new 
+      Query("Info").addSort("timestamp",SortDirection.DESCENDING);
+
+      PreparedQuery results = datastore.prepare(query);
+      for (Entity entity : results.asIterable()){
+          if (entity.getProperty("email").equals(userEmail)){
+              long id = entity.getKey().getId();
+              System.out.println(id);
+              break;
+
+          }
+      }
+
     // Get the input from the form.
     String title= getParameter(request,"new-title", "");
     String name= getParameter(request,"new-name","");
@@ -60,7 +85,7 @@ public class editInfoServlet extends HttpServlet {
         userEmail="none";
     }*/
 
-     String[] empty={"none"};
+    
     String[] racearray=request.getParameterValues("new-race");
     String race= racearray!=null ? String.join(" ",racearray): String.join(" ",empty);
    
@@ -83,12 +108,12 @@ public class editInfoServlet extends HttpServlet {
     String[] locationarray=request.getParameterValues("new-location");
     String location= locationarray!=null ? String.join(" ",locationarray): String.join(" ",empty);
 
-    long id=Long.parseLong(request.getParameter("new-id"));
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
 
-     try {
-        Key entryEntityKey = KeyFactory.createKey("Info", id);
+
+
+     /*try {
+       /* Key entryEntityKey = KeyFactory.createKey("Info", id); 
         System.out.println(entryEntityKey);
         Entity entryEntity=datastore.get(entryEntityKey);
         entryEntity.setProperty("title",title);
@@ -102,11 +127,11 @@ public class editInfoServlet extends HttpServlet {
         entryEntity.setProperty("grade",grade);
         entryEntity.setProperty("location",location);
         /*scholarshipEntity.setProperty("userEmail",userEmail);*/
-        datastore.put(entryEntity);
+         /*datastore.put(entryEntity);
 
         }catch (EntityNotFoundException e) {
 		throw new RuntimeException("user not found.");
-        }
+        } /* */
 
     response.setContentType("text/html");
     

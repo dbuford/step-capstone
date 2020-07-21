@@ -190,6 +190,7 @@ public class DataServlet extends HttpServlet {
     String title = request.getParameter("title");
     String name = request.getParameter("name");
     String age = request.getParameter("age");
+    String idname = request.getParameter("idname");
     long timestamp = System.currentTimeMillis();
     //String email = userService.getCurrentUser().getEmail();
     

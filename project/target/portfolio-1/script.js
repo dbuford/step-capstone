@@ -313,6 +313,8 @@ function deleteEntry(entry) {
   fetch('/delete', {method: 'POST', body: params});
 }
 
+
+
 // Modifying user info
 //function editing_info() {
  //   
