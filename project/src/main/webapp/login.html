@@ -19,7 +19,24 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background: -webkit-linear-gradient(left, #D7DEDA, #D7DEDA);
+ 
+}
+.bg-image {
+  /* The image used */
+  background-image: url(/images/students.jpg);
+  
+  /* Add the blur effect */
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
+  
+  /* Full height */
+  
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -39,7 +56,10 @@ body {
     /* Style the top navigation bar */
     .navbar {
         overflow: hidden;
-        background-color: #ffcc99;
+        background-color: black;
+        position:absolute;
+        top:0;
+        width:100%;
     }
 
 /* Style the navigation bar links */
@@ -85,13 +105,22 @@ body {
 }
 
 .box {       
-        background-color:#ffcc99;
-        text-align: center;
-        color:white;
+        background-color:white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       /* text-align: center;*/
+        color:black;
         font-weight:bold;
-        border-radius: 25px;
+        /*border-radius: 25px;*/
         margin:auto;     
         width: 40%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow:scroll;
+        min-height:auto;
+        max-height:80%;
+        transform: translate(-50%, -50%);
+        /*z-index: 2;*/
     }
 
 /*style the scroll box in the right side of eligibility div*/
@@ -103,6 +132,7 @@ body {
         border: dotted black;
         margin-right:5%;
         margin-top:2%;
+        text-align:left;
     }
 
 /* styling section */
@@ -113,6 +143,8 @@ body {
 </style>
 </head>
 <body >
+
+<div class="bg-image"></div>
 
 
 <div class="navbar">
@@ -125,7 +157,9 @@ body {
 
 
 
+
   </div>
+
 
   <div class=box>
     
@@ -148,7 +182,7 @@ body {
 
 
 
-    <center><h1>Login/Signup</h1> </center>
+    <center><h1 style="font-family:Impact, fantasy">LOGIN/SIGNUP</h1> </center>
     <center><p id="loginel"></p>
       <button id="authorize_button" style="display: none;">Login</button>
       <button id="signout_button" style="display: none;">Sign Out</button>
@@ -156,9 +190,11 @@ body {
       <div class="divider"></div>
       <h6 id="error"></h6>
 
-      <p> Complete form if you haven't already to best help us find the best scholarships for you! </p> 
       <form  id="addcomm" action="/data" method="POST">
+        <p> Complete form if you haven't already to help us find the best scholarships for you! </p> 
+
         <input id = "login" name="userEmail" style="display:none";></input>
+        <input name="idname"  value="entry.id" style="display:none";></input>
         
         <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
@@ -170,10 +206,6 @@ body {
         <label for="displayemail"> Display email next to info</label> -->
     
       <div class="innerdiv2">
-                <h2> Eligibility Requirements</h2>
-                <p style="text-align:center;"> If the scholarship has any eligibility requirements,
-                    <br> check all that apply or check none</p>
-                
                 <div class="eligibility">
                     <div class="title">
                         <h4> Race/Ethnicity:</h4>

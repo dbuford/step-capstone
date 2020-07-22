@@ -140,6 +140,8 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
+    
+
     Query query = new Query ("Info");
 
     PreparedQuery results = datastore.prepare(query);
@@ -184,12 +186,15 @@ public class DataServlet extends HttpServlet {
     String[] emailarray = request.getParameterValues("userEmail");
 
     System.out.println(emailarray);
+
+    
   
     
     // Must be logged in to add info
     String title = request.getParameter("title");
     String name = request.getParameter("name");
     String age = request.getParameter("age");
+    String idname = request.getParameter("idname");
     long timestamp = System.currentTimeMillis();
     //String email = userService.getCurrentUser().getEmail();
     
