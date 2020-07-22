@@ -1,42 +1,131 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset="utf-8">
-    <title>Step Capstone Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="css/normalize.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-
+    <meta charset="UTF-8">
+    <title>Display Scholarships</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+   
+    <script src="bundle.js"></script>
+    <script src="script.js"></script>
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
+
+<style>
+    body{
+        width:100vw;
+        height:100vh;
     }
+    
+    .container{
+      position:relative;
+      margin-left: 10%;
+      height:auto;
+      margin-top:3%;
+      width:70vw;
+      border: 3px solid #ffcc99;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius:10px;
+      overflow:visible;
+              }
+    .regular{
+      width:97%;
+      height:90%;
+      overflow:auto;
+      text-align:left;
+      line-height:50%;
+      padding-top:10px;
+      border-top:1px solid #e6e6e6;
+            }
+    .deadline-container{
+        width:29%;
+        float:left;
+        line-height:50%;
+       text-align:right;
+       margin-right:60px;
+        height:3%;
+    }
+    .amount-container{
+        width:30%;
+        float:left;
+        margin-right:10%;
+        line-height:50%;
+        height:3%;
+        text-align:left;
+    }
+    /*style the thumb up/down voting system*/
+    .voting-container{
+        width:20%;
+        float:left;
+        height:3%;
+        padding-left:10px;
+                     }
+    .fa {
+        font-size:15px;
+        cursor: pointer;
+        user-select: none;
+        color:black;
+            }
 
-
-     /* Style the header */
-      .header {
-        border: 5px outset antiquewhite;
-        padding: 80px;
+    .fa:hover {
+        color: darkblue;
+                 }
+    
+    .scholarship-title{
+        width:95%;
+        height:20%;
+        text-align:center;
+        vertical-align:top;
+        padding:0px;
+    }
+    .scholarship-title a{
+        margin-left:5%;
+    }
+    .scholarship-title button, .regular button{
+        float:right;
+        border:none;
+        color: #919191;
         text-align: center;
-      }
+        text-decoration: none;
+        font-size: 20px;
+        cursor: pointer;
+        background-color:white;
+    }
+    .scholarship-title button:hover, .regular button:hover{
+        color:green;
+    }
+    .more-details{
+    color: #919191;
+    bottom:0;
+    left:0;
+    display: block;
+    height: 15%;
+    width:100%;
+    text-align: center;
+    overflow:visible;
+    }
+/*style arrow in more-detials*/
+    .arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
 
-      /* Increase the font size of the h1 element */
-      .header h1 {
-        font-size: 40px;
-      }
-
-      /* Style the top navigation bar */
-      .navbar {
-        overflow: hidden;
-        background-color: #ffcc99;
-      }
-
+    /* Style the top navigation bar */
+    .navbar {
+      overflow: hidden;
+      background-color: #ffcc99;
+            }
     /* Style the navigation bar links */
     .navbar a {
       float: left;
@@ -45,50 +134,176 @@
       text-align: center;
       padding: 14px 20px;
       text-decoration: none;
-    }
+              }
 
-    /* Right-aligned link */
-    .navbar a.right {
-      float: right;
-    }
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
 
-    /* Change color on hover */
-    .navbar a:hover {
-      background-color: #ddd;
-      color: black;
-    }
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
-    /* Column container */
-    .row {  
-      display: flex;
-      flex-wrap: wrap;
-    }
+.container a{
+    text-align:center;
+    font-size:35px;
+    padding:0px;
+    text-decoration:none;
+    color:darkgreen;
 
-    /* Create two unequal columns that sits next to each other */
-    /* Sidebar/left column */
-    .side {
-      flex: 30%;
-      background-color: #f1f1f1;
-      padding: 20px;
-    }
+  }
+.container a:hover{
+    color:pink;
+}
 
-    /* Main column */
-    .main {   
-      flex: 70%;
-      background-color: white;
-      padding: 20px;
-    }
+.container a:active{
+    color:black;
+}
+.container h4{
+    color:grey;
+}
+.pagination {
+  display: inline-block;
+}
+.pagination a{
+    text-decoration:none;
+    color:black;
+}
 
-    .box {       
-      background-color:#ffcc99;
-      text-align: center;
-      color:white;
-      font-weight:bold;
-      margin:auto;     
-      width: 40%;
+.pagination button {
+  color: black;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  border-bottom:none;
+  background:none;
+}
+.pagination button:active{
+    border-bottom:solid black;
+    border-left:none;
+    border-right:none;
+    border-top:none;
+
+}
+p,h4{
+    padding-left:5px;
     }
+.circle {
+  float:left;
+  /*position:absolute;*/
+  margin-top:-35px;
+  margin-left:-25px;
+  overflow:visible;
+  
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 50px;
+  border-width:thick;
+  border-color:#ffcc99;
+  border-style:solid;
+  background: darkgreen;
+}
+
+
+.header{
+    width:60%;
+    height:40vh;
+    float:left;
+}
+.header h3{
+    font-weight:normal;
+    padding-left:10%;
+}
+.header h1{
+    font-size:60px;
+    padding-top:8%;
+    padding-left:10%;
+}
+.image{
+    background-image:url("/images/college7.jpg");
+    background-position:right 25% top 20%;
+    background-size:cover;
+    width:40%;
+    height:40vh;
+    float:right;
+}
+.outer{
+    padding:5px;
+    border-bottom-color:black;
+    border-bottom-style:ridge;
+    margin-bottom:1%;
+}
+.scholarships{
+    height:100%;
+    width:90%;
+    float:right;
+    padding-left:0px;
+}
+.dropdown{
+    height:100%;
+    width:10%;
+    float:left;
     
-  </style>
+}
+/* The popup form - hidden by default */
+.form-popup {
+position:absolute;
+top:0;
+left:0;
+  width:20%;
+  height:100%;
+  border: 3px solid white;
+  border-radius:10px;
+  background-color:white;
+}
+.edit-form-parent{
+    position:relative;
+    display:block;
+    width:70%;
+    margin-left:10%;
+    height:100%;
+    overflow:auto;
+}
+.edit-form1{
+    width:40%;
+    margin-left:20%;
+    height:100%;
+    display:block;
+    line-height:60%;
+    
+    
+}
+.edit-form2{
+    margin-right:10%;
+    width:35%;
+    height:100%; 
+    display:block;
+    float:right;
+    overflow:auto;
+    line-height:0%;
+}
+/*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:95%;
+        height:25px;
+        overflow:scroll;
+        border: dotted black;
+        line-height:80%;
+              }
+span {
+  font-size:50px;
+  position:absolute;
+}
+
+</style>
+  <body onload = "toDoListDisplay()">
 
   <div class="navbar">
     <a href="index.html">Home</a>
@@ -98,31 +313,8 @@
     <a href="addScholarships.html" class="right">Add-Scholarship</a>
   </div>
 
-  <body>
-      <h1>To Do List</h1>
-
-      <ul style="list-style-type:none">
-        <li>
-          <p>Scholarship 1</p>
-          <p style = "font-weight: bold;">Description:</p>
-          <p>This is a test!</p>
-          <p style = "font-weight: bold;">Deadline:</p>
-          <p>9/30/2020</p>
-        </li>
-        <li>
-          <p>Scholarship 2</p>
-          <p style = "font-weight: bold;">Description:</p>
-          <p>This is a second test!</p>
-          <p style = "font-weight: bold;">Deadline:</p>
-          <p>9/29/2020</p>
-        </li>
-        <li>
-          <p>Scholarship 3</p>
-          <p style = "font-weight: bold;">Description:</p>
-          <p>This is a third test!</p>
-          <p style = "font-weight: bold;">Deadline:</p>
-          <p>9/28/2020</p>
-        </li>
-      </ul>
+  
   </body>
+
+    
 </html>
