@@ -49,20 +49,22 @@ public class ToDoListServlet extends HttpServlet {
     if (request.getParameter("email")!=null){
 
     long id=Long.parseLong(request.getParameter("id"));
+    Long newId = new Long(id);
     String userEmail=request.getParameter("email");
     String currentUser =request.getParameter("currentUser");
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Entity userToDoList = new Entity(userEmail);
-    System.out.println("working");
-    userToDoList.setProperty("id", id);
-    datastore.put(userToDoList);
-    }
-    else {
-      currentUser=request.getParameter("userEmail");
-      doGet(request, response);
-    }
+    ArrayList<Long> idList = new ArrayList<Long>();
+    idList.add(newId);
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    
+    Entity userToDoList = new Entity("ToDoListScholarship");
+    System.out.println("working");
+    userToDoList.setProperty("user", userEmail);
+    userToDoList.setProperty("scholarshipIdList", idList);
+    datastore.put(userToDoList);
+
+    }
   }
 
   @Override
