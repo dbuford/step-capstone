@@ -102,14 +102,9 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           document.getElementById("signout_button").style.display = 'block';
           console.log("working");
           document.getElementById("addcomm").style.display = 'block';
-        } else {
-          document.getElementById("authorize_button").style.display = 'block';
-          document.getElementById("signout_button").style.display = 'none';
-          console.log("working");
-          localStorage.removeItem("userEmail");
-          document.getElementById("addcomm").style.display = 'none';
+        } 
 
-        }
+        
         if(document.getElementById('login')==null){
             listUpcomingEvents();
         }
