@@ -57,12 +57,30 @@ public class ToDoListServlet extends HttpServlet {
     idList.add(newId);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    
-    Entity userToDoList = new Entity("ToDoListScholarship");
-    System.out.println("working");
-    userToDoList.setProperty("user", userEmail);
-    userToDoList.setProperty("scholarshipIdList", idList);
-    datastore.put(userToDoList);
+    Query query = new Query("ToDoListScholarship").addSort("timestamp", SortDirection.DESCENDING);
+
+    PreparedQuery results = datastore.prepare(query);
+
+
+    ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
+    boolean user_exist = false;
+    for (Entity entity : results.asIterable()){
+      if(entity.getProperty("user").equals(currentUser))
+      {
+        ArrayList <Long> currentIds=(ArrayList)entity.getProperty("scholarshipIdList");
+        currentIds.add(newId);
+        entity.setProperty("scholarshipIdList",currentIds);
+        user_exist = true;
+        break;
+      }
+    }
+      if (user_exist == false){
+        Entity userToDoList = new Entity("ToDoListScholarship");
+        System.out.println("working");
+        userToDoList.setProperty("user", userEmail);
+        userToDoList.setProperty("scholarshipIdList", idList);
+        datastore.put(userToDoList);
+      }
 
     }
   }
