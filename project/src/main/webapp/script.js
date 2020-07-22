@@ -583,6 +583,11 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 const checkMark=document.createElement('span');
                 checkMark.innerHTML='&#x2714;';
                 circleElement.appendChild(checkMark);
+
+                const params = new URLSearchParams();
+                params.append('id', scholarship[12]);
+                params.append('email', scholarship[11]);
+                fetch('/display-ToDoList', {method: 'POST', body: params});
             };
 
             const closeButton=document.createElement('button');
@@ -1031,7 +1036,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const amountTitle=document.createElement("h4");
             amountTitle.innerText="AMOUNT: ";
             const amountValue=document.createElement("h4");
-            amountValue.innerText='$'+scholarship[9];
+            amountValue.innerText='$'+thousands_separators(scholarship[9]);
             amountContainer.appendChild(amountTitle);
             amountContainer.appendChild(amountValue);
             containerElement.appendChild(amountContainer);
@@ -1089,6 +1094,11 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             }
 
         }
+        function thousands_separators(num){
+            var num_parts = num.toString().split(".");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num_parts.join(".");
+        }
         function accessCalendar(){
            handleClientLoad();
         }
@@ -1130,3 +1140,18 @@ request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
       }
+
+function toDoListDisplay() {
+  if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+
+    }
+    const params = new URLSearchParams();
+   params.append('userEmail',currentUserEmail);
+
+   fetch("/display-ToDoList", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+       console.log(response)});
+  
+}
+
+            
