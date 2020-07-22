@@ -44,69 +44,89 @@ public class editInfoServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    String title= getParameter(request,"new-title", "");
-    String name= getParameter(request,"new-name","");
-    String age=getParameter(request,"new-age","");
+
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+
+    String[] empty={"none"};
+
+
+
+       // Get the input from the form.
+    String title= getParameter(request,"title", "");
+    String name= getParameter(request,"name","");
+    String age=getParameter(request,"age","");
     long timestamp = System.currentTimeMillis();
 
 
-    /*String userEmail;
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      userEmail = userService.getCurrentUser().getEmail();
-    }
-    else{
-        userEmail="none";
-    }*/
-
-     String[] empty={"none"};
-    String[] racearray=request.getParameterValues("new-race");
+    
+    String[] racearray=request.getParameterValues("race");
     String race= racearray!=null ? String.join(" ",racearray): String.join(" ",empty);
    
 
 
-    String[] genderarray=request.getParameterValues("new-gender");
+    String[] genderarray=request.getParameterValues("gender");
     String gender= genderarray!=null ? String.join(" ",genderarray): String.join(" ",empty);
     
 
-    String[] incomearray=request.getParameterValues("new-income");
+    String[] incomearray=request.getParameterValues("income");
     String income= incomearray!=null ? String.join(" ",incomearray): String.join(" ",empty);
 
 
-    String[] majorarray=request.getParameterValues("new-major");
+    String[] majorarray=request.getParameterValues("major");
     String major= majorarray!=null ? String.join(" ", majorarray): String.join(" ",empty);
 
-    String[] gradearray=request.getParameterValues("new-grade");
+    String[] gradearray=request.getParameterValues("grade");
     String grade= gradearray!=null ? String.join(" ", gradearray): String.join(" ",empty);
 
-    String[] locationarray=request.getParameterValues("new-location");
+    String[] locationarray=request.getParameterValues("location");
     String location= locationarray!=null ? String.join(" ",locationarray): String.join(" ",empty);
 
-    long id=Long.parseLong(request.getParameter("new-id"));
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      String [] emailarray = request.getParameterValues("userEmail");
+      System.out.println("line55");
+      String userEmail = emailarray != null ? String.join ("", emailarray) : String.join("", empty);
+      System.out.println("line 57");
+      System.out.println(userEmail.toString());
+      Query query = new 
+      Query("Info").addSort("timestamp",SortDirection.DESCENDING);
+
+      PreparedQuery results = datastore.prepare(query);
+      for (Entity entity : results.asIterable()){
+          if (entity.getProperty("email").equals(userEmail)){
+              long id = entity.getKey().getId();
+              System.out.println(id);
+        
+                try {
+                    Key entryEntityKey = KeyFactory.createKey("Info", id); 
+                    System.out.println(entryEntityKey);
+                    Entity entryEntity=datastore.get(entryEntityKey);
+                    entryEntity.setProperty("title",title);
+                    entryEntity.setProperty("name",name);
+                    entryEntity.setProperty("age",age);
+                
+                    entryEntity.setProperty("race",race);
+                    entryEntity.setProperty("gender", gender);
+                    entryEntity.setProperty("income", income);
+                    entryEntity.setProperty("major", major);
+                    entryEntity.setProperty("grade",grade);
+                    entryEntity.setProperty("location",location);
+                    datastore.put(entryEntity);
+
+                    }catch (EntityNotFoundException e) {
+                    throw new RuntimeException("user not found.");
+                    } 
+
+              break;
+            
+
+          }
+      }
+
+   
 
 
-     try {
-        Key entryEntityKey = KeyFactory.createKey("Info", id);
-        System.out.println(entryEntityKey);
-        Entity entryEntity=datastore.get(entryEntityKey);
-        entryEntity.setProperty("title",title);
-        entryEntity.setProperty("name",name);
-        entryEntity.setProperty("age",age);
-    
-        entryEntity.setProperty("race",race);
-        entryEntity.setProperty("gender", gender);
-        entryEntity.setProperty("income", income);
-        entryEntity.setProperty("major", major);
-        entryEntity.setProperty("grade",grade);
-        entryEntity.setProperty("location",location);
-        /*scholarshipEntity.setProperty("userEmail",userEmail);*/
-        datastore.put(entryEntity);
 
-        }catch (EntityNotFoundException e) {
-		throw new RuntimeException("user not found.");
-        }
 
     response.setContentType("text/html");
     
