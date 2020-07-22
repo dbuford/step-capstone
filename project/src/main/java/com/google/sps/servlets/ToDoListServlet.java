@@ -51,7 +51,6 @@ public class ToDoListServlet extends HttpServlet {
     long id=Long.parseLong(request.getParameter("id"));
     Long newId = new Long(id);
     String userEmail=request.getParameter("email");
-    String currentUser =request.getParameter("currentUser");
 
     ArrayList<Long> idList = new ArrayList<Long>();
     idList.add(newId);
@@ -65,6 +64,10 @@ public class ToDoListServlet extends HttpServlet {
     datastore.put(userToDoList);
 
     }
+    else{
+        currentUser=request.getParameter("userEmail");
+        doGet(request,response);
+    }
   }
 
   @Override
@@ -73,28 +76,82 @@ public class ToDoListServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    Query query = new Query(currentUser).addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("ToDoListScholarship");
     
     PreparedQuery results = datastore.prepare(query);
 
 
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
     System.out.println(currentUser);
+    ArrayList<Long> getIds=new ArrayList<Long>();
     for (Entity entity : results.asIterable()){
-       
-        long id = entity.getKey().getId();
-        try{
-        System.out.println("working part 3");
-        Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
-        System.out.println("working part 4");
-        System.out.println(scholarshipEntityKey);
-        Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
-        System.out.println("working part 5");
+        if(entity.getProperty("user").equals(currentUser)){
+            System.out.println("line90");
+            getIds=(ArrayList)entity.getProperty("scholarshipIdList");
+            break;
         }
-        catch (EntityNotFoundException e) {
-		throw new RuntimeException("scholarship not found.");
-        };
     }
+    if(getIds!=null){
+        for(Long idLong:getIds){
+            long id=idLong.longValue();
+            try{
+            Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
+            System.out.println("working part 4");
+            System.out.println(scholarshipEntityKey);
+            Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
+            String title = (String) scholarshipEntity.getProperty("title");
+            String description= (String) scholarshipEntity.getProperty("description");
+            String deadline= (String) scholarshipEntity.getProperty("deadline");
+            String url= (String) scholarshipEntity.getProperty("url");
+            String amount=(String) scholarshipEntity.getProperty("amount");
+            String race=(String) scholarshipEntity.getProperty("race");
+            String gender=(String) scholarshipEntity.getProperty("gender");
+            String income=(String) scholarshipEntity.getProperty("income");
+            String major=(String) scholarshipEntity.getProperty("major");
+            String grade=(String) scholarshipEntity.getProperty("grade");
+            String state=(String) scholarshipEntity.getProperty("state");
+
+            ArrayList<Object> info=new ArrayList<>();
+            info.add(title);
+            info.add(description);
+            info.add(deadline);
+            info.add(url);
+            info.add(race);
+            info.add(gender);
+            info.add(income);
+            info.add(major);
+            info.add(grade);
+            info.add(amount);
+            info.add(state);
+        
+            scholarships.add(info);
+            }catch (EntityNotFoundException e) {
+		        throw new RuntimeException("scholarship not found.");
+            };
+
+        }
+
+    }
+    
+    
+    
+  
+      String json=convertToJsonUsingGson(scholarships);
+      System.out.println(scholarships.toString());
+
+    // Send the JSON as the response
+
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+
+  }
+    
+  
+
+ private String convertToJsonUsingGson(ArrayList scholarships) {
+    Gson gson = new Gson();
+    String json = gson.toJson(scholarships);
+    return json;
   }
 
 }
