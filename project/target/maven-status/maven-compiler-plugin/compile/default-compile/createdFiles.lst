@@ -1,5 +1,5 @@
 com/google/sps/servlets/ListScholarshipsServlet$1.class
-com/google/sps/servlets/LoginServlet.class
+com/google/sps/servlets/ToDoListServlet.class
 com/google/sps/servlets/editScholarshipServlet.class
 com/google/sps/servlets/addScholarshipServlet.class
 com/google/sps/servlets/DeleteInfoServlet.class
