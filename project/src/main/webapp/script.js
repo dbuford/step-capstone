@@ -1220,19 +1220,22 @@ function createToDoListElement(scholarship){
     doneButton.innerText="done";
     containerElement.appendChild(doneButton);
 
-    return containerElement;
+  
     
     doneButton.onclick=function(){
-                    if(doneButton.innerText=="done"){
-                        doneButton.innerText="Close";
+                    console.log("this is working");
+                    const params = new URLSearchParams();
+                    params.append('scholarshipId', scholarship[12]);
+                    console.log(scholarship[12]);
+                    params.append('entityId',scholarship[13]);
+                    fetch('/completed', {method: 'POST', body: params});
 
-                    
-                    scholarshipList.appendChild(createCompletedListElement(response[i]));
-                    }
+    }
+    return containerElement;
     }
 
 
-}
+
 
 function createPriority(title,priority,scholarshipId,entityId){
     var selectContainer=document.createElement("select");
