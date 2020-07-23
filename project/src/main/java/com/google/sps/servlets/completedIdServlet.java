@@ -57,14 +57,15 @@ public class completedIdServlet extends HttpServlet {
 
         toDoListEntity.setProperty("completedscholarshipIdList",currentIds);
         datastore.put(toDoListEntity);
+    
+     /* Redirect back to the HTML page.*/
+    response.sendRedirect("/toDoList.html");
+
        }catch (EntityNotFoundException e) {
 		throw new RuntimeException("scholarship not found.");
         }
 
-    response.setContentType("text/html");
-    
-     /* Redirect back to the HTML page.*/
-    response.sendRedirect("toDoList.html");
+   
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
