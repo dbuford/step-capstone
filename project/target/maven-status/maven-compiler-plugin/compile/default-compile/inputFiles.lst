@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/DeleteInfoServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/editScholarshipServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/editInfoServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/ToDoListServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/addScholarshipServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/CurrentUserServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/DataServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/DeleteScholarshipServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/UpdateVoteServlet.java
+/home/coyfouchia/step-capstone/project/src/main/java/com/google/sps/servlets/ListScholarshipsServlet.java
+=======
 
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/addScholarshipServlet.java
 /home/brakiajackson/step-capstone/project/src/main/java/com/google/sps/servlets/LoginServlet.java
@@ -22,3 +34,4 @@
 /home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/UpdateVoteServlet.java
 /home/dombuford/step-capstone/project/src/main/java/com/google/sps/servlets/editInfoServlet.java
 
+>>>>>>> 961165e050ba28cf16edb867fd3432c091099fad
