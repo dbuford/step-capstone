@@ -1211,9 +1211,53 @@ function createToDoListElement(scholarship){
     amountContainer.appendChild(amountValue);
     containerElement.appendChild(amountContainer);
 
+    //display priority level for scholarship
+    containerElement.appendChild(createPriority(scholarship[0],scholarship[11],scholarship[12],scholarship[13]));
+
 
     return containerElement;
     
+}
+
+function createPriority(title,priority,scholarshipId,entityId){
+    var selectContainer=document.createElement("select");
+    selectContainer.setAttribute('class','scholarship-info');
+    selectContainer.setAttribute('id','priority'+title);
+    selectContainer.setAttribute('name','priority');
+    selectContainer.onchange=function(){
+        const params = new URLSearchParams();
+        params.append('scholarshipId', scholarshipId);
+        params.append('entityId',entityId);
+        params.append('priorityValue',document.getElementById('priority'+title).value);
+        fetch('/change-priority', {method: 'POST', body: params});
+
+    }
+
+    var noOption=document.createElement("option");
+    noOption.value="none";
+    noOption.innerText="Select Priority";
+    selectContainer.appendChild(noOption);
+
+
+    var highOption=document.createElement("option");
+    highOption.value="high";
+    highOption.innerText="High Priority";
+    selectContainer.appendChild(highOption);
+
+     var mediumOption=document.createElement("option");
+    mediumOption.value="medium";
+    mediumOption.innerText="Medium Priority";
+    selectContainer.appendChild(mediumOption);
+
+    var lowOption=document.createElement("option");
+    lowOption.value="low";
+    lowOption.innerText="Low Priority";
+    selectContainer.appendChild(lowOption);
+
+    selectContainer.value=priority;
+
+    return selectContainer;
+
 }
 
 function doneButton() {
