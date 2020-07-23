@@ -1199,7 +1199,8 @@ function createToDoListElement(scholarship,type){
     var linkText=document.createTextNode(scholarship[0]);
     urlElement.appendChild(linkText);
     var titleContainer=document.createElement("div");
-    urlElement.setAttribute('class','scholarship-info');
+    titleContainer.setAttribute('class','scholarship-title');
+    urlElement.setAttribute('class','scholarship-title-design');
     urlElement.title=scholarship[0];
     urlElement.setAttribute('href', scholarship[3]);
     urlElement.style.fontWeight="bold";
