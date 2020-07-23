@@ -56,12 +56,16 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<Long> idList = new ArrayList<Long>();
     idList.add(newId);
 
+    /*ArrayList<Long> idList2 = new ArrayList<Long>();
+    idList2.add(newId); */
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     
     Entity userToDoList = new Entity("ToDoListScholarship");
     System.out.println("working");
     userToDoList.setProperty("user", userEmail);
     userToDoList.setProperty("scholarshipIdList", idList);
+    /*userToDoList.setProperty("completed_scholarship_id", idList2); */
     datastore.put(userToDoList);
 
     }
