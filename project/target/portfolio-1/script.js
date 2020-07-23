@@ -331,6 +331,10 @@ function deleteEntry(entry) {
 //}
 
 
+
+
+
+
 // create function for user info
 function getUserInfo(){
     console.log(localStorage.getItem("userEmail"));
@@ -350,8 +354,10 @@ function getUserInfo(){
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
-                    const messageForm = document.getElementById('my-form');
-                    messageForm.action = entries.uploadUrl;
+                    const messageForm = document.getElementById('entry-list');
+                    messageForm.action = entry.uploadUrl;
+                    console.log(entry.uploadUrl);
+
             
                     
                 }
@@ -1210,4 +1216,15 @@ function createToDoListElement(scholarship){
     
 }
 
+function doneButton() {
+    document.getElementById("done");
+    const params = new URLSearchParams();
+    fetch("/display-ToDoList", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+        console.log(response)
+        if(localStorage.getItem('userEmail')!=null){
+            currentUserEmail=localStorage.getItem('userEmail');
             
+            params.append("completed_scholarships_id",idList2)
+       };
+    })
+}         
