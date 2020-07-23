@@ -38,6 +38,8 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+import java.util.Comparator;
+import java.util.Collections;
 
 
 @WebServlet("/display-ToDoList")
@@ -55,6 +57,9 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<Long> idList = new ArrayList<Long>();
     idList.add(newId);
 
+    ArrayList<String> idPriority=new ArrayList<String>();
+    idPriority.add("none");
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("ToDoListScholarship");
 
@@ -66,11 +71,22 @@ public class ToDoListServlet extends HttpServlet {
     for (Entity entity : results.asIterable()){
       if(entity.getProperty("user").equals(userEmail)){
         ArrayList <Long> currentIds=(ArrayList)entity.getProperty("scholarshipIdList");
+
         ArrayList <Long> currentIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
+
+        ArrayList <String> currentIdPriority=(ArrayList)entity.getProperty("idPriorityList");
+        if(!currentIds.contains(newId)){
+
         currentIds.add(newId);
+        currentIdPriority.add("none");
         entity.setProperty("scholarshipIdList",currentIds);
+
         entity.setProperty("completedscholarshipIdList",currentIds2);
+
+        entity.setProperty("idPriorityList",currentIdPriority);
+
         datastore.put(entity);
+        }
         user_exist = true;
         break;
       }
@@ -80,7 +96,11 @@ public class ToDoListServlet extends HttpServlet {
         System.out.println("USEREXISTISFALSE");
         userToDoList.setProperty("user", userEmail);
         userToDoList.setProperty("scholarshipIdList", idList);
+
         userToDoList.setProperty("completedscholarshipIdList", idList);
+
+        userToDoList.setProperty("idPriorityList",idPriority);
+
         datastore.put(userToDoList);
       }
 
@@ -106,17 +126,28 @@ public class ToDoListServlet extends HttpServlet {
     System.out.println(currentUser);
     ArrayList<Long> getIds=new ArrayList<Long>();
 
+
     ArrayList<Long> getIds2=new ArrayList<Long>();
+
+    ArrayList<String> getPriority=new ArrayList<String>();
+    long entityId=0;
+
     for (Entity entity : results.asIterable()){
         if(entity.getProperty("user").equals(currentUser)){
             System.out.println("line90");
             getIds=(ArrayList)entity.getProperty("scholarshipIdList");
+
             getIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
+
+            getPriority=(ArrayList) entity.getProperty("idPriorityList");
+            entityId = entity.getKey().getId();
+
             break;
         }
     }
     if(getIds!=null){
-        for(Long idLong:getIds){
+        for(int i=0;i<getIds.size();i++){
+            Long idLong=getIds.get(i);
             long id=idLong.longValue();
             try{
             Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
@@ -134,6 +165,7 @@ public class ToDoListServlet extends HttpServlet {
             String major=(String) scholarshipEntity.getProperty("major");
             String grade=(String) scholarshipEntity.getProperty("grade");
             String state=(String) scholarshipEntity.getProperty("state");
+            String priority=(String)getPriority.get(i);
 
             ArrayList<Object> info=new ArrayList<>();
             info.add(title);
@@ -147,6 +179,10 @@ public class ToDoListServlet extends HttpServlet {
             info.add(grade);
             info.add(amount);
             info.add(state);
+            info.add(priority);
+            info.add(id);
+            info.add(entityId);
+            System.out.println(priority);
         
             scholarships.add(info);
             }catch (EntityNotFoundException e) {
@@ -156,12 +192,45 @@ public class ToDoListServlet extends HttpServlet {
         }
 
     }
+
+    scholarships.sort(new Comparator<ArrayList>() {
+    @Override
+    public int compare(ArrayList l1, ArrayList l2) {
+        int l1priority=0;
+        int l2priority=0;
+
+        String l1priorityString=l1.get(11).toString();
+        String l2priorityString=l2.get(11).toString();
+
+        if(l1priorityString.equals("high")){
+            l1priority=3;
+        }
+        if(l2priorityString.equals("high")){
+            l2priority=3;
+        }
+        if(l1priorityString.equals("medium")){
+            l1priority=2;
+        }
+        if(l2priorityString.equals("medium")){
+            l2priority=2;
+        }
+        if(l1priorityString.equals("low")){
+            l1priority=1;
+        }
+        if(l2priorityString.equals("low")){
+            l2priority=1;
+        }
+
+        return(-l1priority+l2priority);
+
+    }
+    });
+
     
     
     
   
       String json=convertToJsonUsingGson(scholarships);
-      System.out.println(scholarships.toString());
 
     // Send the JSON as the response
 
