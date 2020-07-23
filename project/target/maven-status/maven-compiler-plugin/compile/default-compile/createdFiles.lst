@@ -6,6 +6,7 @@ com/google/sps/servlets/DeleteScholarshipServlet.class
 com/google/sps/servlets/ToDoListServlet.class
 com/google/sps/servlets/DataServlet$Info.class
 com/google/sps/servlets/editInfoServlet.class
+com/google/sps/servlets/ToDoListServlet$1.class
 com/google/sps/servlets/changePriorityServlet.class
 com/google/sps/servlets/CurrentUserServlet.class
 com/google/sps/servlets/ListScholarshipsServlet.class
