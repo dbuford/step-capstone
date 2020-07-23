@@ -38,6 +38,8 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+import java.util.Comparator;
+import java.util.Collections;
 
 
 @WebServlet("/display-ToDoList")
@@ -171,6 +173,40 @@ public class ToDoListServlet extends HttpServlet {
         }
 
     }
+
+    scholarships.sort(new Comparator<ArrayList>() {
+    @Override
+    public int compare(ArrayList l1, ArrayList l2) {
+        int l1priority=0;
+        int l2priority=0;
+
+        String l1priorityString=l1.get(11).toString();
+        String l2priorityString=l2.get(11).toString();
+
+        if(l1priorityString.equals("high")){
+            l1priority=3;
+        }
+        if(l2priorityString.equals("high")){
+            l2priority=3;
+        }
+        if(l1priorityString.equals("medium")){
+            l1priority=2;
+        }
+        if(l2priorityString.equals("medium")){
+            l2priority=2;
+        }
+        if(l1priorityString.equals("low")){
+            l1priority=1;
+        }
+        if(l2priorityString.equals("low")){
+            l2priority=1;
+        }
+
+        return(-l1priority+l2priority);
+
+    }
+    });
+
     
     
     
