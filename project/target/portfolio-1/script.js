@@ -1242,6 +1242,7 @@ function createPriority(title,priority,scholarshipId,entityId){
     var highOption=document.createElement("option");
     highOption.value="high";
     highOption.innerText="High Priority";
+    highOption.setAttribute('class','high-priority');
     selectContainer.appendChild(highOption);
 
      var mediumOption=document.createElement("option");
