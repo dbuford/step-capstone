@@ -1142,7 +1142,10 @@ request.execute(function(event) {
 });
       }
 
-function toDoListDisplay() {
+function toDoListDisplay(type) {
+    console.log(type);
+    var newType=type;
+    console.log(newType);
     const toDoListDiv=document.getElementById('to-do-list');
     const alertMessage=document.createElement('h2');
 
@@ -1167,7 +1170,15 @@ function toDoListDisplay() {
             const scholarshipList = document.getElementById('to-do-list-list');
                 scholarshipList.innerHTML="";
                 for(let i=0;i<response.length;i++){
-                scholarshipList.appendChild(createToDoListElement(response[i]));
+                    //check to display only active scholarships
+                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])){
+                scholarshipList.appendChild(createToDoListElement(response[i],newType));
+                }
+                //check to display only complete scholarships
+                else if(type=='completed'&& response[i][15].includes(response[i][12])){
+                scholarshipList.appendChild(createToDoListElement(response[i],newType));
+
+                }
                 }
             
 
@@ -1177,7 +1188,9 @@ function toDoListDisplay() {
   
 }
 }
-function createToDoListElement(scholarship){
+function createToDoListElement(scholarship,type){
+    console.log(type);
+    console.log("line1191");
     const containerElement=document.createElement('div');
     containerElement.setAttribute('class','container');
 
@@ -1214,23 +1227,47 @@ function createToDoListElement(scholarship){
     //display priority level for scholarship
     containerElement.appendChild(createPriority(scholarship[0],scholarship[11],scholarship[12],scholarship[13]));
 
-
+    
     //done button for scholarship
     var doneButton=document.createElement("button");
-    doneButton.innerText="mark as complete";
+
+    //only append to container if type is active
+    if(type=="active"){
     doneButton.setAttribute('class','done-button');
+    doneButton.innerText="mark as complete";
     containerElement.appendChild(doneButton);
+    }
+    //active button for scholarship
+    var activeButton=document.createElement("button");
+
+    //only append to container if type is completed
+    if(type=="completed"){
+        activeButton.setAttribute('class','done-button');
+        activeButton.innerText='mark as active';
+        containerElement.appendChild(activeButton);
+    }
+
 
   
     
     doneButton.onclick=function(){
-                    console.log("this is working");
-                    const params = new URLSearchParams();
-                    params.append('scholarshipId', scholarship[12]);
-                    console.log(scholarship[12]);
-                    params.append('entityId',scholarship[13]);
-                    fetch('/completed', {method: 'POST', body: params});
+        console.log("this is working");
+        const params = new URLSearchParams();
+        params.append('scholarshipId', scholarship[12]);
+        console.log(scholarship[12]);
+        params.append('entityId',scholarship[13]);
+        fetch('/completed', {method: 'POST', body: params});
+        location.reload();
 
+    }
+    activeButton.onclick=function(){
+        console.log("this is working");
+        const params = new URLSearchParams();
+        params.append('scholarshipId', scholarship[12]);
+        console.log(scholarship[12]);
+        params.append('entityId',scholarship[13]);
+        fetch('/active', {method: 'POST', body: params});
+        location.reload();
     }
     return containerElement;
     }
@@ -1281,7 +1318,7 @@ function createPriority(title,priority,scholarshipId,entityId){
 }
 
 
-function compltoDoListDisplay() {
+/*function compltoDoListDisplay() {
     const toDoListDiv=document.getElementById('to-do-list2');
     const alertMessage=document.createElement('h2');
 
@@ -1315,9 +1352,9 @@ function compltoDoListDisplay() {
        });
   
 }
-}
+}*/
 
-function createCompletedListElement(scholarship){
+/*function createCompletedListElement(scholarship){
     const containerElement=document.createElement('div');
     containerElement.setAttribute('class','container');
 
@@ -1353,4 +1390,4 @@ function createCompletedListElement(scholarship){
 
 
     return containerElement;
-}      
+}  */   
