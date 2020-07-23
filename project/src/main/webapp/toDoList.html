@@ -77,6 +77,19 @@
     padding-top:10px;
     padding-bottom:0px;
 }
+.to-do-list2{
+    float:left;
+    height:95%;
+    width:70%;
+    margin-left:2%;
+    margin-top:5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.to-do-list-list2{
+    height:100%;
+    width:100%;
+}
 .section-scholarships img{
     padding-bottom:0;
 }
@@ -122,6 +135,7 @@
 
 </style>
   <body onload = "toDoListDisplay()">
+  <body onload = "compltoDoListDisplay()">
 
   <div class="navbar">
     <a href="index.html">Home</a>
@@ -133,12 +147,12 @@
 
   <div class="horizontal-filter-bar"> 
       <div class='filter-bar-title'><h3 style="text-align:center">SCHOLARSHIPS</h3></div>
-      <div class="section-scholarships"> 
+      <div id = "active" class="section-scholarships"> 
           <img src="/images/activescholarship2.jpg" alt="active scholarships" width=70% height=60%>
             <h4>Active Scholarships</h4>
 
       </div>
-      <div class="section-scholarships"> 
+      <div id= "completed" class="section-scholarships"> 
           <img src="/images/checkmark.jpg" alt="completed scholarships" width=60% height=60%>
             <h4>Completed Scholarships</h4>
 
@@ -148,16 +162,25 @@
   <div class="to-do-list" id='to-do-list'> 
       <div id="to-do-list-header" class="to-do-list-header"> Active Scholarships:</div>
     <div id="to-do-list-list" class="to-do-list-list">
-        
+    
     </div>
+    
 
   </div>
 
+  <div class="to-do-list2" id='to-do-list2'> 
+      <div id="to-do-list2-header" class="to-do-list2-header"> Completed Scholarships:</div>
+    <div id="to-do-list-list2" class="to-do-list-list2">
+    
+    </div>
+    
+
+  </div>
+    
   
   </body>
-
     <button onclick="doneButton()">Done</button>
-
     <p id="done"></p>
+    
     
 </html>

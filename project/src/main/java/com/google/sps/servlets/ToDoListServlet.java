@@ -66,8 +66,10 @@ public class ToDoListServlet extends HttpServlet {
     for (Entity entity : results.asIterable()){
       if(entity.getProperty("user").equals(userEmail)){
         ArrayList <Long> currentIds=(ArrayList)entity.getProperty("scholarshipIdList");
+        ArrayList <Long> currentIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
         currentIds.add(newId);
         entity.setProperty("scholarshipIdList",currentIds);
+        entity.setProperty("completedscholarshipIdList",currentIds2);
         datastore.put(entity);
         user_exist = true;
         break;
@@ -78,6 +80,7 @@ public class ToDoListServlet extends HttpServlet {
         System.out.println("USEREXISTISFALSE");
         userToDoList.setProperty("user", userEmail);
         userToDoList.setProperty("scholarshipIdList", idList);
+        userToDoList.setProperty("completedscholarshipIdList", idList);
         datastore.put(userToDoList);
       }
 
@@ -102,10 +105,13 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
     System.out.println(currentUser);
     ArrayList<Long> getIds=new ArrayList<Long>();
+
+    ArrayList<Long> getIds2=new ArrayList<Long>();
     for (Entity entity : results.asIterable()){
         if(entity.getProperty("user").equals(currentUser)){
             System.out.println("line90");
             getIds=(ArrayList)entity.getProperty("scholarshipIdList");
+            getIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
             break;
         }
     }
