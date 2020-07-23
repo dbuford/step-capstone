@@ -139,13 +139,40 @@ scholarships.sort(new Comparator<ArrayList>() {
         }
         if(sorting.equals("likes")){
                 l1thumbsup=Integer.parseInt(l1.get(13).toString());
-                l1thumbsdown=-1*Integer.parseInt(l1.get(14).toString());
+                l1thumbsdown=Integer.parseInt(l1.get(14).toString());
+
+                int l1totalvotes=l1thumbsup+l1thumbsdown;
+                int l1percentage;
+                //if total votes>0, find percentage of up votes to total votes
+                if(l1totalvotes!=0){
+                    l1percentage=(int)(l1thumbsup/l1totalvotes);
+                }
+                //if total votes=0, set it equal to 1 then take percentage
+                else{
+                    l1totalvotes=1;
+                    l1percentage=(int)(l1thumbsup/l1totalvotes);
+                }
 
                 l2thumbsup=Integer.parseInt(l2.get(13).toString());
-                l2thumbsdown=-1*Integer.parseInt(l2.get(14).toString());
+                l2thumbsdown=Integer.parseInt(l2.get(14).toString());
 
-                return(-(l1thumbsup+l2thumbsdown)+(l2thumbsup+l2thumbsdown));
+                int l2totalvotes=l2thumbsup+l2thumbsdown;
+                int l2percentage;
+                //if total votes>0, find percentage of up votes to total votes
+                if(l2totalvotes!=0){
+                    l2percentage=(int)(l2thumbsup/l2totalvotes);
+                }
+                //if total votes=0, set it equal to 1 then take percentage
+                else{
+                    l2totalvotes=1;
+                    l2percentage=(int)(l2thumbsup/l2totalvotes);
+                }
+                //if percentages of upvotes to total votes are equal, tiebreak using number of upvotes
+                if(l1percentage-l2percentage==0){
+                    return(-l1thumbsup+l2thumbsup);
+                }
 
+                return (-l1percentage+l2percentage);
 
 
 
