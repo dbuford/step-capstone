@@ -55,6 +55,9 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<Long> idList = new ArrayList<Long>();
     idList.add(newId);
 
+    ArrayList<String> idPriority=new ArrayList<String>();
+    idPriority.add("none");
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("ToDoListScholarship");
 
@@ -66,9 +69,15 @@ public class ToDoListServlet extends HttpServlet {
     for (Entity entity : results.asIterable()){
       if(entity.getProperty("user").equals(userEmail)){
         ArrayList <Long> currentIds=(ArrayList)entity.getProperty("scholarshipIdList");
+        ArrayList <String> currentIdPriority=(ArrayList)entity.getProperty("idPriorityList");
+        if(!currentIds.contains(newId)){
+
         currentIds.add(newId);
+        currentIdPriority.add("none");
         entity.setProperty("scholarshipIdList",currentIds);
+        entity.setProperty("idPriorityList",currentIdPriority);
         datastore.put(entity);
+        }
         user_exist = true;
         break;
       }
@@ -78,6 +87,7 @@ public class ToDoListServlet extends HttpServlet {
         System.out.println("USEREXISTISFALSE");
         userToDoList.setProperty("user", userEmail);
         userToDoList.setProperty("scholarshipIdList", idList);
+        userToDoList.setProperty("idPriorityList",idPriority);
         datastore.put(userToDoList);
       }
 
@@ -102,15 +112,21 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
     System.out.println(currentUser);
     ArrayList<Long> getIds=new ArrayList<Long>();
+    ArrayList<String> getPriority=new ArrayList<String>();
+    long entityId=0;
+
     for (Entity entity : results.asIterable()){
         if(entity.getProperty("user").equals(currentUser)){
             System.out.println("line90");
             getIds=(ArrayList)entity.getProperty("scholarshipIdList");
+            getPriority=(ArrayList) entity.getProperty("idPriorityList");
+            entityId = entity.getKey().getId();
             break;
         }
     }
     if(getIds!=null){
-        for(Long idLong:getIds){
+        for(int i=0;i<getIds.size();i++){
+            Long idLong=getIds.get(i);
             long id=idLong.longValue();
             try{
             Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
@@ -128,6 +144,7 @@ public class ToDoListServlet extends HttpServlet {
             String major=(String) scholarshipEntity.getProperty("major");
             String grade=(String) scholarshipEntity.getProperty("grade");
             String state=(String) scholarshipEntity.getProperty("state");
+            String priority=(String)getPriority.get(i);
 
             ArrayList<Object> info=new ArrayList<>();
             info.add(title);
@@ -141,6 +158,10 @@ public class ToDoListServlet extends HttpServlet {
             info.add(grade);
             info.add(amount);
             info.add(state);
+            info.add(priority);
+            info.add(id);
+            info.add(entityId);
+            System.out.println(priority);
         
             scholarships.add(info);
             }catch (EntityNotFoundException e) {
@@ -155,7 +176,6 @@ public class ToDoListServlet extends HttpServlet {
     
   
       String json=convertToJsonUsingGson(scholarships);
-      System.out.println(scholarships.toString());
 
     // Send the JSON as the response
 
