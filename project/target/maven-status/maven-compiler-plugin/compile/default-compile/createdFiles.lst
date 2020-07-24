@@ -1,3 +1,4 @@
+com/google/sps/servlets/activeIdServlet.class
 com/google/sps/servlets/ListScholarshipsServlet$1.class
 com/google/sps/servlets/completedIdServlet.class
 com/google/sps/servlets/editScholarshipServlet.class

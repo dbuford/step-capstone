@@ -1142,7 +1142,10 @@ request.execute(function(event) {
 });
       }
 
-function toDoListDisplay() {
+function toDoListDisplay(type) {
+    console.log(type);
+    var newType=type;
+    console.log(newType);
     const toDoListDiv=document.getElementById('to-do-list');
     const alertMessage=document.createElement('h2');
 
@@ -1167,7 +1170,15 @@ function toDoListDisplay() {
             const scholarshipList = document.getElementById('to-do-list-list');
                 scholarshipList.innerHTML="";
                 for(let i=0;i<response.length;i++){
-                scholarshipList.appendChild(createToDoListElement(response[i]));
+                    //check to display only active scholarships
+                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])){
+                scholarshipList.appendChild(createToDoListElement(response[i],newType));
+                }
+                //check to display only complete scholarships
+                else if(type=='completed'&& response[i][15].includes(response[i][12])){
+                scholarshipList.appendChild(createToDoListElement(response[i],newType));
+
+                }
                 }
             
 
@@ -1177,7 +1188,9 @@ function toDoListDisplay() {
   
 }
 }
-function createToDoListElement(scholarship){
+function createToDoListElement(scholarship,type){
+    console.log(type);
+    console.log("line1191");
     const containerElement=document.createElement('div');
     containerElement.setAttribute('class','container');
 
@@ -1186,7 +1199,8 @@ function createToDoListElement(scholarship){
     var linkText=document.createTextNode(scholarship[0]);
     urlElement.appendChild(linkText);
     var titleContainer=document.createElement("div");
-    urlElement.setAttribute('class','scholarship-info');
+    titleContainer.setAttribute('class','scholarship-title');
+    urlElement.setAttribute('class','scholarship-title-design');
     urlElement.title=scholarship[0];
     urlElement.setAttribute('href', scholarship[3]);
     urlElement.style.fontWeight="bold";
@@ -1214,22 +1228,47 @@ function createToDoListElement(scholarship){
     //display priority level for scholarship
     containerElement.appendChild(createPriority(scholarship[0],scholarship[11],scholarship[12],scholarship[13]));
 
-
+    
     //done button for scholarship
     var doneButton=document.createElement("button");
-    doneButton.innerText="done";
+
+    //only append to container if type is active
+    if(type=="active"){
+    doneButton.setAttribute('class','done-button');
+    doneButton.innerText="mark as complete";
     containerElement.appendChild(doneButton);
+    }
+    //active button for scholarship
+    var activeButton=document.createElement("button");
+
+    //only append to container if type is completed
+    if(type=="completed"){
+        activeButton.setAttribute('class','done-button');
+        activeButton.innerText='mark as active';
+        containerElement.appendChild(activeButton);
+    }
+
 
   
     
     doneButton.onclick=function(){
-                    console.log("this is working");
-                    const params = new URLSearchParams();
-                    params.append('scholarshipId', scholarship[12]);
-                    console.log(scholarship[12]);
-                    params.append('entityId',scholarship[13]);
-                    fetch('/completed', {method: 'POST', body: params});
+        console.log("this is working");
+        const params = new URLSearchParams();
+        params.append('scholarshipId', scholarship[12]);
+        console.log(scholarship[12]);
+        params.append('entityId',scholarship[13]);
+        fetch('/completed', {method: 'POST', body: params});
+        location.reload();
 
+    }
+    activeButton.onclick=function(){
+        console.log("this is working");
+        const params = new URLSearchParams();
+        params.append('scholarshipId', scholarship[12]);
+        console.log(scholarship[12]);
+        params.append('entityId',scholarship[13]);
+        fetch('/active', {method: 'POST', body: params});
+        location.reload();
     }
     return containerElement;
     }
@@ -1260,6 +1299,7 @@ function createPriority(title,priority,scholarshipId,entityId){
     var highOption=document.createElement("option");
     highOption.value="high";
     highOption.innerText="High Priority";
+    highOption.setAttribute('class','high-priority');
     selectContainer.appendChild(highOption);
 
      var mediumOption=document.createElement("option");
@@ -1277,77 +1317,3 @@ function createPriority(title,priority,scholarshipId,entityId){
     return selectContainer;
 
 }
-
-function compltoDoListDisplay() {
-    const toDoListDiv=document.getElementById('to-do-list2');
-    const alertMessage=document.createElement('h2');
-
-  if(localStorage.getItem('userEmail')==null){
-      alertMessage.innerText='Please Sign in to View';
-      toDoListDiv.appendChild(alertMessage);
-      
-  }
-  else{
-        currentUserEmail=localStorage.getItem('userEmail');
-
-    
-
-    const params = new URLSearchParams();
-   params.append('userEmail',currentUserEmail);
-
-   fetch("/display-ToDoList", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
-       if(response.length==0){
-           alertMessage.innerText='No Scholarships Completed';
-        }
-        else{
-            const scholarshipList = document.getElementById('to-do-list-list2');
-                scholarshipList.innerHTML="";
-                for(let i=0;i<response.length;i++){
-                scholarshipList.appendChild(createCompletedListElement(response[i]));
-                }
-            
-
-        }
-            
-       });
-  
-}
-}
-
-function createCompletedListElement(scholarship){
-    const containerElement=document.createElement('div');
-    containerElement.setAttribute('class','container');
-
-    //display title and link to scholarship
-    var urlElement=document.createElement('a');
-    var linkText=document.createTextNode(scholarship[0]);
-    urlElement.appendChild(linkText);
-    var titleContainer=document.createElement("div");
-    urlElement.setAttribute('class','scholarship-info');
-    urlElement.title=scholarship[0];
-    urlElement.setAttribute('href', scholarship[3]);
-    urlElement.style.fontWeight="bold";
-    urlElement.style.fontSize="20px";
-    urlElement.setAttribute('target', '_blank');
-    titleContainer.appendChild(urlElement);
-    containerElement.appendChild(titleContainer);
-
-    //display deadline for scholarship
-    var deadlineContainer=document.createElement("div");
-    deadlineContainer.setAttribute('class','scholarship-info');
-    var deadlineValue=document.createElement("a");
-    deadlineValue.innerText="Deadline: "+scholarship[2];
-    deadlineContainer.appendChild(deadlineValue);
-    containerElement.appendChild(deadlineContainer);
-
-    //display amount for scholarship
-    var amountContainer=document.createElement("div");
-    amountContainer.setAttribute('class','scholarship-info');
-    var amountValue=document.createElement("a");
-    amountValue.innerText="Amount: $"+thousands_separators(scholarship[9]);
-    amountContainer.appendChild(amountValue);
-    containerElement.appendChild(amountContainer);
-
-
-    return containerElement;
-}      

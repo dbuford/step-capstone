@@ -102,12 +102,28 @@
 .scholarship-info{
     color:black;
     text-decoration:none;
-    width:20%;
+    width:15%;
     height:100%;
     font-size:17px;
     float:left;
     margin-right:5%;
     margin-top:1%;
+}
+.scholarship-title{
+   
+    width:15%;
+    height:100%;
+    font-size:17px;
+    float:left;
+    margin-right:5%;
+    margin-top:1%;
+}
+.scholarship-title a:hover{
+    color:#00CED1;
+}
+.scholarship-title-design{
+ color:black;
+    text-decoration:none;
 }
 .container{
     width:97%;
@@ -131,12 +147,25 @@
     padding-top:20px;
     padding-left:10px;
 }
+select{
+   border:0px;
+   outline:0px;
+color: red;
+  background: white;
+}
+.done-button{
+    background:white;
+    border-radius:25px;
+    border:2px solid #00CED1;
+    margin-top:.8%;
+    padding:5px;
+    color:grey;
+}
 
 
 
 </style>
-  <body onload = "toDoListDisplay()">
-  <body onload = "compltoDoListDisplay()">
+  <body onload = "activeChange()">
 
   <div class="navbar">
     <a href="index.html">Home</a>
@@ -148,12 +177,12 @@
 
   <div class="horizontal-filter-bar"> 
       <div class='filter-bar-title'><h3 style="text-align:center">SCHOLARSHIPS</h3></div>
-      <div id = "active" class="section-scholarships"> 
+      <div id = "active" onclick="activeChange()" class="section-scholarships"> 
           <img src="/images/activescholarship2.jpg" alt="active scholarships" width=70% height=60%>
             <h4>Active Scholarships</h4>
 
       </div>
-      <div id= "completed" class="section-scholarships"> 
+      <div id= "completed" onclick="completedChange()"class="section-scholarships"> 
           <img src="/images/checkmark.jpg" alt="completed scholarships" width=60% height=60%>
             <h4>Completed Scholarships</h4>
 
@@ -169,17 +198,24 @@
 
   </div>
 
-  <div class="to-do-list2" id='to-do-list2'> 
-      <div id="to-do-list2-header" class="to-do-list2-header"> Completed Scholarships:</div>
-    <div id="to-do-list-list2" class="to-do-list-list2">
     
-    </div>
     
-
-  </div>
-    
+<<<<<<< HEAD
   
   </body>
 
     
 </html>
+=======
+</html>
+<script>
+    function activeChange(){
+        document.getElementById("to-do-list-header").innerText="Active Scholarships:";
+        toDoListDisplay('active');
+    }
+    function completedChange(){
+        document.getElementById("to-do-list-header").innerText="Completed Scholarships:";
+        toDoListDisplay('completed'); 
+    }
+</script>
+>>>>>>> 21414d4bc18042f6d9faa2ca43e16595707daad9

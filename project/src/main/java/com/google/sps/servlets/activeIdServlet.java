@@ -27,8 +27,8 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 
 
-@WebServlet("/completed")
-public class completedIdServlet extends HttpServlet {
+@WebServlet("/active")
+public class activeIdServlet extends HttpServlet {
   String currentUser;
   
   @Override
@@ -48,24 +48,22 @@ public class completedIdServlet extends HttpServlet {
         Entity toDoListEntity=datastore.get(toDoListEntityKey);
         System.out.println(toDoListEntity);
         ArrayList <Long> currentIds=(ArrayList)toDoListEntity.getProperty("completedscholarshipIdList");
-        if (!currentIds.contains(scholarshipId)) {
-            currentIds.add(scholarshipId);
-        }
+    
+        currentIds.remove(scholarshipId);
+        
         
         System.out.println(currentIds.toString());
-        System.out.println("completedservlet");
+        System.out.println("activeservlet");
 
         toDoListEntity.setProperty("completedscholarshipIdList",currentIds);
         datastore.put(toDoListEntity);
-    
-     /* Redirect back to the HTML page.*/
-    response.sendRedirect("/toDoList.html");
-
        }catch (EntityNotFoundException e) {
 		throw new RuntimeException("scholarship not found.");
         }
 
-   
+    
+     /* Redirect back to the HTML page.*/
+    response.sendRedirect("/toDoList.html");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {

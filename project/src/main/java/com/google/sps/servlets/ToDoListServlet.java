@@ -55,9 +55,14 @@ public class ToDoListServlet extends HttpServlet {
     String userEmail=request.getParameter("email");
 
     ArrayList<Long> idList = new ArrayList<Long>();
+    idList.add(Long.valueOf(1));
     idList.add(newId);
 
+    ArrayList<Long> idList2 = new ArrayList<Long>();
+    idList2.add(Long.valueOf(1));
+
     ArrayList<String> idPriority=new ArrayList<String>();
+    idPriority.add("none");
     idPriority.add("none");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -97,7 +102,7 @@ public class ToDoListServlet extends HttpServlet {
         userToDoList.setProperty("user", userEmail);
         userToDoList.setProperty("scholarshipIdList", idList);
 
-        userToDoList.setProperty("completedscholarshipIdList", idList);
+        userToDoList.setProperty("completedscholarshipIdList", idList2);
 
         userToDoList.setProperty("idPriorityList",idPriority);
 
@@ -147,6 +152,7 @@ public class ToDoListServlet extends HttpServlet {
     }
     if(getIds!=null){
         for(int i=0;i<getIds.size();i++){
+            if(getIds.get(i)!=1){
             Long idLong=getIds.get(i);
             long id=idLong.longValue();
             try{
@@ -182,6 +188,8 @@ public class ToDoListServlet extends HttpServlet {
             info.add(priority);
             info.add(id);
             info.add(entityId);
+            info.add(getIds);
+            info.add(getIds2);
             System.out.println(priority);
         
             scholarships.add(info);
@@ -189,6 +197,7 @@ public class ToDoListServlet extends HttpServlet {
 		        throw new RuntimeException("scholarship not found.");
             };
 
+        }
         }
 
     }
