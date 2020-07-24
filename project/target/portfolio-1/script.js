@@ -1318,8 +1318,12 @@ function createPriority(title,priority,scholarshipId,entityId){
 
 }
 
+<<<<<<< HEAD
+function compltoDoListDisplay() {
+=======
 
 /*function compltoDoListDisplay() {
+>>>>>>> 21414d4bc18042f6d9faa2ca43e16595707daad9
     const toDoListDiv=document.getElementById('to-do-list2');
     const alertMessage=document.createElement('h2');
 
