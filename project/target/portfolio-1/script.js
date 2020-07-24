@@ -359,9 +359,6 @@ function getUserInfo(){
                     console.log(localStorage.getItem("userEmail"));
                     const messageForm = document.getElementById('addcomm');
                     messageForm.action = entry.uploadUrl;
-                    messageForm.action = entry.image;
-                    console.log(entries.uploadUrl);
-                    console.log(entry.image);
                     console.log(entry.uploadUrl);
 
             

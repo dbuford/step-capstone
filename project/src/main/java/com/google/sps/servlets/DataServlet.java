@@ -190,7 +190,7 @@ public class DataServlet extends HttpServlet {
 
     
    // Get the URL of the image that the user uploaded to Blobstore.
-    String imageUrl = getUploadedFileUrl(request, "image");
+   // String imageUrl = getUploadedFileUrl(request, "image");
     
     // Must be logged in to add info
     String title = request.getParameter("title");
@@ -239,7 +239,7 @@ public class DataServlet extends HttpServlet {
     entryEntity.setProperty("grade", grade);
     entryEntity.setProperty("location", location);
     //entryEntity.setProperty("image", url);
-    entryEntity.setProperty("image", imageUrl);
+   // entryEntity.setProperty("image", imageUrl);
     datastore.put(entryEntity);
 
     response.sendRedirect("/response.html"); // could possibly add a redirect page ?
@@ -254,7 +254,7 @@ public class DataServlet extends HttpServlet {
   //}
 
     /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */
-  private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
+ /* private String getUploadedFileUrl(HttpServletRequest request, String formInputElementName) {
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
     Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
     List<BlobKey> blobKeys = blobs.get("image");
@@ -289,7 +289,7 @@ public class DataServlet extends HttpServlet {
     } catch (MalformedURLException e) {
       return imagesService.getServingUrl(options);
     }
-  }
+  } */
 
 }
 
