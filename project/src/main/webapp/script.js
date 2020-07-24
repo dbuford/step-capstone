@@ -590,7 +590,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
                 const params = new URLSearchParams();
                 params.append('id', scholarship[12]);
-                params.append('email', scholarship[11]);
+                params.append('email', localStorage.getItem("userEmail"));
                 fetch('/display-ToDoList', {method: 'POST', body: params});
             };
 
