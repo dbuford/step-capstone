@@ -185,6 +185,9 @@ async function getData() {
 
 
 function add_info() {
+
+
+
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
     if (txt.includes("Please")) {
@@ -356,7 +359,7 @@ function getUserInfo(){
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
-                    const messageForm = document.getElementById('entry-list');
+                    const messageForm = document.getElementById('addcomm');
                     messageForm.action = entry.uploadUrl;
                     console.log(entry.uploadUrl);
 
