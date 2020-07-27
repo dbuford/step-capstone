@@ -146,6 +146,7 @@
     font-size:25px;
     padding-top:20px;
     padding-left:10px;
+    border-bottom: 1px solid lightgrey;
 }
 select{
    border:0px;
@@ -209,10 +210,14 @@ color: red;
     function activeChange(){
         document.getElementById("to-do-list-header").innerText="Active Scholarships:";
         toDoListDisplay('active');
+        document.getElementById("active").style.background="LightCyan";
+        document.getElementById("completed").style.background="white";
     }
     function completedChange(){
         document.getElementById("to-do-list-header").innerText="Completed Scholarships:";
         toDoListDisplay('completed'); 
+        document.getElementById("completed").style.background="LightCyan";
+        document.getElementById("active").style.background="white";
     }
 </script>
 

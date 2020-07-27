@@ -78,47 +78,57 @@
     <async-supported origin="@WebServlet(com.google.sps.servlets.CurrentUserServlet):17">false</async-supported>
   </servlet>
   <servlet>
+    <servlet-name>com.google.sps.servlets.changePriorityServlet</servlet-name>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.changePriorityServlet):18">com.google.sps.servlets.changePriorityServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.changePriorityServlet):19">false</async-supported>
+  </servlet>
+  <servlet>
     <servlet-name>com.google.sps.servlets.ListScholarshipsServlet</servlet-name>
-    <servlet-class origin="@WebServlet(com.google.sps.servlets.ListScholarshipsServlet):18">com.google.sps.servlets.ListScholarshipsServlet</servlet-class>
-    <async-supported origin="@WebServlet(com.google.sps.servlets.ListScholarshipsServlet):19">false</async-supported>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.ListScholarshipsServlet):20">com.google.sps.servlets.ListScholarshipsServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.ListScholarshipsServlet):21">false</async-supported>
+  </servlet>
+  <servlet>
+    <servlet-name>com.google.sps.servlets.activeIdServlet</servlet-name>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.activeIdServlet):22">com.google.sps.servlets.activeIdServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.activeIdServlet):23">false</async-supported>
   </servlet>
   <servlet>
     <servlet-name>com.google.sps.servlets.DeleteScholarshipServlet</servlet-name>
-    <servlet-class origin="@WebServlet(com.google.sps.servlets.DeleteScholarshipServlet):20">com.google.sps.servlets.DeleteScholarshipServlet</servlet-class>
-    <async-supported origin="@WebServlet(com.google.sps.servlets.DeleteScholarshipServlet):21">false</async-supported>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.DeleteScholarshipServlet):24">com.google.sps.servlets.DeleteScholarshipServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.DeleteScholarshipServlet):25">false</async-supported>
+  </servlet>
+  <servlet>
+    <servlet-name>com.google.sps.servlets.completedIdServlet</servlet-name>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.completedIdServlet):26">com.google.sps.servlets.completedIdServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.completedIdServlet):27">false</async-supported>
   </servlet>
   <servlet>
     <servlet-name>com.google.sps.servlets.ToDoListServlet</servlet-name>
-    <servlet-class origin="@WebServlet(com.google.sps.servlets.ToDoListServlet):22">com.google.sps.servlets.ToDoListServlet</servlet-class>
-    <async-supported origin="@WebServlet(com.google.sps.servlets.ToDoListServlet):23">false</async-supported>
-  </servlet>
-  <servlet>
-    <servlet-name>com.google.sps.servlets.LoginServlet</servlet-name>
-    <servlet-class origin="@WebServlet(com.google.sps.servlets.LoginServlet):24">com.google.sps.servlets.LoginServlet</servlet-class>
-    <async-supported origin="@WebServlet(com.google.sps.servlets.LoginServlet):25">false</async-supported>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.ToDoListServlet):28">com.google.sps.servlets.ToDoListServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.ToDoListServlet):29">false</async-supported>
   </servlet>
   <servlet>
     <servlet-name>com.google.sps.servlets.editScholarshipServlet</servlet-name>
-    <servlet-class origin="@WebServlet(com.google.sps.servlets.editScholarshipServlet):26">com.google.sps.servlets.editScholarshipServlet</servlet-class>
-    <async-supported origin="@WebServlet(com.google.sps.servlets.editScholarshipServlet):27">false</async-supported>
+    <servlet-class origin="@WebServlet(com.google.sps.servlets.editScholarshipServlet):30">com.google.sps.servlets.editScholarshipServlet</servlet-class>
+    <async-supported origin="@WebServlet(com.google.sps.servlets.editScholarshipServlet):31">false</async-supported>
   </servlet>
-  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):28">
+  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):32">
     <servlet-name>_ah_default</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):29">
+  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):33">
     <servlet-name>_ah_sessioncleanup</servlet-name>
     <url-pattern>/_ah/sessioncleanup</url-pattern>
   </servlet-mapping>
-  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):30">
+  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):34">
     <servlet-name>_ah_warmup</servlet-name>
     <url-pattern>/_ah/warmup</url-pattern>
   </servlet-mapping>
-  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):31">
+  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):35">
     <servlet-name>_ah_queue_deferred</servlet-name>
     <url-pattern>/_ah/queue/__deferred__</url-pattern>
   </servlet-mapping>
-  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):32">
+  <servlet-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):36">
     <servlet-name>_ah_snapshot</servlet-name>
     <url-pattern>/_ah/snapshot</url-pattern>
   </servlet-mapping>
@@ -147,20 +157,28 @@
     <url-pattern>/current-user</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>com.google.sps.servlets.changePriorityServlet</servlet-name>
+    <url-pattern>/change-priority</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>com.google.sps.servlets.ListScholarshipsServlet</servlet-name>
     <url-pattern>/list-scholarships</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>com.google.sps.servlets.activeIdServlet</servlet-name>
+    <url-pattern>/active</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>com.google.sps.servlets.DeleteScholarshipServlet</servlet-name>
     <url-pattern>/delete-scholarship</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>com.google.sps.servlets.ToDoListServlet</servlet-name>
-    <url-pattern>/display-ToDoList</url-pattern>
+    <servlet-name>com.google.sps.servlets.completedIdServlet</servlet-name>
+    <url-pattern>/completed</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>com.google.sps.servlets.LoginServlet</servlet-name>
-    <url-pattern>/logins</url-pattern>
+    <servlet-name>com.google.sps.servlets.ToDoListServlet</servlet-name>
+    <url-pattern>/display-ToDoList</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>com.google.sps.servlets.editScholarshipServlet</servlet-name>
@@ -172,7 +190,7 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Disable TRACE</web-resource-name>
-      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):33">/</url-pattern>
+      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):37">/</url-pattern>
       <http-method>TRACE</http-method>
     </web-resource-collection>
     <auth-constraint/>
@@ -180,14 +198,14 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>Enable everything but TRACE</web-resource-name>
-      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):34">/</url-pattern>
+      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):38">/</url-pattern>
       <http-method-omission>TRACE</http-method-omission>
     </web-resource-collection>
   </security-constraint>
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>deferred_queue</web-resource-name>
-      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):35">/_ah/queue/__deferred__</url-pattern>
+      <url-pattern origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):39">/_ah/queue/__deferred__</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>
@@ -198,159 +216,159 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <locale-encoding-mapping-list>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):36">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):40">
       <locale>de</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):37">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):41">
       <locale>no</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):38">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):42">
       <locale>be</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):39">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):43">
       <locale>fi</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):40">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):44">
       <locale>ru</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):41">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):45">
       <locale>pt</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):42">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):46">
       <locale>bg</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):43">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):47">
       <locale>lt</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):44">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):48">
       <locale>hr</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):45">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):49">
       <locale>lv</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):46">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):50">
       <locale>fr</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):47">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):51">
       <locale>hu</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):48">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):52">
       <locale>zh_TW</locale>
       <encoding>Big5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):49">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):53">
       <locale>sh</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):50">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):54">
       <locale>uk</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):51">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):55">
       <locale>sk</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):52">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):56">
       <locale>sl</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):53">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):57">
       <locale>ca</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):54">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):58">
       <locale>mk</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):55">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):59">
       <locale>sq</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):56">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):60">
       <locale>sr</locale>
       <encoding>ISO-8859-5</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):57">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):61">
       <locale>sv</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):58">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):62">
       <locale>ko</locale>
       <encoding>EUC-KR</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):59">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):63">
       <locale>el</locale>
       <encoding>ISO-8859-7</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):60">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):64">
       <locale>en</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):61">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):65">
       <locale>is</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):62">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):66">
       <locale>it</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):63">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):67">
       <locale>es</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):64">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):68">
       <locale>iw</locale>
       <encoding>ISO-8859-8</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):65">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):69">
       <locale>zh</locale>
       <encoding>GB2312</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):66">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):70">
       <locale>et</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):67">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):71">
       <locale>cs</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):68">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):72">
       <locale>ar</locale>
       <encoding>ISO-8859-6</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):69">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):73">
       <locale>ja</locale>
       <encoding>Shift_JIS</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):70">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):74">
       <locale>pl</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):71">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):75">
       <locale>da</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):72">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):76">
       <locale>ro</locale>
       <encoding>ISO-8859-2</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):73">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):77">
       <locale>nl</locale>
       <encoding>ISO-8859-1</encoding>
     </locale-encoding-mapping>
-    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):74">
+    <locale-encoding-mapping origin="DefaultsDescriptor(file:///home/dombuford/.cache/google-cloud-tools-java/managed-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):78">
       <locale>tr</locale>
       <encoding>ISO-8859-9</encoding>
     </locale-encoding-mapping>
