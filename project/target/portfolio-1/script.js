@@ -216,7 +216,6 @@ function createEntryElement(entry) {
     const containerElement=document.getElementById('container-div');
   const pictureElement = document.createElement('div');
   pictureElement.className = 'profile-picture-div';
-  containerElement.appendChild(pictureElement);
 
   const imageElement=document.createElement("img");
         if(entry.image == null || entry.image == undefined) { 
@@ -313,6 +312,8 @@ titleElement.className="title-div";
   });*/
 
   pictureElement.appendChild(imageElement);
+    containerElement.appendChild(pictureElement);
+
   const breakElement1=document.createElement("br");
   breakElement1.innerText="div";
   breakElement1.style.color="white";
