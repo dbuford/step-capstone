@@ -9,6 +9,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="script.js"></script>
 
 
@@ -24,7 +25,51 @@
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 30%;
+}
+.info-div{
+    width:70%;
+    float:left;
+}
+.rest-div{
+    height:90%;
+    width:100%;
+}
+.title-div{
+    width:30%;
+    height:100%;
+    float:left;
+}
+.title-div p{
+    font-weight:bold;
+}
+.value-div{
+    width:50%;
+    height:100%;
+    float:left;
+}
+.value-div p{
+    color:#0062cc;
+    font-weight: 600;
+}
+.name-location-div{
+    width:100%;
+    height:30%;
+}
+.name-location-div h3{
+    padding-right:20px;
+}
+.name-location-div p{
+    padding-left:10px;
+    margin-top:7px;
+}
+.profile-picture-div{
+    float:left;
+    width:30%;
+}
+.container-div{
+    width:100%;
+    height:100%;
 }
 
 #greeting-container {
@@ -38,7 +83,10 @@
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
 }
 .profile-im
     text-align: center;
@@ -130,7 +178,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background: -webkit-linear-gradient(left, #D7DEDA, #D7DEDA);
+  background: ghostwhite;
 
 }
 
@@ -206,6 +254,13 @@ body {
         margin:auto;     
         width: 40%;
     }
+.item-nav{
+    width:100%;
+    height:20%;
+}
+.link-nav{
+    width:10%;
+}
 
 
 /* styling section */
@@ -232,32 +287,23 @@ body {
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
-                    <div class="col-md-4">
                     </div>
-                    <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        <ul class="collection" id="userName"></ul>
-                                    </h5>
-                                    <h6>
-                                        User
-                                    </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
+                                <div class="item-nav">
+                                    <a class="link-nav" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    <a href="EditingPage.html" style='float:right'>Edit Profile</a>
+
+                                </div>
                             </ul>
                         </div>
-                    </div>
                     <div class="col-md-2">
-                        <a href="EditingPage.html">Edit Profile</a>
                     </div>
+                                    <div class="container-div" id="container-div">
+
                 </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        
+
+               
     <div class="row">
         <div class="input-field col s3 select-wrapper" style="width:20%">
           <!-- <form action="/data" method="POST">  -->
@@ -268,3 +314,4 @@ body {
                 </div>
             </form>           
         </div>
+      </div>
