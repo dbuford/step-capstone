@@ -34,11 +34,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
       var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
 
     
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest","https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest"];
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/tasks";
 
 
       /**
@@ -105,9 +105,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         } 
 
         
-        if(document.getElementById('login')==null){
+        if(document.getElementById('scholarship-list')!=null){
             listUpcomingEvents();
+            FindTaskList();
         }
+
         } else {
             if(document.getElementById('login') !=null){
                 document.getElementById("authorize_button").style.display = 'block';
@@ -555,6 +557,27 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
+
+            var emailInToDoList=false;
+
+            currentUserEmail=localStorage.getItem('userEmail');
+            const params = new URLSearchParams();
+            params.append('userEmail',currentUserEmail);
+            fetch('/display-ToDoList',{method: 'POST', body: params}).then(response => response.json()).then((response) => {
+                for(let i=0;i<response.length;i++){
+                    if(response[i][12]==(scholarship[12])){
+                        const checkMark=document.createElement('span');
+                        checkMark.innerHTML='&#x2714;';
+                        circleElement.appendChild(checkMark);
+                        emailInToDoList=true;
+                        console.log(emailInToDoList);
+
+                    }
+                }
+
+           
+            console.log(emailInToDoList);
+            if(emailInToDoList==false){
             circleElement.onclick = function() { // Note this is a function
             
             const formElement=document.createElement('div');
@@ -589,6 +612,9 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 params.append('id', scholarship[12]);
                 params.append('email', localStorage.getItem("userEmail"));
                 fetch('/display-ToDoList', {method: 'POST', body: params});
+
+
+
             };
 
             const closeButton=document.createElement('button');
@@ -602,6 +628,8 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
             containerElement.appendChild(formElement);
             };
+            }
+            });
             
 
             var urlElement=document.createElement('a');
@@ -1100,9 +1128,13 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return num_parts.join(".");
         }
+        /*access users calendar*/
         function accessCalendar(){
            handleClientLoad();
         }
+
+
+
       /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
@@ -1141,6 +1173,32 @@ request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
       }
+function FindTaskList(){
+    var taskListId;
+    console.log(date);
+    //check to see if Scholarship Tasks List exist
+       gapi.client.tasks.tasklists.list({
+        }).then(function(response) {
+          var taskLists = response.result.items;
+          if (taskLists && taskLists.length > 0) {
+            for (var i = 0; i < taskLists.length; i++) {
+              var taskList = taskLists[i];
+              if(taskList.title=="My Tasks"){
+                  taskListId=taskList.id;
+                  console.log(taskList.id);
+                  console.log(taskListId);
+                  createNewTasks(taskListId);
+              }
+            }
+          } 
+        });
+
+}
+function createNewTasks(id){
+    console.log(id);
+    gapi.client.tasks.tasks.insert({'tasklist':id,'title':calendarTitle,'notes':'make sure to get this done on time','due':date+'T12:00:00.000Z'}).then(function(response){});
+
+}
 
 function toDoListDisplay(type) {
     console.log(type);
