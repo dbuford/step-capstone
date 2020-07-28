@@ -38,7 +38,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/tasks";
+      var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
 
 
       /**
