@@ -93,22 +93,35 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
-         // const params = new URLSearchParams();
-          //  params.append('email', email);
-          //  fetch('/logins', {method: 'POST', body: params})
-          console.log("working");
+
           document.getElementById("authorize_button").style.display = 'none';
-          console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
-          console.log("working");
-          document.getElementById("addcomm").style.display = 'block';
-        } 
+
+          //check if user has already filled out form
+          var alreadyFilledOut=false;
+
+          fetch('/data').then(response => response.json()).then((entries) => {
+          entries.forEach((entry) => {
+          if(entry.email== localStorage.getItem("userEmail")){
+              alreadyFilledOut=true;
+        }
+          })
+          if(alreadyFilledOut==false){
+            document.getElementById("addcomm").style.display = 'block';
+
+          }
+          else{
+            document.getElementById("addcomm").style.display = 'none';
+ 
+          }
+          }); 
 
         
         if(document.getElementById('scholarship-list')!=null){
             listUpcomingEvents();
             FindTaskList();
         }
+          }
 
         } else {
             if(document.getElementById('login') !=null){
@@ -126,6 +139,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         }
       
       }
+      
 
       /**
        *  Sign in the user upon button click.
@@ -184,7 +198,7 @@ async function getData() {
 }
 
 
-function add_info() {
+/*function add_info() {
 
 
 
@@ -196,7 +210,7 @@ function add_info() {
     } else{
       document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
     }});
-}
+}*/
 
 
 
