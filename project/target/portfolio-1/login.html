@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
+
     <style>
 * {
   box-sizing: border-box;
@@ -135,6 +136,25 @@ body {
         margin-top:2%;
         text-align:left;
     }
+    .loginel{
+        /*background:#00CED1;*/
+        background:royalblue;
+        height:20%;
+        color:white;
+    }
+    h4{
+        font-weight:bold;
+        color:royalblue;
+        font-size:20px;
+    }
+    .submit-button{
+        border-radius:10px;
+        background-color:royalblue;
+        color:white;
+        width:50%;
+        text-align:center;
+        margin-top:5%;
+    }
 
 /* styling section */
 
@@ -182,21 +202,29 @@ body {
 
 
 
-    <center><h1 style="font-family:Impact, fantasy">LOGIN/SIGNUP</h1> </center>
-    <center><p id="loginel"></p>
-      <button id="authorize_button" style="display: none;">Login</button>
-      <button id="signout_button" style="display: none;">Sign Out</button>
+    <center><h1 style="font-family:Impact, fantasy" id="login/signup">LOGIN/SIGNUP</h1> </center>
+    <center><h2 id="loginel" class="loginel"></h2>
+     <!-- <button id="authorize_button" style="display: none;">Login</button>-->
+    <button id="authorize_button" class="oauth-container btn darken-4 white black-text"  style="text-transform:none;">
+            <img width="20px" alt="Google sign-in" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Login with Google
+    </button>
+      <button id="signout_button" style="display: none;background:#4285F4;color:white">
+          <img width="20px"  alt="Google sign-in" src="/images/blueg.jpg" >
+        Sign Out
+      </button>
       <br/>
       <div class="divider"></div>
       <h6 id="error"></h6>
 
       <form  id="addcomm" action="/data" method="POST">
-        <p> Complete form if you haven't already to help us find the best scholarships for you! </p> 
+        <p> Complete form to help us find the best scholarships for you! </p> 
 
         <input id = "login" name="userEmail" style="display:none";></input>
         <input name="idname"  value="entry.id" style="display:none";></input>
         
-        <textarea name="name" placeholder="Name"></textarea>
+        <textarea name="name" placeholder="Name" style="width:45%"></textarea>
         <br/><br/>
         
         <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
@@ -376,10 +404,10 @@ body {
 
 
         </div>
-        <button> Submit</button> 
+        <button class="submit-button"> Submit</button> 
           
         </form>   
-      <br/>
+   
       </center>
 
 </div>
