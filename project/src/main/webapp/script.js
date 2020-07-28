@@ -158,8 +158,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        const titleElement=document.getElementById('login/signup');
+        titleElement.style.display="block";
         const loginElement = document.getElementById('loginel');
-        loginElement.innerHTML = "Feel free to Login";
+        loginElement.style.display="none";
+
 
         localStorage.removeItem("userEmail");
 
@@ -215,10 +218,15 @@ async function getData() {
 
 
 function login() {
+    const titleElement=document.getElementById('login/signup');
+    titleElement.style.display="none";
      const loginElement = document.getElementById('loginel');
+    loginElement.style.display="block";
+     loginElement.style.background="royalblue";
+     loginElement.style.color="white";
+     loginElement.style.fontSize="40px";
      loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
      console.log(document.getElementById('login').value);
-     console.log("works");
 }
 
 
