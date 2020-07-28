@@ -34,11 +34,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
       var API_KEY = 'AIzaSyAedVIc7Rqof96Rwz4kg9G8hybDOYm_578';
 
     
-      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest","https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest"];
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/tasks";
 
 
       /**
@@ -105,9 +105,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         } 
 
         
-        if(document.getElementById('login')==null){
+        if(document.getElementById('scholarship-list')!=null){
             listUpcomingEvents();
+            FindTaskList();
         }
+
         } else {
             if(document.getElementById('login') !=null){
                 document.getElementById("authorize_button").style.display = 'block';
@@ -211,49 +213,84 @@ function updateCount() {
 }
 
 function createEntryElement(entry) {
-  const entryElement = document.createElement('li');
-  entryElement.className = 'entry collection-item';
+    const containerElement=document.getElementById('container-div');
+  const pictureElement = document.createElement('div');
+  pictureElement.className = 'profile-picture-div';
 
   const imageElement=document.createElement("img");
   imageElement.src="/images/person.jpg";
     
-
-
-  const nameElement = document.createElement('span');
+    const entryElement=document.createElement('div');
+    entryElement.className='info-div';
+  const nameElement = document.createElement('h3');
+  nameElement.style.float='left';
   if (entry.name === undefined || entry.name === "") {
     nameElement.innerHTML = "-- Anonymous".italics().bold();
   } else {
-    nameElement.innerHTML = ("Name: " + entry.name).italics().bold();
+    nameElement.innerText = (entry.name);
   }
-  nameElement.style.marginLeft = "15px"
+const nameLocationElement=document.createElement('div');
+nameLocationElement.className='name-location-div';
+nameLocationElement.appendChild(nameElement);
+const geoTagElement=document.createElement('i');
+geoTagElement.className='fas fa-map-marker-alt';
+geoTagElement.style.fontSize='24px';
+geoTagElement.style.float='left';
+nameLocationElement.appendChild(geoTagElement);
 
-  const emailElement = document.createElement('span');
-  emailElement.innerHTML = ("Email: " + entry.email);
+
+const locationElement = document.createElement('p');
+locationElement.innerText = (entry.location.toString());
+locationElement.style.float='left';
+nameLocationElement.appendChild(locationElement);
+
+const restOfElement=document.createElement('div');
+restOfElement.className="rest-div";
+
+const valueElement=document.createElement('div');
+valueElement.className="value-div";
+
+const titleElement=document.createElement('div');
+titleElement.className="title-div";
+
+  const emailTitleElement=document.createElement('p');
+  emailTitleElement.innerText="Email ";
+  const emailElement = document.createElement('p');
+  emailElement.innerText = (entry.email);
   
+  const ageTitleElement=document.createElement('p');
+  ageTitleElement.innerText="Age ";
+  const ageElement = document.createElement('p');
+  ageElement.innerText = (entry.age);
 
-  const ageElement = document.createElement('span');
-  ageElement.innerText = ("Age: " + entry.age);
+  const majorTitleElement=document.createElement('p');
+  majorTitleElement.innerText="Major Interest ";
+  const majorElement = document.createElement('p');
+  majorElement.innerText = (entry.major.toString());
+
+  const genderTitleElement=document.createElement('p');
+  genderTitleElement.innerText="Gender Identity ";
+  const genderElement = document.createElement('p');
+  genderElement.innerText = (entry.gender.toString());
+
+  const incomeTitleElement=document.createElement('p');
+  incomeTitleElement.innerText="Income Level ";
+  const incomeElement = document.createElement('p');
+  incomeElement.innerText = (entry.income.toString());
+
+  const raceTitleElement=document.createElement('p');
+  raceTitleElement.innerText="Race/Ethnicity ";
+  const raceElement = document.createElement('p');
+  raceElement.innerText = (entry.race.toString());
+
+  const gradeTitleElement=document.createElement('p');
+  gradeTitleElement.innerText="Grade Level ";
+  const gradeElement = document.createElement('p');
+  gradeElement.innerText = (entry.grade.toString());
 
 
-  const majorElement = document.createElement('span');
-  majorElement.innerText = ("Major: " + entry.major.toString());
 
-  const genderElement = document.createElement('span');
-  genderElement.innerText = ("Gender: " + entry.gender.toString());
-
-  const incomeElement = document.createElement('span');
-  incomeElement.innerText = ("Income: " + entry.income.toString());
-
-  const raceElement = document.createElement('span');
-  raceElement.innerText = ("Race: " + entry.race.toString());
-
-  const gradeElement = document.createElement('span');
-  gradeElement.innerText = ("Grade Level: " + entry.grade.toString());
-
-  const locationElement = document.createElement('span');
-  locationElement.innerText = ("Location: " + entry.location.toString());
-
-  const timeElement = document.createElement('span');
+  /*const timeElement = document.createElement('span');
   var date = new Date(entry.timestamp);
   timeElement.innerText = date.toString().slice(0,24);
   timeElement.style.float = "right";
@@ -267,37 +304,66 @@ function createEntryElement(entry) {
 
     // Remove the entry from the DOM.
     entryElement.remove();
-  });
+  });*/
 
-  entryElement.appendChild(imageElement);
-  const breakElement9=document.createElement("br");
-  entryElement.appendChild(breakElement9);
-  entryElement.appendChild(nameElement);
-  const breakElement=document.createElement("br");
-  entryElement.appendChild(breakElement);
-  entryElement.appendChild(emailElement);
+  pictureElement.appendChild(imageElement);
+    containerElement.appendChild(pictureElement);
+
+  const breakElement1=document.createElement("br");
+  breakElement1.innerText="div";
+  breakElement1.style.color="white";
+
   const breakElement2=document.createElement("br");
-  const breakElement3=document.createElement("br");
+  breakElement2.innerText="div";
+  breakElement2.style.color="white";
+
+const breakElement3=document.createElement("br");
+  breakElement3.innerText="div";
+  breakElement3.style.color="white";
+
   const breakElement4=document.createElement("br");
-  const breakElement5=document.createElement("br");
-  const breakElement6=document.createElement("br");
-  const breakElement7=document.createElement("br");
-  const breakElement8=document.createElement("br");
-  entryElement.appendChild(breakElement2);
-  entryElement.appendChild(ageElement);
-  entryElement.appendChild(breakElement3);
-  entryElement.appendChild(majorElement);
-  entryElement.appendChild(breakElement6);
-  entryElement.appendChild(incomeElement);
-  entryElement.appendChild(breakElement4);
-  entryElement.appendChild(raceElement);
-  entryElement.appendChild(breakElement5);
-  entryElement.appendChild(gradeElement);
-  entryElement.appendChild(breakElement7);
-  entryElement.appendChild(locationElement);
+  breakElement4.innerText="div";
+  breakElement4.style.color="white";
+
+  containerElement.appendChild(nameLocationElement);
+  
+  titleElement.appendChild(emailTitleElement);
+  valueElement.appendChild(emailElement);
+
+  titleElement.appendChild(ageTitleElement);
+  valueElement.appendChild(ageElement);
+
+  titleElement.appendChild(breakElement1);
+  valueElement.appendChild(breakElement2);
+
+titleElement.appendChild(raceTitleElement);
+  valueElement.appendChild(raceElement);
+
+  titleElement.appendChild(genderTitleElement);
+  valueElement.appendChild(genderElement);
+   
+  titleElement.appendChild(incomeTitleElement);
+  valueElement.appendChild(incomeElement);
+
+  titleElement.appendChild(breakElement3);
+  valueElement.appendChild(breakElement4);
+
+
+  titleElement.appendChild(majorTitleElement);
+  valueElement.appendChild(majorElement);
+
+  titleElement.appendChild(gradeTitleElement);
+  valueElement.appendChild(gradeElement);
+
+  restOfElement.appendChild(titleElement);
+  restOfElement.appendChild(valueElement);
+  entryElement.appendChild(restOfElement);
+
+containerElement.appendChild(entryElement);
+
   
   
-  return entryElement;
+  return containerElement;
 }
 
 function deleteEntry(entry) {
@@ -526,6 +592,27 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
+
+            var emailInToDoList=false;
+
+            currentUserEmail=localStorage.getItem('userEmail');
+            const params = new URLSearchParams();
+            params.append('userEmail',currentUserEmail);
+            fetch('/display-ToDoList',{method: 'POST', body: params}).then(response => response.json()).then((response) => {
+                for(let i=0;i<response.length;i++){
+                    if(response[i][12]==(scholarship[12])){
+                        const checkMark=document.createElement('span');
+                        checkMark.innerHTML='&#x2714;';
+                        circleElement.appendChild(checkMark);
+                        emailInToDoList=true;
+                        console.log(emailInToDoList);
+
+                    }
+                }
+
+           
+            console.log(emailInToDoList);
+            if(emailInToDoList==false){
             circleElement.onclick = function() { // Note this is a function
             
             const formElement=document.createElement('div');
@@ -560,6 +647,9 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 params.append('id', scholarship[12]);
                 params.append('email', localStorage.getItem("userEmail"));
                 fetch('/display-ToDoList', {method: 'POST', body: params});
+
+
+
             };
 
             const closeButton=document.createElement('button');
@@ -573,6 +663,8 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
             containerElement.appendChild(formElement);
             };
+            }
+            });
             
 
             var urlElement=document.createElement('a');
@@ -1071,9 +1163,13 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return num_parts.join(".");
         }
+        /*access users calendar*/
         function accessCalendar(){
            handleClientLoad();
         }
+
+
+
       /**
        * Print the summary and start datetime/date of the next ten events in
        * the authorized user's calendar. If no events are found an
@@ -1112,6 +1208,32 @@ request.execute(function(event) {
   appendPre('Event created: ' + event.htmlLink);
 });
       }
+function FindTaskList(){
+    var taskListId;
+    console.log(date);
+    //check to see if Scholarship Tasks List exist
+       gapi.client.tasks.tasklists.list({
+        }).then(function(response) {
+          var taskLists = response.result.items;
+          if (taskLists && taskLists.length > 0) {
+            for (var i = 0; i < taskLists.length; i++) {
+              var taskList = taskLists[i];
+              if(taskList.title=="My Tasks"){
+                  taskListId=taskList.id;
+                  console.log(taskList.id);
+                  console.log(taskListId);
+                  createNewTasks(taskListId);
+              }
+            }
+          } 
+        });
+
+}
+function createNewTasks(id){
+    console.log(id);
+    gapi.client.tasks.tasks.insert({'tasklist':id,'title':calendarTitle,'notes':'make sure to get this done on time','due':date+'T12:00:00.000Z'}).then(function(response){});
+
+}
 
 function toDoListDisplay(type) {
     console.log(type);
