@@ -215,12 +215,7 @@ function createEntryElement(entry) {
   entryElement.className = 'entry collection-item';
 
   const imageElement=document.createElement("img");
-        if(entry.image == null || entry.image == undefined) { 
-            imageElement.src="/images/person.jpg";
-        }
-        else{
-            imageElement.src = entry.image;
-        }
+  imageElement.src="/images/person.jpg";
     
 
 
@@ -313,31 +308,6 @@ function deleteEntry(entry) {
 
 
 
-// Modifying user info
-//function editing_info() {
- //   
-//}
-
-//function show_form() {
-  //  if (email != emailElement) {
-//
-  //  }
-//}
-
-
-//function getUserInfoOnce(){
- //   if (entryListElement.in.entry){
-     //   if (entryListElement.in.entry){
-     //       add_info();
-      //  }
-  //  }
-//}
-
-
-
-
-
-
 // create function for user info
 function getUserInfo(){
     console.log(localStorage.getItem("userEmail"));
@@ -357,9 +327,7 @@ function getUserInfo(){
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
-                    const messageForm = document.getElementById('addcomm');
-                    messageForm.action = entry.uploadUrl;
-                    console.log(entry.uploadUrl);
+    
 
             
                     
