@@ -60,36 +60,47 @@ public class editInfoServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
 
 
-    
     String[] racearray=request.getParameterValues("race");
-    String race= racearray!=null ? String.join(", ",racearray): String.join(" ",empty);
+    List<String> race= racearray!=null ? Arrays.asList(racearray): Arrays.asList(empty);
+    race = new ArrayList<>(race);
+
+    race.add("none");
    
 
 
     String[] genderarray=request.getParameterValues("gender");
-    String gender= genderarray!=null ? String.join(", ",genderarray): String.join(" ",empty);
+    List<String> gender= genderarray!=null ? Arrays.asList(genderarray): Arrays.asList(empty);
+    gender = new ArrayList<>(gender);
+    gender.add("none");
     
 
     String[] incomearray=request.getParameterValues("income");
-    String income= incomearray!=null ? String.join(", ",incomearray): String.join(" ",empty);
+    List<String> income= incomearray!=null ? Arrays.asList(incomearray): Arrays.asList(empty);
+    income = new ArrayList<>(income);
+    income.add("none");
+
+    String[] emailarray = request.getParameterValues("userEmail");
+    String userEmail=emailarray!=null ? String.join(", ",emailarray): String.join(" ", empty);
 
 
     String[] majorarray=request.getParameterValues("major");
-    String major= majorarray!=null ? String.join(", ", majorarray): String.join(" ",empty);
+    List<String> major= majorarray!=null ? Arrays.asList(majorarray): Arrays.asList(empty);
+    major = new ArrayList<>(major);
+    major.add("none");
+
 
     String[] gradearray=request.getParameterValues("grade");
-    String grade= gradearray!=null ? String.join(", ", gradearray): String.join(" ",empty);
+    List<String> grade= gradearray!=null ? Arrays.asList(gradearray): Arrays.asList(empty);
+    grade = new ArrayList<>(grade);
+    grade.add("none");
+
 
     String[] locationarray=request.getParameterValues("location");
-    String location= locationarray!=null ? String.join(", ",locationarray): String.join(" ",empty);
+    List<String> location= locationarray!=null ? Arrays.asList(locationarray):Arrays.asList(empty);
+    location = new ArrayList<>(location);
+    location.add("none");
 
-      String [] emailarray = request.getParameterValues("userEmail");
-      System.out.println("line55");
-      String userEmail = emailarray != null ? String.join ("", emailarray) : String.join("", empty);
-      System.out.println("line 57");
-      System.out.println(userEmail.toString());
-      Query query = new 
-      Query("Info").addSort("timestamp",SortDirection.DESCENDING);
+      Query query = new Query("Info").addSort("timestamp",SortDirection.DESCENDING);
 
       PreparedQuery results = datastore.prepare(query);
       for (Entity entity : results.asIterable()){

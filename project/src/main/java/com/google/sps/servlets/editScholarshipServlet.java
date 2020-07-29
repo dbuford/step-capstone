@@ -69,28 +69,28 @@ public class editScholarshipServlet extends HttpServlet {
     }*/
 
      String[] empty={"none"};
-    String[] racearray=request.getParameterValues("new-race");
-    String race= racearray!=null ? String.join(", ",racearray): String.join(" ",empty);
+     String[] racearray=request.getParameterValues("new-race");
+    List<String> race= racearray!=null ? Arrays.asList(racearray): Arrays.asList(empty);
    
 
 
     String[] genderarray=request.getParameterValues("new-gender");
-    String gender= genderarray!=null ? String.join(", ",genderarray): String.join(" ",empty);
+    List<String> gender= genderarray!=null ? Arrays.asList(genderarray): Arrays.asList(empty);
     
 
     String[] incomearray=request.getParameterValues("new-income");
-    String income= incomearray!=null ? String.join(", ",incomearray): String.join(" ",empty);
+    List<String> income= incomearray!=null ? Arrays.asList(incomearray): Arrays.asList(empty);
 
 
     String[] majorarray=request.getParameterValues("new-major");
-    String major= majorarray!=null ? String.join(", ", majorarray): String.join(" ",empty);
+    List<String> major= majorarray!=null ? Arrays.asList(majorarray): Arrays.asList(empty);
 
     String[] gradearray=request.getParameterValues("new-grade");
-    String grade= gradearray!=null ? String.join(", ", gradearray): String.join(" ",empty);
+    List<String> grade= gradearray!=null ? Arrays.asList(gradearray): Arrays.asList(empty);
 
     String[] statearray=request.getParameterValues("new-state");
-    String state= statearray!=null ? String.join(", ",statearray): String.join(" ",empty);
-
+    List<String> state= statearray!=null ? Arrays.asList(statearray): Arrays.asList(empty);
+    
     long id=Long.parseLong(request.getParameter("new-id"));
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 

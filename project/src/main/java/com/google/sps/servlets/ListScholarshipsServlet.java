@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,22 +41,51 @@ import java.util.Collections;
 @WebServlet("/list-scholarships")
 public class ListScholarshipsServlet extends HttpServlet {
     String sorting;
+    List<String> raceFilter;
+    List<String> genderFilter;
+    List<String> majorFilter;
+    List<String> incomeFilter;
+    List<String> gradeFilter;
+    List<String> stateFilter;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-    
-    /*long minHeight = 160;
-    Filter propertyFilter =new FilterPredicate("amount", FilterOperator.EQUAL, minHeight);*/
     Query query = new Query("Scholarship").addSort("timestamp", SortDirection.DESCENDING);
 
     
+    if(raceFilter.size()!=1){
+        Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);
+        query.setFilter(raceFilter_Filter);
 
-    
+    }
+    if(genderFilter.size()!=1){
+        Filter genderFilter_Filter =new FilterPredicate("gender", FilterOperator.IN, genderFilter);
+        query.setFilter(genderFilter_Filter);
 
-    /*query.setFilter(propertyFilter);*/
+    }
+    if(majorFilter.size()!=1){
+        Filter majorFilter_Filter =new FilterPredicate("major", FilterOperator.IN,majorFilter);
+        query.setFilter(majorFilter_Filter);
+
+    }
+    if(incomeFilter.size()!=1){
+        Filter incomeFilter_Filter =new FilterPredicate("income", FilterOperator.IN, incomeFilter);
+        query.setFilter(incomeFilter_Filter);
+
+    }
+    if(gradeFilter.size()!=1){
+        Filter gradeFilter_Filter =new FilterPredicate("grade", FilterOperator.IN, gradeFilter);
+        query.setFilter(gradeFilter_Filter);
+
+    }
+    if(stateFilter.size()!=1){
+        Filter stateFilter_Filter =new FilterPredicate("state", FilterOperator.IN, stateFilter);
+        query.setFilter(stateFilter_Filter);
+
+    }
 
    
 
@@ -70,12 +100,12 @@ public class ListScholarshipsServlet extends HttpServlet {
         String deadline= (String) entity.getProperty("deadline");
         String url= (String) entity.getProperty("url");
         String amount=(String) entity.getProperty("amount");
-        String race=(String) entity.getProperty("race");
-        String gender=(String) entity.getProperty("gender");
-        String income=(String) entity.getProperty("income");
-        String major=(String) entity.getProperty("major");
-        String grade=(String) entity.getProperty("grade");
-        String state=(String) entity.getProperty("state");
+        List race=(ArrayList) entity.getProperty("race");
+        List gender=(ArrayList) entity.getProperty("gender");
+        List income=(ArrayList) entity.getProperty("income");
+        List major=(ArrayList) entity.getProperty("major");
+        List grade=(ArrayList) entity.getProperty("grade");
+        List state=(ArrayList) entity.getProperty("state");
         String userEmail=(String) entity.getProperty("userEmail");
         int thumbsup= Integer.parseInt(entity.getProperty("thumbsup").toString());
         int thumbsdown=Integer.parseInt(entity.getProperty("thumbsdown").toString());
@@ -108,6 +138,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         scholarships.add(info);
     }
 
+if(scholarships!=null){
 scholarships.sort(new Comparator<ArrayList>() {
     @Override
     public int compare(ArrayList l1, ArrayList l2) {
@@ -217,7 +248,6 @@ scholarships.sort(new Comparator<ArrayList>() {
     int l2total=l2none+amount2+l2thumbsup+l2thumbsdown;
     
     
-    System.out.println(l1total-l2total);
      return (l1total-l2total);
 
         }
@@ -226,6 +256,7 @@ scholarships.sort(new Comparator<ArrayList>() {
 }
      
 });
+}
 
 
     String json=convertToJsonUsingGson(scholarships);
@@ -247,7 +278,21 @@ scholarships.sort(new Comparator<ArrayList>() {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
       sorting=request.getParameter("sort");
-      System.out.println(sorting);
+      raceFilter=Arrays.asList(request.getParameter("race").split(","));
+ 
+
+      genderFilter=Arrays.asList(request.getParameter("gender").split(","));
+      majorFilter=Arrays.asList(request.getParameter("major").split(","));
+      incomeFilter=Arrays.asList(request.getParameter("income").split(","));
+      gradeFilter=Arrays.asList(request.getParameter("grade").split(","));
+      stateFilter=Arrays.asList(request.getParameter("state").split(","));
+  
+
+
+
+
+      
+
       doGet(request,response);
 
 }
