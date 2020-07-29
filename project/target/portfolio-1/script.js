@@ -37,7 +37,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/tasks";
+      var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
 
 
       /**
@@ -92,22 +92,37 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
           console.log(document.getElementById('login').value);
-         // const params = new URLSearchParams();
-          //  params.append('email', email);
-          //  fetch('/logins', {method: 'POST', body: params})
-          console.log("working");
+
           document.getElementById("authorize_button").style.display = 'none';
-          console.log("working also");
           document.getElementById("signout_button").style.display = 'block';
-          console.log("working");
-          document.getElementById("addcomm").style.display = 'block';
-        } 
+
+          //check if user has already filled out form
+          var alreadyFilledOut=false;
+
+          fetch('/data').then(response => response.json()).then((entries) => {
+          entries.forEach((entry) => {
+          if(entry.email== localStorage.getItem("userEmail")){
+              alreadyFilledOut=true;
+        }
+          })
+          if(alreadyFilledOut==false){
+            document.getElementById("addcomm").style.display = 'block';
+
+          }
+          else{
+            document.getElementById("addcomm").style.display = 'none';
+ 
+          }
+          }); 
+          }
 
         
         if(document.getElementById('scholarship-list')!=null){
+            console.log("line 121 calendar working");
             listUpcomingEvents();
             FindTaskList();
         }
+          
 
         } else {
             if(document.getElementById('login') !=null){
@@ -125,6 +140,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         }
       
       }
+      
 
       /**
        *  Sign in the user upon button click.
@@ -143,8 +159,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        */
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+        const titleElement=document.getElementById('login/signup');
+        titleElement.style.display="block";
         const loginElement = document.getElementById('loginel');
-        loginElement.innerHTML = "Feel free to Login";
+        loginElement.style.display="none";
+
 
         localStorage.removeItem("userEmail");
 
@@ -183,7 +202,7 @@ async function getData() {
 }
 
 
-function add_info() {
+/*function add_info() {
 
 
 
@@ -195,15 +214,20 @@ function add_info() {
     } else{
       document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
     }});
-}
+}*/
 
 
 
 function login() {
+    const titleElement=document.getElementById('login/signup');
+    titleElement.style.display="none";
      const loginElement = document.getElementById('loginel');
+    loginElement.style.display="block";
+     loginElement.style.background="royalblue";
+     loginElement.style.color="white";
+     loginElement.style.fontSize="40px";
      loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
      console.log(document.getElementById('login').value);
-     console.log("works");
 }
 
 

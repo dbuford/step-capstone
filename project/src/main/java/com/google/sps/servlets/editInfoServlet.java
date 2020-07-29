@@ -62,26 +62,26 @@ public class editInfoServlet extends HttpServlet {
 
     
     String[] racearray=request.getParameterValues("race");
-    String race= racearray!=null ? String.join(" ",racearray): String.join(" ",empty);
+    String race= racearray!=null ? String.join(", ",racearray): String.join(" ",empty);
    
 
 
     String[] genderarray=request.getParameterValues("gender");
-    String gender= genderarray!=null ? String.join(" ",genderarray): String.join(" ",empty);
+    String gender= genderarray!=null ? String.join(", ",genderarray): String.join(" ",empty);
     
 
     String[] incomearray=request.getParameterValues("income");
-    String income= incomearray!=null ? String.join(" ",incomearray): String.join(" ",empty);
+    String income= incomearray!=null ? String.join(", ",incomearray): String.join(" ",empty);
 
 
     String[] majorarray=request.getParameterValues("major");
-    String major= majorarray!=null ? String.join(" ", majorarray): String.join(" ",empty);
+    String major= majorarray!=null ? String.join(", ", majorarray): String.join(" ",empty);
 
     String[] gradearray=request.getParameterValues("grade");
-    String grade= gradearray!=null ? String.join(" ", gradearray): String.join(" ",empty);
+    String grade= gradearray!=null ? String.join(", ", gradearray): String.join(" ",empty);
 
     String[] locationarray=request.getParameterValues("location");
-    String location= locationarray!=null ? String.join(" ",locationarray): String.join(" ",empty);
+    String location= locationarray!=null ? String.join(", ",locationarray): String.join(" ",empty);
 
       String [] emailarray = request.getParameterValues("userEmail");
       System.out.println("line55");
