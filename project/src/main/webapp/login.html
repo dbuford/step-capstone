@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="script.js"></script>
+
     <style>
 * {
   box-sizing: border-box;
@@ -23,10 +24,10 @@ body {
 }
 .bg-image {
   /* The image used */
-  background-image: url(/images/students.jpg);
+  background-image: url(/images/homebackground3.jpg);
   
   /* Add the blur effect */
-  filter: blur(6px);
+  filter: blur(2px);
   -webkit-filter: blur(6px);
   
   /* Full height */
@@ -135,6 +136,25 @@ body {
         margin-top:2%;
         text-align:left;
     }
+    .loginel{
+        /*background:#00CED1;*/
+        background:royalblue;
+        height:20%;
+        color:white;
+    }
+    h4{
+        font-weight:bold;
+        color:royalblue;
+        font-size:20px;
+    }
+    .submit-button{
+        border-radius:10px;
+        background-color:royalblue;
+        color:white;
+        width:50%;
+        text-align:center;
+        margin-top:5%;
+    }
 
 /* styling section */
 
@@ -172,8 +192,7 @@ body {
       </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+      onload="handleClientLoad()">
     </script>
 
 
@@ -183,21 +202,29 @@ body {
 
 
 
-    <center><h1 style="font-family:Impact, fantasy">LOGIN/SIGNUP</h1> </center>
-    <center><p id="loginel"></p>
-      <button id="authorize_button" style="display: none;">Login</button>
-      <button id="signout_button" style="display: none;">Sign Out</button>
+    <center><h1 style="font-family:Impact, fantasy" id="login/signup">LOGIN/SIGNUP</h1> </center>
+    <center><h2 id="loginel" class="loginel"></h2>
+     <!-- <button id="authorize_button" style="display: none;">Login</button>-->
+    <button id="authorize_button" class="oauth-container btn darken-4 white black-text"  style="text-transform:none;">
+            <img width="20px" alt="Google sign-in" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Login with Google
+    </button>
+      <button id="signout_button" style="display: none;background:#4285F4;color:white">
+          <img width="20px"  alt="Google sign-in" src="/images/blueg.jpg" >
+        Sign Out
+      </button>
       <br/>
       <div class="divider"></div>
       <h6 id="error"></h6>
 
       <form  id="addcomm" action="/data" method="POST">
-        <p> Complete form if you haven't already to help us find the best scholarships for you! </p> 
+        <p> Complete form to help us find the best scholarships for you! </p> 
 
         <input id = "login" name="userEmail" style="display:none";></input>
         <input name="idname"  value="entry.id" style="display:none";></input>
         
-        <textarea name="name" placeholder="Name"></textarea>
+        <textarea name="name" placeholder="Name" style="width:45%"></textarea>
         <br/><br/>
         
         <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea>
@@ -212,10 +239,11 @@ body {
                         <h4> Race/Ethnicity:</h4>
                     </div>
                     <div class="scrollbox">
-                        <input type="checkbox" value="hispanic/latinx" name="race">Hispanic or Latinx</input><br>
-                        <input type="checkbox" value="african american/black" name="race">African American or Black</input><br>
-                        <input type="checkbox" value="asian" name="race">Asian </input><br>
-                        <input type="checkbox" value="hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
+                        <input type="checkbox" value="Hispanic/Latinx" name="race">Hispanic or Latinx</input><br>
+                        <input type="checkbox" value="African American/Black" name="race">African American or Black</input><br>
+                        <input type="checkbox" value="Asian" name="race">Asian </input><br>
+                        <input type="checkbox" value="Hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
+                        <input type="checkbox" value="White" name="race">White</input><br>
                     </div>
                 </div>
 
@@ -224,11 +252,11 @@ body {
                         <h4> Gender Identity:</h4>
                     </div>
                     <div class="scrollbox">
-                        <input type="checkbox" value="male" name="gender"> Male/Man</input><br>
-                        <input type ="checkbox" value="fem" name="gender"> Female/Woman</input><br>
-                        <input type="checkbox" value="transman" name="gender"> Transmale/Transman</input><br>
-                        <input type="checkbox" value="transwoman" name="gender">Transfemale/Transwoman</input><br>
-                        <input type="checkbox" value="nonconforming" name="gender"> Genderqueer/Gender nonconforming</input><br>
+                        <input type="checkbox" value="Male/Man" name="gender"> Male/Man</input><br>
+                        <input type ="checkbox" value="Female/Woman" name="gender"> Female/Woman</input><br>
+                        <input type="checkbox" value="Transmale/Transman" name="gender"> Transmale/Transman</input><br>
+                        <input type="checkbox" value="Transfemale/Transwoman" name="gender">Transfemale/Transwoman</input><br>
+                        <input type="checkbox" value="Genderqueer/Gender Nonconforming" name="gender"> Genderqueer/Gender Nonconforming</input><br>
                     </div>
                 </div>
 
@@ -237,11 +265,11 @@ body {
                         <h4>Income Level:</h4>
                     </div>
                     <div class="scrollbox">
-                        <input type="checkbox" value="lessthan25k" name="income">less than $25k</input><br>
+                        <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
                         <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
                         <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
                         <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
-                        <input type="checkbox" value="morethan100k" name="income"> more than $100k</input>
+                        <input type="checkbox" value="More than 100k" name="income"> more than $100k</input>
 
                     </div>
                 </div>
@@ -260,7 +288,7 @@ body {
                         <input type ="checkbox" name="major" value="business">Business/Management</input><br>
                         <input type ="checkbox" name="major" value="chemistry">Chemistry</input><br>
                         <input type ="checkbox" name="major" value="communications-journalism">Communications/Journalism</input><br>
-                        <input type ="checkbox" name="major" value="compsci">Computer Science</input><br>
+                        <input type ="checkbox" name="major" value="computer science">Computer Science</input><br>
                         <input type ="checkbox" name="major" value="criminal-justice">Criminal Justice</input><br>
                         <input type ="checkbox" name="major" value="culinary-arts">Culinary Arts</input><br>
                         <input type ="checkbox" name="major" value="dental-studies">Dental Studies</input><br>
@@ -308,10 +336,10 @@ body {
                         <h4>Grade Level:</h4>
                     </div>
                     <div class="scrollbox">
-                        <input type="checkbox" value="freshman" name="grade">Freshman</input><br>
-                        <input type ="checkbox" value="sophomore" name="grade"> Sophomore</input><br>
-                        <input type="checkbox" value="junior" name="grade"> Junior </input><br>
-                        <input type="checkbox" value="senior" name="grade">Senior</input><br>
+                        <input type="checkbox" value="Freshman" name="grade">Freshman</input><br>
+                        <input type ="checkbox" value="Sophomore" name="grade"> Sophomore</input><br>
+                        <input type="checkbox" value="Junior" name="grade"> Junior </input><br>
+                        <input type="checkbox" value="Senior" name="grade">Senior</input><br>
                     </div>
                 </div>
 
@@ -377,10 +405,10 @@ body {
 
 
         </div>
-        <button> Submit</button> 
+        <button class="submit-button"> Submit</button> 
           
         </form>   
-      <br/>
+   
       </center>
 
 </div>

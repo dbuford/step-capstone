@@ -19,6 +19,10 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -43,7 +47,17 @@ public class ListScholarshipsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     
+    /*long minHeight = 160;
+    Filter propertyFilter =new FilterPredicate("amount", FilterOperator.EQUAL, minHeight);*/
     Query query = new Query("Scholarship").addSort("timestamp", SortDirection.DESCENDING);
+
+    
+
+    
+
+    /*query.setFilter(propertyFilter);*/
+
+   
 
     PreparedQuery results = datastore.prepare(query);
 

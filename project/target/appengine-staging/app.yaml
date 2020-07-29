@@ -40,11 +40,11 @@ handlers:
   script: unused
   login: optional
   secure: optional
-- url: /logins
+- url: /display-ToDoList
   script: unused
   login: optional
   secure: optional
-- url: /display-ToDoList
+- url: /completed
   script: unused
   login: optional
   secure: optional
@@ -52,7 +52,15 @@ handlers:
   script: unused
   login: optional
   secure: optional
+- url: /active
+  script: unused
+  login: optional
+  secure: optional
 - url: /list-scholarships
+  script: unused
+  login: optional
+  secure: optional
+- url: /change-priority
   script: unused
   login: optional
   secure: optional
