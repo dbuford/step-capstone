@@ -249,6 +249,7 @@ function createEntryElement(entry) {
   } else {
     nameElement.innerText = (entry.name);
   }
+<<<<<<< HEAD
     const nameLocationElement=document.createElement('div');
     nameLocationElement.className='name-location-div';
     nameLocationElement.appendChild(nameElement);
@@ -312,6 +313,84 @@ function createEntryElement(entry) {
 
 
     
+=======
+const nameLocationElement=document.createElement('div');
+nameLocationElement.className='name-location-div';
+nameLocationElement.appendChild(nameElement);
+const geoTagElement=document.createElement('i');
+geoTagElement.className='fas fa-map-marker-alt';
+geoTagElement.style.fontSize='24px';
+geoTagElement.style.float='left';
+nameLocationElement.appendChild(geoTagElement);
+
+
+const locationElement = document.createElement('p');
+locationElement.innerText = (entry.location.splice(0,(entry.location.length)-1).toString());
+locationElement.style.float='left';
+nameLocationElement.appendChild(locationElement);
+
+const restOfElement=document.createElement('div');
+restOfElement.className="rest-div";
+
+const valueElement=document.createElement('div');
+valueElement.className="value-div";
+
+const titleElement=document.createElement('div');
+titleElement.className="title-div";
+
+  const emailTitleElement=document.createElement('p');
+  emailTitleElement.innerText="Email ";
+  const emailElement = document.createElement('p');
+  emailElement.innerText = (entry.email);
+  
+  const ageTitleElement=document.createElement('p');
+  ageTitleElement.innerText="Age ";
+  const ageElement = document.createElement('p');
+  ageElement.innerText = (entry.age);
+
+  const majorTitleElement=document.createElement('p');
+  majorTitleElement.innerText="Major Interest ";
+  const majorElement = document.createElement('p');
+  majorElement.innerText = (entry.major.splice(0,(entry.major.length)-1).toString());
+
+  const genderTitleElement=document.createElement('p');
+  genderTitleElement.innerText="Gender Identity ";
+  const genderElement = document.createElement('p');
+  genderElement.innerText = (entry.gender.splice(0,(entry.gender.length)-1).toString());
+
+  const incomeTitleElement=document.createElement('p');
+  incomeTitleElement.innerText="Income Level ";
+  const incomeElement = document.createElement('p');
+  incomeElement.innerText = (entry.income.splice(0,(entry.income.length)-1).toString());
+
+  const raceTitleElement=document.createElement('p');
+  raceTitleElement.innerText="Race/Ethnicity ";
+  const raceElement = document.createElement('p');
+  raceElement.innerText = (entry.race.splice(0,(entry.race.length)-1).toString());
+
+  const gradeTitleElement=document.createElement('p');
+  gradeTitleElement.innerText="Grade Level ";
+  const gradeElement = document.createElement('p');
+  gradeElement.innerText = (entry.grade.splice(0,(entry.grade.length)-1).toString());
+
+
+
+  /*const timeElement = document.createElement('span');
+  var date = new Date(entry.timestamp);
+  timeElement.innerText = date.toString().slice(0,24);
+  timeElement.style.float = "right";
+  timeElement.style.marginRight = "10px";
+
+  var deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.style.float = "right";
+  deleteButtonElement.addEventListener('click', () => {
+    deleteEntry(entry);
+
+    // Remove the entry from the DOM.
+    entryElement.remove();
+  });*/
+>>>>>>> 64189cedf4df6fb25f279c541fcd97b925324635
 
   pictureElement.appendChild(imageElement);
     containerElement.appendChild(pictureElement);
@@ -673,6 +752,12 @@ function getUserScholarships(){
                 })
 
                 if(foundEmail==true){
+                    document.getElementById("race").value=foundEntry.race;
+                    document.getElementById("gender").value=foundEntry.gender;
+                    document.getElementById("major").value=foundEntry.major;
+                    document.getElementById("income").value=foundEntry.income;
+                    document.getElementById("grade").value=foundEntry.grade;
+                    document.getElementById("state").value=foundEntry.location;
                     getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location); 
                 }
                 else{
@@ -702,6 +787,15 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
     }
     const params = new URLSearchParams();
     params.append('sort', sort);
+    params.append('race',race);
+    params.append('gender',gender);
+    params.append('major',major);
+    params.append('income',income);
+    params.append('grade',grade);
+    params.append('state',state);
+
+
+
 
    fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
        var scholarships=[];
@@ -716,7 +810,8 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             else{   
             for(let i=0;i<response.length;i++){
-                if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
+                scholarships.push(response[i]);
+                /*if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
                     if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
                         if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
                             if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
@@ -730,7 +825,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                             }  
                         }
                     } 
-                } 
+                } */
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -1011,7 +1106,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("race").options;
                         
                         var newRaceElement=document.createElement("input");
-                        setAttributes(newRaceElement,{"value":x[i].value,"type":"checkbox","name":"new-race"},scholarship[4]);
+                        setAttributes(newRaceElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-race"},scholarship[4]);
                         if(i!=1){
                         newRaceContainer.appendChild(document.createElement("br"));
                         }
@@ -1036,7 +1131,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("gender").options;
                         
                         var newGenderElement=document.createElement("input");
-                        setAttributes(newGenderElement,{"value":x[i].value,"type":"checkbox","name":"new-gender"},scholarship[5]);
+                        setAttributes(newGenderElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-gender"},scholarship[5]);
                         if(i!=2){
                         newGenderContainer.appendChild(document.createElement("br"));
                         }
@@ -1061,7 +1156,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("income").options;
                         
                         var newIncomeElement=document.createElement("input");
-                        setAttributes(newIncomeElement,{"value":x[i].value,"type":"checkbox","name":"new-income"},scholarship[6]);
+                        setAttributes(newIncomeElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-income"},scholarship[6]);
                         if(i!=2){
                         newIncomeContainer.appendChild(document.createElement("br"));
                         }
@@ -1084,7 +1179,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("major").options;
                         
                         var newMajorElement=document.createElement("input");
-                        setAttributes(newMajorElement,{"value":x[i].value,"type":"checkbox","name":"new-major"},scholarship[7]);
+                        setAttributes(newMajorElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-major"},scholarship[7]);
                         if(i!=2){
                         newMajorContainer.appendChild(document.createElement("br"));
                         }
@@ -1109,7 +1204,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("grade").options;
                         
                         var newGradeElement=document.createElement("input");
-                        setAttributes(newGradeElement,{"value":x[i].value,"type":"checkbox","name":"new-grade"},scholarship[8]);
+                        setAttributes(newGradeElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-grade"},scholarship[8]);
                         if(i!=2){
                         newGradeContainer.appendChild(document.createElement("br"));
                         }
@@ -1132,7 +1227,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                         var x=document.getElementById("state").options;
                         
                         var newStateElement=document.createElement("input");
-                        setAttributes(newStateElement,{"value":x[i].value,"type":"checkbox","name":"new-state"},scholarship[10]);
+                        setAttributes(newStateElement,{"value":x[i].value.split(",")[0],"type":"checkbox","name":"new-state"},scholarship[10]);
                         if(i!=2){
                         newStateContainer.appendChild(document.createElement("br"));
                         }

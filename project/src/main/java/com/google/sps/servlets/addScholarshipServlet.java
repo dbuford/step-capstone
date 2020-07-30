@@ -55,26 +55,26 @@ public class addScholarshipServlet extends HttpServlet {
 
    String[] empty={"none"};
     String[] racearray=request.getParameterValues("race");
-    String race= racearray!=null ? String.join(" ",racearray): String.join(" ",empty);
+    List<String> race= racearray!=null ? Arrays.asList(racearray): Arrays.asList(empty);
    
 
 
     String[] genderarray=request.getParameterValues("gender");
-    String gender= genderarray!=null ? String.join(", ",genderarray): String.join(" ",empty);
+    List<String> gender= genderarray!=null ? Arrays.asList(genderarray): Arrays.asList(empty);
     
 
     String[] incomearray=request.getParameterValues("income");
-    String income= incomearray!=null ? String.join(", ",incomearray): String.join(" ",empty);
+    List<String> income= incomearray!=null ? Arrays.asList(incomearray): Arrays.asList(empty);
 
 
     String[] majorarray=request.getParameterValues("major");
-    String major= majorarray!=null ? String.join(", ", majorarray): String.join(" ",empty);
+    List<String> major= majorarray!=null ? Arrays.asList(majorarray): Arrays.asList(empty);
 
     String[] gradearray=request.getParameterValues("grade");
-    String grade= gradearray!=null ? String.join(", ", gradearray): String.join(" ",empty);
+    List<String> grade= gradearray!=null ? Arrays.asList(gradearray): Arrays.asList(empty);
 
     String[] statearray=request.getParameterValues("state");
-    String state= statearray!=null ? String.join(", ",statearray): String.join(" ",empty);
+    List<String> state= statearray!=null ? Arrays.asList(statearray): Arrays.asList(empty);
 
     long timestamp = System.currentTimeMillis();
 

@@ -59,12 +59,10 @@ public class changePriorityServlet extends HttpServlet {
        try {
         Key toDoListEntityKey = KeyFactory.createKey("ToDoListScholarship", entityId);
         Entity toDoListEntity=datastore.get(toDoListEntityKey);
-        System.out.println(toDoListEntity);
         ArrayList <Long> currentIds=(ArrayList)toDoListEntity.getProperty("scholarshipIdList");
         int scholarshipidx=currentIds.indexOf(scholarshipId);
         ArrayList <String> currentIdPriority=(ArrayList)toDoListEntity.getProperty("idPriorityList");
         currentIdPriority.set(scholarshipidx,priorityValue);
-        System.out.println(currentIdPriority.toString());
 
         toDoListEntity.setProperty("idPriorityList",currentIdPriority);
         datastore.put(toDoListEntity);

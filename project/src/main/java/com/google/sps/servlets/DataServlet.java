@@ -58,16 +58,16 @@ public class DataServlet extends HttpServlet {
     public String name;
     public String email;
     public String age;
-    public String major;
-    public String race;
-    public String gender;
-    public String income;
-    public String grade;
-    public String location;
+    public List<String> major;
+    public List<String> race;
+    public List<String> gender;
+    public List<String> income;
+    public List<String> grade;
+    public List<String> location;
     public String uploadUrl;
 	
     
-    public Info(long id, long timestamp, String name, String email, String age, String major, String gender, String race, String income, String grade, String location, String uploadUrl) {
+    public Info(long id, long timestamp, String name, String email, String age,List<String> major, List<String> gender, List<String> race, List<String> income, List<String> grade, List<String> location, String uploadUrl) {
       this.id = id;
       this.timestamp = timestamp;
       this.name = name;
@@ -102,26 +102,26 @@ public class DataServlet extends HttpServlet {
         return age;
     }
 
-    public String getMajor() {
+    public List<String> getMajor() {
         return major;
     }
-    public String getRace() {
+    public List<String> getRace() {
         return race;
     }
 
-    public String getIncome() {
+    public List<String> getIncome() {
         return income;
     }
 
-    public String getGender() {
+    public List<String> getGender() {
         return gender;
     }
 
-    public String getGrade() {
+    public List<String> getGrade() {
         return grade;
     }
 
-    public String getLocation() {
+    public List<String> getLocation() {
         return location;
     }
    
@@ -156,16 +156,15 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
       String age = (String) entity.getProperty("age");
-      String major = (String) entity.getProperty("major");
-      String gender = (String) entity.getProperty("gender");
-      String race = (String) entity.getProperty("race");
-      String income = (String) entity.getProperty("income");
-      String grade = (String) entity.getProperty("grade");
-      String location = (String) entity.getProperty("location");
+      List major = (ArrayList) entity.getProperty("major");
+      List gender = (ArrayList) entity.getProperty("gender");
+      List race = (ArrayList) entity.getProperty("race");
+      List income = (ArrayList) entity.getProperty("income");
+      List grade = (ArrayList) entity.getProperty("grade");
+      List location = (ArrayList) entity.getProperty("location");
       String url= (String) entity.getProperty("image");
       Info entry = new Info(id, timestamp, name, email, age, major, gender, race, income, grade, location, url);
       information.add(entry);
-      System.out.println("working");
 
     }
 
@@ -186,7 +185,6 @@ public class DataServlet extends HttpServlet {
     
     String[] emailarray = request.getParameterValues("userEmail");
 
-    System.out.println(emailarray);
 
     
    // Get the URL of the image that the user uploaded to Blobstore.
@@ -200,30 +198,46 @@ public class DataServlet extends HttpServlet {
     long timestamp = System.currentTimeMillis();
     //String email = userService.getCurrentUser().getEmail();
     
-    String[] empty={"none"};
+     String[] empty={"none"};
     String[] racearray=request.getParameterValues("race");
-    String race= racearray!=null ? String.join(", ",racearray): String.join(" ", empty);
+    List<String> race= racearray!=null ? Arrays.asList(racearray): Arrays.asList(empty);
+    race = new ArrayList<>(race);
+
+    race.add("none");
+   
 
 
     String[] genderarray=request.getParameterValues("gender");
-    String gender= genderarray!=null ? String.join(", ",genderarray): String.join(" ", empty);
-    
-    String email=emailarray!=null ? String.join(", ",emailarray): String.join(" ", empty);
+    List<String> gender= genderarray!=null ? Arrays.asList(genderarray): Arrays.asList(empty);
+    gender = new ArrayList<>(gender);
+    gender.add("none");
     
 
     String[] incomearray=request.getParameterValues("income");
-    String income= incomearray!=null ? String.join(", ",incomearray): String.join(" ", empty);
+    List<String> income= incomearray!=null ? Arrays.asList(incomearray): Arrays.asList(empty);
+    income = new ArrayList<>(income);
+    income.add("none");
+
+    String email=emailarray!=null ? String.join(", ",emailarray): String.join(" ", empty);
 
 
     String[] majorarray=request.getParameterValues("major");
-    String major= majorarray!=null ? String.join(", ",majorarray): String.join(" ", empty);
+    List<String> major= majorarray!=null ? Arrays.asList(majorarray): Arrays.asList(empty);
+    major = new ArrayList<>(major);
+    major.add("none");
+
 
     String[] gradearray=request.getParameterValues("grade");
-    String grade= gradearray!=null ? String.join(", ",gradearray): String.join(" ", empty);
+    List<String> grade= gradearray!=null ? Arrays.asList(gradearray): Arrays.asList(empty);
+    grade = new ArrayList<>(grade);
+    grade.add("none");
 
 
     String[] locationarray=request.getParameterValues("location");
-    String location= locationarray!=null ? String.join(", ",locationarray): String.join(" ", empty);
+    List<String> location= locationarray!=null ? Arrays.asList(locationarray):Arrays.asList(empty);
+    location = new ArrayList<>(location);
+    location.add("none");
+
 
 
     Entity entryEntity = new Entity("Info");
