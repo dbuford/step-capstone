@@ -534,6 +534,12 @@ span {
             var stateElement=document.getElementById('state');
             var sortElement=document.getElementById('sort');
             console.log(sortElement.value);
+            console.log(raceElement.value);
+            console.log(genderElement.value);
+            console.log(majorElement.value);
+            console.log(incomeElement.value);
+            console.log(stateElement.value);
+            console.log(gradeElement.value);
 
 
             getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value,gradeElement.value,stateElement.value,sortElement.value);
@@ -570,6 +576,12 @@ function changeSelection(){
     }
     else{
         form2Element.style.display="block";
+        document.getElementById("race").value="none";
+        document.getElementById("gender").value="none";
+        document.getElementById("major").value="none";
+        document.getElementById("income").value="none";
+        document.getElementById("grade").value="none";
+        document.getElementById("state").value="none";
       
         getScholarships("none","none","none","none","none","none","none");
     }

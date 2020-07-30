@@ -151,13 +151,15 @@ scholarships.sort(new Comparator<ArrayList>() {
         int l1thumbsdown=0;
         int l2thumbsup=0;
         int l2thumbsdown=0;
+        String[] empty={"none"};
+
 
         if(sorting.equals("requirements")){
             for(int i=4; i<11; i++){
-                if(l1.get(i).equals("none")){
+                if(l1.get(i).equals(Arrays.asList(empty))){
                     l1none++;
                 }
-                if(l2.get(i).equals("none")){
+                if(l2.get(i).equals(Arrays.asList(empty))){
                     l2none++;
                 }
             return l1none-l2none;
@@ -223,11 +225,11 @@ scholarships.sort(new Comparator<ArrayList>() {
 
         }
         else{
-                   for(int i=4; i<11; i++){
-            if(l1.get(i).equals("none")){
+                for(int i=4; i<11; i++){
+            if(l1.get(i).equals(Arrays.asList(empty))){
             l1none++;
             }
-            if(l2.get(i).equals("none")){
+            if(l2.get(i).equals(Arrays.asList(empty))){
             l2none++;
             }
     l1none=5*l1none;

@@ -509,6 +509,12 @@ function getUserScholarships(){
                 })
 
                 if(foundEmail==true){
+                    document.getElementById("race").value=foundEntry.race;
+                    document.getElementById("gender").value=foundEntry.gender;
+                    document.getElementById("major").value=foundEntry.major;
+                    document.getElementById("income").value=foundEntry.income;
+                    document.getElementById("grade").value=foundEntry.grade;
+                    document.getElementById("state").value=foundEntry.location;
                     getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location); 
                 }
                 else{
