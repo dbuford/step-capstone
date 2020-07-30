@@ -231,9 +231,6 @@ function login() {
 }
 
 
-function updateCount() {
-  location.replace("Profile.html")
-}
 
 function createEntryElement(entry) {
     const containerElement=document.getElementById('container-div');
@@ -343,8 +340,8 @@ function createEntryElement(entry) {
   titleElement.appendChild(ageTitleElement);
   valueElement.appendChild(ageElement);
 
-  titleElement.appendChild(breakElement1);
-  valueElement.appendChild(breakElement2);
+  titleElement.appendChild(breakElement3);
+  valueElement.appendChild(breakElement4);
 
     titleElement.appendChild(raceTitleElement);
   valueElement.appendChild(raceElement);
@@ -354,9 +351,6 @@ function createEntryElement(entry) {
    
   titleElement.appendChild(incomeTitleElement);
   valueElement.appendChild(incomeElement);
-
-  titleElement.appendChild(breakElement3);
-  valueElement.appendChild(breakElement4);
 
 
   titleElement.appendChild(majorTitleElement);
@@ -374,7 +368,6 @@ function createEntryElement(entry) {
     var editButton=document.createElement("button");
     editButton.innerText="edit";
     containerElement.appendChild(editButton);
-    var deleteButton=document.createElement("button");
   
   //edit button
   editButton.onclick=function(){
@@ -383,198 +376,199 @@ function createEntryElement(entry) {
                         editButton.innerText="Close";
                     
 
-                    //display elements as none
-                    document.getElementById("user-info").style.display="none";
-                    console.log("working2");
-                 
+                        //display elements as none
+                        document.getElementById("user-info").style.display="none";
+                        console.log("working2");
+                    
+                    
+                        formDiv1=document.createElement("div");
+                        formDiv1.setAttribute("class","edit-form1");
+
+                        formDiv2=document.createElement("div");
+                        formDiv2.setAttribute("class","edit-form2");
+
+
+                        formElement2=document.createElement("form");
+                        formElement2.setAttribute("class","edit-form-parent");
+                        console.log("working3");
+                        formElement2.action="/edit-Info";
+                        formElement2.method="POST";
+
+                        //formElement2.setAttribute('id','form-element-2'+scholarship[0]);
+                        
+
+
+                        var newTitle=document.createElement("h4");
+                        newTitle.innerText='Title: ';
+                        formDiv1.appendChild(newTitle);
+
+                        var newTitleInput=document.createElement("input");
+                        newTitleInput.value=scholarship[0];
+                        newTitleInput.name="new-title";
+                        formDiv1.appendChild(newTitleInput);
+
+
+                    //create input boxes for race*/
+
+                        var newRace=document.createElement("h4");
+                        newRace.innerText='Race/Ethnicity: ';
+                        formDiv2.appendChild(newRace);
+
+                        var newRaceContainer=document.createElement("div");
+                        newRaceContainer.setAttribute("class","scrollbox");
+
+                        for(let i=1;i<document.getElementById("race").length;i++){
+                            var x=document.getElementById("race").options;
+                            
+                            var newRaceElement=document.createElement("input");
+                            setAttributes(newRaceElement,{"value":x[i].value,"type":"checkbox","name":"new-race"},entry.race.toString());
+                            if(i!=1){
+                            newRaceContainer.appendChild(document.createElement("br"));
+                            }
+
+                            newRaceContainer.appendChild(newRaceElement);
+                            newRaceContainer.appendChild(document.createTextNode(x[i].text));
+                        }
+
+                        formDiv2.appendChild(newRaceContainer);
+
                 
-                    formDiv1=document.createElement("div");
-                    formDiv1.setAttribute("class","edit-form1");
+                    //create input for gender identity
 
-                    formDiv2=document.createElement("div");
-                    formDiv2.setAttribute("class","edit-form2");
+                        var newGender=document.createElement("h4");
+                        newGender.innerText='Gender Identity: ';
+                        formDiv2.appendChild(newGender);
+
+                        var newGenderContainer=document.createElement("div");
+                        newGenderContainer.setAttribute("class","scrollbox");
+
+                        for(let i=2;i<document.getElementById("gender").length;i++){
+                            var x=document.getElementById("gender").options;
+                            
+                            var newGenderElement=document.createElement("input");
+                            setAttributes(newGenderElement,{"value":x[i].value,"type":"checkbox","name":"new-gender"},entry.gender.toString());
+                            if(i!=2){
+                            newGenderContainer.appendChild(document.createElement("br"));
+                            }
+
+                            newGenderContainer.appendChild(newGenderElement);
+                            newGenderContainer.appendChild(document.createTextNode(x[i].text));
+                        }
+
+                        formDiv2.appendChild(newGenderContainer);
 
 
-                    formElement2=document.createElement("form");
-                    formElement2.setAttribute("class","edit-form-parent");
-                    formElement2.action="/edit-profile";
-                    formElement2.method="POST";
+                //create input for income level
 
-                    formElement2.setAttribute('id','form-element-2'+scholarship[0]);
+                        var newIncome=document.createElement("h4");
+                        newIncome.innerText='Income Level: ';
+                        formDiv2.appendChild(newIncome);
+
+                        var newIncomeContainer=document.createElement("div");
+                        newIncomeContainer.setAttribute("class","scrollbox");
+
+                        for(let i=2;i<document.getElementById("income").length;i++){
+                            var x=document.getElementById("income").options;
+                            
+                            var newIncomeElement=document.createElement("input");
+                            setAttributes(newIncomeElement,{"value":x[i].value,"type":"checkbox","name":"new-income"},entry.income.toString());
+                            if(i!=2){
+                            newIncomeContainer.appendChild(document.createElement("br"));
+                            }
+
+                            newIncomeContainer.appendChild(newIncomeElement);
+                            newIncomeContainer.appendChild(document.createTextNode(x[i].text));
+                        }
+
+                        formDiv2.appendChild(newIncomeContainer);
+
+                //create input for major
+                        var newMajor=document.createElement("h4");
+                        newMajor.innerText='Major: ';
+                        formDiv2.appendChild(newMajor);
+
+                        var newMajorContainer=document.createElement("div");
+                        newMajorContainer.setAttribute("class","scrollbox");
+
+                        for(let i=2;i<document.getElementById("major").length;i++){
+                            var x=document.getElementById("major").options;
+                            
+                            var newMajorElement=document.createElement("input");
+                            setAttributes(newMajorElement,{"value":x[i].value,"type":"checkbox","name":"new-major"},entry.major.toString());
+                            if(i!=2){
+                            newMajorContainer.appendChild(document.createElement("br"));
+                            }
+
+                            newMajorContainer.appendChild(newMajorElement);
+                            newMajorContainer.appendChild(document.createTextNode(x[i].text));
+                        }
+
+                        formDiv2.appendChild(newMajorContainer);
                     
-
-
-                    var newTitle=document.createElement("h4");
-                    newTitle.innerText='Title: ';
-                    formDiv1.appendChild(newTitle);
-
-                    var newTitleInput=document.createElement("input");
-                    newTitleInput.value=scholarship[0];
-                    newTitleInput.name="new-title";
-                    formDiv1.appendChild(newTitleInput);
-
-
-                //create input boxes for race*/
-
-                    var newRace=document.createElement("h4");
-                    newRace.innerText='Race/Ethnicity: ';
-                    formDiv2.appendChild(newRace);
-
-                    var newRaceContainer=document.createElement("div");
-                    newRaceContainer.setAttribute("class","scrollbox");
-
-                    for(let i=1;i<document.getElementById("race").length;i++){
-                        var x=document.getElementById("race").options;
                         
-                        var newRaceElement=document.createElement("input");
-                        setAttributes(newRaceElement,{"value":x[i].value,"type":"checkbox","name":"new-race"},entry.race.toString());
-                        if(i!=1){
-                        newRaceContainer.appendChild(document.createElement("br"));
+
+                //create input for gradelevel
+                        var newGrade=document.createElement("h4");
+                        newGrade.innerText='Grade Level: ';
+                        formDiv2.appendChild(newGrade);
+
+                        var newGradeContainer=document.createElement("div");
+                        newGradeContainer.setAttribute("class","scrollbox");
+
+                        for(let i=2;i<document.getElementById("grade").length;i++){
+                            var x=document.getElementById("grade").options;
+                            
+                            var newGradeElement=document.createElement("input");
+                            setAttributes(newGradeElement,{"value":x[i].value,"type":"checkbox","name":"new-grade"},entry.grade.toString());
+                            if(i!=2){
+                            newGradeContainer.appendChild(document.createElement("br"));
+                            }
+
+                            newGradeContainer.appendChild(newGradeElement);
+                            newGradeContainer.appendChild(document.createTextNode(x[i].text));
                         }
 
-                        newRaceContainer.appendChild(newRaceElement);
-                        newRaceContainer.appendChild(document.createTextNode(x[i].text));
-                    }
+                        formDiv2.appendChild(newGradeContainer);
 
-                    formDiv2.appendChild(newRaceContainer);
+                //input for state location
+                        var newlocation=document.createElement("h4");
+                        newlocation.innerText='location: ';
+                        formDiv2.appendChild(newlocation);
 
-               
-                //create input for gender identity
+                    var newlocationContainer=document.createElement("div");
+                        newlocationContainer.setAttribute("class","scrollbox");
 
-                    var newGender=document.createElement("h4");
-                    newGender.innerText='Gender Identity: ';
-                    formDiv2.appendChild(newGender);
+                        for(let i=2;i<document.getElementById("location").length;i++){
+                            var x=document.getElementById("location").options;
+                            
+                            var newlocationElement=document.createElement("input");
+                            setAttributes(newlocationElement,{"value":x[i].value,"type":"checkbox","name":"new-location"},entry.location.toString());
+                            if(i!=2){
+                            newlocationContainer.appendChild(document.createElement("br"));
+                            }
 
-                    var newGenderContainer=document.createElement("div");
-                    newGenderContainer.setAttribute("class","scrollbox");
-
-                    for(let i=2;i<document.getElementById("gender").length;i++){
-                        var x=document.getElementById("gender").options;
-                        
-                        var newGenderElement=document.createElement("input");
-                        setAttributes(newGenderElement,{"value":x[i].value,"type":"checkbox","name":"new-gender"},entry.gender.toString());
-                        if(i!=2){
-                        newGenderContainer.appendChild(document.createElement("br"));
+                            newlocationContainer.appendChild(newlocationElement);
+                            newlocationContainer.appendChild(document.createTextNode(x[i].text));
                         }
 
-                        newGenderContainer.appendChild(newGenderElement);
-                        newGenderContainer.appendChild(document.createTextNode(x[i].text));
-                    }
-
-                    formDiv2.appendChild(newGenderContainer);
+                        formDiv2.appendChild(newlocationContainer);
 
 
-            //create input for income level
-
-                    var newIncome=document.createElement("h4");
-                    newIncome.innerText='Income Level: ';
-                    formDiv2.appendChild(newIncome);
-
-                    var newIncomeContainer=document.createElement("div");
-                    newIncomeContainer.setAttribute("class","scrollbox");
-
-                    for(let i=2;i<document.getElementById("income").length;i++){
-                        var x=document.getElementById("income").options;
+                        var submitButton=document.createElement("button");
+                        submitButton.innerHTML="Submit";
+                        submitButton.style.float="left";
+                        formElement2.appendChild(formDiv2);
+                        formElement2.appendChild(formDiv1);
+                        formElement2.appendChild(submitButton);
                         
-                        var newIncomeElement=document.createElement("input");
-                        setAttributes(newIncomeElement,{"value":x[i].value,"type":"checkbox","name":"new-income"},entry.income.toString());
-                        if(i!=2){
-                        newIncomeContainer.appendChild(document.createElement("br"));
-                        }
-
-                        newIncomeContainer.appendChild(newIncomeElement);
-                        newIncomeContainer.appendChild(document.createTextNode(x[i].text));
-                    }
-
-                    formDiv2.appendChild(newIncomeContainer);
-
-            //create input for major
-                    var newMajor=document.createElement("h4");
-                    newMajor.innerText='Major: ';
-                    formDiv2.appendChild(newMajor);
-
-                    var newMajorContainer=document.createElement("div");
-                    newMajorContainer.setAttribute("class","scrollbox");
-
-                    for(let i=2;i<document.getElementById("major").length;i++){
-                        var x=document.getElementById("major").options;
-                        
-                        var newMajorElement=document.createElement("input");
-                        setAttributes(newMajorElement,{"value":x[i].value,"type":"checkbox","name":"new-major"},entry.major.toString());
-                        if(i!=2){
-                        newMajorContainer.appendChild(document.createElement("br"));
-                        }
-
-                        newMajorContainer.appendChild(newMajorElement);
-                        newMajorContainer.appendChild(document.createTextNode(x[i].text));
-                    }
-
-                    formDiv2.appendChild(newMajorContainer);
-                
-                    
-
-            //create input for gradelevel
-                    var newGrade=document.createElement("h4");
-                    newGrade.innerText='Grade Level: ';
-                    formDiv2.appendChild(newGrade);
-
-                    var newGradeContainer=document.createElement("div");
-                    newGradeContainer.setAttribute("class","scrollbox");
-
-                    for(let i=2;i<document.getElementById("grade").length;i++){
-                        var x=document.getElementById("grade").options;
-                        
-                        var newGradeElement=document.createElement("input");
-                        setAttributes(newGradeElement,{"value":x[i].value,"type":"checkbox","name":"new-grade"},entry.grade.toString());
-                        if(i!=2){
-                        newGradeContainer.appendChild(document.createElement("br"));
-                        }
-
-                        newGradeContainer.appendChild(newGradeElement);
-                        newGradeContainer.appendChild(document.createTextNode(x[i].text));
-                    }
-
-                    formDiv2.appendChild(newGradeContainer);
-
-            //input for state location
-                    var newState=document.createElement("h4");
-                    newState.innerText='State: ';
-                    formDiv2.appendChild(newState);
-
-                var newStateContainer=document.createElement("div");
-                    newStateContainer.setAttribute("class","scrollbox");
-
-                    for(let i=2;i<document.getElementById("state").length;i++){
-                        var x=document.getElementById("state").options;
-                        
-                        var newStateElement=document.createElement("input");
-                        setAttributes(newStateElement,{"value":x[i].value,"type":"checkbox","name":"new-state"},entry.location.toString());
-                        if(i!=2){
-                        newStateContainer.appendChild(document.createElement("br"));
-                        }
-
-                        newStateContainer.appendChild(newStateElement);
-                        newStateContainer.appendChild(document.createTextNode(x[i].text));
-                    }
-
-                    formDiv2.appendChild(newStateContainer);
-
-
-                    var submitButton=document.createElement("button");
-                    submitButton.innerHTML="Submit";
-                    submitButton.style.float="left";
-                    formElement2.appendChild(formDiv2);
-                    formElement2.appendChild(formDiv1);
-                    formElement2.appendChild(submitButton);
-                    
-                    containerElement.appendChild(formElement2);
+                        containerElement.appendChild(formElement2);
                     }
                     else{
                     editButton.innerText="edit"
                     
-                   document.getElementById('form-element-2'+scholarship[0]).remove();
+                    document.getElementById('form-element-2'+scholarship[0]).remove();
                     
-
+                    document.getElementById("user-info").style.display="block";
                     }
 
                     
