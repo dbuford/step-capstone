@@ -88,8 +88,10 @@ public class ListScholarshipsServlet extends HttpServlet {
     }
 
    
-
+    System.out.println("line 91 working");
     PreparedQuery results = datastore.prepare(query);
+    System.out.println("line 93 working");
+
 
 
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();

@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-<!-- Indices written at Thu, 30 Jul 2020 13:55:21 UTC -->
-=======
-<<<<<<< HEAD
-<!-- Indices written at Wed, 29 Jul 2020 15:37:40 UTC -->
-=======
-<!-- Indices written at Tue, 28 Jul 2020 21:16:58 UTC -->
->>>>>>> 31486bd566a1700cac21e35ad6f987785d9e4aeb
->>>>>>> 4c1ff84bdc5eb0d4a3f2c4eae74cca88b857c7f8
+<!-- Indices written at Thu, 30 Jul 2020 19:00:32 UTC -->
 
 <datastore-indexes autoGenerate="true">
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 4 times in query history -->
     <datastore-index kind="Scholarship" ancestor="false" source="auto">
         <property name="state" direction="asc"/>
         <property name="timestamp" direction="desc"/>

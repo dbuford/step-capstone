@@ -99,19 +99,34 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
           //check if user has already filled out form
           var alreadyFilledOut=false;
+          var userName;
 
           fetch('/data').then(response => response.json()).then((entries) => {
           entries.forEach((entry) => {
           if(entry.email== localStorage.getItem("userEmail")){
               alreadyFilledOut=true;
+              userName=entry.name;
         }
           })
           if(alreadyFilledOut==false){
             document.getElementById("addcomm").style.display = 'block';
+            const loginElement = document.getElementById('loginel');
+            loginElement.style.display="block";
+            loginElement.style.background="royalblue";
+            loginElement.style.color="white";
+            loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
+
+
 
           }
           else{
             document.getElementById("addcomm").style.display = 'none';
+            const loginElement = document.getElementById('loginel');
+            loginElement.style.display="block";
+            loginElement.style.background="white";
+            loginElement.style.color="black";
+            loginElement.innerHTML = ("Welcome, " + userName+"!");
+
  
           }
           }); 
@@ -227,7 +242,7 @@ function login() {
      loginElement.style.background="royalblue";
      loginElement.style.color="white";
      loginElement.style.fontSize="40px";
-     loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
+     /*loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);*/
      console.log(document.getElementById('login').value);
 }
 
@@ -553,8 +568,9 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
 
 
-
+   console.log("line 571 working");
    fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+       console.log("line 573 working");
        var scholarships=[];
        console.log(response);
        if(response.length==0){
