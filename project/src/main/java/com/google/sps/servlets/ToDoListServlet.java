@@ -98,7 +98,6 @@ public class ToDoListServlet extends HttpServlet {
     }
       if (user_exist == false){
         Entity userToDoList = new Entity("ToDoListScholarship");
-        System.out.println("USEREXISTISFALSE");
         userToDoList.setProperty("user", userEmail);
         userToDoList.setProperty("scholarshipIdList", idList);
 
@@ -128,7 +127,6 @@ public class ToDoListServlet extends HttpServlet {
 
 
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
-    System.out.println(currentUser);
     ArrayList<Long> getIds=new ArrayList<Long>();
 
 
@@ -139,7 +137,6 @@ public class ToDoListServlet extends HttpServlet {
 
     for (Entity entity : results.asIterable()){
         if(entity.getProperty("user").equals(currentUser)){
-            System.out.println("line90");
             getIds=(ArrayList)entity.getProperty("scholarshipIdList");
 
             getIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
@@ -157,20 +154,18 @@ public class ToDoListServlet extends HttpServlet {
             long id=idLong.longValue();
             try{
             Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
-            System.out.println("working part 4");
-            System.out.println(scholarshipEntityKey);
             Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
             String title = (String) scholarshipEntity.getProperty("title");
             String description= (String) scholarshipEntity.getProperty("description");
             String deadline= (String) scholarshipEntity.getProperty("deadline");
             String url= (String) scholarshipEntity.getProperty("url");
             String amount=(String) scholarshipEntity.getProperty("amount");
-            String race=(String) scholarshipEntity.getProperty("race");
-            String gender=(String) scholarshipEntity.getProperty("gender");
-            String income=(String) scholarshipEntity.getProperty("income");
-            String major=(String) scholarshipEntity.getProperty("major");
-            String grade=(String) scholarshipEntity.getProperty("grade");
-            String state=(String) scholarshipEntity.getProperty("state");
+            List race=(ArrayList) scholarshipEntity.getProperty("race");
+            List gender=(ArrayList) scholarshipEntity.getProperty("gender");
+            List income=(ArrayList) scholarshipEntity.getProperty("income");
+            List major=(ArrayList) scholarshipEntity.getProperty("major");
+            List grade=(ArrayList) scholarshipEntity.getProperty("grade");
+            List state=(ArrayList) scholarshipEntity.getProperty("state");
             String priority=(String)getPriority.get(i);
 
             ArrayList<Object> info=new ArrayList<>();
@@ -190,7 +185,6 @@ public class ToDoListServlet extends HttpServlet {
             info.add(entityId);
             info.add(getIds);
             info.add(getIds2);
-            System.out.println(priority);
         
             scholarships.add(info);
             }catch (EntityNotFoundException e) {
