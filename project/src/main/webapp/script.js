@@ -482,14 +482,18 @@ function deleteEntry(entry) {
 function getUserInfo(){
     console.log(localStorage.getItem("userEmail"));
         if(localStorage.getItem("userEmail") == null){
+            console.log("usernotloggedin");
+            document.getElementById("myTab").style.display="none";
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
                 divElement.appendChild(titleElement);
-                const entryListElement = document.getElementById('entry-list');
+                const entryListElement = document.getElementById('container-div');
                 entryListElement.appendChild(divElement);
+
         }
         else{
+            document.getElementById("myTab").style.display="block";
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email== localStorage.getItem("userEmail")){
