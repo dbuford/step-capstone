@@ -214,15 +214,36 @@ body {
 
 
 
-.scrollbox{
-    width:60%;
-    height:90px;
-    line-height:80%;
-    overflow:scroll;
-    border: dotted black;
-    margin-right:5%;
-    margin-top:2%;
+/*style the scroll box in the right side of eligibility div*/
+    .scrollbox{
+        width:60%;
+        height:90px;
+        line-height:80%;
+        overflow:scroll;
+        border: dotted black;
+        margin-right:5%;
+        margin-top:2%;
+        text-align:left;
+    }
+.eligibility{
+    padding-bottom:20px;
 }
+ 
+    .submit-button{
+        border-radius:10px;
+        background-color:royalblue;
+        color:white;
+        width:50%;
+        text-align:center;
+        margin-top:5%;
+    }
+    .select-div{
+        width:100%;
+        height:10%;
+        padding-bottom:20px;
+        text-align:left;
+        padding-left:17%;
+    }
 /* styling section */
 
 </style>
@@ -230,7 +251,7 @@ body {
 
 </style>
 </head>
-<body onload="loadInfo()"> >
+<body onload="loadInfo()"> 
 
 
 
@@ -271,7 +292,7 @@ body {
         <label for="displayemail"> Display email next to info</label> -->
     
       <div class="innerdiv2">
-                <div class="eligibility">
+               <div class="eligibility">
                     <div class="title">
                         <h4> Race/Ethnicity:</h4>
                     </div>
@@ -281,43 +302,38 @@ body {
                         <input type="checkbox" value="Asian" name="race">Asian </input><br>
                         <input type="checkbox" value="Hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
                         <input type="checkbox" value="White" name="race">White</input><br>
-
                     </div>
                 </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4> Gender Identity:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Male/Man" name="gender"> Male/Man</input><br>
-                        <input type ="checkbox" value="Female/Woman" name="gender"> Female/Woman</input><br>
-                        <input type="checkbox" value="Transmale/Transman" name="gender"> Transmale/Transman</input><br>
-                        <input type="checkbox" value="Transfemale/Transwoman" name="gender">Transfemale/Transwoman</input><br>
-                        <input type="checkbox" value="Genderqueer/Gender Nonconforming" name="gender"> Genderqueer/Gender Nonconforming</input><br>
-                    </div>
-                </div>
+            <div class="select-div">
+            <label for="gender">Gender Identity:</label>
+            <select name="gender" id="gender" >
+            <option selected value="none"></option>
+            <option value="Male/Man" name="gender">Male/Man</option>
+            <option value="Female/Woman"name="gender">Female/Woman</option>
+            <option value="Transmale/Transman" name="gender">Trans male/man</option>
+            <option value="Transfemale/Transwoman" name="gender">Trans female/woman</option>
+            <option value="Genderqueer/Gender Nonconforming" name="gender">Gender Queer</option>
+        </select>
+        </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Income Level:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
-                        <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
-                        <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
-                        <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
-                        <input type="checkbox" value="More than 100k" name="income"> more than $100k</input>
-
-                    </div>
-                </div>
-
+            <div class="select-div">
+            <label for="income">Income Level:</label>
+            <select name="income" id="income">
+            <option selected value="none"> </option>
+            <option value="Less than 25k"name="income">less than $25k</option>
+            <option value="25k-50k" name="incme">$25k-$50k</option>
+            <option value="50k-75k"name="income">$50k-$75k</option>
+            <option value="75k-100k"name="income">$75k-$100k</option>
+            <option value="More than 100k"name="income">more than $100k</option>
+        </select>
+        </div>
                 <div class="eligibility">
                     <div class="title">
                         <h4> Major Interests:</h4>
                     </div>
                     <div class="scrollbox">
-                      <input type ="checkbox" name="major" value="Agriculture">Agriculture</input><br>
+                      <input type ="checkbox" name="major" value="agriculture">Agriculture</input><br>
                         <input type ="checkbox" name="major" value="Anthropology/Archaeology">Anthropology/Archaeology</input><br>
                         <input type ="checkbox" name="major" value="Architecture">Architecture</input><br>
                         <input type ="checkbox" name="major" value="Arts">Art</input><br>
@@ -369,83 +385,82 @@ body {
                                  
                 </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Grade Level:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Freshman" name="grade">Freshman</input><br>
-                        <input type ="checkbox" value="Sophomore" name="grade"> Sophomore</input><br>
-                        <input type="checkbox" value="Junior" name="grade"> Junior </input><br>
-                        <input type="checkbox" value="Senior" name="grade">Senior</input><br>
-                    </div>
-                </div>
+         <div class="select-div">
+         <label for="grade">Grade Level:</label>
+            <select name="grade" id="grade" >
+            <option selected value="none"> </option>
+            <option value="Freshman" name="grade">Freshman</option>
+            <option value="Sophomore" name="grade">Sophomore</option>
+            <option value="Junior" name="grade">Junior</option>
+            <option value="Senior" name="grade">Senior</option>
+        </select>
+        </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Location:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" name="location" value="AL">Alabama</input><br>
-                        <input type="checkbox" name="location" value="AK">Alaska</input><br>
-                        <input type="checkbox" name="location" value="AZ">Arizona</input><br>
-                        <input type="checkbox" name="location"value="AR">Arkansas</input><br>
-                        <input type="checkbox" name="location" value="CA">California</input><br>
-                        <input type="checkbox" name="location" value="CO">Colorado</input><br>
-                        <input type="checkbox" name="location" value="CT">Connecticut</input><br>
-                        <input type="checkbox" name="location" value="DE">Delaware</input><br>
-                        <input type="checkbox" name="location" value="DC">District of Columbia</input><br>
-                        <input type="checkbox" name="location" value="FL">Florida</input><br>
-                        <input type="checkbox" name="location" value="GA">Georgia</input><br>
-                        <input type="checkbox" name="location" value="HI">Hawaii</input><br>
-                        <input type="checkbox" name="location" value="ID">Idaho</input><br>
-                        <input type="checkbox" name="location" value="IL">Illinois</input><br>
-                        <input type="checkbox" name="location" value="IN">Indiana</input><br>
-                        <input type="checkbox" name="location" value="IA">Iowa</input><br>
-                        <input type="checkbox" name="location" value="KS">Kansas</input><br>
-                        <input type="checkbox" name="location" value="KY">Kentucky</input><br>
-                        <input type="checkbox" name="location" value="LA">Louisiana</input><br>
-                        <input type="checkbox" name="location" value="ME">Maine</input><br>
-                        <input type="checkbox" name="location" value="MD">Maryland</input><br>
-                        <input type="checkbox" name="location" value="MA">Massachusetts</input><br>
-                        <input type="checkbox" name="location" value="MI">Michigan</input><br>
-                        <input type="checkbox" name="location" value="MN">Minnesota</input><br>
-                        <input type="checkbox" name="location" value="MS">Mississippi</input><br>
-                        <input type="checkbox" name="location" value="MO">Missouri</input><br>
-                        <input type="checkbox" name="location" value="MT">Montana</input><br>
-                        <input type="checkbox" name="location" value="NE">Nebraska</input><br>
-                        <input type="checkbox" name="location" value="NV">Nevada</input><br>
-                        <input type="checkbox" name="location" value="NH">New Hampshire</input><br>
-                        <input type="checkbox" name="location" value="NJ">New Jersey</input><br>
-                        <input type="checkbox" name="location" value="NM">New Mexico</input><br>
-                        <input type="checkbox" name="location" value="NY">New York</input><br>
-                        <input type="checkbox" name="location" value="NC">North Carolina</input><br>
-                        <input type="checkbox" name="location" value="ND">North Dakota</input><br>
-                        <input type="checkbox" name="location" value="OH">Ohio</input><br>
-                        <input type="checkbox" name="location" value="OK">Oklahoma</input><br>
-                        <input type="checkbox" name="location" value="OR">Oregon</input><br>
-                        <input type="checkbox" name="location" value="PA">Pennsylvania</input><br>
-                        <input type="checkbox" name="location" value="PR">Puerto Rico</input><br>
-                        <input type="checkbox" name="location" value="RI">Rhode Island</input><br>
-                        <input type="checkbox" name="location" value="SC">South Carolina</input><br>
-                        <input type="checkbox" name="location" value="SD">South Dakota</input><br>
-                        <input type="checkbox" name="location" value="TN">Tennessee</input><br>
-                        <input type="checkbox" name="location" value="TX">Texas</input><br>
-                        <input type="checkbox" name="location" value="UT">Utah</input><br>
-                        <input type="checkbox" name="location" value="VT">Vermont</input><br>
-                        <input type="checkbox" name="location" value="VA">Virginia</input><br>
-                        <input type="checkbox" name="location" value="WA">Washington</input><br>
-                        <input type="checkbox" name="location" value="WV">West Virginia</input><br>
-                        <input type="checkbox" name="location" value="WI">Wisconsin</input><br>
-                        <input type="checkbox" name="location" value="WY">Wyoming</input><br>
-                    </div>
-                </div>
+         <div class="select-div">
+          <label for="location">State:</label>
+            <select name="location" id="location">
+            <option selected value="none"></option>
+            <option value="AL" name="location">Alabama</option>
+            <option value="AK" name="location">Alaska</option>
+            <option value="AZ" name="location" >Arizona</option>
+            <option value="AR" name="location">Arkansas</option>
+            <option value="CA" name="location">California</option>
+            <option value="CO" name="location">Colorado</option>
+            <option value="CT" name="location">Connecticut</option>
+            <option value="DE" name="location">Delaware</option>
+            <option value="DC" name="location">D.C.</option>
+            <option value="FL" name="location">Florida</option>
+            <option value="GA" name="location">Georgia</option>
+            <option value="HI" name="location">Hawaii</option>
+            <option value="ID" name="location">Idaho</option>
+            <option value="IL" name="location" >Illinois</option>
+            <option value="IN" name="location">Indiana</option>
+            <option value="IA" name="location">Iowa</option>
+            <option value="KS" name="location">Kansas</option>
+            <option value="KY" name="location">Kentucky</option>
+            <option value="LA" name="location" >Louisiana</option>
+            <option value="ME" name="location">Maine</option>
+            <option value="MD" name="location">Maryland</option>
+            <option value="MA" name="location">Massachusetts</option>
+            <option value="MI" name="location">Michigan</option>
+            <option value="MN" name="location">Minnesota</option>
+            <option value="MS" name="location">Mississippi</option>
+            <option value="MO" name="location">Missouri</option>
+            <option value="MT" name="location">Montana</option>
+            <option value="NE" name="location">Nebraska</option>
+            <option value="NV" name="location">Nevada</option>
+            <option value="NH" name="location">New Hampshire</option>
+            <option value="NJ" name="location">New Jersey</option>
+            <option value="NM" name="location">New Mexico</option>
+            <option value="NY" name="location">New York</option>
+            <option value="NC" name="location">North Carolina</option>
+            <option value="ND" name="location">North Dakota</option>
+            <option value="OH" name="location">Ohio</option>
+            <option value="OK" name="location">Oklahoma</option>
+            <option value="OR" name="location">Oregon</option>
+            <option value="PA" name="location">Pennsylvania</option>
+            <option value="PR" name="location">Puerto Rico</option>
+            <option value="RI" name="location">Rhode Island</option>
+            <option value="SC" name="location">South Carolina</option>
+            <option value="SD" name="location">South Dakota</option>
+            <option value="TN" name="location">Tennessee</option>
+            <option value="TX" name="location">Texas</option>
+            <option value="UT" name="location">Utah</option>
+            <option value="VT" name="location">Vermont</option>
+            <option value="VA" name="location">Virginia</option>
+            <option value="WA" name="location">Washington</option>
+            <option value="WV" name="location">West Virginia</option>
+            <option value="WI" name="location">Wisconsin</option>
+            <option value="WY" name="location">Wyoming</option>
+        </select>
+        </div>
+        
 
 
         </div>
-        <button> Submit</button> 
+        <button class="submit-button"> Submit</button> 
           
-        </form>   
+        </form>     
       <br/>
       </center>
 

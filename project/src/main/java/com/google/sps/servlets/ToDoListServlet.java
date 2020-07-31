@@ -179,8 +179,7 @@ public class ToDoListServlet extends HttpServlet {
             String deadline= (String) scholarshipEntity.getProperty("deadline");
             LocalDate currentDate = LocalDate.now();
             LocalDate scholarshipDate = LocalDate.parse(deadline);
-            System.out.println(currentDate.toString());
-            System.out.println(scholarshipDate.toString());
+
             
             if(scholarshipDate.compareTo(currentDate) < 0){
               Key ToDoListScholarshipKey = KeyFactory.createKey("ToDoListScholarship", entityId);
