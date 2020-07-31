@@ -86,7 +86,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         console.log("working");
         if (isSignedIn) {
           var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
-          localStorage.setItem("userEmail",JSON.stringify(userEmail2));
+          localStorage.setItem("userEmail",JSON.stringify(userEmail2).replace(/\"/g, ""));
           console.log(localStorage.getItem("userEmail")); 
           if (document.getElementById('login') !=null) {
               
