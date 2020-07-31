@@ -433,7 +433,6 @@ titleElement.className="title-div";
   restOfElement.appendChild(raceDiv);
   restOfElement.appendChild(genderDiv);
   restOfElement.appendChild(incomeDiv);
-  restOfElement.appendChild(breakElement2);
   restOfElement.appendChild(majorDiv);
   restOfElement.appendChild(gradeDiv);
 
