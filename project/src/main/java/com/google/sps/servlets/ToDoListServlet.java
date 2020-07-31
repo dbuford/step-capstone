@@ -40,6 +40,12 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import java.util.Comparator;
 import java.util.Collections;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
 
 
 @WebServlet("/display-ToDoList")
@@ -61,6 +67,9 @@ public class ToDoListServlet extends HttpServlet {
     ArrayList<Long> idList2 = new ArrayList<Long>();
     idList2.add(Long.valueOf(1));
 
+    ArrayList<Long> idList3 = new ArrayList<Long>();
+    idList3.add(Long.valueOf(1));
+
     ArrayList<String> idPriority=new ArrayList<String>();
     idPriority.add("none");
     idPriority.add("none");
@@ -79,6 +88,8 @@ public class ToDoListServlet extends HttpServlet {
 
         ArrayList <Long> currentIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
 
+        ArrayList <Long> currentIds3 = (ArrayList)entity.getProperty("expiredList");
+
         ArrayList <String> currentIdPriority=(ArrayList)entity.getProperty("idPriorityList");
         if(!currentIds.contains(newId)){
 
@@ -87,6 +98,8 @@ public class ToDoListServlet extends HttpServlet {
         entity.setProperty("scholarshipIdList",currentIds);
 
         entity.setProperty("completedscholarshipIdList",currentIds2);
+
+        entity.setProperty("expiredList", currentIds3);
 
         entity.setProperty("idPriorityList",currentIdPriority);
 
@@ -102,6 +115,8 @@ public class ToDoListServlet extends HttpServlet {
         userToDoList.setProperty("scholarshipIdList", idList);
 
         userToDoList.setProperty("completedscholarshipIdList", idList2);
+
+        userToDoList.setProperty("expiredList", idList3);
 
         userToDoList.setProperty("idPriorityList",idPriority);
 
@@ -132,6 +147,8 @@ public class ToDoListServlet extends HttpServlet {
 
     ArrayList<Long> getIds2=new ArrayList<Long>();
 
+    ArrayList<Long> getIds3 = new ArrayList<Long>();
+
     ArrayList<String> getPriority=new ArrayList<String>();
     long entityId=0;
 
@@ -140,6 +157,8 @@ public class ToDoListServlet extends HttpServlet {
             getIds=(ArrayList)entity.getProperty("scholarshipIdList");
 
             getIds2=(ArrayList)entity.getProperty("completedscholarshipIdList");
+
+            getIds3=(ArrayList)entity.getProperty("expiredList");
 
             getPriority=(ArrayList) entity.getProperty("idPriorityList");
             entityId = entity.getKey().getId();
@@ -158,6 +177,22 @@ public class ToDoListServlet extends HttpServlet {
             String title = (String) scholarshipEntity.getProperty("title");
             String description= (String) scholarshipEntity.getProperty("description");
             String deadline= (String) scholarshipEntity.getProperty("deadline");
+            LocalDate currentDate = LocalDate.now();
+            LocalDate scholarshipDate = LocalDate.parse(deadline);
+            System.out.println(currentDate.toString());
+            System.out.println(scholarshipDate.toString());
+            
+            if(scholarshipDate.compareTo(currentDate) < 0){
+              Key ToDoListScholarshipKey = KeyFactory.createKey("ToDoListScholarship", entityId);
+              System.out.println(ToDoListScholarshipKey);
+              Entity entity=datastore.get(ToDoListScholarshipKey);
+              getIds.remove(id);
+              getIds3.add(id);
+              entity.setProperty("scholarshipIdList", getIds);
+              entity.setProperty("expiredList", getIds3);
+              datastore.put(entity);
+            }
+            
             String url= (String) scholarshipEntity.getProperty("url");
             String amount=(String) scholarshipEntity.getProperty("amount");
             List race=(ArrayList) scholarshipEntity.getProperty("race");
@@ -185,6 +220,7 @@ public class ToDoListServlet extends HttpServlet {
             info.add(entityId);
             info.add(getIds);
             info.add(getIds2);
+            info.add(getIds3);
         
             scholarships.add(info);
             }catch (EntityNotFoundException e) {
