@@ -74,7 +74,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("works");
           console.log("works");
         }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
+          /*appendPre(JSON.stringify(error, null, 2));*/
         });
       }
 
@@ -193,11 +193,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *
        * @param {string} message Text to be placed in pre element.
        */
-      function appendPre(message) {
+     /* function appendPre(message) {
         var pre = document.getElementById('content');
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
-      }
+      }*/
 
 
 
@@ -634,22 +634,16 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
     }
     const params = new URLSearchParams();
     params.append('sort', sort);
-    params.append('race',race);
+   /* params.append('race',race);
     params.append('gender',gender);
     params.append('major',major);
     params.append('income',income);
     params.append('grade',grade);
-    params.append('state',state);
+    params.append('state',state);*/
 
 
 
-   console.log('line 611 working');
-   console.log(params);
-   console.log(gender);
-   console.log(race);
-   console.log(major);
-   console.log(income);
-   console.log(state);
+   
    fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
        console.log("line 614 working");
        var scholarships=[];
@@ -664,13 +658,13 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             else{   
             for(let i=0;i<response.length;i++){
-                scholarships.push(response[i]);
-                /*if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
-                    if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
-                        if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
-                            if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
-                                if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
-                                    if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
+                /*scholarships.push(response[i]);*/
+                if(race=="none" || response[i][4].includes(race[0])||response[i][4]=="none"){
+                    if(gender=="none"||response[i][5].includes(gender[0])||response[i][5]=="none"){
+                        if(major=="none"||response[i][7].includes(major[0])||response[i][7]=="none"){
+                            if(income=='none'||response[i][6].includes(income[0])||response[i][6]=="none"){
+                                if(grade=='none'||response[i][8].includes(grade[0])||response[i][8]=="none"){
+                                    if(state=='none'||response[i][10].includes(state[0])||response[i][10]=="none"){
                                     scholarships.push(response[i]);
                                     console.log(response[i]);
                                     }
@@ -678,7 +672,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                             }  
                         }
                     } 
-                } */
+                } 
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -1378,7 +1372,6 @@ var request = gapi.client.calendar.events.insert({
 });
 
 request.execute(function(event) {
-  appendPre('Event created: ' + event.htmlLink);
 });
       }
 function FindTaskList(){
@@ -1437,12 +1430,16 @@ function toDoListDisplay(type) {
                 scholarshipList.innerHTML="";
                 for(let i=0;i<response.length;i++){
                     //check to display only active scholarships
-                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])){
+                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])&&!response[i][16].includes(response[i][12])){
                 scholarshipList.appendChild(createToDoListElement(response[i],newType));
                 }
                 //check to display only complete scholarships
                 else if(type=='completed'&& response[i][15].includes(response[i][12])){
                 scholarshipList.appendChild(createToDoListElement(response[i],newType));
+
+                }
+                else if(type=="expired"&& response[i][16].includes(response[i][12])){
+                    scholarshipList.appendChild(createToDoListElement(response[i],newType));
 
                 }
                 }
