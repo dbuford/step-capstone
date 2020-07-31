@@ -219,9 +219,6 @@ async function getData() {
 
 
 /*function add_info() {
-
-
-
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
     if (txt.includes("Please")) {
@@ -339,13 +336,11 @@ titleElement.className="title-div";
   timeElement.innerText = date.toString().slice(0,24);
   timeElement.style.float = "right";
   timeElement.style.marginRight = "10px";
-
   var deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.style.float = "right";
   deleteButtonElement.addEventListener('click', () => {
     deleteEntry(entry);
-
     // Remove the entry from the DOM.
     entryElement.remove();
   });*/
@@ -590,7 +585,6 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                             if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
                                 if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
                                     if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
-
                                     scholarships.push(response[i]);
                                     console.log(response[i]);
                                     }

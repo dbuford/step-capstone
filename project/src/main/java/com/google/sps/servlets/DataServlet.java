@@ -256,7 +256,7 @@ public class DataServlet extends HttpServlet {
    // entryEntity.setProperty("image", imageUrl);
     datastore.put(entryEntity);
 
-    response.sendRedirect("/response.html"); // could possibly add a redirect page ?
+    response.sendRedirect("/Profile.html"); // could possibly add a redirect page ?
     
   }
 
