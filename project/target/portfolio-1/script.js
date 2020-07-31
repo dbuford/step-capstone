@@ -109,12 +109,14 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         }
           })
           if(alreadyFilledOut==false){
-            document.getElementById("addcomm").style.display = 'block';
+            window.location.replace("login.html");
+
+            /*document.getElementById("addcomm").style.display = 'block';
             const loginElement = document.getElementById('loginel');
             loginElement.style.display="block";
             loginElement.style.background="royalblue";
             loginElement.style.color="white";
-            loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
+            loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);*/
 
 
 
@@ -146,7 +148,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
                 document.getElementById("signout_button").style.display = 'none';
                 console.log("working");
                 localStorage.removeItem("userEmail");
-                document.getElementById("addcomm").style.display = 'none';
+                /*document.getElementById("addcomm").style.display = 'none';*/
             }
             else{
                 handleAuthClick();
@@ -232,15 +234,14 @@ async function getData() {
 
 
 function login() {
-    const titleElement=document.getElementById('login/signup');
-    titleElement.style.display="none";
-     const loginElement = document.getElementById('loginel');
+  
+  /*  const loginElement = document.getElementById('loginel2');
     loginElement.style.display="block";
      loginElement.style.background="royalblue";
      loginElement.style.color="white";
      loginElement.style.fontSize="40px";
-     /*loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);*/
-     console.log(document.getElementById('login').value);
+     loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
+     console.log(document.getElementById('login').value);*/
 }
 
 
@@ -493,23 +494,30 @@ function getUserInfo(){
 
         }
         else{
+            var foundData=false;
             document.getElementById("myTab").style.display="block";
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email== localStorage.getItem("userEmail")){
+                    foundData=true;
                     const entryListElement = document.getElementById('entry-list');
                     entryListElement.appendChild(createEntryElement(entry));
-                    console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
                     const messageForm = document.getElementById('addcomm');
                     messageForm.action = entry.uploadUrl;
-                    console.log(entry.uploadUrl);
 
-            
-                    
                 }
 
     })
+    if(foundData==false){
+                   document.getElementById("myTab").style.display="none";
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const entryListElement = document.getElementById('container-div');
+                entryListElement.appendChild(divElement); 
+    }
   });
 
         }
@@ -636,9 +644,15 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
 
 
-   console.log("line 571 working");
+   console.log('line 611 working');
+   console.log(params);
+   console.log(gender);
+   console.log(race);
+   console.log(major);
+   console.log(income);
+   console.log(state);
    fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
-       console.log("line 573 working");
+       console.log("line 614 working");
        var scholarships=[];
        console.log(response);
        if(response.length==0){
