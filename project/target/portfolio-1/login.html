@@ -119,7 +119,7 @@ body {
         overflow:scroll;
         min-height:auto;
         max-height:80%;
-        border-radius: 25px;
+       /* border-radius: 25px;*/
         transform: translate(-50%, -50%);
         /*z-index: 2;*/
     }
@@ -218,7 +218,7 @@ body {
       <h6 id="error"></h6>
 
       <form  id="addcomm" action="/data" method="POST">
-        <p> Complete form to help us find the best scholarships for you! </p> 
+        <p> Complete this form to help us find the best scholarships for you! </p> 
 
         <input id = "login" name="userEmail" style="display:none";></input>
         <input name="idname"  value="entry.id" style="display:none";></input>
@@ -251,11 +251,11 @@ body {
                         <h4> Gender Identity:</h4>
                     </div>
                     <div class="scrollbox">
-                        <input type="checkbox" value="Male/Man" name="gender"> Male/Man</input><br>
-                        <input type ="checkbox" value="Female/Woman" name="gender"> Female/Woman</input><br>
-                        <input type="checkbox" value="Transmale/Transman" name="gender"> Transmale/Transman</input><br>
+                        <input type="checkbox" value="Male/Man" name="gender">Male/Man</input><br>
+                        <input type ="checkbox" value="Female/Woman" name="gender">Female/Woman</input><br>
+                        <input type="checkbox" value="Transmale/Transman" name="gender">Transmale/Transman</input><br>
                         <input type="checkbox" value="Transfemale/Transwoman" name="gender">Transfemale/Transwoman</input><br>
-                        <input type="checkbox" value="Genderqueer/Gender Nonconforming" name="gender"> Genderqueer/Gender Nonconforming</input><br>
+                        <input type="checkbox" value="Genderqueer/Gender Nonconforming" name="gender">Genderqueer/Gender Nonconforming</input><br>
                     </div>
                 </div>
 
@@ -265,10 +265,10 @@ body {
                     </div>
                     <div class="scrollbox">
                         <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
-                        <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
-                        <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
+                        <input type ="checkbox" value="25k-50k" name="income">$25k-$50k</input><br>
+                        <input type="checkbox" value="50k-75k" name="income">$50k-$75k </input><br>
                         <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
-                        <input type="checkbox" value="More than 100k" name="income"> more than $100k</input>
+                        <input type="checkbox" value="More than 100k" name="income">more than $100k</input>
 
                     </div>
                 </div>
@@ -279,53 +279,53 @@ body {
                     </div>
                     <div class="scrollbox">
                       <input type ="checkbox" name="major" value="agriculture">Agriculture</input><br>
-                        <input type ="checkbox" name="major" value="anthropology-archaeology">Anthropology/Archaeology</input><br>
-                        <input type ="checkbox" name="major" value="architecture">Architecture</input><br>
-                        <input type ="checkbox" name="major" value="arts">Art</input><br>
-                        <input type ="checkbox" name="major" value="astronomy-astrophysics">Astronomy/Astrophysics</input><br>
-                        <input type ="checkbox" name="major" value="biology">Biology</input><br>
-                        <input type ="checkbox" name="major" value="business">Business/Management</input><br>
-                        <input type ="checkbox" name="major" value="chemistry">Chemistry</input><br>
-                        <input type ="checkbox" name="major" value="communications-journalism">Communications/Journalism</input><br>
-                        <input type ="checkbox" name="major" value="computer science">Computer Science</input><br>
-                        <input type ="checkbox" name="major" value="criminal-justice">Criminal Justice</input><br>
-                        <input type ="checkbox" name="major" value="culinary-arts">Culinary Arts</input><br>
-                        <input type ="checkbox" name="major" value="dental-studies">Dental Studies</input><br>
-                        <input type ="checkbox" name="major" value="design">Design</input><br>
-                        <input type ="checkbox" name="major" value="earth-science-geology">Earth Science/Geology</input><br>
-                        <input type ="checkbox" name="major" value="economics">Economics</input><br>
-                        <input type ="checkbox" name="major" value="education">Education</input><br>
-                        <input type ="checkbox" name="major" value="engineering">Engineering</input><br>
-                        <input type ="checkbox" name="major" value="english">English</input><br>
-                        <input type ="checkbox" name="major" value="film-video-photography">Film/Video/Photography</input><br>
-                        <input type ="checkbox" name="major" value="finance-accounting">Finance/Accounting</input><br>
-                        <input type ="checkbox" name="major" value="fine-arts">Fine Arts</input><br>
-                        <input type ="checkbox" name="major" value="foreign-languages">Foreign Languages</input><br>
-                        <input type ="checkbox" name="major" value="general-studies">General Studies</input><br>
-                        <input type ="checkbox" name="major" value="health-professions">Health Professions</input><br>
-                        <input type ="checkbox" name="major" value="history">History</input><br>
-                        <input type ="checkbox" name="major" value="information-technology">Information Technology</input><br>
-                        <input type ="checkbox" name="major" value="international-relations">International Relations</input><br>
-                        <input type ="checkbox" name="major" value="kinesiology-exercise-science">Kinesiology/Exercise Science</input><br>
-                        <input type ="checkbox" name="major" value="legal-studies">Legal Studies</input><br>
-                        <input type ="checkbox" name="major" value="marketing">Marketing</input><br>
-                        <input type ="checkbox" name="major" value="mathematics-statistics">Mathematics/Statistics</input><br>
-                        <input type ="checkbox" name="major" value="mechanics-repair">Mechanics/Repair</input><br>
-                        <input type ="checkbox" name="major" value="music">Music</input><br>
-                        <input type ="checkbox" name="major" value="nursing">Nursing</input><br>
-                        <input type ="checkbox" name="major" value="nutritional-science">Nutritional Science</input><br>
-                        <input type ="checkbox" name="major" value="performing-arts">Performing Arts</input><br>
-                        <input type ="checkbox" name="major" value="philosophy">Philosophy</input><br>
-                        <input type ="checkbox" name="major" value="physics">Physics</input><br>
-                        <input type ="checkbox" name="major" value="political-science">Political Science</input><br>
-                        <input type ="checkbox" name="major" value="pre-medicine">Pre-Medicine</input><br>
-                        <input type ="checkbox" name="major" value="psychology">Psychology</input><br>
-                        <input type ="checkbox" name="major" value="religious-studies-theology">Religious Studies/Theology</input><br>
-                        <input type ="checkbox" name="major" value="skilled-trades-construction">Skilled Trades/Construction</input><br>
-                        <input type ="checkbox" name="major" value="social-sciences">Social Sciences</input><br>
-                        <input type ="checkbox" name="major" value="sports-management">Sports Management</input><br>
-                        <input type ="checkbox" name="major" value="veterinary-studies">Veterinary Studies</input><br>
-                        <input type ="checkbox" name="major" value="visual-arts">Visual Arts</input><br>
+                        <input type ="checkbox" name="major" value="Anthropology/Archaeology">Anthropology/Archaeology</input><br>
+                        <input type ="checkbox" name="major" value="Architecture">Architecture</input><br>
+                        <input type ="checkbox" name="major" value="Arts">Art</input><br>
+                        <input type ="checkbox" name="major" value="Astronomy/Astrophysics">Astronomy/Astrophysics</input><br>
+                        <input type ="checkbox" name="major" value="Biology">Biology</input><br>
+                        <input type ="checkbox" name="major" value="Business">Business/Management</input><br>
+                        <input type ="checkbox" name="major" value="Chemistry">Chemistry</input><br>
+                        <input type ="checkbox" name="major" value="Communications/Journalism">Communications/Journalism</input><br>
+                        <input type ="checkbox" name="major" value="Computer Science">Computer Science</input><br>
+                        <input type ="checkbox" name="major" value="Criminal Justice">Criminal Justice</input><br>
+                        <input type ="checkbox" name="major" value="Culinary Arts">Culinary Arts</input><br>
+                        <input type ="checkbox" name="major" value="Dental Studies">Dental Studies</input><br>
+                        <input type ="checkbox" name="major" value="Design">Design</input><br>
+                        <input type ="checkbox" name="major" value="Earth Science/Geology">Earth Science/Geology</input><br>
+                        <input type ="checkbox" name="major" value="Economics">Economics</input><br>
+                        <input type ="checkbox" name="major" value="Education">Education</input><br>
+                        <input type ="checkbox" name="major" value="Engineering">Engineering</input><br>
+                        <input type ="checkbox" name="major" value="English">English</input><br>
+                        <input type ="checkbox" name="major" value="Film/Video/Photography">Film/Video/Photography</input><br>
+                        <input type ="checkbox" name="major" value="Finance/Accounting">Finance/Accounting</input><br>
+                        <input type ="checkbox" name="major" value="Fine Arts">Fine Arts</input><br>
+                        <input type ="checkbox" name="major" value="Foreign Languages">Foreign Languages</input><br>
+                        <input type ="checkbox" name="major" value="General Studies">General Studies</input><br>
+                        <input type ="checkbox" name="major" value="Health Professions">Health Professions</input><br>
+                        <input type ="checkbox" name="major" value="History">History</input><br>
+                        <input type ="checkbox" name="major" value="Information Technology">Information Technology</input><br>
+                        <input type ="checkbox" name="major" value="International Relations">International Relations</input><br>
+                        <input type ="checkbox" name="major" value="Kinesiology/Exercise Science">Kinesiology/Exercise Science</input><br>
+                        <input type ="checkbox" name="major" value="Legal Studies">Legal Studies</input><br>
+                        <input type ="checkbox" name="major" value="Marketing">Marketing</input><br>
+                        <input type ="checkbox" name="major" value="Mathematics/Statistics">Mathematics/Statistics</input><br>
+                        <input type ="checkbox" name="major" value="Mechanics/Repair">Mechanics/Repair</input><br>
+                        <input type ="checkbox" name="major" value="Music">Music</input><br>
+                        <input type ="checkbox" name="major" value="Nursing">Nursing</input><br>
+                        <input type ="checkbox" name="major" value="Nutritional Science">Nutritional Science</input><br>
+                        <input type ="checkbox" name="major" value="Performing Arts">Performing Arts</input><br>
+                        <input type ="checkbox" name="major" value="Philosophy">Philosophy</input><br>
+                        <input type ="checkbox" name="major" value="Physics">Physics</input><br>
+                        <input type ="checkbox" name="major" value="Political Science">Political Science</input><br>
+                        <input type ="checkbox" name="major" value="Pre-Medicine">Pre-Medicine</input><br>
+                        <input type ="checkbox" name="major" value="Psychology">Psychology</input><br>
+                        <input type ="checkbox" name="major" value="Religious Studies/Theology">Religious Studies/Theology</input><br>
+                        <input type ="checkbox" name="major" value="Skilled Trades/Construction">Skilled Trades/Construction</input><br>
+                        <input type ="checkbox" name="major" value="Social Sciences">Social Sciences</input><br>
+                        <input type ="checkbox" name="major" value="Sports Management">Sports Management</input><br>
+                        <input type ="checkbox" name="major" value="Veterinary Studies">Veterinary Studies</input><br>
+                        <input type ="checkbox" name="major" value="Visual Arts">Visual Arts</input><br>
                     </div>
                                  
                 </div>
@@ -336,11 +336,13 @@ body {
                     </div>
                     <div class="scrollbox">
                         <input type="checkbox" value="Freshman" name="grade">Freshman</input><br>
-                        <input type ="checkbox" value="Sophomore" name="grade"> Sophomore</input><br>
-                        <input type="checkbox" value="Junior" name="grade"> Junior </input><br>
+                        <input type ="checkbox" value="Sophomore" name="grade">Sophomore</input><br>
+                        <input type="checkbox" value="Junior" name="grade">Junior </input><br>
                         <input type="checkbox" value="Senior" name="grade">Senior</input><br>
                     </div>
                 </div>
+
+
 
                 <div class="eligibility">
                     <div class="title">
