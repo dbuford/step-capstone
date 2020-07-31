@@ -536,6 +536,35 @@ function loadInfo() {
 }
 
 
+function loadEdit(){
+    fetch('/data').then(response => response.json()).then((entries) => {
+          entries.forEach((entry) => {
+          if(entry.email== localStorage.getItem("userEmail")){
+              console.log(entry.name);
+              document.getElementById("nameid").value = entry.name;
+              document.getElementById("ageid").value = entry.age;
+              console.log(entry.location);
+              genre(document.getElementById("raceid"),entry.race[0]);
+              genre(document.getElementById("majorid"),entry.major[0]);
+              document.getElementById("locationid").value = entry.location[0];
+              document.getElementById("genderid").value = entry.gender[0];
+              document.getElementById("gradeid").value = entry.grade[0];
+              document.getElementById("incomeid").value = entry.income[0];
+          
+
+          }
+})
+})
+}
+function genre(sel,current){
+    for (var i = 0, len = sel.getElementsByTagName('input').length; i < len; i++ ) {
+        console.log(sel.getElementsByTagName('input')[i].value);
+                opt = sel.getElementsByTagName('input')[i];
+
+                if(current.includes(opt.value)){
+                opt.checked=true;
+            }
+}}
 
 
 /* scholarships functions*/

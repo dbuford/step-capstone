@@ -214,44 +214,272 @@ body {
 
 
 
-/*style the scroll box in the right side of eligibility div*/
-    .scrollbox{
-        width:60%;
-        height:90px;
-        line-height:80%;
-        overflow:scroll;
-        border: dotted black;
-        margin-right:5%;
-        margin-top:2%;
-        text-align:left;
-    }
-.eligibility{
-    padding-bottom:20px;
+.scrollbox{
+    width:60%;
+    height:90px;
+    line-height:80%;
+    overflow:scroll;
+    border: dotted black;
+    margin-right:5%;
+    margin-top:2%;
 }
- 
-    .submit-button{
-        border-radius:10px;
-        background-color:royalblue;
+* {
+  box-sizing: border-box;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+.info-div{
+    width:70%;
+    float:left;
+    background-color:aliceblue;
+    padding-left:50px;
+    padding-top:20px;
+}
+.rest-div{
+    height:90%;
+    width:100%;
+}
+.title-div{
+    width:30%;
+    height:100%;
+    float:left;
+}
+.title-div p{
+    font-weight:bold;
+}
+.value-div{
+    width:60%;
+    height:100%;
+    float:left;
+}
+.value-div p{
+    color:#0062cc;
+    font-weight: 600;
+}
+.name-location-div{
+    width:100%;
+    height:40;
+    margin-left:10px;
+}
+.name-location-div h3{
+    padding-right:20px;
+    padding-left:5%;
+}
+.name-location-div p{
+    padding-left:10px;
+    margin-top:7px;
+}
+.profile-picture-div{
+    float:left;
+    width:25%;
+}
+.container-div{
+    width:100%;
+    height:100%;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
+
+
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 4px 8px 0 #b7dee4, 0 6px 20px 0 #0062cc69;
+
+
+}
+.profile-im
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #17a2b803;
+
+
+}
+
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+        background-image: url("images/scholar.jpg");
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: black;
+        display:block;
+        padding:0px;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.box {       
+        background-color:#ffcc99;
+        text-align: center;
         color:white;
-        width:50%;
-        text-align:center;
-        margin-top:5%;
+        font-weight:bold;
+        margin:auto;     
+        width: 40%;
     }
-    .select-div{
-        width:100%;
-        height:10%;
-        padding-bottom:20px;
-        text-align:left;
-        padding-left:17%;
-    }
+.item-nav{
+    width:100%;
+    height:20%;
+}
+.link-nav{
+    width:10%;
+}
+
+
 /* styling section */
 
-</style>
-</head>
 
 </style>
 </head>
-<body onload="loadInfo()"> 
+<body onload="loadEdit()" > 
 
 
 
@@ -270,6 +498,7 @@ body {
 
 <div class="container emp-profile">
     <div class="col-md-2">
+        
         <a href="Profile.html" class="right">Back to Profile</a>
     </div>
     <center><form  id="addcomm" action="/edit-Info" method="POST">
@@ -278,15 +507,10 @@ body {
             document.getElementById("login").value = localStorage.getItem("userEmail");
             console.log(document.getElementById("login").value);
         </script>
-         
-        <input name="name"  value="entry.name" style="display:block";></input>
-        <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
-        
-        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea><br>
+        <input  id="nameid" name="name"  style="display:block";></input>
 
-
-        <br/><br/>
+        <input  id="ageid" name="age"  style="display:block";></input><br>
         
         <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
         <label for="displayemail"> Display email next to info</label> -->
@@ -296,7 +520,7 @@ body {
                     <div class="title">
                         <h4> Race/Ethnicity:</h4>
                     </div>
-                    <div class="scrollbox">
+                    <div class="scrollbox" id="raceid">
                         <input type="checkbox" value="Hispanic/Latinx" name="race">Hispanic or Latinx</input><br>
                         <input type="checkbox" value="African American/Black" name="race">African American or Black</input><br>
                         <input type="checkbox" value="Asian" name="race">Asian </input><br>
@@ -307,7 +531,7 @@ body {
 
             <div class="select-div">
             <label for="gender">Gender Identity:</label>
-            <select name="gender" id="gender" >
+            <select name="gender" id="genderid" >
             <option selected value="none"></option>
             <option value="Male/Man" name="gender">Male/Man</option>
             <option value="Female/Woman"name="gender">Female/Woman</option>
@@ -319,7 +543,7 @@ body {
 
             <div class="select-div">
             <label for="income">Income Level:</label>
-            <select name="income" id="income">
+            <select name="income" id="incomeid" >
             <option selected value="none"> </option>
             <option value="Less than 25k"name="income">less than $25k</option>
             <option value="25k-50k" name="incme">$25k-$50k</option>
@@ -332,7 +556,7 @@ body {
                     <div class="title">
                         <h4> Major Interests:</h4>
                     </div>
-                    <div class="scrollbox">
+                    <div class="scrollbox" id="majorid">
                       <input type ="checkbox" name="major" value="agriculture">Agriculture</input><br>
                         <input type ="checkbox" name="major" value="Anthropology/Archaeology">Anthropology/Archaeology</input><br>
                         <input type ="checkbox" name="major" value="Architecture">Architecture</input><br>
@@ -387,7 +611,7 @@ body {
 
          <div class="select-div">
          <label for="grade">Grade Level:</label>
-            <select name="grade" id="grade" >
+            <select name="grade" id="gradeid" >
             <option selected value="none"> </option>
             <option value="Freshman" name="grade">Freshman</option>
             <option value="Sophomore" name="grade">Sophomore</option>
@@ -398,7 +622,7 @@ body {
 
          <div class="select-div">
           <label for="location">State:</label>
-            <select name="location" id="location">
+            <select name="location" id="locationid" >
             <option selected value="none"></option>
             <option value="AL" name="location">Alabama</option>
             <option value="AK" name="location">Alaska</option>
