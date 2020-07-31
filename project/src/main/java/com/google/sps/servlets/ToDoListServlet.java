@@ -185,8 +185,11 @@ public class ToDoListServlet extends HttpServlet {
               Key ToDoListScholarshipKey = KeyFactory.createKey("ToDoListScholarship", entityId);
               System.out.println(ToDoListScholarshipKey);
               Entity entity=datastore.get(ToDoListScholarshipKey);
-              getIds.remove(id);
+              /*getIds.remove(id);*/
+              if(!getIds3.contains(id)){
               getIds3.add(id);
+
+              }
               entity.setProperty("scholarshipIdList", getIds);
               entity.setProperty("expiredList", getIds3);
               datastore.put(entity);

@@ -56,7 +56,7 @@ public class ListScholarshipsServlet extends HttpServlet {
     Query query = new Query("Scholarship");
     System.out.println("line 57 working for filter test");
     
-    if(raceFilter.size()!=1){
+   /* if(raceFilter.size()!=1){
         Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);
         query.setFilter(raceFilter_Filter);
 
@@ -85,7 +85,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         Filter stateFilter_Filter =new FilterPredicate("state", FilterOperator.IN, stateFilter);
         query.setFilter(stateFilter_Filter);
 
-    }
+    }*/
 
    
     PreparedQuery results = datastore.prepare(query);
@@ -280,14 +280,14 @@ scholarships.sort(new Comparator<ArrayList>() {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
       sorting=request.getParameter("sort");
-      raceFilter=Arrays.asList(request.getParameter("race").split(","));
+     /* raceFilter=Arrays.asList(request.getParameter("race").split(","));
  
 
       genderFilter=Arrays.asList(request.getParameter("gender").split(","));
       majorFilter=Arrays.asList(request.getParameter("major").split(","));
       incomeFilter=Arrays.asList(request.getParameter("income").split(","));
       gradeFilter=Arrays.asList(request.getParameter("grade").split(","));
-      stateFilter=Arrays.asList(request.getParameter("state").split(","));
+      stateFilter=Arrays.asList(request.getParameter("state").split(","));*/
   
 
 
