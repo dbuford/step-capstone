@@ -38,7 +38,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
+      var SCOPES = "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
 
 
       /**
@@ -294,36 +294,78 @@ valueElement.className="value-div";
 const titleElement=document.createElement('div');
 titleElement.className="title-div";
 
+  const emailDiv=document.createElement("div");
+  emailDiv.className="entire-info-div";
+  const emailInfoDiv=document.createElement("div");
+  emailInfoDiv.className="left-title-div";
+  const emailValueDiv=document.createElement("div");
+  emailValueDiv.className="right-value-div";  
   const emailTitleElement=document.createElement('p');
   emailTitleElement.innerText="Email ";
   const emailElement = document.createElement('p');
   emailElement.innerText = (entry.email);
   
+  const ageDiv=document.createElement("div");
+  ageDiv.className="entire-info-div";
+  const ageInfoDiv=document.createElement("div");
+  ageInfoDiv.className="left-title-div";
+  const ageValueDiv=document.createElement("div");
+  ageValueDiv.className="right-value-div"; 
   const ageTitleElement=document.createElement('p');
   ageTitleElement.innerText="Age ";
   const ageElement = document.createElement('p');
   ageElement.innerText = (entry.age);
 
+  const majorDiv=document.createElement("div");
+  majorDiv.className="entire-info-div";
+  const majorInfoDiv=document.createElement("div");
+  majorInfoDiv.className="left-title-div";
+  const majorValueDiv=document.createElement("div");
+  majorValueDiv.className="right-value-div";
   const majorTitleElement=document.createElement('p');
   majorTitleElement.innerText="Major Interest ";
   const majorElement = document.createElement('p');
   majorElement.innerText = (entry.major.splice(0,(entry.major.length)-1).toString());
 
+  const genderDiv=document.createElement("div");
+  genderDiv.className="entire-info-div";
+  const genderInfoDiv=document.createElement("div");
+  genderInfoDiv.className="left-title-div";
+  const genderValueDiv=document.createElement("div");
+  genderValueDiv.className="right-value-div";
   const genderTitleElement=document.createElement('p');
   genderTitleElement.innerText="Gender Identity ";
   const genderElement = document.createElement('p');
   genderElement.innerText = (entry.gender.splice(0,(entry.gender.length)-1).toString());
 
+  const incomeDiv=document.createElement("div");
+  incomeDiv.className="entire-info-div";
+  const incomeInfoDiv=document.createElement("div");
+  incomeInfoDiv.className="left-title-div";
+  const incomeValueDiv=document.createElement("div");
+  incomeValueDiv.className="right-value-div";
   const incomeTitleElement=document.createElement('p');
   incomeTitleElement.innerText="Income Level ";
   const incomeElement = document.createElement('p');
   incomeElement.innerText = (entry.income.splice(0,(entry.income.length)-1).toString());
 
+  const raceDiv=document.createElement("div");
+  raceDiv.className="entire-info-div";
+  const raceInfoDiv=document.createElement("div");
+  raceInfoDiv.className="left-title-div";
+  const raceValueDiv=document.createElement("div");
+  raceValueDiv.className="right-value-div";
   const raceTitleElement=document.createElement('p');
   raceTitleElement.innerText="Race/Ethnicity ";
   const raceElement = document.createElement('p');
   raceElement.innerText = (entry.race.splice(0,(entry.race.length)-1).toString());
 
+  const gradeDiv=document.createElement("div");
+  gradeDiv.className="entire-info-div";
+  const gradeInfoDiv=document.createElement("div");
+  gradeInfoDiv.className="left-title-div";
+  const gradeValueDiv=document.createElement("div");
+  gradeValueDiv.className="right-value-div"; 
   const gradeTitleElement=document.createElement('p');
   gradeTitleElement.innerText="Grade Level ";
   const gradeElement = document.createElement('p');
@@ -331,71 +373,69 @@ titleElement.className="title-div";
 
 
 
-  /*const timeElement = document.createElement('span');
-  var date = new Date(entry.timestamp);
-  timeElement.innerText = date.toString().slice(0,24);
-  timeElement.style.float = "right";
-  timeElement.style.marginRight = "10px";
-  var deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.style.float = "right";
-  deleteButtonElement.addEventListener('click', () => {
-    deleteEntry(entry);
-    // Remove the entry from the DOM.
-    entryElement.remove();
-  });*/
-
   pictureElement.appendChild(imageElement);
     containerElement.appendChild(pictureElement);
 
-  const breakElement1=document.createElement("br");
+  const breakElement1=document.createElement("div");
   breakElement1.innerText="div";
   breakElement1.style.color="white";
 
-  const breakElement2=document.createElement("br");
+  const breakElement2=document.createElement("div");
   breakElement2.innerText="div";
   breakElement2.style.color="white";
 
-const breakElement3=document.createElement("br");
-  breakElement3.innerText="div";
-  breakElement3.style.color="white";
-
-  const breakElement4=document.createElement("br");
-  breakElement4.innerText="div";
-  breakElement4.style.color="white";
 
   containerElement.appendChild(nameLocationElement);
   
-  titleElement.appendChild(emailTitleElement);
-  valueElement.appendChild(emailElement);
+ emailInfoDiv.appendChild(emailTitleElement);
+ emailValueDiv.appendChild(emailElement);
+ emailDiv.appendChild(emailInfoDiv);
+ emailDiv.appendChild(emailValueDiv);
 
-  titleElement.appendChild(ageTitleElement);
-  valueElement.appendChild(ageElement);
+  ageInfoDiv.appendChild(ageTitleElement);
+  ageValueDiv.appendChild(ageElement);
+  ageDiv.appendChild(ageInfoDiv);
+  ageDiv.appendChild(ageValueDiv);
 
-  titleElement.appendChild(breakElement1);
-  valueElement.appendChild(breakElement2);
 
-titleElement.appendChild(raceTitleElement);
-  valueElement.appendChild(raceElement);
+  raceInfoDiv.appendChild(raceTitleElement);
+  raceValueDiv.appendChild(raceElement);
+  raceDiv.appendChild(raceInfoDiv);
+  raceDiv.appendChild(raceValueDiv);
 
-  titleElement.appendChild(genderTitleElement);
-  valueElement.appendChild(genderElement);
+  genderInfoDiv.appendChild(genderTitleElement);
+  genderValueDiv.appendChild(genderElement);
+  genderDiv.appendChild(genderInfoDiv);
+  genderDiv.appendChild(genderValueDiv);
    
-  titleElement.appendChild(incomeTitleElement);
-  valueElement.appendChild(incomeElement);
+  incomeInfoDiv.appendChild(incomeTitleElement);
+  incomeValueDiv.appendChild(incomeElement);
+  incomeDiv.appendChild(incomeInfoDiv);
+  incomeDiv.appendChild(incomeValueDiv);
 
-  titleElement.appendChild(breakElement3);
-  valueElement.appendChild(breakElement4);
+ 
 
 
-  titleElement.appendChild(majorTitleElement);
-  valueElement.appendChild(majorElement);
+  majorInfoDiv.appendChild(majorTitleElement);
+  majorValueDiv.appendChild(majorElement);
+  majorDiv.appendChild(majorInfoDiv);
+  majorDiv.appendChild(majorValueDiv);
 
-  titleElement.appendChild(gradeTitleElement);
-  valueElement.appendChild(gradeElement);
+  gradeInfoDiv.appendChild(gradeTitleElement);
+  gradeValueDiv.appendChild(gradeElement);
+  gradeDiv.appendChild(gradeInfoDiv);
+  gradeDiv.appendChild(gradeValueDiv);
 
-  restOfElement.appendChild(titleElement);
-  restOfElement.appendChild(valueElement);
+  restOfElement.appendChild(emailDiv);
+  restOfElement.appendChild(ageDiv);
+  restOfElement.appendChild(breakElement1);
+  restOfElement.appendChild(raceDiv);
+  restOfElement.appendChild(genderDiv);
+  restOfElement.appendChild(incomeDiv);
+  restOfElement.appendChild(breakElement2);
+  restOfElement.appendChild(majorDiv);
+  restOfElement.appendChild(gradeDiv);
+
   entryElement.appendChild(restOfElement);
 
 containerElement.appendChild(entryElement);
@@ -1182,7 +1222,12 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const amountTitle=document.createElement("h4");
             amountTitle.innerText="AMOUNT: ";
             const amountValue=document.createElement("h4");
-            amountValue.innerText='$'+thousands_separators(scholarship[9]);
+            if(scholarship[9]!="not specified"){
+                amountValue.innerText='$'+thousands_separators(scholarship[9]);
+            }
+            else{
+                amountValue.innerText=scholarship[9];
+            }
             amountContainer.appendChild(amountTitle);
             amountContainer.appendChild(amountValue);
             containerElement.appendChild(amountContainer);
