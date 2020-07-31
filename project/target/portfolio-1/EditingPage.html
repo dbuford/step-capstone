@@ -2,7 +2,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Editing</title>
+    <title>$cholar</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -223,17 +223,263 @@ body {
     margin-right:5%;
     margin-top:2%;
 }
+* {
+  box-sizing: border-box;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+.info-div{
+    width:70%;
+    float:left;
+    background-color:aliceblue;
+    padding-left:50px;
+    padding-top:20px;
+}
+.rest-div{
+    height:90%;
+    width:100%;
+}
+.title-div{
+    width:30%;
+    height:100%;
+    float:left;
+}
+.title-div p{
+    font-weight:bold;
+}
+.value-div{
+    width:60%;
+    height:100%;
+    float:left;
+}
+.value-div p{
+    color:#0062cc;
+    font-weight: 600;
+}
+.name-location-div{
+    width:100%;
+    height:40;
+    margin-left:10px;
+}
+.name-location-div h3{
+    padding-right:20px;
+    padding-left:5%;
+}
+.name-location-div p{
+    padding-left:10px;
+    margin-top:7px;
+}
+.profile-picture-div{
+    float:left;
+    width:25%;
+}
+.container-div{
+    width:100%;
+    height:100%;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
+
+
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 4px 8px 0 #b7dee4, 0 6px 20px 0 #0062cc69;
+
+
+}
+.profile-im
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #17a2b803;
+
+
+}
+
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+        background-image: url("images/scholar.jpg");
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: black;
+        display:block;
+        padding:0px;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.box {       
+        background-color:#ffcc99;
+        text-align: center;
+        color:white;
+        font-weight:bold;
+        margin:auto;     
+        width: 40%;
+    }
+.item-nav{
+    width:100%;
+    height:20%;
+}
+.link-nav{
+    width:10%;
+}
+
+
 /* styling section */
 
-</style>
-</head>
 
 </style>
 </head>
-<body onload="loadInfo()"> >
-
-
-
+<body onload="loadEdit()" > 
 
 <div class="navbar">
   <a href="index.html">Home</a>
@@ -242,10 +488,7 @@ body {
   <a href="toDoList.html" class="right">To-Do</a>
   <a href="addScholarships.html" class="right">Add-Scholarship</a>
 </div>
-
-
-
-  </div>
+  </div>  
 
 <div class="container emp-profile">
     <div class="col-md-2">
@@ -257,12 +500,10 @@ body {
             document.getElementById("login").value = localStorage.getItem("userEmail");
             console.log(document.getElementById("login").value);
         </script>
-         
-        <input name="name"  value="entry.name" style="display:block";></input>
-        <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
-        
-        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea><br>
+        <input  id="nameid" name="name"  style="display:block";></input>
+        <br/><br/>
+        <input  id="ageid" name="age"  style="display:block";></input><br>
 
 
         <br/><br/>
@@ -276,6 +517,8 @@ body {
                         <h4> Race/Ethnicity:</h4>
                     </div>
                     <div class="scrollbox">
+                        
+                        <select name="race" id="raceid" onchange="display()">>
                         <input type="checkbox" value="Hispanic/Latinx" name="race">Hispanic or Latinx</input><br>
                         <input type="checkbox" value="African American/Black" name="race">African American or Black</input><br>
                         <input type="checkbox" value="Asian" name="race">Asian </input><br>
@@ -290,6 +533,7 @@ body {
                         <h4> Gender Identity:</h4>
                     </div>
                     <div class="scrollbox">
+                        <select name="gender" id="genderid" onchange="display()">
                         <input type="checkbox" value="Male/Man" name="gender"> Male/Man</input><br>
                         <input type ="checkbox" value="Female/Woman" name="gender"> Female/Woman</input><br>
                         <input type="checkbox" value="Transmale/Transman" name="gender"> Transmale/Transman</input><br>
@@ -303,6 +547,7 @@ body {
                         <h4>Income Level:</h4>
                     </div>
                     <div class="scrollbox">
+                        <select name="income" id="incomeid" onchange="display()">
                         <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
                         <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
                         <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
@@ -317,6 +562,7 @@ body {
                         <h4> Major Interests:</h4>
                     </div>
                     <div class="scrollbox">
+                      <select name="major" id="majorid" onchange="display()">
                       <input type ="checkbox" name="major" value="agriculture">Agriculture</input><br>
                         <input type ="checkbox" name="major" value="anthropology-archaeology">Anthropology/Archaeology</input><br>
                         <input type ="checkbox" name="major" value="architecture">Architecture</input><br>
@@ -374,6 +620,7 @@ body {
                         <h4>Grade Level:</h4>
                     </div>
                     <div class="scrollbox">
+                        <select name="grade" id="gradeid" onchange="display()">
                         <input type="checkbox" value="Freshman" name="grade">Freshman</input><br>
                         <input type ="checkbox" value="Sophomore" name="grade"> Sophomore</input><br>
                         <input type="checkbox" value="Junior" name="grade"> Junior </input><br>
@@ -386,6 +633,7 @@ body {
                         <h4>Location:</h4>
                     </div>
                     <div class="scrollbox">
+                        <select name="location" id="locationid" onchange="display()">
                         <input type="checkbox" name="location" value="AL">Alabama</input><br>
                         <input type="checkbox" name="location" value="AK">Alaska</input><br>
                         <input type="checkbox" name="location" value="AZ">Arizona</input><br>

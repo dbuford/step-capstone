@@ -140,6 +140,7 @@ public class editInfoServlet extends HttpServlet {
 
 
     response.setContentType("text/html");
+    response.sendRedirect("/Profile.html");
     
      /* Redirect back to the HTML page.*/
     //response.sendRedirect("Profile.html");

@@ -4,6 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -203,9 +204,6 @@ async function getData() {
 
 
 /*function add_info() {
-
-
-
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
     if (txt.includes("Please")) {
@@ -231,6 +229,9 @@ function login() {
 }
 
 
+function updateCount() {
+  location.replace("Profile.html")
+}
 
 function createEntryElement(entry) {
     const containerElement=document.getElementById('container-div');
@@ -238,7 +239,12 @@ function createEntryElement(entry) {
   pictureElement.className = 'profile-picture-div';
 
   const imageElement=document.createElement("img");
-  imageElement.src="/images/person.jpg";
+        if(entry.image == null || entry.image == undefined) { 
+            imageElement.src="/images/person.jpg";
+        }
+        else{
+            imageElement.src = entry.image;
+        }
     
     const entryElement=document.createElement('div');
     entryElement.className='info-div';
@@ -249,71 +255,6 @@ function createEntryElement(entry) {
   } else {
     nameElement.innerText = (entry.name);
   }
-
-    const nameLocationElement=document.createElement('div');
-    nameLocationElement.className='name-location-div';
-    nameLocationElement.appendChild(nameElement);
-    const geoTagElement=document.createElement('i');
-    geoTagElement.className='fas fa-map-marker-alt';
-    geoTagElement.style.fontSize='24px';
-    geoTagElement.style.float='left';
-    nameLocationElement.appendChild(geoTagElement);
-
-
-    const locationElement = document.createElement('p');
-    locationElement.innerText = (entry.location.toString());
-    locationElement.style.float='left';
-    nameLocationElement.appendChild(locationElement);
-
-    const restOfElement=document.createElement('div');
-    restOfElement.className="rest-div";
-    restOfElement.setAttribute("id","user-info");
-
-    const valueElement=document.createElement('div');
-    valueElement.className="value-div";
-
-    const titleElement=document.createElement('div');
-    titleElement.className="title-div";
-
-    const emailTitleElement=document.createElement('p');
-    emailTitleElement.innerText="Email ";
-    const emailElement = document.createElement('p');
-    emailElement.innerText = (entry.email);
-    
-    const ageTitleElement=document.createElement('p');
-    ageTitleElement.innerText="Age ";
-    const ageElement = document.createElement('p');
-    ageElement.innerText = (entry.age);
-
-    const majorTitleElement=document.createElement('p');
-    majorTitleElement.innerText="Major Interest ";
-    const majorElement = document.createElement('p');
-    majorElement.innerText = (entry.major.toString());
-
-    const genderTitleElement=document.createElement('p');
-    genderTitleElement.innerText="Gender Identity ";
-    const genderElement = document.createElement('p');
-    genderElement.innerText = (entry.gender.toString());
-
-    const incomeTitleElement=document.createElement('p');
-    incomeTitleElement.innerText="Income Level ";
-    const incomeElement = document.createElement('p');
-    incomeElement.innerText = (entry.income.toString());
-
-    const raceTitleElement=document.createElement('p');
-    raceTitleElement.innerText="Race/Ethnicity ";
-    const raceElement = document.createElement('p');
-    raceElement.innerText = (entry.race.toString());
-
-    const gradeTitleElement=document.createElement('p');
-    gradeTitleElement.innerText="Grade Level ";
-    const gradeElement = document.createElement('p');
-    gradeElement.innerText = (entry.grade.toString());
-
-
-
-    
-
 const nameLocationElement=document.createElement('div');
 nameLocationElement.className='name-location-div';
 nameLocationElement.appendChild(nameElement);
@@ -373,25 +314,6 @@ titleElement.className="title-div";
   const gradeElement = document.createElement('p');
   gradeElement.innerText = (entry.grade.splice(0,(entry.grade.length)-1).toString());
 
-
-
-  /*const timeElement = document.createElement('span');
-  var date = new Date(entry.timestamp);
-  timeElement.innerText = date.toString().slice(0,24);
-  timeElement.style.float = "right";
-  timeElement.style.marginRight = "10px";
-
-  var deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.style.float = "right";
-  deleteButtonElement.addEventListener('click', () => {
-    deleteEntry(entry);
-
-    // Remove the entry from the DOM.
-    entryElement.remove();
-  });*/
-
-
   pictureElement.appendChild(imageElement);
     containerElement.appendChild(pictureElement);
 
@@ -403,7 +325,7 @@ titleElement.className="title-div";
   breakElement2.innerText="div";
   breakElement2.style.color="white";
 
-    const breakElement3=document.createElement("br");
+const breakElement3=document.createElement("br");
   breakElement3.innerText="div";
   breakElement3.style.color="white";
 
@@ -419,10 +341,10 @@ titleElement.className="title-div";
   titleElement.appendChild(ageTitleElement);
   valueElement.appendChild(ageElement);
 
-  titleElement.appendChild(breakElement3);
-  valueElement.appendChild(breakElement4);
+  titleElement.appendChild(breakElement1);
+  valueElement.appendChild(breakElement2);
 
-    titleElement.appendChild(raceTitleElement);
+titleElement.appendChild(raceTitleElement);
   valueElement.appendChild(raceElement);
 
   titleElement.appendChild(genderTitleElement);
@@ -430,6 +352,9 @@ titleElement.className="title-div";
    
   titleElement.appendChild(incomeTitleElement);
   valueElement.appendChild(incomeElement);
+
+  titleElement.appendChild(breakElement3);
+  valueElement.appendChild(breakElement4);
 
 
   titleElement.appendChild(majorTitleElement);
@@ -443,226 +368,42 @@ titleElement.className="title-div";
   entryElement.appendChild(restOfElement);
 
   containerElement.appendChild(entryElement);
-    //create form if user chooses to edit their info entry
-    var editButton=document.createElement("button");
-    editButton.innerText="edit";
-    containerElement.appendChild(editButton);
   
-  //edit button
-  editButton.onclick=function(){
-                    if(editButton.innerText=="edit"){
-                        console.log("working");
-                        editButton.innerText="Close";
-                    
-
-                        //display elements as none
-                        document.getElementById("user-info").style.display="none";
-                        console.log("working2");
-                    
-                    
-                        formDiv1=document.createElement("div");
-                        formDiv1.setAttribute("class","edit-form1");
-
-                        formDiv2=document.createElement("div");
-                        formDiv2.setAttribute("class","edit-form2");
-
-
-                        formElement2=document.createElement("form");
-                        formElement2.setAttribute("class","edit-form-parent");
-                        console.log("working3");
-                        formElement2.action="/edit-Info";
-                        formElement2.method="POST";
-
-                        //formElement2.setAttribute('id','form-element-2'+scholarship[0]);
-                        
-
-
-                        var newTitle=document.createElement("h4");
-                        newTitle.innerText='Title: ';
-                        formDiv1.appendChild(newTitle);
-
-                        var newTitleInput=document.createElement("input");
-                        newTitleInput.value=scholarship[0];
-                        newTitleInput.name="new-title";
-                        formDiv1.appendChild(newTitleInput);
-
-
-                    //create input boxes for race*/
-
-                        var newRace=document.createElement("h4");
-                        newRace.innerText='Race/Ethnicity: ';
-                        formDiv2.appendChild(newRace);
-
-                        var newRaceContainer=document.createElement("div");
-                        newRaceContainer.setAttribute("class","scrollbox");
-
-                        for(let i=1;i<document.getElementById("race").length;i++){
-                            var x=document.getElementById("race").options;
-                            
-                            var newRaceElement=document.createElement("input");
-                            setAttributes(newRaceElement,{"value":x[i].value,"type":"checkbox","name":"new-race"},entry.race.toString());
-                            if(i!=1){
-                            newRaceContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newRaceContainer.appendChild(newRaceElement);
-                            newRaceContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newRaceContainer);
-
-                
-                    //create input for gender identity
-
-                        var newGender=document.createElement("h4");
-                        newGender.innerText='Gender Identity: ';
-                        formDiv2.appendChild(newGender);
-
-                        var newGenderContainer=document.createElement("div");
-                        newGenderContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("gender").length;i++){
-                            var x=document.getElementById("gender").options;
-                            
-                            var newGenderElement=document.createElement("input");
-                            setAttributes(newGenderElement,{"value":x[i].value,"type":"checkbox","name":"new-gender"},entry.gender.toString());
-                            if(i!=2){
-                            newGenderContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newGenderContainer.appendChild(newGenderElement);
-                            newGenderContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newGenderContainer);
-
-
-                //create input for income level
-
-                        var newIncome=document.createElement("h4");
-                        newIncome.innerText='Income Level: ';
-                        formDiv2.appendChild(newIncome);
-
-                        var newIncomeContainer=document.createElement("div");
-                        newIncomeContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("income").length;i++){
-                            var x=document.getElementById("income").options;
-                            
-                            var newIncomeElement=document.createElement("input");
-                            setAttributes(newIncomeElement,{"value":x[i].value,"type":"checkbox","name":"new-income"},entry.income.toString());
-                            if(i!=2){
-                            newIncomeContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newIncomeContainer.appendChild(newIncomeElement);
-                            newIncomeContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newIncomeContainer);
-
-                //create input for major
-                        var newMajor=document.createElement("h4");
-                        newMajor.innerText='Major: ';
-                        formDiv2.appendChild(newMajor);
-
-                        var newMajorContainer=document.createElement("div");
-                        newMajorContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("major").length;i++){
-                            var x=document.getElementById("major").options;
-                            
-                            var newMajorElement=document.createElement("input");
-                            setAttributes(newMajorElement,{"value":x[i].value,"type":"checkbox","name":"new-major"},entry.major.toString());
-                            if(i!=2){
-                            newMajorContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newMajorContainer.appendChild(newMajorElement);
-                            newMajorContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newMajorContainer);
-                    
-                        
-
-                //create input for gradelevel
-                        var newGrade=document.createElement("h4");
-                        newGrade.innerText='Grade Level: ';
-                        formDiv2.appendChild(newGrade);
-
-                        var newGradeContainer=document.createElement("div");
-                        newGradeContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("grade").length;i++){
-                            var x=document.getElementById("grade").options;
-                            
-                            var newGradeElement=document.createElement("input");
-                            setAttributes(newGradeElement,{"value":x[i].value,"type":"checkbox","name":"new-grade"},entry.grade.toString());
-                            if(i!=2){
-                            newGradeContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newGradeContainer.appendChild(newGradeElement);
-                            newGradeContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newGradeContainer);
-
-                //input for state location
-                        var newlocation=document.createElement("h4");
-                        newlocation.innerText='location: ';
-                        formDiv2.appendChild(newlocation);
-
-                    var newlocationContainer=document.createElement("div");
-                        newlocationContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("location").length;i++){
-                            var x=document.getElementById("location").options;
-                            
-                            var newlocationElement=document.createElement("input");
-                            setAttributes(newlocationElement,{"value":x[i].value,"type":"checkbox","name":"new-location"},entry.location.toString());
-                            if(i!=2){
-                            newlocationContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newlocationContainer.appendChild(newlocationElement);
-                            newlocationContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newlocationContainer);
-
-
-                        var submitButton=document.createElement("button");
-                        submitButton.innerHTML="Submit";
-                        submitButton.style.float="left";
-                        formElement2.appendChild(formDiv2);
-                        formElement2.appendChild(formDiv1);
-                        formElement2.appendChild(submitButton);
-                        
-                        containerElement.appendChild(formElement2);
-                    }
-                    else{
-                    editButton.innerText="edit"
-                    
-                    document.getElementById('form-element-2'+scholarship[0]).remove();
-                    
-                    document.getElementById("user-info").style.display="block";
-                    }
-
-                    
-                     
-                
-
-                }
-                return containerElement;
+  return containerElement;
 }
-            
-
-        
 
 
-  
+function loadEdit(){
+    fetch('/data').then(response => response.json()).then((entries) => {
+          entries.forEach((entry) => {
+          if(entry.email== localStorage.getItem("userEmail")){
+              console.log(entry.name);
+              document.getElementById("nameid").value = entry.name;
+              document.getElementById("ageid").value = entry.age;
+              var x=document.getElementById("locationid").options;
+              var y=document.getElementById("raceid").options;
+              var z=document.getElementById("genderid").options;
+              var r=document.getElementById("majorid").options;
+              var l=document.getElementById("gradeid").options;
+              var w=document.getElementById("incomeid").options;
+              entry.race = y.value;
+              entry.gender = z.value;
+              entry.income = w.value;
+              entry.major = r.value;
+              entry.grade = l.value;
+              entry.state = x.value;
+
+              if(entry.race.includes(el.value)){
+                el.checked=true;
+            }
+        }
+
+          })
+})
+}
+
+
+
 
 
 function deleteEntry(entry) {
@@ -670,8 +411,6 @@ function deleteEntry(entry) {
   params.append('id', entry.id);
   fetch('/delete', {method: 'POST', body: params});
 }
-
-
 
 // create function for user info
 function getUserInfo(){
@@ -692,7 +431,9 @@ function getUserInfo(){
                     entryListElement.appendChild(createEntryElement(entry));
                     console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
-    
+                    const messageForm = document.getElementById('addcomm');
+                    messageForm.action = entry.uploadUrl;
+                    console.log(entry.uploadUrl);
 
             
                     
@@ -817,7 +558,6 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                             if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
                                 if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
                                     if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
-
                                     scholarships.push(response[i]);
                                     console.log(response[i]);
                                     }
@@ -1725,5 +1465,3 @@ function createPriority(title,priority,scholarshipId,entityId){
     return selectContainer;
 
 }
-
-//edit profile autofill'
