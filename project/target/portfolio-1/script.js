@@ -1505,7 +1505,12 @@ function createToDoListElement(scholarship,type){
     var amountContainer=document.createElement("div");
     amountContainer.setAttribute('class','scholarship-info');
     var amountValue=document.createElement("a");
-    amountValue.innerText="Amount: $"+thousands_separators(scholarship[9]);
+    if(scholarship[9]!="not specified"){
+        amountValue.innerText='$'+thousands_separators(scholarship[9]);
+        }
+    else{
+        amountValue.innerText=scholarship[9];
+        }
     amountContainer.appendChild(amountValue);
     containerElement.appendChild(amountContainer);
 
