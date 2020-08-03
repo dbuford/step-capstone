@@ -634,12 +634,12 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
     }
     const params = new URLSearchParams();
     params.append('sort', sort);
-   /* params.append('race',race);
+    params.append('race',race);
     params.append('gender',gender);
     params.append('major',major);
     params.append('income',income);
     params.append('grade',grade);
-    params.append('state',state);*/
+    params.append('state',state);
 
 
 
@@ -668,7 +668,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             else{   
             for(let i=0;i<response.length;i++){
-                /*scholarships.push(response[i]);*/
+                scholarships.push(response[i]);/*
                 if(race=="none" || response[i][4].includes(race[0])||response[i][4]=="none"){
                     if(gender=="none"||response[i][5].includes(gender[0])||response[i][5]=="none"){
                         if(major=="none"||response[i][7].includes(major[0])||response[i][7]=="none"){
@@ -682,7 +682,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                             }  
                         }
                     } 
-                } 
+                } */
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -726,7 +726,9 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
         })();
         }
         
-          function createScholarships(scholarships,pagenum){
+           function createScholarships(scholarships,pagenum){
+               console.log("hello");
+            /*const result = await resolveAfter1Second();*/
             return function(){
                  const scholarshipList = document.getElementById('scholarship-list');
                 scholarshipList.innerHTML="";
@@ -735,6 +737,13 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                 }
             }
         }
+    function resolveAfter1Second() {
+        return new Promise(resolve => {
+        setTimeout(() => {
+      resolve('1');
+    }, 10);
+  });
+}
 
         /** Creates a list element to display the comment */
         function createScholarshipElement(scholarship) {
@@ -765,7 +774,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
 
-            var emailInToDoList=false;
+           /* var emailInToDoList=false;
 
             currentUserEmail=localStorage.getItem('userEmail');
             const params = new URLSearchParams();
@@ -783,8 +792,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                 }
 
            
-            console.log(emailInToDoList);
-            if(emailInToDoList==false){
+            console.log(emailInToDoList);*/
+            /*if(emailInToDoList==false){*/
             circleElement.onclick = function() { // Note this is a function
             
             const formElement=document.createElement('div');
@@ -835,8 +844,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
 
             containerElement.appendChild(formElement);
             };
-            }
-            });
+            /*}
+            });*/
             
 
             var urlElement=document.createElement('a');
