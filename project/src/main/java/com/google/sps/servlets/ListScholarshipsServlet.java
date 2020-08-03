@@ -54,7 +54,7 @@ public class ListScholarshipsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("Scholarship");
     
-   /* if(raceFilter.size()!=1){
+    if(raceFilter.size()!=1){
         Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);
         query.setFilter(raceFilter_Filter);
 
@@ -83,7 +83,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         Filter stateFilter_Filter =new FilterPredicate("state", FilterOperator.IN, stateFilter);
         query.setFilter(stateFilter_Filter);
 
-    }*/
+    }
 
    
     PreparedQuery results = datastore.prepare(query);
@@ -238,11 +238,11 @@ scholarships.sort(new Comparator<ArrayList>() {
         amount1=Integer.parseInt(l1.get(9).toString())*-1;
         amount2=Integer.parseInt(l2.get(9).toString())*-1;
     }
-    l1thumbsup=2*Integer.parseInt(l1.get(13).toString());
-    l1thumbsdown=-2*Integer.parseInt(l1.get(14).toString());
+    l1thumbsup=-2*Integer.parseInt(l1.get(13).toString());
+    l1thumbsdown=2*Integer.parseInt(l1.get(14).toString());
 
-    l2thumbsup=2*Integer.parseInt(l2.get(13).toString());
-    l2thumbsdown=-2*Integer.parseInt(l2.get(14).toString());
+    l2thumbsup=-2*Integer.parseInt(l2.get(13).toString());
+    l2thumbsdown=2*Integer.parseInt(l2.get(14).toString());
 
     int l1total=l1none+amount1+l1thumbsup+l1thumbsdown;
     int l2total=l2none+amount2+l2thumbsup+l2thumbsdown;
@@ -278,14 +278,14 @@ scholarships.sort(new Comparator<ArrayList>() {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
       sorting=request.getParameter("sort");
-     /* raceFilter=Arrays.asList(request.getParameter("race").split(","));
+      raceFilter=Arrays.asList(request.getParameter("race").split(","));
  
 
       genderFilter=Arrays.asList(request.getParameter("gender").split(","));
       majorFilter=Arrays.asList(request.getParameter("major").split(","));
       incomeFilter=Arrays.asList(request.getParameter("income").split(","));
       gradeFilter=Arrays.asList(request.getParameter("grade").split(","));
-      stateFilter=Arrays.asList(request.getParameter("state").split(","));*/
+      stateFilter=Arrays.asList(request.getParameter("state").split(","));
   
 
 
