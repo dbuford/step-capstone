@@ -775,7 +775,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             containerElement.appendChild(circleElement);
 
            /* var emailInToDoList=false;
-
             currentUserEmail=localStorage.getItem('userEmail');
             const params = new URLSearchParams();
             params.append('userEmail',currentUserEmail);
@@ -787,10 +786,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                         circleElement.appendChild(checkMark);
                         emailInToDoList=true;
                         console.log(emailInToDoList);
-
                     }
                 }
-
            
             console.log(emailInToDoList);*/
             /*if(emailInToDoList==false){*/
