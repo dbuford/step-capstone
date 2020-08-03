@@ -851,6 +851,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             var urlElement=document.createElement('a');
             var linkText=document.createTextNode(scholarship[0]);
             urlElement.appendChild(linkText);
+           
             
             var titleContainer=document.createElement("div");
             titleContainer.setAttribute('class','scholarship-title');
@@ -1490,6 +1491,7 @@ function createToDoListElement(scholarship,type){
     urlElement.setAttribute('target', '_blank');
     titleContainer.appendChild(urlElement);
     containerElement.appendChild(titleContainer);
+    
 
     //display deadline for scholarship
     var deadlineContainer=document.createElement("div");

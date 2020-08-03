@@ -775,7 +775,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             containerElement.appendChild(circleElement);
 
            /* var emailInToDoList=false;
-
             currentUserEmail=localStorage.getItem('userEmail');
             const params = new URLSearchParams();
             params.append('userEmail',currentUserEmail);
@@ -787,10 +786,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                         circleElement.appendChild(checkMark);
                         emailInToDoList=true;
                         console.log(emailInToDoList);
-
                     }
                 }
-
            
             console.log(emailInToDoList);*/
             /*if(emailInToDoList==false){*/
@@ -851,6 +848,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             var urlElement=document.createElement('a');
             var linkText=document.createTextNode(scholarship[0]);
             urlElement.appendChild(linkText);
+           
             
             var titleContainer=document.createElement("div");
             titleContainer.setAttribute('class','scholarship-title');
@@ -1490,6 +1488,7 @@ function createToDoListElement(scholarship,type){
     urlElement.setAttribute('target', '_blank');
     titleContainer.appendChild(urlElement);
     containerElement.appendChild(titleContainer);
+    
 
     //display deadline for scholarship
     var deadlineContainer=document.createElement("div");
