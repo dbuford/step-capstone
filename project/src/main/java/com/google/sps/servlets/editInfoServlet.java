@@ -106,11 +106,9 @@ public class editInfoServlet extends HttpServlet {
       for (Entity entity : results.asIterable()){
           if (entity.getProperty("email").equals(userEmail)){
               long id = entity.getKey().getId();
-              System.out.println(id);
         
                 try {
                     Key entryEntityKey = KeyFactory.createKey("Info", id); 
-                    System.out.println(entryEntityKey);
                     Entity entryEntity=datastore.get(entryEntityKey);
                     entryEntity.setProperty("title",title);
                     entryEntity.setProperty("name",name);

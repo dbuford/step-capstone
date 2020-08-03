@@ -52,9 +52,7 @@ public class ListScholarshipsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-     System.out.println("line 55 working for filter test");
     Query query = new Query("Scholarship");
-    System.out.println("line 57 working for filter test");
     
    /* if(raceFilter.size()!=1){
         Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);

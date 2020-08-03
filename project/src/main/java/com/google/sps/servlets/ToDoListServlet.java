@@ -183,7 +183,6 @@ public class ToDoListServlet extends HttpServlet {
             
             if(scholarshipDate.compareTo(currentDate) < 0){
               Key ToDoListScholarshipKey = KeyFactory.createKey("ToDoListScholarship", entityId);
-              System.out.println(ToDoListScholarshipKey);
               Entity entity=datastore.get(ToDoListScholarshipKey);
               /*getIds.remove(id);*/
               if(!getIds3.contains(id)){
