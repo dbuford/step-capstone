@@ -627,7 +627,7 @@ function getUserScholarships(){
         }
 
 }
-function getScholarships(race,gender,major,income,grade,state,sort) {
+async function getScholarships(race,gender,major,income,grade,state,sort) {
     if(localStorage.getItem('userEmail')!=null){
         currentUserEmail=localStorage.getItem('userEmail');
 
@@ -644,7 +644,17 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
 
    
-   fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+  (async () => {
+      const rawResponse = await fetch("/list-scholarships", {method: 'POST', body: params}, 
+      {
+          headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+   }
+      });
+     const response = await rawResponse.json();
+
+      /* }).then(response => response.json()).then((response) => {*/
        console.log("line 614 working");
        var scholarships=[];
        console.log(response);
@@ -713,7 +723,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                     }    
            }
             }
-        });
+        })();
         }
         
           function createScholarships(scholarships,pagenum){
