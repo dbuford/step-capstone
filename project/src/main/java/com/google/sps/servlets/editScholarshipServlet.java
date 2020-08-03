@@ -58,15 +58,7 @@ public class editScholarshipServlet extends HttpServlet {
         amount= amount;
     }
 
-    /*String userEmail;
 
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      userEmail = userService.getCurrentUser().getEmail();
-    }
-    else{
-        userEmail="none";
-    }*/
 
      String[] empty={"none"};
      String[] racearray=request.getParameterValues("new-race");
@@ -97,7 +89,6 @@ public class editScholarshipServlet extends HttpServlet {
 
      try {
         Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
-        System.out.println(scholarshipEntityKey);
         Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
         scholarshipEntity.setProperty("title",title);
         scholarshipEntity.setProperty("description",description);
@@ -121,7 +112,7 @@ public class editScholarshipServlet extends HttpServlet {
 
     response.setContentType("text/html");
     
-     /* Redirect back to the HTML page.*/
+      /*Redirect back to the HTML page.*/
     response.sendRedirect("displayScholarships.html");
   }
 

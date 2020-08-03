@@ -52,9 +52,7 @@ public class ListScholarshipsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
-    Query query = new Query("Scholarship").addSort("timestamp", SortDirection.DESCENDING);
-
+    Query query = new Query("Scholarship");
     
     if(raceFilter.size()!=1){
         Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);
@@ -88,8 +86,8 @@ public class ListScholarshipsServlet extends HttpServlet {
     }
 
    
-
     PreparedQuery results = datastore.prepare(query);
+
 
 
     ArrayList<ArrayList<Object>> scholarships = new ArrayList<>();
@@ -240,11 +238,11 @@ scholarships.sort(new Comparator<ArrayList>() {
         amount1=Integer.parseInt(l1.get(9).toString())*-1;
         amount2=Integer.parseInt(l2.get(9).toString())*-1;
     }
-    l1thumbsup=2*Integer.parseInt(l1.get(13).toString());
-    l1thumbsdown=-2*Integer.parseInt(l1.get(14).toString());
+    l1thumbsup=-2*Integer.parseInt(l1.get(13).toString());
+    l1thumbsdown=2*Integer.parseInt(l1.get(14).toString());
 
-    l2thumbsup=2*Integer.parseInt(l2.get(13).toString());
-    l2thumbsdown=-2*Integer.parseInt(l2.get(14).toString());
+    l2thumbsup=-2*Integer.parseInt(l2.get(13).toString());
+    l2thumbsdown=2*Integer.parseInt(l2.get(14).toString());
 
     int l1total=l1none+amount1+l1thumbsup+l1thumbsdown;
     int l2total=l2none+amount2+l2thumbsup+l2thumbsdown;
@@ -290,10 +288,6 @@ scholarships.sort(new Comparator<ArrayList>() {
       stateFilter=Arrays.asList(request.getParameter("state").split(","));
   
 
-
-
-
-      
 
       doGet(request,response);
 

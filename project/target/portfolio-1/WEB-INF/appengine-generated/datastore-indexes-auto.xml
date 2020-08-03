@@ -1,13 +1,6 @@
 
-<!-- Indices written at Thu, 30 Jul 2020 16:00:19 UTC -->
+<!-- Indices written at Mon, 3 Aug 2020 18:33:08 UTC -->
 
 
-<datastore-indexes autoGenerate="true">
+<datastore-indexes autoGenerate="true"/>
 
-    <!-- Used 2 times in query history -->
-    <datastore-index kind="Scholarship" ancestor="false" source="auto">
-        <property name="state" direction="asc"/>
-        <property name="timestamp" direction="desc"/>
-    </datastore-index>
-
-</datastore-indexes>

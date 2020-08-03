@@ -46,10 +46,8 @@ public class UpdateVoteServlet extends HttpServlet {
     long id=Long.parseLong(request.getParameter("id"));
     String thumbsup=request.getParameter("thumbsup");
     String thumbsdown=request.getParameter("thumbsdown");
-    System.out.println(id);
     String upVoteEmailsString=request.getParameter("thumbsUpList");
     List upVoteEmails=Arrays.asList(upVoteEmailsString.split(","));
-    System.out.println(upVoteEmails);
 
     String downVoteEmailsString=request.getParameter("thumbsDownList");
     List downVoteEmails=Arrays.asList(downVoteEmailsString.split(","));
@@ -60,7 +58,6 @@ public class UpdateVoteServlet extends HttpServlet {
 
         try {
             Key scholarshipEntityKey = KeyFactory.createKey("Scholarship", id);
-        System.out.println(scholarshipEntityKey);
         Entity scholarshipEntity=datastore.get(scholarshipEntityKey);
         scholarshipEntity.setProperty("thumbsup", thumbsup);
         scholarshipEntity.setProperty("thumbsdown",thumbsdown);

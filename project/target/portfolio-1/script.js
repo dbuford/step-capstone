@@ -4,6 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,7 +38,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
+      var SCOPES = "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks";
 
 
       /**
@@ -73,7 +74,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
           console.log("works");
           console.log("works");
         }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
+          /*appendPre(JSON.stringify(error, null, 2));*/
         });
       }
 
@@ -85,7 +86,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
         console.log("working");
         if (isSignedIn) {
           var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
-          localStorage.setItem("userEmail",JSON.stringify(userEmail2));
+          localStorage.setItem("userEmail",JSON.stringify(userEmail2).replace(/\"/g, ""));
           console.log(localStorage.getItem("userEmail")); 
           if (document.getElementById('login') !=null) {
               
@@ -98,19 +99,36 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
           //check if user has already filled out form
           var alreadyFilledOut=false;
+          var userName;
 
           fetch('/data').then(response => response.json()).then((entries) => {
           entries.forEach((entry) => {
           if(entry.email== localStorage.getItem("userEmail")){
               alreadyFilledOut=true;
+              userName=entry.name;
         }
           })
           if(alreadyFilledOut==false){
-            document.getElementById("addcomm").style.display = 'block';
+            window.location.replace("login.html");
+
+            /*document.getElementById("addcomm").style.display = 'block';
+            const loginElement = document.getElementById('loginel');
+            loginElement.style.display="block";
+            loginElement.style.background="royalblue";
+            loginElement.style.color="white";
+            loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);*/
+
+
 
           }
           else{
             document.getElementById("addcomm").style.display = 'none';
+            const loginElement = document.getElementById('loginel');
+            loginElement.style.display="block";
+            loginElement.style.background="white";
+            loginElement.style.color="black";
+            loginElement.innerHTML = ("Welcome, " + userName+"!");
+
  
           }
           }); 
@@ -130,7 +148,7 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
                 document.getElementById("signout_button").style.display = 'none';
                 console.log("working");
                 localStorage.removeItem("userEmail");
-                document.getElementById("addcomm").style.display = 'none';
+                /*document.getElementById("addcomm").style.display = 'none';*/
             }
             else{
                 handleAuthClick();
@@ -175,11 +193,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *
        * @param {string} message Text to be placed in pre element.
        */
-      function appendPre(message) {
+     /* function appendPre(message) {
         var pre = document.getElementById('content');
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
-      }
+      }*/
 
 
 
@@ -203,9 +221,6 @@ async function getData() {
 
 
 /*function add_info() {
-
-
-
 	fetch('/logins').then(response => response.text()).then((txt) => {
      var form = document.getElementById("addcomm");
     if (txt.includes("Please")) {
@@ -219,18 +234,20 @@ async function getData() {
 
 
 function login() {
-    const titleElement=document.getElementById('login/signup');
-    titleElement.style.display="none";
-     const loginElement = document.getElementById('loginel');
+  
+  /*  const loginElement = document.getElementById('loginel2');
     loginElement.style.display="block";
      loginElement.style.background="royalblue";
      loginElement.style.color="white";
      loginElement.style.fontSize="40px";
      loginElement.innerHTML = ("Welcome " + document.getElementById('login').value);
-     console.log(document.getElementById('login').value);
+     console.log(document.getElementById('login').value);*/
 }
 
 
+function updateCount() {
+  location.replace("Profile.html")
+}
 
 function createEntryElement(entry) {
     const containerElement=document.getElementById('container-div');
@@ -238,7 +255,12 @@ function createEntryElement(entry) {
   pictureElement.className = 'profile-picture-div';
 
   const imageElement=document.createElement("img");
-  imageElement.src="/images/person.jpg";
+        if(entry.image == null || entry.image == undefined) { 
+            imageElement.src="/images/person.jpg";
+        }
+        else{
+            imageElement.src = entry.image;
+        }
     
     const entryElement=document.createElement('div');
     entryElement.className='info-div';
@@ -249,71 +271,6 @@ function createEntryElement(entry) {
   } else {
     nameElement.innerText = (entry.name);
   }
-<<<<<<< HEAD
-    const nameLocationElement=document.createElement('div');
-    nameLocationElement.className='name-location-div';
-    nameLocationElement.appendChild(nameElement);
-    const geoTagElement=document.createElement('i');
-    geoTagElement.className='fas fa-map-marker-alt';
-    geoTagElement.style.fontSize='24px';
-    geoTagElement.style.float='left';
-    nameLocationElement.appendChild(geoTagElement);
-
-
-    const locationElement = document.createElement('p');
-    locationElement.innerText = (entry.location.toString());
-    locationElement.style.float='left';
-    nameLocationElement.appendChild(locationElement);
-
-    const restOfElement=document.createElement('div');
-    restOfElement.className="rest-div";
-    restOfElement.setAttribute("id","user-info");
-
-    const valueElement=document.createElement('div');
-    valueElement.className="value-div";
-
-    const titleElement=document.createElement('div');
-    titleElement.className="title-div";
-
-    const emailTitleElement=document.createElement('p');
-    emailTitleElement.innerText="Email ";
-    const emailElement = document.createElement('p');
-    emailElement.innerText = (entry.email);
-    
-    const ageTitleElement=document.createElement('p');
-    ageTitleElement.innerText="Age ";
-    const ageElement = document.createElement('p');
-    ageElement.innerText = (entry.age);
-
-    const majorTitleElement=document.createElement('p');
-    majorTitleElement.innerText="Major Interest ";
-    const majorElement = document.createElement('p');
-    majorElement.innerText = (entry.major.toString());
-
-    const genderTitleElement=document.createElement('p');
-    genderTitleElement.innerText="Gender Identity ";
-    const genderElement = document.createElement('p');
-    genderElement.innerText = (entry.gender.toString());
-
-    const incomeTitleElement=document.createElement('p');
-    incomeTitleElement.innerText="Income Level ";
-    const incomeElement = document.createElement('p');
-    incomeElement.innerText = (entry.income.toString());
-
-    const raceTitleElement=document.createElement('p');
-    raceTitleElement.innerText="Race/Ethnicity ";
-    const raceElement = document.createElement('p');
-    raceElement.innerText = (entry.race.toString());
-
-    const gradeTitleElement=document.createElement('p');
-    gradeTitleElement.innerText="Grade Level ";
-    const gradeElement = document.createElement('p');
-    gradeElement.innerText = (entry.grade.toString());
-
-
-
-    
-=======
 const nameLocationElement=document.createElement('div');
 nameLocationElement.className='name-location-div';
 nameLocationElement.appendChild(nameElement);
@@ -338,36 +295,78 @@ valueElement.className="value-div";
 const titleElement=document.createElement('div');
 titleElement.className="title-div";
 
+  const emailDiv=document.createElement("div");
+  emailDiv.className="entire-info-div";
+  const emailInfoDiv=document.createElement("div");
+  emailInfoDiv.className="left-title-div";
+  const emailValueDiv=document.createElement("div");
+  emailValueDiv.className="right-value-div";  
   const emailTitleElement=document.createElement('p');
   emailTitleElement.innerText="Email ";
   const emailElement = document.createElement('p');
   emailElement.innerText = (entry.email);
   
+  const ageDiv=document.createElement("div");
+  ageDiv.className="entire-info-div";
+  const ageInfoDiv=document.createElement("div");
+  ageInfoDiv.className="left-title-div";
+  const ageValueDiv=document.createElement("div");
+  ageValueDiv.className="right-value-div"; 
   const ageTitleElement=document.createElement('p');
   ageTitleElement.innerText="Age ";
   const ageElement = document.createElement('p');
   ageElement.innerText = (entry.age);
 
+  const majorDiv=document.createElement("div");
+  majorDiv.className="entire-info-div";
+  const majorInfoDiv=document.createElement("div");
+  majorInfoDiv.className="left-title-div";
+  const majorValueDiv=document.createElement("div");
+  majorValueDiv.className="right-value-div";
   const majorTitleElement=document.createElement('p');
   majorTitleElement.innerText="Major Interest ";
   const majorElement = document.createElement('p');
   majorElement.innerText = (entry.major.splice(0,(entry.major.length)-1).toString());
 
+  const genderDiv=document.createElement("div");
+  genderDiv.className="entire-info-div";
+  const genderInfoDiv=document.createElement("div");
+  genderInfoDiv.className="left-title-div";
+  const genderValueDiv=document.createElement("div");
+  genderValueDiv.className="right-value-div";
   const genderTitleElement=document.createElement('p');
   genderTitleElement.innerText="Gender Identity ";
   const genderElement = document.createElement('p');
   genderElement.innerText = (entry.gender.splice(0,(entry.gender.length)-1).toString());
 
+  const incomeDiv=document.createElement("div");
+  incomeDiv.className="entire-info-div";
+  const incomeInfoDiv=document.createElement("div");
+  incomeInfoDiv.className="left-title-div";
+  const incomeValueDiv=document.createElement("div");
+  incomeValueDiv.className="right-value-div";
   const incomeTitleElement=document.createElement('p');
   incomeTitleElement.innerText="Income Level ";
   const incomeElement = document.createElement('p');
   incomeElement.innerText = (entry.income.splice(0,(entry.income.length)-1).toString());
 
+  const raceDiv=document.createElement("div");
+  raceDiv.className="entire-info-div";
+  const raceInfoDiv=document.createElement("div");
+  raceInfoDiv.className="left-title-div";
+  const raceValueDiv=document.createElement("div");
+  raceValueDiv.className="right-value-div";
   const raceTitleElement=document.createElement('p');
   raceTitleElement.innerText="Race/Ethnicity ";
   const raceElement = document.createElement('p');
   raceElement.innerText = (entry.race.splice(0,(entry.race.length)-1).toString());
 
+  const gradeDiv=document.createElement("div");
+  gradeDiv.className="entire-info-div";
+  const gradeInfoDiv=document.createElement("div");
+  gradeInfoDiv.className="left-title-div";
+  const gradeValueDiv=document.createElement("div");
+  gradeValueDiv.className="right-value-div"; 
   const gradeTitleElement=document.createElement('p');
   gradeTitleElement.innerText="Grade Level ";
   const gradeElement = document.createElement('p');
@@ -375,295 +374,76 @@ titleElement.className="title-div";
 
 
 
-  /*const timeElement = document.createElement('span');
-  var date = new Date(entry.timestamp);
-  timeElement.innerText = date.toString().slice(0,24);
-  timeElement.style.float = "right";
-  timeElement.style.marginRight = "10px";
-
-  var deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.style.float = "right";
-  deleteButtonElement.addEventListener('click', () => {
-    deleteEntry(entry);
-
-    // Remove the entry from the DOM.
-    entryElement.remove();
-  });*/
->>>>>>> 64189cedf4df6fb25f279c541fcd97b925324635
-
   pictureElement.appendChild(imageElement);
     containerElement.appendChild(pictureElement);
 
-  const breakElement1=document.createElement("br");
+  const breakElement1=document.createElement("div");
   breakElement1.innerText="div";
   breakElement1.style.color="white";
 
-  const breakElement2=document.createElement("br");
+  const breakElement2=document.createElement("div");
   breakElement2.innerText="div";
   breakElement2.style.color="white";
 
-    const breakElement3=document.createElement("br");
-  breakElement3.innerText="div";
-  breakElement3.style.color="white";
-
-  const breakElement4=document.createElement("br");
-  breakElement4.innerText="div";
-  breakElement4.style.color="white";
 
   containerElement.appendChild(nameLocationElement);
   
-  titleElement.appendChild(emailTitleElement);
-  valueElement.appendChild(emailElement);
+ emailInfoDiv.appendChild(emailTitleElement);
+ emailValueDiv.appendChild(emailElement);
+ emailDiv.appendChild(emailInfoDiv);
+ emailDiv.appendChild(emailValueDiv);
 
-  titleElement.appendChild(ageTitleElement);
-  valueElement.appendChild(ageElement);
+  ageInfoDiv.appendChild(ageTitleElement);
+  ageValueDiv.appendChild(ageElement);
+  ageDiv.appendChild(ageInfoDiv);
+  ageDiv.appendChild(ageValueDiv);
 
-  titleElement.appendChild(breakElement3);
-  valueElement.appendChild(breakElement4);
 
-    titleElement.appendChild(raceTitleElement);
-  valueElement.appendChild(raceElement);
+  raceInfoDiv.appendChild(raceTitleElement);
+  raceValueDiv.appendChild(raceElement);
+  raceDiv.appendChild(raceInfoDiv);
+  raceDiv.appendChild(raceValueDiv);
 
-  titleElement.appendChild(genderTitleElement);
-  valueElement.appendChild(genderElement);
+  genderInfoDiv.appendChild(genderTitleElement);
+  genderValueDiv.appendChild(genderElement);
+  genderDiv.appendChild(genderInfoDiv);
+  genderDiv.appendChild(genderValueDiv);
    
-  titleElement.appendChild(incomeTitleElement);
-  valueElement.appendChild(incomeElement);
+  incomeInfoDiv.appendChild(incomeTitleElement);
+  incomeValueDiv.appendChild(incomeElement);
+  incomeDiv.appendChild(incomeInfoDiv);
+  incomeDiv.appendChild(incomeValueDiv);
+
+ 
 
 
-  titleElement.appendChild(majorTitleElement);
-  valueElement.appendChild(majorElement);
+  majorInfoDiv.appendChild(majorTitleElement);
+  majorValueDiv.appendChild(majorElement);
+  majorDiv.appendChild(majorInfoDiv);
+  majorDiv.appendChild(majorValueDiv);
 
-  titleElement.appendChild(gradeTitleElement);
-  valueElement.appendChild(gradeElement);
+  gradeInfoDiv.appendChild(gradeTitleElement);
+  gradeValueDiv.appendChild(gradeElement);
+  gradeDiv.appendChild(gradeInfoDiv);
+  gradeDiv.appendChild(gradeValueDiv);
 
-  restOfElement.appendChild(titleElement);
-  restOfElement.appendChild(valueElement);
+  restOfElement.appendChild(emailDiv);
+  restOfElement.appendChild(ageDiv);
+  restOfElement.appendChild(breakElement1);
+  restOfElement.appendChild(raceDiv);
+  restOfElement.appendChild(genderDiv);
+  restOfElement.appendChild(incomeDiv);
+  restOfElement.appendChild(majorDiv);
+  restOfElement.appendChild(gradeDiv);
+
   entryElement.appendChild(restOfElement);
 
-  containerElement.appendChild(entryElement);
-    //create form if user chooses to edit their info entry
-    var editButton=document.createElement("button");
-    editButton.innerText="edit";
-    containerElement.appendChild(editButton);
+containerElement.appendChild(entryElement);
+
   
-  //edit button
-  editButton.onclick=function(){
-                    if(editButton.innerText=="edit"){
-                        console.log("working");
-                        editButton.innerText="Close";
-                    
-
-                        //display elements as none
-                        document.getElementById("user-info").style.display="none";
-                        console.log("working2");
-                    
-                    
-                        formDiv1=document.createElement("div");
-                        formDiv1.setAttribute("class","edit-form1");
-
-                        formDiv2=document.createElement("div");
-                        formDiv2.setAttribute("class","edit-form2");
-
-
-                        formElement2=document.createElement("form");
-                        formElement2.setAttribute("class","edit-form-parent");
-                        console.log("working3");
-                        formElement2.action="/edit-Info";
-                        formElement2.method="POST";
-
-                        //formElement2.setAttribute('id','form-element-2'+scholarship[0]);
-                        
-
-
-                        var newTitle=document.createElement("h4");
-                        newTitle.innerText='Title: ';
-                        formDiv1.appendChild(newTitle);
-
-                        var newTitleInput=document.createElement("input");
-                        newTitleInput.value=scholarship[0];
-                        newTitleInput.name="new-title";
-                        formDiv1.appendChild(newTitleInput);
-
-
-                    //create input boxes for race*/
-
-                        var newRace=document.createElement("h4");
-                        newRace.innerText='Race/Ethnicity: ';
-                        formDiv2.appendChild(newRace);
-
-                        var newRaceContainer=document.createElement("div");
-                        newRaceContainer.setAttribute("class","scrollbox");
-
-                        for(let i=1;i<document.getElementById("race").length;i++){
-                            var x=document.getElementById("race").options;
-                            
-                            var newRaceElement=document.createElement("input");
-                            setAttributes(newRaceElement,{"value":x[i].value,"type":"checkbox","name":"new-race"},entry.race.toString());
-                            if(i!=1){
-                            newRaceContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newRaceContainer.appendChild(newRaceElement);
-                            newRaceContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newRaceContainer);
-
-                
-                    //create input for gender identity
-
-                        var newGender=document.createElement("h4");
-                        newGender.innerText='Gender Identity: ';
-                        formDiv2.appendChild(newGender);
-
-                        var newGenderContainer=document.createElement("div");
-                        newGenderContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("gender").length;i++){
-                            var x=document.getElementById("gender").options;
-                            
-                            var newGenderElement=document.createElement("input");
-                            setAttributes(newGenderElement,{"value":x[i].value,"type":"checkbox","name":"new-gender"},entry.gender.toString());
-                            if(i!=2){
-                            newGenderContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newGenderContainer.appendChild(newGenderElement);
-                            newGenderContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newGenderContainer);
-
-
-                //create input for income level
-
-                        var newIncome=document.createElement("h4");
-                        newIncome.innerText='Income Level: ';
-                        formDiv2.appendChild(newIncome);
-
-                        var newIncomeContainer=document.createElement("div");
-                        newIncomeContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("income").length;i++){
-                            var x=document.getElementById("income").options;
-                            
-                            var newIncomeElement=document.createElement("input");
-                            setAttributes(newIncomeElement,{"value":x[i].value,"type":"checkbox","name":"new-income"},entry.income.toString());
-                            if(i!=2){
-                            newIncomeContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newIncomeContainer.appendChild(newIncomeElement);
-                            newIncomeContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newIncomeContainer);
-
-                //create input for major
-                        var newMajor=document.createElement("h4");
-                        newMajor.innerText='Major: ';
-                        formDiv2.appendChild(newMajor);
-
-                        var newMajorContainer=document.createElement("div");
-                        newMajorContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("major").length;i++){
-                            var x=document.getElementById("major").options;
-                            
-                            var newMajorElement=document.createElement("input");
-                            setAttributes(newMajorElement,{"value":x[i].value,"type":"checkbox","name":"new-major"},entry.major.toString());
-                            if(i!=2){
-                            newMajorContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newMajorContainer.appendChild(newMajorElement);
-                            newMajorContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newMajorContainer);
-                    
-                        
-
-                //create input for gradelevel
-                        var newGrade=document.createElement("h4");
-                        newGrade.innerText='Grade Level: ';
-                        formDiv2.appendChild(newGrade);
-
-                        var newGradeContainer=document.createElement("div");
-                        newGradeContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("grade").length;i++){
-                            var x=document.getElementById("grade").options;
-                            
-                            var newGradeElement=document.createElement("input");
-                            setAttributes(newGradeElement,{"value":x[i].value,"type":"checkbox","name":"new-grade"},entry.grade.toString());
-                            if(i!=2){
-                            newGradeContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newGradeContainer.appendChild(newGradeElement);
-                            newGradeContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newGradeContainer);
-
-                //input for state location
-                        var newlocation=document.createElement("h4");
-                        newlocation.innerText='location: ';
-                        formDiv2.appendChild(newlocation);
-
-                    var newlocationContainer=document.createElement("div");
-                        newlocationContainer.setAttribute("class","scrollbox");
-
-                        for(let i=2;i<document.getElementById("location").length;i++){
-                            var x=document.getElementById("location").options;
-                            
-                            var newlocationElement=document.createElement("input");
-                            setAttributes(newlocationElement,{"value":x[i].value,"type":"checkbox","name":"new-location"},entry.location.toString());
-                            if(i!=2){
-                            newlocationContainer.appendChild(document.createElement("br"));
-                            }
-
-                            newlocationContainer.appendChild(newlocationElement);
-                            newlocationContainer.appendChild(document.createTextNode(x[i].text));
-                        }
-
-                        formDiv2.appendChild(newlocationContainer);
-
-
-                        var submitButton=document.createElement("button");
-                        submitButton.innerHTML="Submit";
-                        submitButton.style.float="left";
-                        formElement2.appendChild(formDiv2);
-                        formElement2.appendChild(formDiv1);
-                        formElement2.appendChild(submitButton);
-                        
-                        containerElement.appendChild(formElement2);
-                    }
-                    else{
-                    editButton.innerText="edit"
-                    
-                    document.getElementById('form-element-2'+scholarship[0]).remove();
-                    
-                    document.getElementById("user-info").style.display="block";
-                    }
-
-                    
-                     
-                
-
-                }
-                return containerElement;
+  
+  return containerElement;
 }
-            
-
-        
-
-
-  
-
 
 function deleteEntry(entry) {
   const params = new URLSearchParams();
@@ -673,32 +453,70 @@ function deleteEntry(entry) {
 
 
 
+// Modifying user info
+//function editing_info() {
+ //   
+//}
+
+//function show_form() {
+  //  if (email != emailElement) {
+//
+  //  }
+//}
+
+
+//function getUserInfoOnce(){
+ //   if (entryListElement.in.entry){
+     //   if (entryListElement.in.entry){
+     //       add_info();
+      //  }
+  //  }
+//}
+
+
+
+
+
+
 // create function for user info
 function getUserInfo(){
     console.log(localStorage.getItem("userEmail"));
         if(localStorage.getItem("userEmail") == null){
+            console.log("usernotloggedin");
+            document.getElementById("myTab").style.display="none";
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
                 titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
                 divElement.appendChild(titleElement);
-                const entryListElement = document.getElementById('entry-list');
+                const entryListElement = document.getElementById('container-div');
                 entryListElement.appendChild(divElement);
+
         }
         else{
+            var foundData=false;
+            document.getElementById("myTab").style.display="block";
             fetch('/data').then(response => response.json()).then((entries) => {
             entries.forEach((entry) => {
                 if(entry.email== localStorage.getItem("userEmail")){
+                    foundData=true;
                     const entryListElement = document.getElementById('entry-list');
                     entryListElement.appendChild(createEntryElement(entry));
-                    console.log(entry.email);
                     console.log(localStorage.getItem("userEmail"));
-    
+                    const messageForm = document.getElementById('addcomm');
+                    messageForm.action = entry.uploadUrl;
 
-            
-                    
                 }
 
     })
+    if(foundData==false){
+                   document.getElementById("myTab").style.display="none";
+                const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const entryListElement = document.getElementById('container-div');
+                entryListElement.appendChild(divElement); 
+    }
   });
 
         }
@@ -717,6 +535,35 @@ function loadInfo() {
 }
 
 
+function loadEdit(){
+    fetch('/data').then(response => response.json()).then((entries) => {
+          entries.forEach((entry) => {
+          if(entry.email== localStorage.getItem("userEmail")){
+              console.log(entry.name);
+              document.getElementById("nameid").value = entry.name;
+              document.getElementById("ageid").value = entry.age;
+              console.log(entry.location);
+              genre(document.getElementById("raceid"),entry.race[0]);
+              genre(document.getElementById("majorid"),entry.major[0]);
+              document.getElementById("locationid").value = entry.location[0];
+              document.getElementById("genderid").value = entry.gender[0];
+              document.getElementById("gradeid").value = entry.grade[0];
+              document.getElementById("incomeid").value = entry.income[0];
+          
+
+          }
+})
+})
+}
+function genre(sel,current){
+    for (var i = 0, len = sel.getElementsByTagName('input').length; i < len; i++ ) {
+        console.log(sel.getElementsByTagName('input')[i].value);
+                opt = sel.getElementsByTagName('input')[i];
+
+                if(current.includes(opt.value)){
+                opt.checked=true;
+            }
+}}
 
 
 /* scholarships functions*/
@@ -780,7 +627,7 @@ function getUserScholarships(){
         }
 
 }
-function getScholarships(race,gender,major,income,grade,state,sort) {
+async function getScholarships(race,gender,major,income,grade,state,sort) {
     if(localStorage.getItem('userEmail')!=null){
         currentUserEmail=localStorage.getItem('userEmail');
 
@@ -796,8 +643,19 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
 
 
+   
+  (async () => {
+      const rawResponse = await fetch("/list-scholarships", {method: 'POST', body: params}, 
+      {
+          headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+   }
+      });
+     const response = await rawResponse.json();
 
-   fetch("/list-scholarships", {method: 'POST', body: params}).then(response => response.json()).then((response) => {
+      /* }).then(response => response.json()).then((response) => {*/
+       console.log("line 614 working");
        var scholarships=[];
        console.log(response);
        if(response.length==0){
@@ -810,14 +668,13 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             else{   
             for(let i=0;i<response.length;i++){
-                scholarships.push(response[i]);
-                /*if(race=="none" || response[i][4].includes(race)||response[i][4]=="none"){
-                    if(gender=="none"||response[i][5].includes(gender)||response[i][5]=="none"){
-                        if(major=="none"||response[i][7].includes(major)||response[i][7]=="none"){
-                            if(income=='none'||response[i][6].includes(income)||response[i][6]=="none"){
-                                if(grade=='none'||response[i][8].includes(grade)||response[i][8]=="none"){
-                                    if(state=='none'||response[i][10].includes(state)||response[i][10]=="none"){
-
+                scholarships.push(response[i]);/*
+                if(race=="none" || response[i][4].includes(race[0])||response[i][4]=="none"){
+                    if(gender=="none"||response[i][5].includes(gender[0])||response[i][5]=="none"){
+                        if(major=="none"||response[i][7].includes(major[0])||response[i][7]=="none"){
+                            if(income=='none'||response[i][6].includes(income[0])||response[i][6]=="none"){
+                                if(grade=='none'||response[i][8].includes(grade[0])||response[i][8]=="none"){
+                                    if(state=='none'||response[i][10].includes(state[0])||response[i][10]=="none"){
                                     scholarships.push(response[i]);
                                     console.log(response[i]);
                                     }
@@ -866,10 +723,12 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                     }    
            }
             }
-        });
+        })();
         }
         
-          function createScholarships(scholarships,pagenum){
+           function createScholarships(scholarships,pagenum){
+               console.log("hello");
+            /*const result = await resolveAfter1Second();*/
             return function(){
                  const scholarshipList = document.getElementById('scholarship-list');
                 scholarshipList.innerHTML="";
@@ -878,6 +737,13 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 }
             }
         }
+    function resolveAfter1Second() {
+        return new Promise(resolve => {
+        setTimeout(() => {
+      resolve('1');
+    }, 10);
+  });
+}
 
         /** Creates a list element to display the comment */
         function createScholarshipElement(scholarship) {
@@ -908,7 +774,7 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             circleElement.setAttribute('class','circle');
             containerElement.appendChild(circleElement);
 
-            var emailInToDoList=false;
+           /* var emailInToDoList=false;
 
             currentUserEmail=localStorage.getItem('userEmail');
             const params = new URLSearchParams();
@@ -926,8 +792,8 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
                 }
 
            
-            console.log(emailInToDoList);
-            if(emailInToDoList==false){
+            console.log(emailInToDoList);*/
+            /*if(emailInToDoList==false){*/
             circleElement.onclick = function() { // Note this is a function
             
             const formElement=document.createElement('div');
@@ -978,8 +844,8 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
 
             containerElement.appendChild(formElement);
             };
-            }
-            });
+            /*}
+            });*/
             
 
             var urlElement=document.createElement('a');
@@ -1415,7 +1281,12 @@ function getScholarships(race,gender,major,income,grade,state,sort) {
             const amountTitle=document.createElement("h4");
             amountTitle.innerText="AMOUNT: ";
             const amountValue=document.createElement("h4");
-            amountValue.innerText='$'+thousands_separators(scholarship[9]);
+            if(scholarship[9]!="not specified"){
+                amountValue.innerText='$'+thousands_separators(scholarship[9]);
+            }
+            else{
+                amountValue.innerText=scholarship[9];
+            }
             amountContainer.appendChild(amountTitle);
             amountContainer.appendChild(amountValue);
             containerElement.appendChild(amountContainer);
@@ -1520,7 +1391,6 @@ var request = gapi.client.calendar.events.insert({
 });
 
 request.execute(function(event) {
-  appendPre('Event created: ' + event.htmlLink);
 });
       }
 function FindTaskList(){
@@ -1579,12 +1449,16 @@ function toDoListDisplay(type) {
                 scholarshipList.innerHTML="";
                 for(let i=0;i<response.length;i++){
                     //check to display only active scholarships
-                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])){
+                    if(type=='active'&& response[i][14].includes(response[i][12])&&!response[i][15].includes(response[i][12])&&!response[i][16].includes(response[i][12])){
                 scholarshipList.appendChild(createToDoListElement(response[i],newType));
                 }
                 //check to display only complete scholarships
                 else if(type=='completed'&& response[i][15].includes(response[i][12])){
                 scholarshipList.appendChild(createToDoListElement(response[i],newType));
+
+                }
+                else if(type=="expired"&& response[i][16].includes(response[i][12])){
+                    scholarshipList.appendChild(createToDoListElement(response[i],newType));
 
                 }
                 }
@@ -1725,5 +1599,3 @@ function createPriority(title,priority,scholarshipId,entityId){
     return selectContainer;
 
 }
-
-//edit profile autofill'

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Display Scholarships</title>
+    <title>$cholar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
     <script async defer src="https://apis.google.com/js/api.js"></script>
@@ -186,6 +186,11 @@ color: red;
             <h4>Completed Scholarships</h4>
 
       </div>
+        <div id= "expired" onclick="expiredChange()"class="section-scholarships"> 
+          <img src="/images/expired.jpg" alt="expired scholarships" width=60% height=60%>
+            <h4>Expired Scholarships</h4>
+
+      </div>
 
   </div>
   <div class="to-do-list" id='to-do-list'> 
@@ -210,12 +215,22 @@ color: red;
         toDoListDisplay('active');
         document.getElementById("active").style.background="LightCyan";
         document.getElementById("completed").style.background="white";
+        document.getElementById("expired").style.background="white";
+
     }
     function completedChange(){
         document.getElementById("to-do-list-header").innerText="Completed Scholarships:";
         toDoListDisplay('completed'); 
         document.getElementById("completed").style.background="LightCyan";
         document.getElementById("active").style.background="white";
+        document.getElementById("expired").style.background="white";
+    }
+function expiredChange(){
+        document.getElementById("to-do-list-header").innerText="Expired Scholarships:";
+        toDoListDisplay('expired'); 
+        document.getElementById("completed").style.background="white";
+        document.getElementById("active").style.background="white";
+        document.getElementById("expired").style.background="LightCyan";
     }
 </script>
 

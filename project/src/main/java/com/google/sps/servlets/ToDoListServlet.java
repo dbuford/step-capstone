@@ -179,15 +179,16 @@ public class ToDoListServlet extends HttpServlet {
             String deadline= (String) scholarshipEntity.getProperty("deadline");
             LocalDate currentDate = LocalDate.now();
             LocalDate scholarshipDate = LocalDate.parse(deadline);
-            System.out.println(currentDate.toString());
-            System.out.println(scholarshipDate.toString());
+
             
             if(scholarshipDate.compareTo(currentDate) < 0){
               Key ToDoListScholarshipKey = KeyFactory.createKey("ToDoListScholarship", entityId);
-              System.out.println(ToDoListScholarshipKey);
               Entity entity=datastore.get(ToDoListScholarshipKey);
-              getIds.remove(id);
+              /*getIds.remove(id);*/
+              if(!getIds3.contains(id)){
               getIds3.add(id);
+
+              }
               entity.setProperty("scholarshipIdList", getIds);
               entity.setProperty("expiredList", getIds3);
               datastore.put(entity);
