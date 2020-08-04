@@ -775,7 +775,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             containerElement.appendChild(circleElement);
 
            /* var emailInToDoList=false;
-
             currentUserEmail=localStorage.getItem('userEmail');
             const params = new URLSearchParams();
             params.append('userEmail',currentUserEmail);
@@ -787,10 +786,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                         circleElement.appendChild(checkMark);
                         emailInToDoList=true;
                         console.log(emailInToDoList);
-
                     }
                 }
-
            
             console.log(emailInToDoList);*/
             /*if(emailInToDoList==false){*/
@@ -1505,7 +1502,12 @@ function createToDoListElement(scholarship,type){
     var amountContainer=document.createElement("div");
     amountContainer.setAttribute('class','scholarship-info');
     var amountValue=document.createElement("a");
-    amountValue.innerText="Amount: $"+thousands_separators(scholarship[9]);
+    if(scholarship[9]!="not specified"){
+        amountValue.innerText='$'+thousands_separators(scholarship[9]);
+        }
+    else{
+        amountValue.innerText=scholarship[9];
+        }
     amountContainer.appendChild(amountValue);
     containerElement.appendChild(amountContainer);
 
