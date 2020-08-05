@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>MainPage</title>
+<title>$cholar</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Limelight" />
+<script src="script.js"></script>
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -114,8 +116,18 @@ body {
 }
 
 
+
 </style>
 <body>
+        <script type="text/javascript">
+  
+      </script>
+<script async defer src="https://apis.google.com/js/api.js"
+      onload="handleClientLoad()">
+    </script>
+
+<input id = "login" name="userEmail" style="display:none";></input>
+
 
 <!-- Navbar -->
   <div class="navbar">
@@ -129,9 +141,18 @@ body {
 <!-- Header -->
 <div class="parallax" >
 <header class="w3-container w3-center" style="padding:15%; 16px">
-  <h1 style='font-size:120px;color:white;font-family:Limelight;text-shadow: 2px 2px black;'><center><i>$cholar</i></h1>
+  <img src="/images/finaltitle.png" height="150" width="650" style="margin-top:5%">
   <p class="w3-xlarge" style='color:white;text-shadow: 2px 2px black;'><em><b>We're Here To Help You Succeed</b></em></p></center>
-  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"><a style="text-decoration:none" href ="login.html">Login/SignUp</button>
+  <button id="authorize_button" class="oauth-container btn darken-4 white black-text"  style="text-transform:none;margin-left:40%;   padding: 15px 32px;">
+            <img width="20px" alt="Google sign-in" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Login with Google
+    </button>
+      <button id="signout_button" style="display: none;background:#4285F4;color:white; margin-left:44%;   padding: 15px 32px;">
+          <img width="20px"  alt="Google sign-in" src="/images/blueg.jpg" >
+        Sign Out
+    </button>
+        <center><h2 id="loginel" class="loginel"></h2>
 
 </header>
 

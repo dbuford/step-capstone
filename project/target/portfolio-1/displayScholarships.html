@@ -535,13 +535,7 @@ span {
             var gradeElement=document.getElementById('grade');
             var stateElement=document.getElementById('state');
             var sortElement=document.getElementById('sort');
-            console.log(sortElement.value);
-            console.log(raceElement.value);
-            console.log(genderElement.value);
-            console.log(majorElement.value);
-            console.log(incomeElement.value);
-            console.log(stateElement.value);
-            console.log(gradeElement.value);
+            
 
 
             getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value,gradeElement.value,stateElement.value,sortElement.value);
@@ -573,8 +567,48 @@ function changeSelection(){
     const form2Element=document.getElementById("form2");
     if(changeSelectionElement.value=="foryou"){
         form2Element.style.display="none";
+        if(localStorage.getItem('userEmail')!=null){
+        currentUserEmail=localStorage.getItem('userEmail');
+    }
+        if(localStorage.getItem('userEmail')==null){
+            const divElement=document.createElement('div');
+                const titleElement=document.createElement("h2");
+                titleElement.innerText="Please Sign In and Fill Out Form on Home Page";
+                divElement.appendChild(titleElement);
+                const scholarshipList = document.getElementById('scholarship-list');
+                scholarshipList.appendChild(divElement);
+        }
+        fetch('/data').then(response => response.json()).then((entries) => {
+                var foundEmail=false;
+                var foundEntry;
+            entries.forEach((entry) => {
+                if(entry.email==currentUserEmail){
+                    foundEmail=true;
+
+                    foundEntry=entry;
+                    }
+                })
+
+                if(foundEmail==true){
+                    document.getElementById("race").value=foundEntry.race;
+                    document.getElementById("gender").value=foundEntry.gender;
+                    document.getElementById("major").value=foundEntry.major;
+                    document.getElementById("income").value=foundEntry.income;
+                    document.getElementById("grade").value=foundEntry.grade;
+                    document.getElementById("state").value=foundEntry.location;
+                                var raceElement=document.getElementById("race");
+                        var genderElement=document.getElementById('gender');
+            var majorElement=document.getElementById('major');
+            var incomeElement=document.getElementById('income');
+            var gradeElement=document.getElementById('grade');
+            var stateElement=document.getElementById('state');
+            var sortElement=document.getElementById('sort');
+            display();
+                    /*getScholarships(raceElement.value,genderElement.value, majorElement.value,incomeElement.value,gradeElement.value,stateElement.value,sortElement.value);*/
+                }
        
-        getUserScholarships();
+       /* getUserScholarships();*/
+    });
     }
     else{
         form2Element.style.display="block";
@@ -585,7 +619,7 @@ function changeSelection(){
         document.getElementById("grade").value="none";
         document.getElementById("state").value="none";
       
-        getScholarships("none","none","none","none","none","none","none");
+        getScholarships("none","none","none","none","none","none","normal");
     }
 }
 
