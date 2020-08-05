@@ -53,7 +53,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *  listeners.
        */
       function initClient() {
-          console.log("working");
         gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
@@ -65,14 +64,11 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
           // Handle the initial sign-in state.
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          console.log("works");
           if(document.getElementById("authorize_button")!=null){
             document.getElementById("authorize_button").onclick = handleAuthClick;
             document.getElementById("signout_button").onclick = handleSignoutClick;
 
           }
-          console.log("works");
-          console.log("works");
         }, function(error) {
           /*appendPre(JSON.stringify(error, null, 2));*/
         });
@@ -83,16 +79,13 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *  appropriately. After a sign-in, the API is called.
        */
       function updateSigninStatus(isSignedIn) {
-        console.log("working");
         if (isSignedIn) {
           var userEmail2 = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
           localStorage.setItem("userEmail",JSON.stringify(userEmail2).replace(/\"/g, ""));
-          console.log(localStorage.getItem("userEmail")); 
           if (document.getElementById('login') !=null) {
               
           document.getElementById('login').value = localStorage.getItem("userEmail");
           loadPage();
-          console.log(document.getElementById('login').value);
 
           document.getElementById("authorize_button").style.display = 'none';
           document.getElementById("signout_button").style.display = 'block';
@@ -136,7 +129,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
         
         if(document.getElementById('scholarship-list')!=null){
-            console.log("line 121 calendar working");
             listUpcomingEvents();
             FindTaskList();
         }
@@ -146,7 +138,6 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
             if(document.getElementById('login') !=null){
                 document.getElementById("authorize_button").style.display = 'block';
                 document.getElementById("signout_button").style.display = 'none';
-                console.log("working");
                 localStorage.removeItem("userEmail");
                 /*document.getElementById("addcomm").style.display = 'none';*/
             }
@@ -164,11 +155,9 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
        *  Sign in the user upon button click.
        */
       function handleAuthClick(event) {
-        console.log("line 133 not logged in");
 
         gapi.auth2.getAuthInstance().signIn();
 
-        console.log("line 136 not logged in");
 
       }
 
@@ -212,10 +201,8 @@ var CLIENT_ID = '376440599760-5dpjdtasspucoc2petrcgct7uslso8nb.apps.googleuserco
 
 
 async function getData() {
-  console.log('Getting Data');
   const response = await fetch('/data');
   const data = await response.text();
-  console.log(data)
   document.getElementById('data-container').innerText = data;
 }
 
@@ -480,9 +467,7 @@ function deleteEntry(entry) {
 
 // create function for user info
 function getUserInfo(){
-    console.log(localStorage.getItem("userEmail"));
         if(localStorage.getItem("userEmail") == null){
-            console.log("usernotloggedin");
             document.getElementById("myTab").style.display="none";
             const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
@@ -501,7 +486,6 @@ function getUserInfo(){
                     foundData=true;
                     const entryListElement = document.getElementById('entry-list');
                     entryListElement.appendChild(createEntryElement(entry));
-                    console.log(localStorage.getItem("userEmail"));
                     const messageForm = document.getElementById('addcomm');
                     messageForm.action = entry.uploadUrl;
 
@@ -539,10 +523,8 @@ function loadEdit(){
     fetch('/data').then(response => response.json()).then((entries) => {
           entries.forEach((entry) => {
           if(entry.email== localStorage.getItem("userEmail")){
-              console.log(entry.name);
               document.getElementById("nameid").value = entry.name;
               document.getElementById("ageid").value = entry.age;
-              console.log(entry.location);
               genre(document.getElementById("raceid"),entry.race[0]);
               genre(document.getElementById("majorid"),entry.major[0]);
               document.getElementById("locationid").value = entry.location[0];
@@ -557,7 +539,6 @@ function loadEdit(){
 }
 function genre(sel,current){
     for (var i = 0, len = sel.getElementsByTagName('input').length; i < len; i++ ) {
-        console.log(sel.getElementsByTagName('input')[i].value);
                 opt = sel.getElementsByTagName('input')[i];
 
                 if(current.includes(opt.value)){
@@ -599,13 +580,13 @@ function getUserScholarships(){
                 })
 
                 if(foundEmail==true){
-                    document.getElementById("race").value=foundEntry.race;
+                    /*document.getElementById("race").value=foundEntry.race;
                     document.getElementById("gender").value=foundEntry.gender;
                     document.getElementById("major").value=foundEntry.major;
                     document.getElementById("income").value=foundEntry.income;
                     document.getElementById("grade").value=foundEntry.grade;
-                    document.getElementById("state").value=foundEntry.location;
-                    getScholarships(foundEntry.race,foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location); 
+                    document.getElementById("state").value=foundEntry.location;*/
+                    getScholarships(foundEntry.race.toString(),foundEntry.gender,foundEntry.major,foundEntry.income,foundEntry.grade,foundEntry.location,'normal'); 
                 }
                 else{
                 if(!document.body.contains(document.getElementById('please-fill'))){
@@ -634,12 +615,12 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
     }
     const params = new URLSearchParams();
     params.append('sort', sort);
-    params.append('race',race);
+    /*params.append('race',race);
     params.append('gender',gender);
     params.append('major',major);
     params.append('income',income);
     params.append('grade',grade);
-    params.append('state',state);
+    params.append('state',state);*/
 
 
 
@@ -655,9 +636,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
      const response = await rawResponse.json();
 
       /* }).then(response => response.json()).then((response) => {*/
-       console.log("line 614 working");
        var scholarships=[];
-       console.log(response);
        if(response.length==0){
                 const divElement=document.createElement('div');
                 const titleElement=document.createElement("h2");
@@ -668,21 +647,26 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             else{   
             for(let i=0;i<response.length;i++){
-                scholarships.push(response[i]);/*
-                if(race=="none" || response[i][4].includes(race[0])||response[i][4]=="none"){
-                    if(gender=="none"||response[i][5].includes(gender[0])||response[i][5]=="none"){
-                        if(major=="none"||response[i][7].includes(major[0])||response[i][7]=="none"){
-                            if(income=='none'||response[i][6].includes(income[0])||response[i][6]=="none"){
-                                if(grade=='none'||response[i][8].includes(grade[0])||response[i][8]=="none"){
-                                    if(state=='none'||response[i][10].includes(state[0])||response[i][10]=="none"){
+                /*scholarships.push(response[i]);*/
+               
+                if(race=="none" || response[i][4].includes(race.split(",")[0])||response[i][4][0]==["none"]){
+                    if(gender=="none"||response[i][5].includes(gender.split(",")[0])||response[i][5][0]==["none"]){
+
+                        if(major=="none"||response[i][7].includes(major.split(",")[0])||response[i][7][0]==["none"]){
+
+                            if(income=='none'||response[i][6].includes(income.split(",")[0])||response[i][6][0]==["none"]){
+                                                    
+
+                                if(grade=='none'||response[i][8].includes(grade.split(",")[0])||response[i][8][0]==["none"]){
+
+                                    if(state=='none'||response[i][10].includes(state.split(",")[0])||response[i][10][0]==["none"]){
                                     scholarships.push(response[i]);
-                                    console.log(response[i]);
                                     }
                                 }   
                             }  
                         }
                     } 
-                } */
+                } 
             }
             if(scholarships.length==0){
                 const divElement=document.createElement('div');
@@ -727,7 +711,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
         }
         
            function createScholarships(scholarships,pagenum){
-               console.log("hello");
             /*const result = await resolveAfter1Second();*/
             return function(){
                  const scholarshipList = document.getElementById('scholarship-list');
@@ -752,12 +735,18 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             const divElement = document.createElement('div');
             divElement.setAttribute('class','regular');
 
+            const titleElement =document.createElement("h4");
+            titleElement.innerText=scholarship[0];
+            titleElement.style.display="none";
+            divElement.appendChild(titleElement);
             //check if scholarship deadline is expired
-            var currentDate=new Date();
+           /* var currentDate=new Date();
             var scholarshipDate=new Date(scholarship[2]);
             if(scholarshipDate<currentDate){
-                containerElement.style.display="none";
-            }
+                /*containerElement.style.display="none";
+                titleElement.innerText=scholarship[0]+':EXPIRED';
+                console.log('expired');
+        }*/
 
             
             const calendarElement=document.createElement("h4");
@@ -765,10 +754,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             calendarElement.style.display="none";
             divElement.appendChild(calendarElement);
 
-            const titleElement =document.createElement("h4");
-            titleElement.innerText=scholarship[0];
-            titleElement.style.display="none";
-            divElement.appendChild(titleElement);
+
 
             const circleElement= document.createElement('div');
             circleElement.setAttribute('class','circle');
@@ -810,11 +796,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             yesButton.innerText='Add Scholarship';
             formElement.appendChild(yesButton);
             yesButton.onclick=function(){
-                console.log(calendarElement.innerText);
                 date=calendarElement.innerText;
                 calendarTitle=titleElement.innerText;
-                console.log(date);
-                console.log(calendarTitle);
                 accessCalendar();
                 document.getElementById('form-popup'+scholarship[0]).remove();
                 const checkMark=document.createElement('span');
@@ -835,7 +818,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             formElement.appendChild(closeButton);
             closeButton.onclick=function(){
                 document.getElementById('form-popup'+scholarship[0]).remove();
-                console.log("close button");
             };
            
 
@@ -915,7 +897,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
 
                     var newUrlInput=document.createElement("input");
                     newUrlInput.type="url";
-                    console.log(scholarship[3]);
                     newUrlInput.value=new URL(scholarship[3]);
                     newUrlInput.name="new-url";
                     formDiv1.appendChild(newUrlInput);
@@ -936,9 +917,7 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
 
                     var newAmountInput=document.createElement("input");
                     newAmountInput.type="number";
-                    console.log(scholarship[9]);
                     newAmountInput.value=Number(scholarship[9]);
-                    console.log(newAmountInput.value);
                     newAmountInput.name="new-amount";
                     formDiv1.appendChild(newAmountInput);
 
@@ -1143,12 +1122,10 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             var userUpClicked=false;
             var userDownClicked=false;
             if(scholarship[15].includes(localStorage.getItem("userEmail"))){
-                        console.log("INCLUDES");
                         userUpClicked=true;
                         thumbsup.style.color="green";
                     }
             if(scholarship[16].includes(localStorage.getItem("userEmail"))){
-                        console.log("INCLUDES");
                         userDownClicked=true;
                         thumbsdown.style.color="green";
                     }
@@ -1162,10 +1139,8 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                         thumbsup.style.color="green";
                         scholarship[13]=scholarship[13]+1;
                         thumbsup.innerText=scholarship[13];
-                        console.log(scholarship[13]);
                         userUpClicked=true;
                        scholarship[15].push(localStorage.getItem("userEmail"));
-                       console.log(scholarship[15]);
                     //change downvote to upvote if downvote is active
                     if(userDownClicked==true && scholarship[14]!=0){
                         thumbsdown.style.color='black';
@@ -1195,7 +1170,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                     
                   const params = new URLSearchParams();
                     params.append('id', scholarship[12]);
-                    console.log(scholarship[12]);
                     params.append('thumbsup',scholarship[13]);
                     params.append('thumbsdown',scholarship[14]);
                     params.append('thumbsUpList',scholarship[15]);
@@ -1217,7 +1191,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
                     thumbsdown.style.color="green";
                     scholarship[14]=scholarship[14]+1;
                     thumbsdown.innerText=scholarship[14];
-                    console.log(scholarship[13]);
                     userDownClicked=true;
                     scholarship[16].push(localStorage.getItem("userEmail"));
 
@@ -1249,7 +1222,6 @@ async function getScholarships(race,gender,major,income,grade,state,sort) {
             }
             const params = new URLSearchParams();
                 params.append('id', scholarship[12]);
-                console.log(scholarship[12]);
                 params.append('thumbsup',scholarship[13]);
                 params.append('thumbsdown',scholarship[14]);
                 params.append('thumbsUpList',scholarship[15]);
@@ -1393,7 +1365,6 @@ request.execute(function(event) {
       }
 function FindTaskList(){
     var taskListId;
-    console.log(date);
     //check to see if Scholarship Tasks List exist
        gapi.client.tasks.tasklists.list({
         }).then(function(response) {
@@ -1403,7 +1374,6 @@ function FindTaskList(){
               var taskList = taskLists[i];
               if(taskList.title=="My Tasks"){
                   taskListId=taskList.id;
-                  console.log(taskList.id);
                   console.log(taskListId);
                   createNewTasks(taskListId);
               }
@@ -1413,15 +1383,12 @@ function FindTaskList(){
 
 }
 function createNewTasks(id){
-    console.log(id);
     gapi.client.tasks.tasks.insert({'tasklist':id,'title':calendarTitle,'notes':'make sure to get this done on time','due':date+'T12:00:00.000Z'}).then(function(response){});
 
 }
 
 function toDoListDisplay(type) {
-    console.log(type);
     var newType=type;
-    console.log(newType);
     const toDoListDiv=document.getElementById('to-do-list');
     const alertMessage=document.createElement('h2');
 
@@ -1469,8 +1436,6 @@ function toDoListDisplay(type) {
 }
 }
 function createToDoListElement(scholarship,type){
-    console.log(type);
-    console.log("line1191");
     const containerElement=document.createElement('div');
     containerElement.setAttribute('class','container');
 
@@ -1538,20 +1503,16 @@ function createToDoListElement(scholarship,type){
   
     
     doneButton.onclick=function(){
-        console.log("this is working");
         const params = new URLSearchParams();
         params.append('scholarshipId', scholarship[12]);
-        console.log(scholarship[12]);
         params.append('entityId',scholarship[13]);
         fetch('/completed', {method: 'POST', body: params});
         location.reload();
 
     }
     activeButton.onclick=function(){
-        console.log("this is working");
         const params = new URLSearchParams();
         params.append('scholarshipId', scholarship[12]);
-        console.log(scholarship[12]);
         params.append('entityId',scholarship[13]);
         fetch('/active', {method: 'POST', body: params});
         location.reload();

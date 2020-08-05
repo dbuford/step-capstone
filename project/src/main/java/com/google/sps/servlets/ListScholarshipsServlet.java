@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URL; 
 import java.util.Comparator;
 import java.util.Collections;
+import java.time.LocalDate;
 
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-scholarships")
@@ -54,9 +55,10 @@ public class ListScholarshipsServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("Scholarship");
     
-    if(raceFilter.size()!=1){
-        Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);
+    /*if(raceFilter.size()!=1){
+        Filter raceFilter_Filter =new FilterPredicate("race", FilterOperator.IN, raceFilter);    
         query.setFilter(raceFilter_Filter);
+        System.out.println(raceFilter_Filter.toString());
 
     }
     if(genderFilter.size()!=1){
@@ -83,7 +85,7 @@ public class ListScholarshipsServlet extends HttpServlet {
         Filter stateFilter_Filter =new FilterPredicate("state", FilterOperator.IN, stateFilter);
         query.setFilter(stateFilter_Filter);
 
-    }
+    }*/
 
    
     PreparedQuery results = datastore.prepare(query);
@@ -99,6 +101,9 @@ public class ListScholarshipsServlet extends HttpServlet {
         String url= (String) entity.getProperty("url");
         String amount=(String) entity.getProperty("amount");
         List race=(ArrayList) entity.getProperty("race");
+        System.out.println(race.toString());
+        
+
         List gender=(ArrayList) entity.getProperty("gender");
         List income=(ArrayList) entity.getProperty("income");
         List major=(ArrayList) entity.getProperty("major");
@@ -131,9 +136,13 @@ public class ListScholarshipsServlet extends HttpServlet {
         info.add(upVoteEmails);
         info.add(downVoteEmails);
         
-        
+        LocalDate currentDate = LocalDate.now();
+        LocalDate scholarshipDate = LocalDate.parse(deadline);
 
-        scholarships.add(info);
+            
+        if(scholarshipDate.compareTo(currentDate) > 0){
+                 scholarships.add(info);
+        }
     }
 
 if(scholarships!=null){
@@ -214,7 +223,7 @@ scholarships.sort(new Comparator<ArrayList>() {
                 }
                 //if percentages of upvotes to total votes are equal, tiebreak using number of upvotes
                 if(l1percentage-l2percentage==0){
-                    return(-l1thumbsup+l2thumbsup);
+                    return(-(l1thumbsup-l1thumbsdown)+(l2thumbsup-l2thumbsdown));
                 }
 
                 return (-l1percentage+l2percentage);
@@ -257,7 +266,7 @@ scholarships.sort(new Comparator<ArrayList>() {
      
 });
 }
-
+System.out.println(scholarships.toString());
 
     String json=convertToJsonUsingGson(scholarships);
 
@@ -278,14 +287,15 @@ scholarships.sort(new Comparator<ArrayList>() {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
       sorting=request.getParameter("sort");
-      raceFilter=Arrays.asList(request.getParameter("race").split(","));
+      System.out.println(sorting);
+      /*raceFilter=Arrays.asList(request.getParameter("race").split(","));
  
 
       genderFilter=Arrays.asList(request.getParameter("gender").split(","));
       majorFilter=Arrays.asList(request.getParameter("major").split(","));
       incomeFilter=Arrays.asList(request.getParameter("income").split(","));
       gradeFilter=Arrays.asList(request.getParameter("grade").split(","));
-      stateFilter=Arrays.asList(request.getParameter("state").split(","));
+      stateFilter=Arrays.asList(request.getParameter("state").split(","));*/
   
 
 

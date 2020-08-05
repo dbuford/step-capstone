@@ -2,8 +2,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Editing</title>
-    <link rel="stylesheet" href="style.css">
+    <title>$cholar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -223,14 +222,263 @@ body {
     margin-right:5%;
     margin-top:2%;
 }
+* {
+  box-sizing: border-box;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+.info-div{
+    width:70%;
+    float:left;
+    background-color:aliceblue;
+    padding-left:50px;
+    padding-top:20px;
+}
+.rest-div{
+    height:90%;
+    width:100%;
+}
+.title-div{
+    width:30%;
+    height:100%;
+    float:left;
+}
+.title-div p{
+    font-weight:bold;
+}
+.value-div{
+    width:60%;
+    height:100%;
+    float:left;
+}
+.value-div p{
+    color:#0062cc;
+    font-weight: 600;
+}
+.name-location-div{
+    width:100%;
+    height:40;
+    margin-left:10px;
+}
+.name-location-div h3{
+    padding-right:20px;
+    padding-left:5%;
+}
+.name-location-div p{
+    padding-left:10px;
+    margin-top:7px;
+}
+.profile-picture-div{
+    float:left;
+    width:25%;
+}
+.container-div{
+    width:100%;
+    height:100%;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
+
+
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 4px 8px 0 #b7dee4, 0 6px 20px 0 #0062cc69;
+
+
+}
+.profile-im
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #17a2b803;
+
+
+}
+
+
+   /* Style the header */
+    .header {
+        border: 5px outset antiquewhite;
+        padding: 80px;
+        text-align: center;
+        background-image: url("images/scholar.jpg");
+    }
+
+    /* Increase the font size of the h1 element */
+    .header h1 {
+        font-size: 40px;
+    }
+
+    /* Style the top navigation bar */
+    .navbar {
+        overflow: hidden;
+        background-color: black;
+        display:block;
+        padding:0px;
+    }
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.box {       
+        background-color:#ffcc99;
+        text-align: center;
+        color:white;
+        font-weight:bold;
+        margin:auto;     
+        width: 40%;
+    }
+.item-nav{
+    width:100%;
+    height:20%;
+}
+.link-nav{
+    width:10%;
+}
+
+
 /* styling section */
 
-</style>
-</head>
 
 </style>
 </head>
-<body onload="loadInfo()"> >
+<body onload="loadEdit()" > 
 
 
 
@@ -249,6 +497,7 @@ body {
 
 <div class="container emp-profile">
     <div class="col-md-2">
+        
         <a href="Profile.html" class="right">Back to Profile</a>
     </div>
     <center><form  id="addcomm" action="/edit-Info" method="POST">
@@ -257,197 +506,184 @@ body {
             document.getElementById("login").value = localStorage.getItem("userEmail");
             console.log(document.getElementById("login").value);
         </script>
-         
-        
-        <textarea name="name" placeholder="Name"></textarea>
         <br/><br/>
-        
-        <textarea name="age" placeholder="age" style="height:25px; width:20%"></textarea><br>
+        <input  id="nameid" name="name"  style="display:block";></input>
 
-        <p><b>Upload a profile image:</b></p>
-        <input type="file" name="image"><br>
-
-
+        <input  id="ageid" name="age"  style="display:block";></input><br>
         
         <!-- <input type="checkbox" id="displayemail" name="displayemail" value="true" checked>
         <label for="displayemail"> Display email next to info</label> -->
     
       <div class="innerdiv2">
-                <div class="eligibility">
+               <div class="eligibility">
                     <div class="title">
                         <h4> Race/Ethnicity:</h4>
                     </div>
-                    <div class="scrollbox">
+                    <div class="scrollbox" id="raceid">
                         <input type="checkbox" value="Hispanic/Latinx" name="race">Hispanic or Latinx</input><br>
                         <input type="checkbox" value="African American/Black" name="race">African American or Black</input><br>
                         <input type="checkbox" value="Asian" name="race">Asian </input><br>
                         <input type="checkbox" value="Hawaiaan" name="race">Native Hawaiaan or Other Pacific Islander</input><br>
                         <input type="checkbox" value="White" name="race">White</input><br>
-
                     </div>
                 </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4> Gender Identity:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Male/Man" name="gender"> Male/Man</input><br>
-                        <input type ="checkbox" value="Female/Woman" name="gender"> Female/Woman</input><br>
-                        <input type="checkbox" value="Transmale/Transman" name="gender"> Transmale/Transman</input><br>
-                        <input type="checkbox" value="Transfemale/Transwoman" name="gender">Transfemale/Transwoman</input><br>
-                        <input type="checkbox" value="Genderqueer/Gender Nonconforming" name="gender"> Genderqueer/Gender Nonconforming</input><br>
-                    </div>
-                </div>
+            <div class="select-div">
+            <label for="gender">Gender Identity:</label>
+            <select name="gender" id="genderid" >
+            <option selected value="none"></option>
+            <option value="Male/Man" name="gender">Male/Man</option>
+            <option value="Female/Woman"name="gender">Female/Woman</option>
+            <option value="Transmale/Transman" name="gender">Trans male/man</option>
+            <option value="Transfemale/Transwoman" name="gender">Trans female/woman</option>
+            <option value="Genderqueer/Gender Nonconforming" name="gender">Gender Queer</option>
+        </select>
+        </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Income Level:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Less than 25k" name="income">less than $25k</input><br>
-                        <input type ="checkbox" value="25k-50k" name="income"> $25k-$50k</input><br>
-                        <input type="checkbox" value="50k-75k" name="income"> $50k-$75k </input><br>
-                        <input type="checkbox" value="75k-100k" name="income">$75k-$100k</input><br>
-                        <input type="checkbox" value="More than 100k" name="income"> more than $100k</input>
-
-                    </div>
-                </div>
-
+            <div class="select-div">
+            <label for="income">Income Level:</label>
+            <select name="income" id="incomeid" >
+            <option selected value="none"> </option>
+            <option value="Less than 25k"name="income">less than $25k</option>
+            <option value="25k-50k" name="incme">$25k-$50k</option>
+            <option value="50k-75k"name="income">$50k-$75k</option>
+            <option value="75k-100k"name="income">$75k-$100k</option>
+            <option value="More than 100k"name="income">more than $100k</option>
+        </select>
+        </div>
                 <div class="eligibility">
                     <div class="title">
                         <h4> Major Interests:</h4>
                     </div>
-                    <div class="scrollbox">
+                    <div class="scrollbox" id="majorid">
                       <input type ="checkbox" name="major" value="agriculture">Agriculture</input><br>
-                        <input type ="checkbox" name="major" value="anthropology-archaeology">Anthropology/Archaeology</input><br>
-                        <input type ="checkbox" name="major" value="architecture">Architecture</input><br>
-                        <input type ="checkbox" name="major" value="arts">Art</input><br>
-                        <input type ="checkbox" name="major" value="astronomy-astrophysics">Astronomy/Astrophysics</input><br>
-                        <input type ="checkbox" name="major" value="biology">Biology</input><br>
-                        <input type ="checkbox" name="major" value="business">Business/Management</input><br>
-                        <input type ="checkbox" name="major" value="chemistry">Chemistry</input><br>
-                        <input type ="checkbox" name="major" value="communications-journalism">Communications/Journalism</input><br>
-                        <input type ="checkbox" name="major" value="computer science">Computer Science</input><br>
-                        <input type ="checkbox" name="major" value="criminal-justice">Criminal Justice</input><br>
-                        <input type ="checkbox" name="major" value="culinary-arts">Culinary Arts</input><br>
-                        <input type ="checkbox" name="major" value="dental-studies">Dental Studies</input><br>
-                        <input type ="checkbox" name="major" value="design">Design</input><br>
-                        <input type ="checkbox" name="major" value="earth-science-geology">Earth Science/Geology</input><br>
-                        <input type ="checkbox" name="major" value="economics">Economics</input><br>
-                        <input type ="checkbox" name="major" value="education">Education</input><br>
-                        <input type ="checkbox" name="major" value="engineering">Engineering</input><br>
-                        <input type ="checkbox" name="major" value="english">English</input><br>
-                        <input type ="checkbox" name="major" value="film-video-photography">Film/Video/Photography</input><br>
-                        <input type ="checkbox" name="major" value="finance-accounting">Finance/Accounting</input><br>
-                        <input type ="checkbox" name="major" value="fine-arts">Fine Arts</input><br>
-                        <input type ="checkbox" name="major" value="foreign-languages">Foreign Languages</input><br>
-                        <input type ="checkbox" name="major" value="general-studies">General Studies</input><br>
-                        <input type ="checkbox" name="major" value="health-professions">Health Professions</input><br>
-                        <input type ="checkbox" name="major" value="history">History</input><br>
-                        <input type ="checkbox" name="major" value="information-technology">Information Technology</input><br>
-                        <input type ="checkbox" name="major" value="international-relations">International Relations</input><br>
-                        <input type ="checkbox" name="major" value="kinesiology-exercise-science">Kinesiology/Exercise Science</input><br>
-                        <input type ="checkbox" name="major" value="legal-studies">Legal Studies</input><br>
-                        <input type ="checkbox" name="major" value="marketing">Marketing</input><br>
-                        <input type ="checkbox" name="major" value="mathematics-statistics">Mathematics/Statistics</input><br>
-                        <input type ="checkbox" name="major" value="mechanics-repair">Mechanics/Repair</input><br>
-                        <input type ="checkbox" name="major" value="music">Music</input><br>
-                        <input type ="checkbox" name="major" value="nursing">Nursing</input><br>
-                        <input type ="checkbox" name="major" value="nutritional-science">Nutritional Science</input><br>
-                        <input type ="checkbox" name="major" value="performing-arts">Performing Arts</input><br>
-                        <input type ="checkbox" name="major" value="philosophy">Philosophy</input><br>
-                        <input type ="checkbox" name="major" value="physics">Physics</input><br>
-                        <input type ="checkbox" name="major" value="political-science">Political Science</input><br>
-                        <input type ="checkbox" name="major" value="pre-medicine">Pre-Medicine</input><br>
-                        <input type ="checkbox" name="major" value="psychology">Psychology</input><br>
-                        <input type ="checkbox" name="major" value="religious-studies-theology">Religious Studies/Theology</input><br>
-                        <input type ="checkbox" name="major" value="skilled-trades-construction">Skilled Trades/Construction</input><br>
-                        <input type ="checkbox" name="major" value="social-sciences">Social Sciences</input><br>
-                        <input type ="checkbox" name="major" value="sports-management">Sports Management</input><br>
-                        <input type ="checkbox" name="major" value="veterinary-studies">Veterinary Studies</input><br>
-                        <input type ="checkbox" name="major" value="visual-arts">Visual Arts</input><br>
+                        <input type ="checkbox" name="major" value="Anthropology/Archaeology">Anthropology/Archaeology</input><br>
+                        <input type ="checkbox" name="major" value="Architecture">Architecture</input><br>
+                        <input type ="checkbox" name="major" value="Arts">Art</input><br>
+                        <input type ="checkbox" name="major" value="Astronomy/Astrophysics">Astronomy/Astrophysics</input><br>
+                        <input type ="checkbox" name="major" value="Biology">Biology</input><br>
+                        <input type ="checkbox" name="major" value="Business">Business/Management</input><br>
+                        <input type ="checkbox" name="major" value="Chemistry">Chemistry</input><br>
+                        <input type ="checkbox" name="major" value="Communications/Journalism">Communications/Journalism</input><br>
+                        <input type ="checkbox" name="major" value="Computer Science">Computer Science</input><br>
+                        <input type ="checkbox" name="major" value="Criminal Justice">Criminal Justice</input><br>
+                        <input type ="checkbox" name="major" value="Culinary Arts">Culinary Arts</input><br>
+                        <input type ="checkbox" name="major" value="Dental Studies">Dental Studies</input><br>
+                        <input type ="checkbox" name="major" value="Design">Design</input><br>
+                        <input type ="checkbox" name="major" value="Earth Science/Geology">Earth Science/Geology</input><br>
+                        <input type ="checkbox" name="major" value="Economics">Economics</input><br>
+                        <input type ="checkbox" name="major" value="Education">Education</input><br>
+                        <input type ="checkbox" name="major" value="Engineering">Engineering</input><br>
+                        <input type ="checkbox" name="major" value="English">English</input><br>
+                        <input type ="checkbox" name="major" value="Film/Video/Photography">Film/Video/Photography</input><br>
+                        <input type ="checkbox" name="major" value="Finance/Accounting">Finance/Accounting</input><br>
+                        <input type ="checkbox" name="major" value="Fine Arts">Fine Arts</input><br>
+                        <input type ="checkbox" name="major" value="Foreign Languages">Foreign Languages</input><br>
+                        <input type ="checkbox" name="major" value="General Studies">General Studies</input><br>
+                        <input type ="checkbox" name="major" value="Health Professions">Health Professions</input><br>
+                        <input type ="checkbox" name="major" value="History">History</input><br>
+                        <input type ="checkbox" name="major" value="Information Technology">Information Technology</input><br>
+                        <input type ="checkbox" name="major" value="International Relations">International Relations</input><br>
+                        <input type ="checkbox" name="major" value="Kinesiology/Exercise Science">Kinesiology/Exercise Science</input><br>
+                        <input type ="checkbox" name="major" value="Legal Studies">Legal Studies</input><br>
+                        <input type ="checkbox" name="major" value="Marketing">Marketing</input><br>
+                        <input type ="checkbox" name="major" value="Mathematics/Statistics">Mathematics/Statistics</input><br>
+                        <input type ="checkbox" name="major" value="Mechanics/Repair">Mechanics/Repair</input><br>
+                        <input type ="checkbox" name="major" value="Music">Music</input><br>
+                        <input type ="checkbox" name="major" value="Nursing">Nursing</input><br>
+                        <input type ="checkbox" name="major" value="Nutritional Science">Nutritional Science</input><br>
+                        <input type ="checkbox" name="major" value="Performing Arts">Performing Arts</input><br>
+                        <input type ="checkbox" name="major" value="Philosophy">Philosophy</input><br>
+                        <input type ="checkbox" name="major" value="Physics">Physics</input><br>
+                        <input type ="checkbox" name="major" value="Political Science">Political Science</input><br>
+                        <input type ="checkbox" name="major" value="Pre-Medicine">Pre-Medicine</input><br>
+                        <input type ="checkbox" name="major" value="Psychology">Psychology</input><br>
+                        <input type ="checkbox" name="major" value="Religious Studies/Theology">Religious Studies/Theology</input><br>
+                        <input type ="checkbox" name="major" value="Skilled Trades/Construction">Skilled Trades/Construction</input><br>
+                        <input type ="checkbox" name="major" value="Social Sciences">Social Sciences</input><br>
+                        <input type ="checkbox" name="major" value="Sports Management">Sports Management</input><br>
+                        <input type ="checkbox" name="major" value="Veterinary Studies">Veterinary Studies</input><br>
+                        <input type ="checkbox" name="major" value="Visual Arts">Visual Arts</input><br>
                     </div>
                                  
                 </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Grade Level:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" value="Freshman" name="grade">Freshman</input><br>
-                        <input type ="checkbox" value="Sophomore" name="grade"> Sophomore</input><br>
-                        <input type="checkbox" value="Junior" name="grade"> Junior </input><br>
-                        <input type="checkbox" value="Senior" name="grade">Senior</input><br>
-                    </div>
-                </div>
+         <div class="select-div">
+         <label for="grade">Grade Level:</label>
+            <select name="grade" id="gradeid" >
+            <option selected value="none"> </option>
+            <option value="Freshman" name="grade">Freshman</option>
+            <option value="Sophomore" name="grade">Sophomore</option>
+            <option value="Junior" name="grade">Junior</option>
+            <option value="Senior" name="grade">Senior</option>
+        </select>
+        </div>
 
-                <div class="eligibility">
-                    <div class="title">
-                        <h4>Location:</h4>
-                    </div>
-                    <div class="scrollbox">
-                        <input type="checkbox" name="location" value="AL">Alabama</input><br>
-                        <input type="checkbox" name="location" value="AK">Alaska</input><br>
-                        <input type="checkbox" name="location" value="AZ">Arizona</input><br>
-                        <input type="checkbox" name="location"value="AR">Arkansas</input><br>
-                        <input type="checkbox" name="location" value="CA">California</input><br>
-                        <input type="checkbox" name="location" value="CO">Colorado</input><br>
-                        <input type="checkbox" name="location" value="CT">Connecticut</input><br>
-                        <input type="checkbox" name="location" value="DE">Delaware</input><br>
-                        <input type="checkbox" name="location" value="DC">District of Columbia</input><br>
-                        <input type="checkbox" name="location" value="FL">Florida</input><br>
-                        <input type="checkbox" name="location" value="GA">Georgia</input><br>
-                        <input type="checkbox" name="location" value="HI">Hawaii</input><br>
-                        <input type="checkbox" name="location" value="ID">Idaho</input><br>
-                        <input type="checkbox" name="location" value="IL">Illinois</input><br>
-                        <input type="checkbox" name="location" value="IN">Indiana</input><br>
-                        <input type="checkbox" name="location" value="IA">Iowa</input><br>
-                        <input type="checkbox" name="location" value="KS">Kansas</input><br>
-                        <input type="checkbox" name="location" value="KY">Kentucky</input><br>
-                        <input type="checkbox" name="location" value="LA">Louisiana</input><br>
-                        <input type="checkbox" name="location" value="ME">Maine</input><br>
-                        <input type="checkbox" name="location" value="MD">Maryland</input><br>
-                        <input type="checkbox" name="location" value="MA">Massachusetts</input><br>
-                        <input type="checkbox" name="location" value="MI">Michigan</input><br>
-                        <input type="checkbox" name="location" value="MN">Minnesota</input><br>
-                        <input type="checkbox" name="location" value="MS">Mississippi</input><br>
-                        <input type="checkbox" name="location" value="MO">Missouri</input><br>
-                        <input type="checkbox" name="location" value="MT">Montana</input><br>
-                        <input type="checkbox" name="location" value="NE">Nebraska</input><br>
-                        <input type="checkbox" name="location" value="NV">Nevada</input><br>
-                        <input type="checkbox" name="location" value="NH">New Hampshire</input><br>
-                        <input type="checkbox" name="location" value="NJ">New Jersey</input><br>
-                        <input type="checkbox" name="location" value="NM">New Mexico</input><br>
-                        <input type="checkbox" name="location" value="NY">New York</input><br>
-                        <input type="checkbox" name="location" value="NC">North Carolina</input><br>
-                        <input type="checkbox" name="location" value="ND">North Dakota</input><br>
-                        <input type="checkbox" name="location" value="OH">Ohio</input><br>
-                        <input type="checkbox" name="location" value="OK">Oklahoma</input><br>
-                        <input type="checkbox" name="location" value="OR">Oregon</input><br>
-                        <input type="checkbox" name="location" value="PA">Pennsylvania</input><br>
-                        <input type="checkbox" name="location" value="PR">Puerto Rico</input><br>
-                        <input type="checkbox" name="location" value="RI">Rhode Island</input><br>
-                        <input type="checkbox" name="location" value="SC">South Carolina</input><br>
-                        <input type="checkbox" name="location" value="SD">South Dakota</input><br>
-                        <input type="checkbox" name="location" value="TN">Tennessee</input><br>
-                        <input type="checkbox" name="location" value="TX">Texas</input><br>
-                        <input type="checkbox" name="location" value="UT">Utah</input><br>
-                        <input type="checkbox" name="location" value="VT">Vermont</input><br>
-                        <input type="checkbox" name="location" value="VA">Virginia</input><br>
-                        <input type="checkbox" name="location" value="WA">Washington</input><br>
-                        <input type="checkbox" name="location" value="WV">West Virginia</input><br>
-                        <input type="checkbox" name="location" value="WI">Wisconsin</input><br>
-                        <input type="checkbox" name="location" value="WY">Wyoming</input><br>
-                    </div>
-                </div>
+         <div class="select-div">
+          <label for="location">State:</label>
+            <select name="location" id="locationid" >
+            <option selected value="none"></option>
+            <option value="AL" name="location">Alabama</option>
+            <option value="AK" name="location">Alaska</option>
+            <option value="AZ" name="location" >Arizona</option>
+            <option value="AR" name="location">Arkansas</option>
+            <option value="CA" name="location">California</option>
+            <option value="CO" name="location">Colorado</option>
+            <option value="CT" name="location">Connecticut</option>
+            <option value="DE" name="location">Delaware</option>
+            <option value="DC" name="location">D.C.</option>
+            <option value="FL" name="location">Florida</option>
+            <option value="GA" name="location">Georgia</option>
+            <option value="HI" name="location">Hawaii</option>
+            <option value="ID" name="location">Idaho</option>
+            <option value="IL" name="location" >Illinois</option>
+            <option value="IN" name="location">Indiana</option>
+            <option value="IA" name="location">Iowa</option>
+            <option value="KS" name="location">Kansas</option>
+            <option value="KY" name="location">Kentucky</option>
+            <option value="LA" name="location" >Louisiana</option>
+            <option value="ME" name="location">Maine</option>
+            <option value="MD" name="location">Maryland</option>
+            <option value="MA" name="location">Massachusetts</option>
+            <option value="MI" name="location">Michigan</option>
+            <option value="MN" name="location">Minnesota</option>
+            <option value="MS" name="location">Mississippi</option>
+            <option value="MO" name="location">Missouri</option>
+            <option value="MT" name="location">Montana</option>
+            <option value="NE" name="location">Nebraska</option>
+            <option value="NV" name="location">Nevada</option>
+            <option value="NH" name="location">New Hampshire</option>
+            <option value="NJ" name="location">New Jersey</option>
+            <option value="NM" name="location">New Mexico</option>
+            <option value="NY" name="location">New York</option>
+            <option value="NC" name="location">North Carolina</option>
+            <option value="ND" name="location">North Dakota</option>
+            <option value="OH" name="location">Ohio</option>
+            <option value="OK" name="location">Oklahoma</option>
+            <option value="OR" name="location">Oregon</option>
+            <option value="PA" name="location">Pennsylvania</option>
+            <option value="PR" name="location">Puerto Rico</option>
+            <option value="RI" name="location">Rhode Island</option>
+            <option value="SC" name="location">South Carolina</option>
+            <option value="SD" name="location">South Dakota</option>
+            <option value="TN" name="location">Tennessee</option>
+            <option value="TX" name="location">Texas</option>
+            <option value="UT" name="location">Utah</option>
+            <option value="VT" name="location">Vermont</option>
+            <option value="VA" name="location">Virginia</option>
+            <option value="WA" name="location">Washington</option>
+            <option value="WV" name="location">West Virginia</option>
+            <option value="WI" name="location">Wisconsin</option>
+            <option value="WY" name="location">Wyoming</option>
+        </select>
+        </div>
+        
 
 
         </div>
-        <button> Submit</button> 
+        <button class="submit-button"> Submit</button> 
           
-        </form>   
+        </form>     
       <br/>
       </center>
 
